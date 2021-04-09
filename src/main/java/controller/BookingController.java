@@ -1,4 +1,4 @@
-package controllerInterfaces;
+package controller;
 
 
 public interface BookingController {

@@ -1,4 +1,4 @@
-package controllerInterfaces;
+package controller;
 
 
 import java.util.Collection;

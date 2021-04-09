@@ -1,4 +1,4 @@
-package modelInterfaces;
+package model;
 
 public interface ProgrammedFilmsModel {
 
