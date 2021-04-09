@@ -1,5 +1,7 @@
 package utilities;
 
-public class Ticket {
+import java.util.Calendar;
 
+public class Ticket {
+	Calendar data;
 }
