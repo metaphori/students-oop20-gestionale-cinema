@@ -36,14 +36,7 @@ dependencies {
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
    implementation("com.google.code.gson:gson:2.8.6")
   
-  
-    // JavaFX: comment out if you do not need them
-   // for (platform in supportedPlatforms) {
-  //      for (module in javaFXModules) {
-   //         implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
-   //     }
-    //}
-
+ 
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
@@ -69,7 +62,7 @@ application {
      */
   //  @Suppress("DEPRECATION")
     //mainClassName = mainClass.get()
-   // mainClassName = "prova.Main"
+    mainClassName = "application.Cinema"
 }
 
 java {
