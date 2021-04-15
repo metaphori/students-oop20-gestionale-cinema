@@ -8,6 +8,10 @@ import com.google.gson.GsonBuilder;
 
 public final class GsonFactory {
     private GsonFactory() { }
+    /**
+     * 
+     * @return a gson object that was built adding adaptation
+     */
     public static Gson getMyGson() {
         return new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateConverter())

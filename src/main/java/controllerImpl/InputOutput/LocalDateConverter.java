@@ -12,11 +12,11 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-public class LocalDateConverter implements JsonSerializer < LocalDate >,  JsonDeserializer < LocalDate >{
+public class LocalDateConverter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
     
     @Override
     public JsonElement serialize(LocalDate localDate, Type srcType, JsonSerializationContext context) {
-        return new JsonPrimitive( DateTimeFormatter.ofPattern("d-MMM-yyyy").format(localDate));
+        return new JsonPrimitive(DateTimeFormatter.ofPattern("d-MMM-yyyy").format(localDate));
     }
 
     @Override
