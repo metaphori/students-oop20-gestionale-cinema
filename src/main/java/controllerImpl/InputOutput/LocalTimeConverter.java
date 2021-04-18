@@ -16,13 +16,13 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
     @Override
     public LocalTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-        // TODO Auto-generated method stub
+       
         return DateTimeFormatter.ISO_LOCAL_TIME.parse(json.getAsString(),LocalTime::from);
     }
 
     @Override
     public JsonElement serialize(LocalTime src, Type typeOfSrc, JsonSerializationContext context) {
-        // TODO Auto-generated method stub
+       
         return new JsonPrimitive(DateTimeFormatter.ISO_LOCAL_TIME.format(src));
     }
 }
