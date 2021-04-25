@@ -2,13 +2,12 @@ package controller;
 
 import java.util.Calendar;
 
-import utilities.Film;
+import utilities.FilmBasicImpl;
 
 public interface StatisticsController {
 	
-	public Film getMostedWatchedFilm(); // in a week
+	public FilmBasicImpl getMostedWatchedFilm(); // in a week
 	public Calendar getMostAffluentDays(); // in  a week
 	public Double getRecessed(); // in a week
 	
-
 }

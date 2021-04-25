@@ -1,11 +1,6 @@
 package model;
-
-import utilities.Film;
-
+import utilities.*;
 public interface ContainerFilmsModel {
-    
-    public void addFilm(Film newFilm);
-    public void deleteFilm(Film oldFilm);
-    
-    
+    void addNewFilm(Film newFilm);
+    void removeFilm(Film oldFilm);
 }
