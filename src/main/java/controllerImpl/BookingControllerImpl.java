@@ -7,6 +7,7 @@ import controller.BookingController;
 import controllerImpl.InputOutput.RW;
 import model.BookingModel;
 import modelImpl.BookingModelImpl;
+import utilities.ProgrammedFilm;
 import utilities.Ticket;
 import view.ListFilmView;
 import view.ListFilmViewObserver;
@@ -23,16 +24,17 @@ public class BookingControllerImpl implements BookingController,ListFilmViewObse
         model = new BookingModelImpl(RW.read(Ticket.class, pathname));
         
     }
-    public void showBookingView() {
-      
-    }
+  
     public void showListFilmView() {
-          ListFilmView viewFilm = new ListFilmViewImpl();
-          viewFilm.setObserver(this);
+          final ListFilmView viewFilm = new ListFilmViewImpl(this);
+          
           viewFilm.show();
     }
     public void showTimeTableView() {
-        
+       // final TimeTableView viewTime = new TimeTalbleViewImpl();
+    } 
+    public void showBookingView() {
+      
     }
     public void addTicket(Ticket ticket) {
         
@@ -45,6 +47,21 @@ public class BookingControllerImpl implements BookingController,ListFilmViewObse
     }
     @Override
     public void showMenu() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    
+
+    @Override
+    public Set<ProgrammedFilm> getFilmProgrammed() {
+        
+        return null;
+    }
+
+ 
+    @Override
+    public void selectedFilm(ProgrammedFilm film) {
         // TODO Auto-generated method stub
         
     }
