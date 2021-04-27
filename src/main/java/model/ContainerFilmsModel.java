@@ -1,6 +1,9 @@
 package model;
-import utilities.*;
+import java.util.Collection;
+
+import utilities.Film;
 public interface ContainerFilmsModel {
-    void addNewFilm(Film newFilm);
+    void addFilm(Film newFilm);
     void removeFilm(Film oldFilm);
+    Collection<Film> getFilms();
 }

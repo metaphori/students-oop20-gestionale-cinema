@@ -4,34 +4,29 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 
-public  class ManagerIdsFilmImpl implements ManagerIdsFilms{
-    private  Collection <Integer> containerFilmsIds;
-    private  IdsGenerator IdsGenerator;
-    
-    ManagerIdsFilmImpl (IdsGenerator IdsGenerator){ 
-        this.IdsGenerator = IdsGenerator;
+import model.IdsGenerator;
+import model.ManagerIdsFilms;
+
+public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
+    private  final Collection<Integer> containerFilmsIds;
+    private  final IdsGenerator idsGenerator;
+    ManagerIdsFilmImpl(final IdsGenerator idsGenerator, final Collection<Integer> containerFilmsIds) { 
+        this.containerFilmsIds = containerFilmsIds;
+        this.idsGenerator = idsGenerator;
     }
-    
-    public Collection<Integer> getUsedIDs(IdsGenerator IdsGenerator) {
+    public Collection<Integer> getUsedIDs(final IdsGenerator idsGenerator) {
         return containerFilmsIds;
-    }   
-    
+    }
     public int getNewFilmID() {
-        return IdsGenerator.getNewId();
+        return idsGenerator.getNewId();
     }
 
     @Override
-    public int getLastGeneratedId() {
-        return 0;
+    public Optional<Integer> getLastGeneratedId() {
+        return idsGenerator.getLastGeneratedId();
     }
-    
     @Override
     public Collection<Integer> getUsedIDs() {
-             return null;
-    }
-
-    @Override
-    public void loadIDs() {
-        
+             return containerFilmsIds;
     }
 }

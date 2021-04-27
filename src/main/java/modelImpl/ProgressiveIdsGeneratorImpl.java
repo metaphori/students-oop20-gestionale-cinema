@@ -2,10 +2,11 @@ package modelImpl;
 
 import java.util.Optional;
 
-public final class ProgressiveIdsGenerator implements IdsGenerator {
+import model.IdsGenerator;
+
+public final class ProgressiveIdsGeneratorImpl implements IdsGenerator {
     private Optional<Integer> lastGeneratedId; //last generated id to insert a newFilm. When films container is empty , this value will be null;
-    
-    public ProgressiveIdsGenerator(final Optional<Integer> lastGeneratedId) {
+    public ProgressiveIdsGeneratorImpl(final Optional<Integer> lastGeneratedId) {
         this.lastGeneratedId = lastGeneratedId;
     }
     @Override
@@ -15,11 +16,12 @@ public final class ProgressiveIdsGenerator implements IdsGenerator {
             return this.lastGeneratedId.get();
         }
         int val = this.lastGeneratedId.get();
-        val ++;
+        val++;
         this.lastGeneratedId = Optional.of(val);
         return lastGeneratedId.get();
     }
-    
-    
-
+    @Override
+    public Optional<Integer> getLastGeneratedId() {
+        return lastGeneratedId;
+    }
 }

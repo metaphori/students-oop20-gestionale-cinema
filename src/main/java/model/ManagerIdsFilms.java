@@ -1,12 +1,12 @@
-package modelImpl;
+package model;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface ManagerIdsFilms {
     int getNewFilmID();
     Collection<Integer> getUsedIDs();
-    int getLastGeneratedId();
-    void loadIDs();
+    Optional<Integer> getLastGeneratedId();
 }
 
 
