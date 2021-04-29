@@ -31,5 +31,9 @@ public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
     public Collection<Film> getFilms() {
         return this.container;
     }
+    @Override
+    public ManagerIdsFilms getManagerIdsFilms() {
+        return this.manager;
+    }
 
 }

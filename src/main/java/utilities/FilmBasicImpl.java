@@ -104,4 +104,11 @@ public final class FilmBasicImpl implements Film {
             || !name.equals(other.name)
              ? false : true;
         }
+    @Override
+    public String toString() {
+        return "FilmBasicImpl [name=" + name + ", genre=" + genre + ", description=" + description + ", coverImagePath="
+                + coverImagePath + ", duration=" + duration + ", id=" + id + "]";
+    }
+
+
 }
