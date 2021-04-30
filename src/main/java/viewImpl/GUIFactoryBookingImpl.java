@@ -2,20 +2,32 @@ package viewImpl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
+import utilities.ProgrammedFilm;
 import view.GUIFactoryBooking;
 
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {
@@ -64,5 +76,37 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         button.setMargin(new Insets(0, 0, 0, 0));
         return button;
     }
+    public JTable getTable(Set<ProgrammedFilm> film) {
+       int row = film.size();
+       String[] columnNames = new String[] {"Date","Time","Hall" };
+       Object[][] data = new Object[row][columnNames.length];
+       int i = 0;
+       for(var elem : film) {
+     //      data[i][0] = elem.getData();
+    //       data[i][1] = elem.getTime();
+    //       data[i][2] = elem.getHall();
+     //      i++;
+       }
+       
+       
+       DefaultTableModel model = new DefaultTableModel(data, columnNames);
+       JTable table = new JTable(model) {    
+           /**
+            * 
+            */
+           private static final long serialVersionUID = 1L;
+
+           public boolean isCellEditable(int row, int column) {
+                  return false;
+           }
+       };
+       table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+      
+        return table;
+    }
+
    
 }
+
+
+

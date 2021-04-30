@@ -9,7 +9,7 @@ package viewImpl;
      */
     public class WrapLayout extends FlowLayout
     {
-            /**
+       /**
          * 
          */
         private static final long serialVersionUID = 1L;
@@ -174,7 +174,7 @@ package viewImpl;
             }
             }
 
-            /*
+            /**
              *  A new row has been completed. Use the dimensions of this row
              *  to update the preferred size for the container.
              *

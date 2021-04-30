@@ -1,24 +1,26 @@
 package utilities;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Set;
 
 public class Ticket {
     
         private final LocalDate data;
+        private final LocalTime time;
 	private final Set<Seat<Row,Integer>> setSeat;
 	private final Double price;
 	private final String titleFilm;
 	private final String hall;
 	
-	public Ticket(LocalDate data, Set<Seat<Row,Integer>> setSeat, Double price, String titleFilm, String hall) {
+	public Ticket(LocalDate data,LocalTime time, Set<Seat<Row,Integer>> setSeat, Double price, String titleFilm, String hall) {
 		this.data = data;
 		this.hall = hall;
 		this.setSeat = setSeat;
 		this.price = price;
 		this.titleFilm = titleFilm;
-		
+		this.time = time;
 	}
 	public LocalDate getData() {
 		return data;
