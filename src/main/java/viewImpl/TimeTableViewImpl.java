@@ -61,10 +61,14 @@ public class TimeTableViewImpl implements TimeTableView {
         this.frame = factory.getBaseFrame(TITLE);
         
         JButton backBt = new JButton("Back");
-        north.add(backBt,BorderLayout.WEST);
-        mainPanel.add(north,BorderLayout.NORTH);
-        mainPanel.add(scroll,BorderLayout.CENTER);
-        mainPanel.add(bookBt,BorderLayout.SOUTH);
+        backBt.addActionListener(e -> {
+            observer.showListView();
+            frame.dispose();
+        });
+        north.add(backBt, BorderLayout.WEST);
+        mainPanel.add(north, BorderLayout.NORTH);
+        mainPanel.add(scroll, BorderLayout.CENTER);
+        mainPanel.add(bookBt, BorderLayout.SOUTH);
         frame.add(mainPanel);
         
         

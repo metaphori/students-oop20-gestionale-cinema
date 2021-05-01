@@ -5,6 +5,6 @@ import utilities.ProgrammedFilm;
 
 public interface TimeTableViewObserver {
     void bookTicketForFilm(ProgrammedFilm film);
-   
+   void showListView();
     
 }

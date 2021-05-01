@@ -11,14 +11,17 @@ import modelImpl.BookingModelImpl;
 import utilities.Film;
 import utilities.ProgrammedFilm;
 import utilities.Ticket;
+import view.BookingView;
+import view.BookingViewObserver;
 import view.ListFilmView;
 import view.ListFilmViewObserver;
 import view.TimeTableView;
 import view.TimeTableViewObserver;
+import viewImpl.BookingViewImpl;
 import viewImpl.ListFilmViewImpl;
 import viewImpl.TimeTableViewImpl;
 
-public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver {
+public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver, BookingViewObserver {
     private final BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
@@ -42,8 +45,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         final TimeTableView viewTimeTable = new TimeTableViewImpl(this,new HashSet<>());
         viewTimeTable.show();
     } 
-    private void showBookingView() {
-       // final BookingView viewBokking = new BookingVIewImpl();
+    
+    private void showBookingView(ProgrammedFilm film) {
+        final BookingView viewBooking = new BookingViewImpl(this,film);
+        viewBooking.show();
     }
     @Override
     public void selectedFilm(ProgrammedFilm film) {
@@ -71,14 +76,20 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public Set<ProgrammedFilm> getFilmProgrammed() {
-        
-        return null;
+        Set<ProgrammedFilm> film = new HashSet<>();
+        return film;
     }
 
 
     @Override
     public void bookTicketForFilm(ProgrammedFilm film) {
         
+        
+    }
+
+    @Override
+    public void showListView() {
+        this.showListFilmView();
         
     }
 
