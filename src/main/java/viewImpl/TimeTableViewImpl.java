@@ -26,16 +26,23 @@ import view.TimeTableViewObserver;
 
 public class TimeTableViewImpl implements TimeTableView {
     private static final String TITLE = "Time Tabel Film";
+    private static final String TEXT_BUTTON_SELECT = "Select";
     private TimeTableViewObserver observer;
     private JFrame frame;
     
     
     
     public TimeTableViewImpl(TimeTableViewObserver observer, Set<ProgrammedFilm> setProgrammedFilm) {
-        GUIFactoryBooking factory = new GUIFactoryBookingImpl();
-        JPanel north = factory.getInfoPanel("Select a film");
+        GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
+        this.observer = observer;
+        this.frame = factory.getBaseFrame(TITLE);
+        
+        JPanel north = factory.getInfoPanel("Select a film", e -> {
+            observer.showListView();
+            frame.dispose();
+        });
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JButton bookBt = new JButton("Booking");
+        JButton bookBt = new JButton(TEXT_BUTTON_SELECT);
         
 
        
@@ -57,15 +64,8 @@ public class TimeTableViewImpl implements TimeTableView {
         JScrollPane scroll = new JScrollPane(table);
       
         
-        this.observer = observer;
-        this.frame = factory.getBaseFrame(TITLE);
-        
-        JButton backBt = new JButton("Back");
-        backBt.addActionListener(e -> {
-            observer.showListView();
-            frame.dispose();
-        });
-        north.add(backBt, BorderLayout.WEST);
+      
+    
         mainPanel.add(north, BorderLayout.NORTH);
         mainPanel.add(scroll, BorderLayout.CENTER);
         mainPanel.add(bookBt, BorderLayout.SOUTH);

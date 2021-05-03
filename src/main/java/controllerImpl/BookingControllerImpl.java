@@ -10,6 +10,8 @@ import model.BookingModel;
 import modelImpl.BookingModelImpl;
 import utilities.Film;
 import utilities.ProgrammedFilm;
+import utilities.Row;
+import utilities.Seat;
 import utilities.Ticket;
 import view.BookingView;
 import view.BookingViewObserver;
@@ -56,7 +58,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
   
     }
     public void test() {
-        this.showTimeTableView(new ProgrammedFilm());
+        this.showBookingView(new ProgrammedFilm());
     }
     public void addTicket(Ticket ticket) {
         
@@ -83,7 +85,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void bookTicketForFilm(ProgrammedFilm film) {
-        
+        this.showBookingView(film);
         
     }
 
@@ -91,6 +93,18 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     public void showListView() {
         this.showListFilmView();
         
+    }
+
+    @Override
+    public void showTableView(ProgrammedFilm film) {
+       this.showTimeTableView(film);
+        
+    }
+
+    @Override
+    public Set<Seat<Row, Integer>> getSeatsFromFilm(ProgrammedFilm film) {
+        return this.model.getSeatsFromFilm(film);
+       
     }
 
 

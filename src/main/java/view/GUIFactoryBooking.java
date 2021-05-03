@@ -12,7 +12,7 @@ import utilities.ProgrammedFilm;
 
 public interface GUIFactoryBooking {
     JFrame getBaseFrame(String title);
-    JPanel getInfoPanel(String info);
+    JPanel getInfoPanel(String info, ActionListener action);
     JButton getButtonImage(String title, String path);
     JTable getTable(Set<ProgrammedFilm> film);
     

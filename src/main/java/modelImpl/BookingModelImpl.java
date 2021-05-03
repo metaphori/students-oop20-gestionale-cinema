@@ -1,8 +1,10 @@
 package modelImpl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import model.BookingModel;
+import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.Seat;
 import utilities.Ticket;
@@ -16,8 +18,11 @@ public class BookingModelImpl implements BookingModel {
         
     }
     @Override
-    public Set<Seat<Row, Integer>> getSeat() {
+    public Set<Seat<Row, Integer>> getSeats() {
         // TODO Auto-generated method stub
         return null;
+    }
+    public Set<Seat<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film){
+        return new HashSet<>();
     }
 }

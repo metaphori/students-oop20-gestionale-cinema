@@ -52,13 +52,19 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         return frame;
     }
     
-    public JPanel getInfoPanel(String info) {
+    public JPanel getInfoPanel(String info, ActionListener action) {
         JPanel infoPanel = new JPanel(new BorderLayout());
+        JButton button = new JButton("back");
+        
         JLabel label = new JLabel(info);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
         infoPanel.add(label,BorderLayout.CENTER);
         infoPanel.setBorder(BorderFactory.createLineBorder(COLOR_BORDER_INFOPANEL));
+        infoPanel.add(button, BorderLayout.WEST);
+        
+        button.addActionListener( action );
+        
         return infoPanel;
     }
     

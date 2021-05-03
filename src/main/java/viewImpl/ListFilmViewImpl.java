@@ -45,15 +45,19 @@ public class ListFilmViewImpl implements ListFilmView{
         map = new HashMap<>();
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
         final JPanel mainPanel = new JPanel(new BorderLayout());
-        final JPanel northPanel = factory.getInfoPanel("Choose film");
+        
+        final JPanel northPanel = factory.getInfoPanel("Choose film", e -> {
+            observer.showMenu();
+            frame.dispose();
+        });
         final JPanel centralPanel = new JPanel(new WrapLayout());
         final JScrollPane scroller = new JScrollPane(centralPanel);
         final Set<ProgrammedFilm> setFilmProgrammed = observer.getFilmProgrammed();
       
-        JButton homeBt = new JButton("home");
+        
         frame = factory.getBaseFrame(FRAME_NAME);
         frame.getContentPane().add(mainPanel);
-        northPanel.add(homeBt, BorderLayout.WEST);
+      
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(scroller, BorderLayout.CENTER);
        
@@ -69,12 +73,7 @@ public class ListFilmViewImpl implements ListFilmView{
                 observer.selectedFilm(map.get(btn));
             });
         }
-        
-        homeBt.addActionListener(e -> {
-            observer.showMenu();
-            frame.dispose();
-        });
-        
+
         
         
     }
