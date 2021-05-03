@@ -1,6 +1,5 @@
 package application;
 
-import controllerImpl.InputOutput.RW;
 import utilities.Film;
 
 public class Cinema {
