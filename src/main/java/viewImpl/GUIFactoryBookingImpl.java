@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -28,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import utilities.ProgrammedFilm;
+import utilities.Row;
+import utilities.SeatState;
 import view.GUIFactoryBooking;
 
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {
@@ -39,6 +42,13 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     
     private static final Color COLOR_BORDER_INFOPANEL = Color.black;
    
+    private static final String FS = File.separator;
+    private static final String pathSeatTaken = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "imageSeatTaken.png";
+    private static final String pathSeatFree = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "imageSeatFree.png";
+    private static final String pathSeatSelected = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "imageSeatSelected.png";
+    private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
+    private static final double HEIGHT_IMAGE_SEAT = HEIGHT_PERC_FRAME/ 15;
+    
     public JFrame getBaseFrame(String title) {
         final JFrame frame = new JFrame();
  
@@ -110,7 +120,28 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
       
         return table;
     }
-
+    public JButton getButtonSeat(SeatState state, int i, int j) {
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        ImageIcon imageIcon = new ImageIcon();
+        if(state.equals(SeatState.FREE)) {
+             imageIcon = new ImageIcon(pathSeatFree); // load the image to a imageIcon
+        }if(state.equals(SeatState.SELECTED)) {
+             imageIcon = new ImageIcon(pathSeatSelected); // load the image to a imageIcon
+        }if(state.equals(SeatState.TAKEN)) {
+             imageIcon = new ImageIcon(pathSeatTaken); // load the image to a imageIcon
+        }
+        
+        Image image = imageIcon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_SEAT), (int) (screenSize.getHeight() * HEIGHT_IMAGE_SEAT),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        imageIcon = new ImageIcon(newimg);  // transform it back
+      
+        JButton button = new JButton( Row.values()[i] + " " + j, imageIcon);
+        button.setHorizontalTextPosition(JButton.CENTER);
+        button.setVerticalTextPosition(JButton.TOP);
+        button.setMargin(new Insets(0, 0, 0, 0));
+        return button;
+       
+    }
    
 }
 

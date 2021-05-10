@@ -9,11 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import utilities.ProgrammedFilm;
+import utilities.SeatState;
 
 public interface GUIFactoryBooking {
     JFrame getBaseFrame(String title);
     JPanel getInfoPanel(String info, ActionListener action);
     JButton getButtonImage(String title, String path);
     JTable getTable(Set<ProgrammedFilm> film);
-    
+    JButton getButtonSeat(SeatState state, int i,int j);
 }

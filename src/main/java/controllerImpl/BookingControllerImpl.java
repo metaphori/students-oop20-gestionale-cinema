@@ -43,7 +43,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
           final ListFilmView viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
     }
-    private void showTimeTableView(ProgrammedFilm film) {
+    private void showTimeTableView(Film film) {
         final TimeTableView viewTimeTable = new TimeTableViewImpl(this,new HashSet<>());
         viewTimeTable.show();
     } 
@@ -53,7 +53,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         viewBooking.show();
     }
     @Override
-    public void selectedFilm(ProgrammedFilm film) {
+    public void selectedFilm(Film film) {
         this.showTimeTableView(film);
   
     }
@@ -77,8 +77,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     
 
     @Override
-    public Set<ProgrammedFilm> getFilmProgrammed() {
-        Set<ProgrammedFilm> film = new HashSet<>();
+    public Set<Film> getFilm() {
+        Set<Film> film = new HashSet<>();
         return film;
     }
 
@@ -97,7 +97,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showTableView(ProgrammedFilm film) {
-       this.showTimeTableView(film);
+        Film film1 = new Film();
+       this.showTimeTableView(film1);
         
     }
 
@@ -106,6 +107,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         return this.model.getSeatsFromFilm(film);
        
     }
+
+
 
 
  

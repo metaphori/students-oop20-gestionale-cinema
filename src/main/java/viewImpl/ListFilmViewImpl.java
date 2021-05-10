@@ -23,10 +23,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
+import utilities.Film;
 import utilities.ProgrammedFilm;
 import view.GUIFactoryBooking;
 import view.ListFilmView;
 import view.ListFilmViewObserver;
+import view.PanelFilmFactory;
 
 public class ListFilmViewImpl implements ListFilmView{
     //private BookingViewObserver observer;
@@ -34,25 +36,31 @@ public class ListFilmViewImpl implements ListFilmView{
     /**
      * 
      */
+  
+    private static final String FS = File.separator;
+    private static final String PATH = System.getProperty("user.home") +  FS + "OOPcinemaFile" + FS + "aquaman.jpg"; 
     private static final long serialVersionUID = 1L;
     private static final String FRAME_NAME = "ListFilm"; 
+    private static final String INFO_STRING = "Choose film";
     private ListFilmViewObserver observer;
     private JFrame frame;
-    private Map<JButton, ProgrammedFilm> map;
+    private Map<JButton, Film> map;
 
     public ListFilmViewImpl(final ListFilmViewObserver observer) {
         this.observer = observer;
         map = new HashMap<>();
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
+        final PanelFilmFactory factoryPanel = new PanelFilmFactoryImpl();
         final JPanel mainPanel = new JPanel(new BorderLayout());
         
-        final JPanel northPanel = factory.getInfoPanel("Choose film", e -> {
+        final JPanel northPanel = factory.getInfoPanel(INFO_STRING, e -> {
             observer.showMenu();
             frame.dispose();
-        });
-        final JPanel centralPanel = new JPanel(new WrapLayout());
+        }); 
+        final Set<Film> setFilm = observer.getFilm();
+        final JPanel centralPanel = factoryPanel.getFilmPanel(map, setFilm);
         final JScrollPane scroller = new JScrollPane(centralPanel);
-        final Set<ProgrammedFilm> setFilmProgrammed = observer.getFilmProgrammed();
+       
       
         
         frame = factory.getBaseFrame(FRAME_NAME);
@@ -60,21 +68,14 @@ public class ListFilmViewImpl implements ListFilmView{
       
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(scroller, BorderLayout.CENTER);
-       
-        for (var elem : setFilmProgrammed) {
-           // map.put(factory.getButtonImage(elem.getTitle, elem.getUrl), elem);
-        }
+        
+        
         for (var bt : map.keySet()) {
-            centralPanel.add(bt);
-            
             bt.addActionListener(e -> {
-                final JButton btn = (JButton) e.getSource(); 
-               
-                observer.selectedFilm(map.get(btn));
+               final JButton btn = (JButton) e.getSource();
+               observer.selectedFilm(map.get(btn));
             });
         }
-
-        
         
     }
     

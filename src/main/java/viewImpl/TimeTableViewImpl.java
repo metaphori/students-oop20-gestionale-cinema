@@ -27,6 +27,7 @@ import view.TimeTableViewObserver;
 public class TimeTableViewImpl implements TimeTableView {
     private static final String TITLE = "Time Tabel Film";
     private static final String TEXT_BUTTON_SELECT = "Select";
+    private static final String INFO_STRING = "Select a film";
     private TimeTableViewObserver observer;
     private JFrame frame;
     
@@ -37,7 +38,7 @@ public class TimeTableViewImpl implements TimeTableView {
         this.observer = observer;
         this.frame = factory.getBaseFrame(TITLE);
         
-        JPanel north = factory.getInfoPanel("Select a film", e -> {
+        JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
             observer.showListView();
             frame.dispose();
         });
