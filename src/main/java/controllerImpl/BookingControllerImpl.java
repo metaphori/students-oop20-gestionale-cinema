@@ -13,24 +13,24 @@ import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.Seat;
 import utilities.Ticket;
-import view.BookingView;
-import view.BookingViewObserver;
-import view.ListFilmView;
-import view.ListFilmViewObserver;
-import view.TimeTableView;
-import view.TimeTableViewObserver;
-import viewImpl.BookingViewImpl;
-import viewImpl.ListFilmViewImpl;
-import viewImpl.TimeTableViewImpl;
+import view.Booking.BookingView;
+import view.Booking.BookingViewObserver;
+import view.Booking.ListFilmView;
+import view.Booking.ListFilmViewObserver;
+import view.Booking.TimeTableView;
+import view.Booking.TimeTableViewObserver;
+import viewImpl.Booking.BookingViewImpl;
+import viewImpl.Booking.ListFilmViewImpl;
+import viewImpl.Booking.TimeTableViewImpl;
 
 public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver, BookingViewObserver {
     private final BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
-    
+    Set<Seat<Row,Integer>> seatSelected;
     
     public BookingControllerImpl() {
-      
+        seatSelected = new HashSet<>();
         model = new BookingModelImpl(RW.read(Ticket.class, pathname));
         
     }
@@ -90,13 +90,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public void showListView() {
+    public void showBackFromTimeTable() {
         this.showListFilmView();
         
     }
 
     @Override
-    public void showTableView(ProgrammedFilm film) {
+    public void showBackFromBooking(ProgrammedFilm film) {
         Film film1 = new Film();
        this.showTimeTableView(film1);
         
@@ -106,6 +106,12 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     public Set<Seat<Row, Integer>> getSeatsFromFilm(ProgrammedFilm film) {
         return this.model.getSeatsFromFilm(film);
        
+    }
+
+    @Override
+    public void bookSeat() {
+        // TODO Auto-generated method stub
+        
     }
 
 

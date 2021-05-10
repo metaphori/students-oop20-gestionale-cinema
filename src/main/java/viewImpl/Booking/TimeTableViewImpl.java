@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.Booking;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import utilities.ProgrammedFilm;
-import view.GUIFactoryBooking;
-import view.TimeTableView;
-import view.TimeTableViewObserver;
+import view.Booking.GUIFactoryBooking;
+import view.Booking.TimeTableView;
+import view.Booking.TimeTableViewObserver;
 
 public class TimeTableViewImpl implements TimeTableView {
     private static final String TITLE = "Time Tabel Film";
@@ -39,7 +39,7 @@ public class TimeTableViewImpl implements TimeTableView {
         this.frame = factory.getBaseFrame(TITLE);
         
         JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
-            observer.showListView();
+            observer.showBackFromTimeTable();
             frame.dispose();
         });
         JPanel mainPanel = new JPanel(new BorderLayout());

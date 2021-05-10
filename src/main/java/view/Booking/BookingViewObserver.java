@@ -1,4 +1,4 @@
-package view;
+package view.Booking;
 
 import java.util.Set;
 
@@ -7,6 +7,7 @@ import utilities.Row;
 import utilities.Seat;
 
 public interface BookingViewObserver {
-    void showTableView(ProgrammedFilm film);
+    void showBackFromBooking(ProgrammedFilm film);
     Set<Seat<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film);
+    void bookSeat();
 }

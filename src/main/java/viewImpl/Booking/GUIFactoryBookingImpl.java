@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.Booking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,14 +31,14 @@ import javax.swing.table.TableCellRenderer;
 import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.SeatState;
-import view.GUIFactoryBooking;
+import view.Booking.GUIFactoryBooking;
 
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGHT_PERC_FRAME = 0.5;
     
-    private static final double WIDTH_IMAGE = WIDTH_PERC_FRAME / 5;
-    private static final double HEIGHT_IMAGE = HEIGHT_PERC_FRAME / 2;
+    private static final double WIDTH_IMAGE_COVER = WIDTH_PERC_FRAME / 5;
+    private static final double HEIGHT_IMAGE_COVER = HEIGHT_PERC_FRAME / 2;
     
     private static final Color COLOR_BORDER_INFOPANEL = Color.black;
    
@@ -83,7 +83,7 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
    
         ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it 
-        Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE), (int) (screenSize.getHeight() * HEIGHT_IMAGE),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_COVER), (int) (screenSize.getHeight() * HEIGHT_IMAGE_COVER),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon = new ImageIcon(newimg);  // transform it back
       
         JButton button = new JButton("Title:" + title, imageIcon);

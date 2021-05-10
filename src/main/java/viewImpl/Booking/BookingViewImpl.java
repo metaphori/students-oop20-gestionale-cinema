@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.Booking;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -16,9 +16,9 @@ import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.Seat;
 import utilities.SeatState;
-import view.BookingView;
-import view.BookingViewObserver;
-import view.GUIFactoryBooking;
+import view.Booking.BookingView;
+import view.Booking.BookingViewObserver;
+import view.Booking.GUIFactoryBooking;
 
 public class BookingViewImpl implements BookingView {
     private final JFrame frame;
@@ -47,7 +47,7 @@ public class BookingViewImpl implements BookingView {
         
         JPanel mainPanel = new JPanel(new BorderLayout()); 
         JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
-            observer.showTableView(film);
+            observer.showBackFromBooking(film);
             frame.dispose();
             
         });
@@ -71,7 +71,8 @@ public class BookingViewImpl implements BookingView {
         }
         JButton bookBt = new JButton(STRING_BTN_BOOK);
         bookBt.addActionListener(e -> {
-            //observer.bookSeat();
+            
+            observer.bookSeat();
         });
         center.add(gridPanel, BorderLayout.CENTER);
         mainPanel.add(north, BorderLayout.NORTH);
