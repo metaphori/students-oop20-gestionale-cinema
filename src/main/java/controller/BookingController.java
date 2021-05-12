@@ -10,8 +10,8 @@ public interface BookingController {
 	
 	//public Collection<Booking> loadAddBooking();
 	
-	public void showBookingView();
-	
+	public void start();
+	public void test();
 	public void showMenu();
 	
 }
