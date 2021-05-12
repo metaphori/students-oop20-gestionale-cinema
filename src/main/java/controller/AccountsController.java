@@ -2,7 +2,7 @@ package controller;
 import java.util.Collection;
 
 import utilities.Account;
-import utilities.Film;
+import utilities.FilmBasicImpl;
 
 public interface AccountsController {
 	
