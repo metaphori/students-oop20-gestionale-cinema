@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import controllerImpl.InputOutput.RWfile;
+import controllerImpl.InputOutput.RWobject;
 import model.ContainerFilmsModel;
 import modelImpl.ContainerFilmsModelImpl;
 import utilities.Film;
@@ -14,26 +16,24 @@ import utilities.FilmFactory;
 import utilities.FilmFactoryImpl;
 
 class TestContainerFilms {
-
     @Test
-    void test() {
-        final ContainerFilmsModel container = new ContainerFilmsModelImpl();
-        final FilmFactory filmFactory = new FilmFactoryImpl(container);
-        Film f1 = filmFactory.createBasicFilm("Spiderman","Action","Spiderman was born on ....",Optional.ofNullable(""), 125);
-        Film f2 = filmFactory.createBasicFilm("Batman","Action","Batman was born on ....",Optional.ofNullable(""), 200);
-        container.addFilm(f1);
-        container.addFilm(f2);
-        assertNotEquals(f1, f2);
-        assertEquals(container.getManagerIdsFilms().getLastGeneratedId().get(), 2);
-        /*container.removeFilm(f2);
-        for (final Film f : container.getFilms()) {
-            System.out.println(f.getID());
-        }*/
-        Film f3 = f1 ;
-        container.addFilm(f3);
-        for (final Film f : container.getFilms()) {
-            System.out.println(f.getID());
-        }
+    void testScrittura() {
+        ContainerFilmsModel container = new ContainerFilmsModelImpl();
+        FilmFactory filmFactory = new FilmFactoryImpl(container) ;
+        Film film1 = filmFactory.createBasicFilm("Spiderman", "Action", "Nice film! ", null, 130);
+        Film film2 = filmFactory.createBasicFilm("Batma", "Action", "Nice film! ", null, 110);
+        
+        container.addFilm(film1);
+        container.addFilm(film2);
+        RWobject rw = new RWfile("/home/ziro/Desktop/containerFilm");
+        rw.writeObj(container);
+        
+        
+        Optional<ContainerFilmsModel> containerNew = rw.readObj(container.getClass());
+        
+        
     }
+ 
+   
 
 }

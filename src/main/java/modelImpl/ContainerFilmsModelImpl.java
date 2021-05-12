@@ -11,6 +11,7 @@ import utilities.Film;
 public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
     private final Collection<Film> container;
     private final ManagerIdsFilms manager; // verrà utilizzato dal controller per poter istanziare il film e passarlo con l'id disponibile richiesto al manager
+    
     public ContainerFilmsModelImpl() {
         container = new HashSet<>();
         manager = new ManagerIdsFilmImpl(new ProgressiveIdsGeneratorImpl(Optional.ofNullable(null)), new HashSet<>());

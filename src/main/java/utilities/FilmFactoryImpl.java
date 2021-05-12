@@ -7,6 +7,7 @@ import modelImpl.ContainerFilmsModelImpl;
 
 public class FilmFactoryImpl implements FilmFactory {
     ContainerFilmsModel containerFilms;
+    
     public FilmFactoryImpl (ContainerFilmsModel containerFilms){
         this.containerFilms = containerFilms;
     }
