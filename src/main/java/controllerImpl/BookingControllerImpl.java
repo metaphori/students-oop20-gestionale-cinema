@@ -12,6 +12,7 @@ import utilities.Film;
 import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.Seat;
+import utilities.SeatState;
 import utilities.Ticket;
 import view.Booking.BookingView;
 import view.Booking.BookingViewObserver;
@@ -24,13 +25,13 @@ import viewImpl.Booking.ListFilmViewImpl;
 import viewImpl.Booking.TimeTableViewImpl;
 
 public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver, BookingViewObserver {
-    private final BookingModel model;
+    private  BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
-    Set<Seat<Row,Integer>> seatSelected;
+   
     
     public BookingControllerImpl() {
-        seatSelected = new HashSet<>();
+       
         model = new BookingModelImpl(RW.read(Ticket.class, pathname));
         
     }
@@ -110,8 +111,25 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void bookSeat() {
-        // TODO Auto-generated method stub
+        model.bookSeat();
+    }
+
+    @Override
+    public void buttonSelected(Seat<Row, Integer> seat, ProgrammedFilm film) {
+      model.buttonSelected(seat, film);
+      
+    }
+
+    @Override
+    public void newBooking() {
+        model.newBooking();
         
+    }
+
+    @Override
+    public Set<Seat<Row, Integer>> getSeatsSelected() {
+        
+        return model.getSeatsSelected();
     }
 
 

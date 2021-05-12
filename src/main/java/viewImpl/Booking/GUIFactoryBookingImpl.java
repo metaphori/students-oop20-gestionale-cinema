@@ -87,6 +87,8 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         imageIcon = new ImageIcon(newimg);  // transform it back
       
         JButton button = new JButton("Title:" + title, imageIcon);
+      
+        button.setIcon(imageIcon);
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.TOP);
         button.setMargin(new Insets(0, 0, 0, 0));
@@ -136,6 +138,7 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         imageIcon = new ImageIcon(newimg);  // transform it back
       
         JButton button = new JButton( Row.values()[i] + " " + j, imageIcon);
+        
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.TOP);
         button.setMargin(new Insets(0, 0, 0, 0));

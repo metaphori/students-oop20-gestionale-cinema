@@ -7,12 +7,17 @@ import model.BookingModel;
 import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.Seat;
+import utilities.SeatState;
 import utilities.Ticket;
 
 public class BookingModelImpl implements BookingModel {
     private Set<Ticket> setTicket;
+    private Set<Seat<Row,Integer>> seatSelected;
+    
     public BookingModelImpl(Set<Ticket> setTicket) {
+        seatSelected = new HashSet<>();
         this.setTicket = setTicket;
+        
     }
     public void addTicket(Ticket ticket) {
         
@@ -24,5 +29,33 @@ public class BookingModelImpl implements BookingModel {
     }
     public Set<Seat<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film){
         return new HashSet<>();
+    }
+    
+    public void buttonSelected(Seat<Row,Integer> seat, ProgrammedFilm film) {
+     
+       if(seatSelected.contains(seat)) {
+        
+            seatSelected.remove(seat);
+        }else {
+            
+            seatSelected.add(seat);
+        }
+            
+        
+     
+    }
+    public void newBooking() {
+        seatSelected = new HashSet<>();
+        
+    }
+    @Override
+    public Set<Seat<Row, Integer>> getSeatsSelected() {
+        
+        return seatSelected;
+    }
+    @Override
+    public void bookSeat() {
+       
+        
     }
 }
