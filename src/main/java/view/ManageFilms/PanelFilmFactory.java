@@ -16,6 +16,6 @@ import javax.swing.JPanel;
 import utilities.Film;
 
 
-public interface PanelFilmFactory{
-    JPanel getFilmPanel(Map<JButton,Film> mapFilm, Set<Film> setFilm);
+public interface PanelFilmFactory {
+    JPanel getFilmPanel(Map<JButton, Film> mapFilm, Set<Film> setFilm);
 }

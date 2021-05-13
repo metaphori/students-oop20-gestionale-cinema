@@ -53,15 +53,14 @@ public class PanelFilmFactoryImpl implements PanelFilmFactory {
     
     
     
-    private JButton getButtonImage(final String title, ImageIcon icon) {
+    private JButton getButtonImage(final String title, final ImageIcon icon) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
    
         // load the image to a imageIcon
-        Image image = icon.getImage(); // transform it 
-        Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE), (int) (screenSize.getHeight() * HEIGHT_IMAGE),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        icon = new ImageIcon(newimg);  // transform it back
-      
-        JButton button = new JButton("Title:" + title, icon);
+        final Image image = icon.getImage(); // transform it 
+        final Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE), (int) (screenSize.getHeight() * HEIGHT_IMAGE),  java.awt.Image.SCALE_SMOOTH);// scale it the smooth way  
+        final ImageIcon newImgIcon = new ImageIcon(newimg);  // transform it back
+        final JButton button = new JButton("Title:" + title, newImgIcon);
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.TOP);
         button.setMargin(new Insets(0, 0, 0, 0));

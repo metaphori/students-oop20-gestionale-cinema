@@ -9,7 +9,9 @@ import model.ManagerIdsFilms;
 public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     private  final Collection<Integer> containerFilmsIds;
     private  final IdsGenerator idsGenerator;
-    ManagerIdsFilmImpl(final IdsGenerator idsGenerator, final Collection<Integer> containerFilmsIds) { 
+
+    //Passo al manager Ids films l' idsGenerator e il containerFilmsIds
+    public ManagerIdsFilmImpl(final IdsGenerator idsGenerator, final Collection<Integer> containerFilmsIds) { 
         this.containerFilmsIds = containerFilmsIds;
         this.idsGenerator = idsGenerator;
     }

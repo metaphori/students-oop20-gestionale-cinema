@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.Film;
+import view.ManageFilms.InfoFilmsGUI;
 import view.ManageFilms.InfoFilmsGUIfactory;
 import view.Settings.InfoFilmSettingsDefault;
 
@@ -40,7 +41,9 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import org.apache.commons.io.*;
 
-public class InfoFilmsImplGUI {
+import controller.FilmsController;
+
+public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	
 	private static final long serialVersionUID = 7114066347061701832L;
 	
@@ -68,7 +71,7 @@ public class InfoFilmsImplGUI {
         private final int frameWidth = (int) (screenWidth / PROPORTION);
         private final int frameHeight = (int) (screenHeight / PROPORTION);
 
-        public InfoFilmsImplGUI() {	
+        public InfoFilmsGUIimpl() {	
 	
         final JPanel mainPanel = factory.createPanel(new BorderLayout());
         final JPanel centralPanel = factory.createPanel(new BorderLayout());
@@ -212,12 +215,25 @@ public class InfoFilmsImplGUI {
             }
 	}	
 	
-	public static void main(String[] args) {
-		InfoFilmsImplGUI view = new InfoFilmsImplGUI();
-		
-		
+	
 
-	}
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+    @Override
+    public void setObserver(FilmsController controller) {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    public static void main(String[] args) {
+        InfoFilmsGUIimpl view = new InfoFilmsGUIimpl();
+    }
 
 }
 
