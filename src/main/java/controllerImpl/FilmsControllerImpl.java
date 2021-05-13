@@ -1,6 +1,7 @@
 package controllerImpl;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import controller.FilmsController;
 import model.ContainerFilmsModel;
@@ -20,7 +21,7 @@ public class FilmsControllerImpl implements FilmsController {
 
     public FilmsControllerImpl() { // must be invoked on the first use of application 
         model = new ContainerFilmsModelImpl();
-        viewFilms = new ContainerFilmsGUIimpl(null, null);
+        viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
 
         this.viewFilms.setObserver(this);

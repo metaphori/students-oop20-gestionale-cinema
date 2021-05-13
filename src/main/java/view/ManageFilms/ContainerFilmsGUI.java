@@ -1,11 +1,8 @@
 package view.ManageFilms;
 
-import controllerImpl.FilmsControllerImpl;
+import controller.FilmsController;
 
 public interface ContainerFilmsGUI {
-
-    void setObserver(FilmsControllerImpl filmsControllerImpl);
-
     void start();
-
+    void setObserver(FilmsController observer);
 }

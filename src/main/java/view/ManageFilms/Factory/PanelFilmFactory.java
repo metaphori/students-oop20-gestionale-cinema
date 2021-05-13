@@ -1,4 +1,4 @@
-package view.ManageFilms;
+package view.ManageFilms.Factory;
 
 
 import java.awt.Dimension;

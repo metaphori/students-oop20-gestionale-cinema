@@ -30,9 +30,11 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.Film;
+import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
-import view.ManageFilms.InfoFilmsGUIfactory;
+import view.ManageFilms.Factory.InfoFilmsGUIfactory;
 import view.Settings.InfoFilmSettingsDefault;
+import viewImpl.ManageFilms.Factory.InfoFilmsGUIfactoryImpl;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -54,7 +56,8 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         private final JFrame frame = new JFrame(FRAME_NAME);
         private final Container container = frame.getContentPane();
-
+        private FilmsController observer ;
+        
         private final JTextField duration = factory.createTextField("Duration (minutes)");
         private final JTextField genre = factory.createTextField("Genre");
         private final JTextArea description = factory.createTextArea("Description");
@@ -220,21 +223,21 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 
     @Override
     public void start() {
-        // TODO Auto-generated method stub
+        
         
     }
 
 
     @Override
-    public void setObserver(FilmsController controller) {
-        // TODO Auto-generated method stub
-        
+    public void setObserver(final FilmsController observer) {
+        this.observer = observer;
     }
     
+    /*
     public static void main(String[] args) {
         InfoFilmsGUIimpl view = new InfoFilmsGUIimpl();
     }
-
+*/
 }
 
 

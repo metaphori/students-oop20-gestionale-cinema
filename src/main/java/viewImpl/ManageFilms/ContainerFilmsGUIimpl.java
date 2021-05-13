@@ -28,30 +28,33 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
+import controller.FilmsController;
 import controllerImpl.FilmsControllerImpl;
 import utilities.Film;
 import utilities.FilmFactory;
 import utilities.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
-import view.ManageFilms.InfoFilmsGUIfactory;
-import view.ManageFilms.PanelFilmFactory;
+import view.ManageFilms.Factory.InfoFilmsGUIfactory;
+import view.ManageFilms.Factory.PanelFilmFactory;
 import view.Settings.InfoFilmSettingsDefault;
+import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
 public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     
     private static final long serialVersionUID = 7114066347061701832L;
-    
-    //private final InfoFilmsGUIfactory factory = new InfoFilmsGUIfactoryImpl();
-    
+
     private static final String FRAME_NAME = "Container Films";
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame = new JFrame(FRAME_NAME);
-    private final Container container = frame.getContentPane();
+    //Components
     private final PanelFilmFactory factoryFilmPanel = new PanelFilmFactoryImpl();
     private final JButton add = new JButton("Add");
     private final JButton home = new JButton("Home");
-    
+
+    private final Container container = frame.getContentPane();
+    private FilmsController observer;
+    private final Map<JButton, Film> map = new HashMap<>();
 
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
@@ -60,10 +63,12 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final int frameWidth = (int) (screenWidth / PROPORTION);
     private final int frameHeight = (int) (screenHeight / PROPORTION);
 
-    public ContainerFilmsGUIimpl(final Map<JButton, Film> mapFilm, final Set<Film> setFilm) {
+
     
+    public ContainerFilmsGUIimpl(final Set<Film> setFilm) {
+
     final JPanel mainPanel = new JPanel(new BorderLayout());
-    final JPanel centerPanel = factoryFilmPanel.getFilmPanel(mapFilm, setFilm);
+    final JPanel centerPanel = factoryFilmPanel.getFilmPanel(map, setFilm);
     //container.add(mainPanel);
     frame.pack();
     frame.setSize(frameWidth, frameHeight);
@@ -73,23 +78,17 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     }
 
     private void display() {
-        
     }
-
-  
-
-    @Override
-    public void setObserver(FilmsControllerImpl filmsControllerImpl) {
-        // TODO Auto-generated method stub
-        
-    } 
-   
 
     @Override
     public void start() {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        
+    }
+
+    @Override
+    public void setObserver(final FilmsController observer) {
+        this.observer = observer;
     }
 
     /*

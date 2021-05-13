@@ -1,4 +1,4 @@
-package viewImpl.ManageFilms;
+package viewImpl.ManageFilms.Factory;
 
 import java.awt.Image;
 import java.awt.LayoutManager;
@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import view.ManageFilms.InfoFilmsGUIfactory;
+import view.ManageFilms.Factory.InfoFilmsGUIfactory;
 import view.Settings.InfoFilmSettingsDefault;
 
 public class InfoFilmsGUIfactoryImpl implements InfoFilmsGUIfactory {

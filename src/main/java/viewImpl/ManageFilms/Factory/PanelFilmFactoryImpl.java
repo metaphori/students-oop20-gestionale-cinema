@@ -1,4 +1,4 @@
-package viewImpl.ManageFilms;
+package viewImpl.ManageFilms.Factory;
 
 
 import java.awt.Dimension;
@@ -17,7 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import utilities.Film;
-import view.ManageFilms.PanelFilmFactory;
+import view.ManageFilms.Factory.PanelFilmFactory;
 
 
 public class PanelFilmFactoryImpl implements PanelFilmFactory {

@@ -1,4 +1,4 @@
-package viewImpl.ManageFilms;
+package viewImpl.ManageFilms.Factory;
 
     import java.awt.*;
     import javax.swing.JScrollPane;

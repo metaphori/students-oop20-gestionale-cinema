@@ -30,8 +30,8 @@ import utilities.ProgrammedFilm;
 import view.Booking.GUIFactoryBooking;
 import view.Booking.ListFilmView;
 import view.Booking.ListFilmViewObserver;
-import view.ManageFilms.PanelFilmFactory;
-import viewImpl.ManageFilms.PanelFilmFactoryImpl;
+import view.ManageFilms.Factory.PanelFilmFactory;
+import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
 public class ListFilmViewImpl implements ListFilmView{
     //private BookingViewObserver observer;
