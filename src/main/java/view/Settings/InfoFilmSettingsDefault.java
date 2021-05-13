@@ -1,4 +1,4 @@
-package settings.view;
+package view.Settings;
 
 public final class InfoFilmSettingsDefault {
     public static final double ImageHeightProportion = 1.7;

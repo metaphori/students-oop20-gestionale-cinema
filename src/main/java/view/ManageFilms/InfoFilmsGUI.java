@@ -1,4 +1,4 @@
-package view;
+package view.ManageFilms;
 
 import controller.FilmsController;
 

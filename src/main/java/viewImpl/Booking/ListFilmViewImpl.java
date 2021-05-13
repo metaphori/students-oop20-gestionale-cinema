@@ -27,11 +27,11 @@ import javax.swing.SpringLayout;
 
 import utilities.Film;
 import utilities.ProgrammedFilm;
-import view.PanelFilmFactory;
 import view.Booking.GUIFactoryBooking;
 import view.Booking.ListFilmView;
 import view.Booking.ListFilmViewObserver;
-import viewImpl.PanelFilmFactoryImpl;
+import view.ManageFilms.PanelFilmFactory;
+import viewImpl.ManageFilms.PanelFilmFactoryImpl;
 
 public class ListFilmViewImpl implements ListFilmView{
     //private BookingViewObserver observer;

@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.ManageFilms;
 
 public class ProgrammedFilmViewImpl {
 

@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.ManageFilms;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,8 +30,8 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.Film;
-import view.InfoFilmsGUIfactory;
-import view.InfoFilmsGUIfactoryImpl;
+import view.ManageFilms.InfoFilmsGUIfactory;
+import view.Settings.InfoFilmSettingsDefault;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,8 +39,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import org.apache.commons.io.*;
-
-import settings.view.InfoFilmSettingsDefault;
 
 public class InfoFilmsImplGUI {
 	
