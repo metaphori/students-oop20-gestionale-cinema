@@ -84,7 +84,7 @@ public class BookingViewImpl implements BookingView {
             btn.addActionListener( e ->{
                 JButton button = (JButton) e.getSource();
                 observer.buttonSelected(grid.get(button),film);
-                
+                this.refresh();
             });
         });
         JButton bookBt = new JButton(STRING_BTN_BOOK);
