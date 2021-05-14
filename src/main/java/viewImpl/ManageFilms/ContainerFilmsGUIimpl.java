@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -30,13 +32,18 @@ import org.apache.commons.io.FileUtils;
 
 import controller.FilmsController;
 import controllerImpl.FilmsControllerImpl;
+import modelImpl.IdsGeneratorImpl;
+import modelImpl.ManagerIdsFilmImpl;
 import utilities.Film;
+import utilities.FilmBasicImpl;
 import utilities.FilmFactory;
 import utilities.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
+import view.ManageFilms.Factory.ContainerFilmsGUIfactory;
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;
 import view.ManageFilms.Factory.PanelFilmFactory;
 import view.Settings.InfoFilmSettingsDefault;
+import viewImpl.ManageFilms.Factory.ContainerFilmsGUIfactoryImpl;
 import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
 public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
@@ -49,6 +56,7 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final JFrame frame = new JFrame(FRAME_NAME);
     //Components
     private final PanelFilmFactory factoryFilmPanel = new PanelFilmFactoryImpl();
+    private final ContainerFilmsGUIfactory factory = new ContainerFilmsGUIfactoryImpl();
     private final JButton add = new JButton("Add");
     private final JButton home = new JButton("Home");
 
@@ -64,20 +72,47 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final int frameHeight = (int) (screenHeight / PROPORTION);
 
 
-    
+
     public ContainerFilmsGUIimpl(final Set<Film> setFilm) {
 
-    final JPanel mainPanel = new JPanel(new BorderLayout());
+    final JPanel mainPanel = factory.createPanel(new BorderLayout());
     final JPanel centerPanel = factoryFilmPanel.getFilmPanel(map, setFilm);
-    //container.add(mainPanel);
+    final JPanel northPanel = factory.createPanel(new FlowLayout(FlowLayout.RIGHT));
+    final JPanel southPanel = factory.createPanel(new FlowLayout(FlowLayout.CENTER));
+
+    mainPanel.add(centerPanel, BorderLayout.CENTER);
+    mainPanel.add(northPanel, BorderLayout.NORTH);
+    mainPanel.add(southPanel, BorderLayout.SOUTH);
+
+    northPanel.add(home);
+    southPanel.add(add);
+
+    final ActionListener al = (e) -> { 
+        //this is what must be done when users click on specific film . So specific film gui must be viewed
+        final JButton selectedFilm = (JButton) e.getSource(); 
+        final Film film = map.get(selectedFilm);
+        observer.showInfoFilmView(film);
+        frame.setVisible(false);
+    };
+    //add action listener to every buttons
+    for (final var button: map.keySet()) {
+        button.addActionListener(al);
+    }
+
+    add.addActionListener(event -> {
+        observer.showNewFilmView();
+        frame.setVisible(false);
+    });
+
+
+    container.add(mainPanel);
     frame.pack();
     frame.setSize(frameWidth, frameHeight);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
+    //frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
     frame.validate();
-    }
+    frame.setVisible(true);
 
-    private void display() {
     }
 
     @Override
@@ -91,12 +126,4 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
         this.observer = observer;
     }
 
-    /*
-    public static void main(final String[] args) {
-        
-        // ContainerFilmsGUIimpl view = new ContainerFilmsGUIimpl();
-
-    }
-    */
-    
 }

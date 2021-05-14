@@ -31,9 +31,8 @@ public class PanelFilmFactoryImpl implements PanelFilmFactory {
     public JPanel getFilmPanel(final Map<JButton, Film> mapFilm, final Set<Film> setFilm) {
         final JPanel centralPanel = new JPanel(new WrapLayout());
         for (var film : setFilm) { 
-           //if film has set a coverPath loads this otherwise loads defaultImage
-           //mapFilm.put(this.getButtonImage(film.getName(), film.getCoverPath()), film);
-            if (Optional.ofNullable(film.getCoverPath()) != null) {
+           //if film has set a coverPath loads this, otherwise loads defaultImage
+            if (film.getCoverPath().isPresent()) {
                 final ImageIcon img = new ImageIcon(film.getCoverPath().get());
                 mapFilm.put(this.getButtonImage(film.getName(), img), film);
             }

@@ -10,6 +10,11 @@ public final class IdsGeneratorImpl implements IdsGenerator {
     public IdsGeneratorImpl(final Optional<Integer> lastGeneratedId) {
         this.lastGeneratedId = lastGeneratedId;
     }
+
+    public IdsGeneratorImpl() {
+        this.lastGeneratedId = Optional.ofNullable(null);
+    }
+
     @Override
     public int getNewId() {
         if (this.lastGeneratedId.isEmpty()) {

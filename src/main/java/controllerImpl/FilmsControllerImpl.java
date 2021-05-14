@@ -2,6 +2,7 @@ package controllerImpl;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import controller.FilmsController;
 import model.ContainerFilmsModel;
@@ -26,9 +27,18 @@ public class FilmsControllerImpl implements FilmsController {
 
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
-        this.viewFilms.start();
+
     }
 
+    public FilmsControllerImpl(final Set<Film> set) { // IT'S A TEST !!!!!!!!!!!!!!!!!!
+        model = new ContainerFilmsModelImpl();
+        viewFilms = new ContainerFilmsGUIimpl(set); // Empty set, there aren't films
+        infoFilms = new InfoFilmsGUIimpl();
+
+        this.viewFilms.setObserver(this);
+        this.infoFilms.setObserver(this);
+    }
+ 
     @Override
     public void addFilm(final Film f) {
  
@@ -49,12 +59,24 @@ public class FilmsControllerImpl implements FilmsController {
     }
 
     @Override
-    public void showManageFilmsView() {
+    public void showMenu() {
+        infoFilms.start();
+    }
+
+    @Override
+    public void showContainerFilmsView() {
 
     }
 
     @Override
-    public void showMenu() {
+    public void showInfoFilmView(final Film f) {
+        infoFilms.start();
+        infoFilms.loadFilm(f);
+    }
+
+    @Override
+    public void showNewFilmView() {
+        infoFilms.start();
     }
 
 }

@@ -1,6 +1,7 @@
 package modelImpl;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 import model.IdsGenerator;
@@ -15,6 +16,12 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
         this.containerFilmsIds = containerFilmsIds;
         this.idsGenerator = idsGenerator;
     }
+    
+    public ManagerIdsFilmImpl(final IdsGenerator idsGenerator) { 
+        this.containerFilmsIds = new HashSet<>();
+        this.idsGenerator = idsGenerator;
+    }
+    
     public Collection<Integer> getUsedIDs(final IdsGenerator idsGenerator) {
         return containerFilmsIds;
     }

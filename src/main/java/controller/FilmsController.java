@@ -10,6 +10,9 @@ public interface FilmsController {
         void deleteFilm(FilmBasicImpl f);
         Collection<FilmBasicImpl> getFilms(); //recupera i film da file
         void loadFilm(Collection<FilmBasicImpl> loadedFilms); //Carica i film sul model
-        void showManageFilmsView();
+        
         void showMenu();
+        void showContainerFilmsView();
+        void showInfoFilmView(Film f);
+        void showNewFilmView();
 }

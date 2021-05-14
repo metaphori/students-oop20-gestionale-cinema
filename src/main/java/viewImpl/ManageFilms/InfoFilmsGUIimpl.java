@@ -56,13 +56,13 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         private final JFrame frame = new JFrame(FRAME_NAME);
         private final Container container = frame.getContentPane();
-        private FilmsController observer ;
+        private FilmsController observer;
         
         private final JTextField duration = factory.createTextField("Duration (minutes)");
         private final JTextField genre = factory.createTextField("Genre");
         private final JTextArea description = factory.createTextArea("Description");
         private final JButton save = factory.createButtonWithText("Save");
-        private final JButton delete = factory.createButtonWithText("delete");
+        private final JButton delete = factory.createButtonWithText("Delete");
         private final JButton home = factory.createButtonWithText("Home");
         private final JButton back = factory.createButtonWithText("Back");
         private final JButton pic = factory.createButtonWithText("");
@@ -128,30 +128,38 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	frame.pack();
 	
 	
-	this.display();
+	//this.display();
 	frame.setSize(frameWidth, frameHeight);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 	description.addFocusListener(new FocusListener() {
 	    public void focusGained(final FocusEvent e) {
-	        description.setText("");
+	        if ("Description".equals(description.getText())) { 
+	            description.setText("");
+                }
 	    }
 
 	    public void focusLost(final FocusEvent e) {
 	
 	    }
 	});
+	
 	genre.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                        genre.setText("");
+                if ("Genre".equals(genre.getText())) { 
+                    genre.setText("");
+                }
             }
 
             public void focusLost(final FocusEvent e) {
             }
         });
+	
 	title.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                        title.setText("");
+                if ("Title".equals(title.getText())) { 
+                    title.setText("");
+                }
             }
 
             public void focusLost(final FocusEvent e) {
@@ -159,7 +167,10 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         });
 	duration.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                        duration.setText("");
+               if ("Duration (minutes)".equals(duration.getText())) { 
+                   duration.setText("");
+               }
+
             }
 
             public void focusLost(final FocusEvent e) {
@@ -182,6 +193,11 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	       }
 	    }
 	}
+	
+	
+	
+	
+	
 	);
 	
 	
@@ -196,17 +212,13 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	}
 	
 	
-	private void display() {
-	    frame.setLocationByPlatform(true);
-	    frame.setVisible(true);
-	}
-	
-	private void loadFilm(final Film film) {
+    @Override	
+    public void loadFilm(final Film film) {
 	    title.setText(film.getName());
 	    genre.setText(film.getGenre());
 	    duration.setText(new Integer(film.getDuration()).toString());
 	    description.setText(film.getDescription());
-	    if (Optional.ofNullable(film.getCoverPath()) != null) {
+	    if (film.getCoverPath().isPresent()) {
                 final ImageIcon icon = new ImageIcon(film.getCoverPath().get());
                 pic.setIcon(
                         factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
@@ -223,8 +235,8 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 
     @Override
     public void start() {
-        
-        
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
     }
 
 
