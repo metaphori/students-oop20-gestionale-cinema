@@ -54,13 +54,8 @@ public class FilmsControllerImpl implements FilmsController {
     }
 
     @Override
-    public void loadFilm(final Collection<FilmBasicImpl> loadedFilms) {
-
-    }
-
-    @Override
-    public void showMenu() {
-        infoFilms.start();
+    public void showMenu() { //TODO 
+        
     }
 
     @Override
@@ -77,6 +72,11 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void showNewFilmView() {
         infoFilms.start();
+    }
+
+    @Override
+    public void loadFilm(final Collection<FilmBasicImpl> loadedFilms) {
+
     }
 
 }

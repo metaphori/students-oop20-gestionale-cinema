@@ -104,6 +104,12 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
         frame.setVisible(false);
     });
 
+    home.addActionListener(event -> {
+        observer.showMenu();
+        frame.setVisible(false);
+    }
+    );
+
 
     container.add(mainPanel);
     frame.pack();

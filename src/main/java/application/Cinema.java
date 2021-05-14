@@ -45,6 +45,7 @@ public class Cinema {
         FilmsController filmsController = new FilmsControllerImpl(set);
         
         filmsController.showContainerFilmsView();
+        System.out.println(System.getProperty("user.home"));
         
         
         

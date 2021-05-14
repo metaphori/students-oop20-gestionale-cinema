@@ -193,11 +193,6 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	       }
 	    }
 	}
-	
-	
-	
-	
-	
 	);
 	
 	
