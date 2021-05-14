@@ -1,8 +1,11 @@
 package application;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.FilmsController;
 import controllerImpl.FilmsControllerImpl;
@@ -12,6 +15,7 @@ import utilities.Film;
 import utilities.FilmBasicImpl;
 import utilities.FilmFactory;
 import utilities.FilmFactoryImpl;
+import utilities.GeneralSettings;
 
 public class Cinema {
 
@@ -45,10 +49,16 @@ public class Cinema {
         FilmsController filmsController = new FilmsControllerImpl(set);
         
         filmsController.showContainerFilmsView();
-        System.out.println(System.getProperty("user.home"));
+       // System.out.println(GeneralSettings.IMAGESDIR);
+        /*
+        File[] files = new File(GeneralSettings.IMAGESDIR).listFiles();
+        for (final File file : files) {
+            System.out.println(file.getName());
+        }
+        */
+
         
-        
-        
+          
     }
 
 

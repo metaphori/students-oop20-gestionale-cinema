@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.Film;
+import utilities.GeneralSettings;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;
@@ -185,7 +186,9 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	    final int returnVal = chooser.showOpenDialog(frame);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 	       final File selectedFile = chooser.getSelectedFile();
-	       final File destFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "test");
+	       final File destFile = new File(GeneralSettings.IMAGESDIR + GeneralSettings.FS + "bb");
+	       //System.out.println(destFile.getAbsoluteFile());
+
 	       try {
 	           FileUtils.copyFile(selectedFile, destFile);
 	       } catch (IOException exception) {

@@ -60,6 +60,7 @@ public class FilmsControllerImpl implements FilmsController {
 
     @Override
     public void showContainerFilmsView() {
+        viewFilms.start();
 
     }
 

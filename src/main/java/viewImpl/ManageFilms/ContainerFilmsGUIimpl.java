@@ -117,7 +117,7 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
     frame.validate();
-    frame.setVisible(true);
+    
 
     }
 
