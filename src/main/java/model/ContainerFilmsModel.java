@@ -7,4 +7,5 @@ public interface ContainerFilmsModel {
     void removeFilm(Film oldFilm);
     Collection<Film> getFilms();
     ManagerIdsFilms getManagerIdsFilms();
+
 }

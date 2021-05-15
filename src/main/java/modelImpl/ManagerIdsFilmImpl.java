@@ -10,6 +10,7 @@ import model.ManagerIdsFilms;
 public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     private  final Collection<Integer> containerFilmsIds;
     private  final IdsGenerator idsGenerator;
+    protected String type = getClass().getName();
 
     //Passo al manager Ids films l' idsGenerator e il containerFilmsIds
     public ManagerIdsFilmImpl(final IdsGenerator idsGenerator, final Collection<Integer> containerFilmsIds) { 
@@ -26,7 +27,9 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
         return containerFilmsIds;
     }
     public int getNewFilmID() {
-        return idsGenerator.getNewId();
+        int id = idsGenerator.getNewId();
+        containerFilmsIds.add(id);
+        return id;
     }
 
     @Override
@@ -36,5 +39,11 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     @Override
     public Collection<Integer> getUsedIDs() {
              return containerFilmsIds;
+    }
+    @Override
+    public String toString() {
+        return containerFilmsIds +"" + idsGenerator;
+        
+        
     }
 }

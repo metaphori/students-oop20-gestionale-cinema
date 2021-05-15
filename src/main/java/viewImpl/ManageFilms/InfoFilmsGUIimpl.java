@@ -31,6 +31,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.Film;
 import utilities.GeneralSettings;
+import utilities.ManagerWorkingDIR;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;
@@ -58,6 +59,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         private final JFrame frame = new JFrame(FRAME_NAME);
         private final Container container = frame.getContentPane();
         private FilmsController observer;
+        private Optional<Film> focusFilm;
         
         private final JTextField duration = factory.createTextField("Duration (minutes)");
         private final JTextField genre = factory.createTextField("Genre");
@@ -82,6 +84,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         final JPanel westPanel = factory.createPanel(new BorderLayout());
         final JPanel southPanel = factory.createPanel(new BorderLayout());
         final JPanel northPanel = factory.createPanel(new BorderLayout());
+        focusFilm = Optional.ofNullable(null); // focusFilm empty
 
         final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
 	ImageIcon icon = new ImageIcon(imgURL);
@@ -184,19 +187,51 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	    final FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG  & PNG Images", "jpg", "png", "jpeg");
 	    chooser.setFileFilter(filter);
 	    final int returnVal = chooser.showOpenDialog(frame);
+	    Optional<String> pathDestFile = Optional.ofNullable(null);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 	       final File selectedFile = chooser.getSelectedFile();
-	       final File destFile = new File(GeneralSettings.IMAGESDIR + GeneralSettings.FS + "bb");
-	       //System.out.println(destFile.getAbsoluteFile());
-
+	       final ManagerWorkingDIR manager = observer.getManagerWorkingDIR();
 	       try {
-	           FileUtils.copyFile(selectedFile, destFile);
-	       } catch (IOException exception) {
-	           exception.printStackTrace();
+	           if (focusFilm.isPresent()) {
+	               pathDestFile = Optional.ofNullable(manager.copyFile(selectedFile, GeneralSettings.IMAGESDIR));
+	           }
+	           else {
+	               pathDestFile = Optional.ofNullable(manager.copyFileWithSpecificName(selectedFile, GeneralSettings.IMAGESDIR, GeneralSettings.TEMPIMAGENAME));
+	           }
+	       } catch (IOException e1) {
+	           e1.printStackTrace();
 	       }
+	     //Now I have to update button image , so update model
+	     // if user clicked on Add to add a new Film
+	     if (focusFilm.isEmpty()) {
+	         final ImageIcon selectedIcon = new ImageIcon(pathDestFile.get());
+	         pic.setIcon(
+	                 factory.getScaledIcon(selectedIcon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
+	         );
+	     }
+	     
+	     
+	     
+	     
+	     
+
 	    }
 	}
+	);	
+	back.addActionListener(event -> {
+	       frame.setVisible(false); 
+	       focusFilm = Optional.ofNullable(null);
+	       observer.showContainerFilmsView();
+	    }
 	);
+	
+	save.addActionListener(event ->
+	{
+	    
+	}     
+	);
+	
+	
 	
 	
 	
@@ -226,6 +261,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
                 final ImageIcon icon = new ImageIcon(imgURL);
                 pic.setIcon(factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
             }
+	    focusFilm = Optional.of(film);
 	}	
 	
 	

@@ -6,7 +6,8 @@ import model.IdsGenerator;
 
 public final class IdsGeneratorImpl implements IdsGenerator {
     private Optional<Integer> lastGeneratedId; //last generated id to insert a newFilm. When films container is empty , this value will be null;
-
+    protected String type = getClass().getName();
+    
     public IdsGeneratorImpl(final Optional<Integer> lastGeneratedId) {
         this.lastGeneratedId = lastGeneratedId;
     }
@@ -30,4 +31,10 @@ public final class IdsGeneratorImpl implements IdsGenerator {
     public Optional<Integer> getLastGeneratedId() {
         return lastGeneratedId;
     }
+
+    @Override
+    public String toString() {
+        return "IdsGeneratorImpl [lastGeneratedId=" + lastGeneratedId + "]";
+    }
+    
 }

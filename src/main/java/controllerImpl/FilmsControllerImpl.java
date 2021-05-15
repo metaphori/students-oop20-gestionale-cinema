@@ -9,6 +9,8 @@ import model.ContainerFilmsModel;
 import modelImpl.ContainerFilmsModelImpl;
 import utilities.Film;
 import utilities.FilmBasicImpl;
+import utilities.ManagerWorkingDIR;
+import utilities.ManagerWorkingDIRimpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import viewImpl.ManageFilms.ContainerFilmsGUIimpl;
@@ -19,11 +21,13 @@ public class FilmsControllerImpl implements FilmsController {
     private final ContainerFilmsModel model;
     private final ContainerFilmsGUI viewFilms;
     private final InfoFilmsGUI infoFilms;
+    private final ManagerWorkingDIR managerWorkingDIR;
 
     public FilmsControllerImpl() { // must be invoked on the first use of application 
         model = new ContainerFilmsModelImpl();
         viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
+        managerWorkingDIR = new ManagerWorkingDIRimpl();
 
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
@@ -34,7 +38,8 @@ public class FilmsControllerImpl implements FilmsController {
         model = new ContainerFilmsModelImpl();
         viewFilms = new ContainerFilmsGUIimpl(set); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
-
+        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
     }
@@ -78,6 +83,11 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void loadFilm(final Collection<FilmBasicImpl> loadedFilms) {
 
+    }
+
+    @Override
+    public ManagerWorkingDIR getManagerWorkingDIR() {
+        return this.managerWorkingDIR;
     }
 
 }

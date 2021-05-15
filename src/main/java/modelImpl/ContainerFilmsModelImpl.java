@@ -9,6 +9,7 @@ import model.ManagerIdsFilms;
 import utilities.Film;
 
 public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
+    protected String type = getClass().getName();
     private final Collection<Film> containerFilms;
     private final ManagerIdsFilms manager; // verrà utilizzato dal controller per poter istanziare il film e passarlo con l'id disponibile richiesto al manager
     
@@ -38,6 +39,10 @@ public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
     @Override
     public ManagerIdsFilms getManagerIdsFilms() {
         return this.manager;
+    }
+    @Override
+    public String toString() {
+        return ""+containerFilms+""+manager ;
     }
 
 }
