@@ -209,11 +209,6 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	                 factory.getScaledIcon(selectedIcon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
 	         );
 	     }
-	     
-	     
-	     
-	     
-	     
 
 	    }
 	}
