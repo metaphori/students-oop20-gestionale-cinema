@@ -7,4 +7,5 @@ public interface InfoFilmsGUI {
     void start();
     void setObserver(FilmsController observer);
     void loadFilm(Film film);
+    void reset();
 }

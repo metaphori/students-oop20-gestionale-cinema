@@ -12,12 +12,14 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.FutureTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,12 +28,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
+
 import controller.FilmsController;
 import controllerImpl.FilmsControllerImpl;
+//import jdk.tools.jlink.internal.Platform;
 import modelImpl.IdsGeneratorImpl;
 import modelImpl.ManagerIdsFilmImpl;
 import utilities.Film;
@@ -47,7 +52,7 @@ import viewImpl.ManageFilms.Factory.ContainerFilmsGUIfactoryImpl;
 import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
 public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
-    
+
     private static final long serialVersionUID = 7114066347061701832L;
 
     private static final String FRAME_NAME = "Container Films";
@@ -62,8 +67,8 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
 
     private final Container container = frame.getContentPane();
     private FilmsController observer;
-    private final Map<JButton, Film> map = new HashMap<>();
-
+    private Map<JButton, Film> map = new HashMap<>();
+    
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
     private final int screenHeight = (int) screen.getHeight();
@@ -71,15 +76,17 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final int frameWidth = (int) (screenWidth / PROPORTION);
     private final int frameHeight = (int) (screenHeight / PROPORTION);
 
-
+    private JPanel centerPanel;
+    final ActionListener al;
 
     public ContainerFilmsGUIimpl(final Set<Film> setFilm) {
 
-    final JPanel mainPanel = factory.createPanel(new BorderLayout());
-    final JPanel centerPanel = factoryFilmPanel.getFilmPanel(map, setFilm);
+    JPanel mainPanel = factory.createPanel(new BorderLayout());
+    //centerPanel = factoryFilmPanel.getFilmPanel(map, setFilm);
     final JPanel northPanel = factory.createPanel(new FlowLayout(FlowLayout.RIGHT));
     final JPanel southPanel = factory.createPanel(new FlowLayout(FlowLayout.CENTER));
-
+    centerPanel = new JPanel();
+    centerPanel.add(factoryFilmPanel.getFilmPanel(map, setFilm));
     mainPanel.add(centerPanel, BorderLayout.CENTER);
     mainPanel.add(northPanel, BorderLayout.NORTH);
     mainPanel.add(southPanel, BorderLayout.SOUTH);
@@ -87,12 +94,16 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     northPanel.add(home);
     southPanel.add(add);
 
-    final ActionListener al = (e) -> { 
+     al = (e) -> { 
         //this is what must be done when users click on specific film . So specific film gui must be viewed
         final JButton selectedFilm = (JButton) e.getSource(); 
+        System.out.println("key" + map.containsKey(selectedFilm));
         final Film film = map.get(selectedFilm);
-        observer.showInfoFilmView(film);
         frame.setVisible(false);
+        System.out.println("ActionListener:" + map + " ");
+        //frame.validate();
+        observer.showInfoFilmView(film);
+        //frame.dispose();
     };
     //add action listener to every buttons
     for (final var button: map.keySet()) {
@@ -102,11 +113,13 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     add.addActionListener(event -> {
         observer.showNewFilmView();
         frame.setVisible(false);
+        //frame.dispose();
     });
 
     home.addActionListener(event -> {
         observer.showMenu();
         frame.setVisible(false);
+        //frame.dispose();
     }
     );
 
@@ -131,5 +144,18 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     public void setObserver(final FilmsController observer) {
         this.observer = observer;
     }
+    @Override
+    public void update() {//Reset map, take new films and rebuild central panel
+        map.clear();
+        centerPanel.remove(0);
 
+        Set<Film> film = new HashSet<>(observer.getFilms());
+        
+        centerPanel.add(factoryFilmPanel.getFilmPanel(map, film));
+        for (final var button: map.keySet()) {
+            button.addActionListener(al);
+        }
+        centerPanel.validate();
+        frame.validate();
+    }
 }

@@ -6,6 +6,7 @@ public class GeneralSettings {
     public static final String ROOTNAME = ".application";
     public static final String IMAGESDIRNAME = "images";
     public static final String IMAGESDEFAULTDIRNAME = "default";
+    public static final String IMAGESSELECTEDDIRNAME = "selected";
     public static final String DATADIRNAME = "data";
     public static final String TEMPDIRNAME = "temp";
     
@@ -16,10 +17,11 @@ public class GeneralSettings {
     public static final String IMAGESDEFAULTDIR = WORKINGDIR +  FS + IMAGESDIRNAME + FS + IMAGESDEFAULTDIRNAME;
     public static final String DATADIR = WORKINGDIR +  FS  + DATADIRNAME;
     public static final String TEMPDIR =  WORKINGDIR +  FS  + TEMPDIRNAME;
+    public static final String IMAGESSELECTEDDIR =  WORKINGDIR +  FS  + IMAGESDIRNAME + FS + IMAGESSELECTEDDIRNAME + FS;
     
     //File options
     public static final String TEMPIMAGENAME = "tempImg";
-    public static final String IMAGEDEFAULTFILMFILENAME = "standardFilmImg";
+    public static final String IMAGEDEFAULTFILMFILENAME = "filmStandardIco.png";
     
     
     public static final String TEMPIMAGEFILE = TEMPDIR + FS + TEMPIMAGENAME;

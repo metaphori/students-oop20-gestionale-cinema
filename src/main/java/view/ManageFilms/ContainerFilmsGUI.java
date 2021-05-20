@@ -5,4 +5,5 @@ import controller.FilmsController;
 public interface ContainerFilmsGUI {
     void start();
     void setObserver(FilmsController observer);
+    void update();
 }

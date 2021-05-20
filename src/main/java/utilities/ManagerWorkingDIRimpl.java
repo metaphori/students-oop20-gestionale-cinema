@@ -1,9 +1,12 @@
 package utilities;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 import org.apache.commons.io.FileSystemUtils;
@@ -12,10 +15,11 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
-    private final int lengthName = 15;
+    private final int lengthFileName = 15;
+    
     @Override
     public String generateNewImageFileName(final String ext) {
-        final String generatedName = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(lengthName), ext);
+        final String generatedName = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(lengthFileName), ext);
         return generatedName;
     }
     @Override
@@ -25,7 +29,7 @@ public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         while (!(this.isValidName(GeneralSettings.IMAGESDIR, generatedName))) {
             generatedName = this.generateNewImageFileName(extSelectedFile);
         }
-        final File destFile = new File(GeneralSettings.IMAGESDIR + GeneralSettings.FS + generatedName);
+        final File destFile = new File(folder + generatedName);
         FileUtils.copyFile(src, destFile);
         return destFile.getAbsolutePath();
     }
@@ -42,9 +46,44 @@ public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
     @Override
     public String copyFileWithSpecificName(final File src, final String folder, final String name) throws IOException {
         final String extSelectedFile = FilenameUtils.getExtension(src.getAbsolutePath());
-        final File destFile = new File(GeneralSettings.IMAGESDIR + GeneralSettings.FS + name +extSelectedFile );
+        final File destFile = new File(folder + name + extSelectedFile);
         FileUtils.copyFile(src, destFile);
         return destFile.getAbsolutePath();
     }
+    
+    
+    @Override
+    public void initWorkingDir() {
+        this.createDIR(GeneralSettings.WORKINGDIR);
+        this.createDIR(GeneralSettings.DATADIR);
+        this.createDIR(GeneralSettings.IMAGESDIR);
+        this.createDIR(GeneralSettings.TEMPDIR);
+        
+    }
+    
+    private void createDIR(final String pathWithDIRname) {
+        final File rootDIR = new File(pathWithDIRname);
+        if (!rootDIR.exists()) {
+            rootDIR.mkdirs();
+        }
+    }
+
+    private void fillDIR(final File toCopy, final String pathDir) { // TODO
+        
+    }
+    /*
+    private void createFileImg(ImageIcon icon) {
+       
+        BufferedImage bi = new BufferedImage(icon.getImage().getWidth(null),icon.getImage().getHeight(null),BufferedImage.TYPE_BYTE_ARGB);
+
+        Graphics2D g2 = bi.createGraphics();
+        g2.drawImage(img, 0, 0, null);
+        g2.dispose();
+        ImageIO.write(bi, "jpg", new File("img.jpg"));
+        
+        
+    }
+    */
+    
 
 }

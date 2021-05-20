@@ -67,51 +67,34 @@ public final class FilmBasicImpl implements Film {
     public int getID() {
         return this.id;
     }
-    /**
-     * {@inheritDoc}
-     */   
-    
-    
-    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((coverImagePath == null) ? 0 : coverImagePath.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + duration;
-        result = prime * result + ((genre == null) ? 0 : genre.hashCode());
         result = prime * result + id;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final FilmBasicImpl other = (FilmBasicImpl) obj;
-        return !coverImagePath.equals(other.coverImagePath) 
-            || !description.equals(other.description)
-            || duration != other.duration
-            || !genre.equals(other.genre)
-            || id != other.id
-            || !name.equals(other.name)
-             ? false : true;
-        }
+   
     @Override
     public String toString() {
         return "FilmBasicImpl [name=" + name + ", genre=" + genre + ", description=" + description + ", coverImagePath="
                 + coverImagePath + ", duration=" + duration + ", id=" + id + "]";
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FilmBasicImpl other = (FilmBasicImpl) obj;
+        if (id != other.id)
+            return false;
+        return true;
     }
 
 

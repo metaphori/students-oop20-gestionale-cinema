@@ -48,10 +48,7 @@ public class PanelFilmFactoryImpl implements PanelFilmFactory {
         }
         return centralPanel;
     }
-    
-    
-    
-    
+
     private JButton getButtonImage(final String title, final ImageIcon icon) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
    

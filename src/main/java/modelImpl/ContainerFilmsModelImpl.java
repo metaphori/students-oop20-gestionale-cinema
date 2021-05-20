@@ -3,6 +3,7 @@ package modelImpl;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import model.ContainerFilmsModel;
 import model.ManagerIdsFilms;
@@ -10,19 +11,20 @@ import utilities.Film;
 
 public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
     protected String type = getClass().getName();
-    private final Collection<Film> containerFilms;
+    private final Set<Film> containerFilms;
     private final ManagerIdsFilms manager; // verrà utilizzato dal controller per poter istanziare il film e passarlo con l'id disponibile richiesto al manager
-    
+
     // must be invoked on the first use of application because no date must be load
     public ContainerFilmsModelImpl() { 
         containerFilms = new HashSet<>();
         manager = new ManagerIdsFilmImpl(new IdsGeneratorImpl(Optional.ofNullable(null)), new HashSet<>());
     }
     // always must be invoked apart on  the first use (in case of Container cant't be written on file)
-    public ContainerFilmsModelImpl(final Collection<Film> container, final ManagerIdsFilms manager) {
+    public ContainerFilmsModelImpl(final Set<Film> container, final ManagerIdsFilms manager) {
         this.containerFilms = container;
         this.manager = manager;
     }
+
 
     @Override
     public void addFilm(final Film newFilm) {
@@ -33,7 +35,7 @@ public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
        this.containerFilms.remove(oldFilm);
     }
     @Override
-    public Collection<Film> getFilms() {
+    public Set<Film> getFilms() {
         return this.containerFilms;
     }
     @Override
@@ -42,7 +44,7 @@ public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
     }
     @Override
     public String toString() {
-        return ""+containerFilms+""+manager ;
+        return "" + containerFilms + "" + manager;
     }
 
 }
