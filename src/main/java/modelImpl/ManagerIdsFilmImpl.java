@@ -42,8 +42,11 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     }
     @Override
     public String toString() {
-        return containerFilmsIds +"" + idsGenerator;
-        
-        
+        return containerFilmsIds + "" + idsGenerator;
+    }
+
+    @Override
+    public void removeFilmId(final int idToDelete) {
+       containerFilmsIds.remove(idToDelete);
     }
 }

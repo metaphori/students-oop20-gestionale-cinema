@@ -10,5 +10,6 @@ public interface ManagerWorkingDIR {
     String copyFileWithSpecificName(File src, String folder, String name) throws IOException;
     void initWorkingDir();
     boolean isValidName(String dirPath, String name);
+    void deleteFileWithSpecificName(File toDelete);
 
 }

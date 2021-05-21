@@ -53,11 +53,13 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void addFilm(final Film f) {
         this.model.addFilm(f);
+        System.out.println("Add new film:"+ f);
     }
 
     @Override
     public void deleteFilm(final Film f) {
         this.model.removeFilm(f);
+        System.out.println("Delete film:"+ f);
     }
 
     @Override
@@ -82,6 +84,7 @@ public class FilmsControllerImpl implements FilmsController {
     public void showInfoFilmView(final Film f) {
         infoFilms.start();
         infoFilms.loadFilm(f);
+        System.out.println("Load specific film"+ f);
     }
 
     @Override

@@ -244,21 +244,28 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
             } else {// If users wants edit an existing film
                 int oldIdFilm = focusFilm.get().getID();
                 if (selectedImagePath.isEmpty()) {
-                    film = filmFactory.createBasicFilmById(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(null), durationTime, oldIdFilm);
+                    Optional<String> equalPath = focusFilm.get().getCoverPath();
+                    film = filmFactory.createBasicFilmById(title.getText(), genre.getText(), description.getText(),equalPath,durationTime, oldIdFilm);
                     observer.deleteFilm(focusFilm.get());
                     observer.addFilm(film);
                 }else {// If users wants edit an existing film and he has selected specific image
+                    final Optional<String> imagePathToDelete = focusFilm.get().getCoverPath();
+                    if (imagePathToDelete.isPresent()) {
+                        observer.getManagerWorkingDIR().deleteFileWithSpecificName(new File(imagePathToDelete.get()));
+                    }
+                    
                     try {
                         pathWhereStored = observer.getManagerWorkingDIR().copyFile(new File(selectedImagePath.get()), GeneralSettings.IMAGESSELECTEDDIR);
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }
-                    film = filmFactory.createBasicFilm(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime);
+                    film = filmFactory.createBasicFilmById(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime,oldIdFilm);
                     observer.deleteFilm(focusFilm.get());
                     observer.addFilm(film);
                 }
-                System.out.println("Just modified:"+film);
+                System.out.println("Just modified:" + film);
             }
+            System.out.print("newPath:" + pathWhereStored);
            
 	    frame.setVisible(false);
 	    observer.showContainerFilmsView();
@@ -266,20 +273,21 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	);
 	
 	delete.
-	addActionListener(event->{
+	addActionListener(event -> {
+	    System.out.println("focus film in delete listener:"+focusFilm);
+	    final Optional<String> imagePathToDelete = focusFilm.get().getCoverPath();
+	    System.out.println("Ids before delete:"+ observer.getManagerIdsFilms().getUsedIDs());
+	    if (imagePathToDelete.isPresent()) {
+	        observer.getManagerWorkingDIR().deleteFileWithSpecificName(new File(imagePathToDelete.get()));
+	        System.out.println("Deleted image");
+	    }
+	    observer.getManagerIdsFilms().removeFilmId(focusFilm.get().getID());
 	    observer.deleteFilm(focusFilm.get());
+	    System.out.println("Ids before delete:"+ observer.getManagerIdsFilms().getUsedIDs());
 	    frame.setVisible(false);
 	    observer.showContainerFilmsView();
-	    
 	}
 	);
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
@@ -290,8 +298,10 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	
     @Override	
     public void loadFilm(final Film film) {
-            //this.reset();
-            System.out.print("filmby load" + film);
+            this.reset();
+            focusFilm = Optional.of(film);
+            System.out.println("I'm loading:" + film);
+            System.out.println("Focus on :" + focusFilm);
 	    title.setText(film.getName());
 	    genre.setText(film.getGenre());
 	    duration.setText(new Integer(film.getDuration()).toString());
@@ -299,18 +309,20 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	    
 	    if (film.getCoverPath().isPresent()) {
                 final ImageIcon icon = new ImageIcon(film.getCoverPath().get());
-                selectedImagePath = Optional.of(film.getCoverPath().get());
+               // selectedImagePath = Optional.of(film.getCoverPath().get());
                 pic.setIcon(
                         factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
                 );
             } else {
                 final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
                 final ImageIcon icon = new ImageIcon(imgURL);
-                selectedImagePath = Optional.ofNullable(null);
+                //selectedImagePath = Optional.ofNullable(null);
                 pic.setIcon(factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
             }
 
-	    focusFilm = Optional.of(film);
+	    
+	    System.out.print("focusFilm:" + film);
+	    delete.setEnabled(true);
 	}	
     
     @Override
@@ -340,6 +352,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         pic.setIcon(
                 factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
         );
+        delete.setEnabled(false);
     }
     /*
     public static void main(String[] args) {

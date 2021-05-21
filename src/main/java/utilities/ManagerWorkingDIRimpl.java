@@ -58,6 +58,7 @@ public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         this.createDIR(GeneralSettings.DATADIR);
         this.createDIR(GeneralSettings.IMAGESDIR);
         this.createDIR(GeneralSettings.TEMPDIR);
+       // this.fillDIR(toCopy, pathDir);
         
     }
     
@@ -69,7 +70,6 @@ public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
     }
 
     private void fillDIR(final File toCopy, final String pathDir) { // TODO
-        
     }
     /*
     private void createFileImg(ImageIcon icon) {
@@ -84,6 +84,15 @@ public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         
     }
     */
-    
+    @Override
+    public void deleteFileWithSpecificName(final File toDelete) {
+        
+      try {
+        FileUtils.forceDelete(toDelete);
+    } catch (IOException e) {
+        System.out.println("Errore while deleting specified file");
+        e.printStackTrace();
+    }  
+    }
 
 }

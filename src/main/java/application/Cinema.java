@@ -28,13 +28,13 @@ import modelImpl.ContainerFilmsModelImpl;
 public class Cinema {
 
     public static void main(final String[] args) {
-
+/*
         final Set<Film> set = new HashSet<>();
         final ManagerIdsFilms managerIdsFilm = new ManagerIdsFilmImpl(new IdsGeneratorImpl());
         //ContainerFilmsModel model = new ContainerFilmsModelImpl();
 
         final FilmFactory filmFactory = new FilmFactoryImpl(new ManagerIdsFilmImpl(new IdsGeneratorImpl()));
-        final Film f1 = filmFactory.createBasicFilm("Spiderman", "Action", "Nice film", Optional.ofNullable("/home/ziro/.application/images/selected/T8HdP0wHZgK74Yq.JPG"),120);
+        final Film f1 = filmFactory.createBasicFilm("Spiderman", "Action", "Nice film", Optional.ofNullable(null),120);
         final Film f2 = filmFactory.createBasicFilm("Batman", "Action", "Nice film", Optional.ofNullable(null),140);
         final Film f3 = filmFactory.createBasicFilm("Thor", "Action", "Good film", Optional.ofNullable(null),120);
         
@@ -51,12 +51,13 @@ public class Cinema {
         managerIdsFilm.getNewFilmID();
         managerIdsFilm.getNewFilmID();
         managerIdsFilm.getNewFilmID();
+        
         System.out.println(managerIdsFilm.getUsedIDs());
-        final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);
-      //  System.out.println(filmsController.getFilms());
+        
+       // final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);*/
+        final FilmsController filmsController = new FilmsControllerImpl();
         filmsController.showContainerFilmsView();
 
-        //System.out.println(exist);
 
     }
 
