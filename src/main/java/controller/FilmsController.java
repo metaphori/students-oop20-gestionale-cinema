@@ -3,7 +3,7 @@ package controller;
 
 import java.util.Set;
 
-import model.ManagerIdsFilms;
+import model.ManageFilms.ManagerIdsFilms;
 import utilities.Film;
 import utilities.ManagerWorkingDIR;
 

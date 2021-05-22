@@ -3,10 +3,10 @@ package model;
 import java.util.Set;
 
 import utilities.ProgrammedFilm;
-import utilities.Row;
-import utilities.Seat;
-import utilities.SeatState;
 import utilities.Ticket;
+import utilitiesImpl.Row;
+import utilitiesImpl.Seat;
+import utilitiesImpl.SeatState;
 
 public interface BookingModel {
     void addTicket(Ticket ticket);

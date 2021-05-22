@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import controllerImpl.InputOutput.RWfile;
 import controllerImpl.InputOutput.RWobject;
-import model.ContainerFilmsModel;
-import modelImpl.ContainerFilmsModelImpl;
+import model.ManageFilms.ContainerFilmsModel;
+import modelImpl.ManageFilms.ContainerFilmsModelImpl;
 import utilities.Film;
-import utilities.FilmBasicImpl;
-import utilities.FilmFactory;
-import utilities.FilmFactoryImpl;
+import utilities.Factory.FilmFactory;
+import utilitiesImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 
 class TestContainerFilms {
     @Test

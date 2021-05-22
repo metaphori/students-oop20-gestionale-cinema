@@ -1,8 +1,8 @@
-package modelImpl;
+package modelImpl.ManageFilms;
 
 import java.util.Optional;
 
-import model.IdsGenerator;
+import model.ManageFilms.IdsGenerator;
 
 public final class IdsGeneratorImpl implements IdsGenerator {
     private Optional<Integer> lastGeneratedId; //last generated id to insert a newFilm. When films container is empty , this value will be null;

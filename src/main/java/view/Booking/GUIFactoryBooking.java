@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import utilities.ProgrammedFilm;
-import utilities.SeatState;
+import utilitiesImpl.SeatState;
 
 public interface GUIFactoryBooking {
     JFrame getBaseFrame(String title);

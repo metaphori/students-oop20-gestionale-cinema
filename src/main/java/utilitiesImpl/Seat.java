@@ -1,4 +1,4 @@
-package utilities;
+package utilitiesImpl;
 
 public class Seat<X,Y> {
 	private final X x;

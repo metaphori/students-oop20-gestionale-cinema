@@ -1,4 +1,4 @@
-package controllerImpl;
+package controllerImpl.ManageFilms;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -7,15 +7,15 @@ import java.util.Set;
 import javax.swing.SwingUtilities;
 
 import controller.FilmsController;
-import model.ContainerFilmsModel;
-import model.ManagerIdsFilms;
-import modelImpl.ContainerFilmsModelImpl;
-import modelImpl.IdsGeneratorImpl;
-import modelImpl.ManagerIdsFilmImpl;
+import model.ManageFilms.ContainerFilmsModel;
+import model.ManageFilms.ManagerIdsFilms;
+import modelImpl.ManageFilms.ContainerFilmsModelImpl;
+import modelImpl.ManageFilms.IdsGeneratorImpl;
+import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
-import utilities.FilmBasicImpl;
 import utilities.ManagerWorkingDIR;
-import utilities.ManagerWorkingDIRimpl;
+import utilitiesImpl.FilmBasicImpl;
+import utilitiesImpl.ManagerWorkingDIRimpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import viewImpl.ManageFilms.ContainerFilmsGUIimpl;

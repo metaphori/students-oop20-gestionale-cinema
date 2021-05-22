@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-import utilities.FilmBasicImpl;
 import utilities.ProgrammedFilm;
+import utilitiesImpl.FilmBasicImpl;
 public interface ProgrammedFilmsModel {
     
     public Collection<ProgrammedFilm> getProgrammedFilms();
