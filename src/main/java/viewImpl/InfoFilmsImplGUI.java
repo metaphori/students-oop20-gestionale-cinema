@@ -43,11 +43,11 @@ import org.apache.commons.io.*;
 import settings.view.InfoFilmSettingsDefault;
 
 public class InfoFilmsImplGUI {
-	
-	private static final long serialVersionUID = 7114066347061701832L;
-	
-	private final InfoFilmsGUIfactory factory = new InfoFilmsGUIfactoryImpl();
-	
+        
+        private static final long serialVersionUID = 7114066347061701832L;
+        
+        private final InfoFilmsGUIfactory factory = new InfoFilmsGUIfactoryImpl();
+        
         private static final String FRAME_NAME = "Info film";
         private static final double PROPORTION = 1.15;
         private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -70,8 +70,8 @@ public class InfoFilmsImplGUI {
         private final int frameWidth = (int) (screenWidth / PROPORTION);
         private final int frameHeight = (int) (screenHeight / PROPORTION);
 
-        public InfoFilmsImplGUI() {	
-	
+        public InfoFilmsImplGUI() {     
+        
         final JPanel mainPanel = factory.createPanel(new BorderLayout());
         final JPanel centralPanel = factory.createPanel(new BorderLayout());
         final JPanel westPanel = factory.createPanel(new BorderLayout());
@@ -79,65 +79,65 @@ public class InfoFilmsImplGUI {
         final JPanel northPanel = factory.createPanel(new BorderLayout());
 
         final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
-	ImageIcon icon = new ImageIcon(imgURL);
-	/*
+        ImageIcon icon = new ImageIcon(imgURL);
+        /*
         final Image image = icon.getImage(); // transform it
         final Image newimg = image.getScaledInstance((int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-    	icon = new ImageIcon(newimg); // transform it back
+        icon = new ImageIcon(newimg); // transform it back
         */
-	pic.setIcon(
-	        factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
-	);
-	
-    	pic.setMargin(new Insets(0, 0, 0, 0));
-	pic.setPreferredSize(new Dimension((int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
-	
-	
-	final JPanel firstInfoPanel =  factory.createPanel(new FlowLayout(FlowLayout.LEFT, InfoFilmSettingsDefault.HgapFlowLayout, InfoFilmSettingsDefault.VgapFlowLayout));
-	final JPanel secondInfoPanel =  factory.createPanel(new FlowLayout(FlowLayout.LEFT, InfoFilmSettingsDefault.HgapFlowLayout, InfoFilmSettingsDefault.VgapFlowLayout));
-	final JPanel actionPanel = factory.createPanel(new FlowLayout(FlowLayout.CENTER));
-	
-	mainPanel.add(centralPanel, BorderLayout.CENTER);
-	mainPanel.add(southPanel, BorderLayout.SOUTH);
-	mainPanel.add(northPanel, BorderLayout.NORTH);
-	mainPanel.add(westPanel, BorderLayout.WEST); 
-	northPanel.add(back, BorderLayout.WEST);
-	back.setPreferredSize(new Dimension(frameHeight / InfoFilmSettingsDefault.ButtonHeightProportion, frameWidth / InfoFilmSettingsDefault.ButtonWidthProportion));
-	northPanel.add(home, BorderLayout.EAST);
-	home.setPreferredSize(new Dimension(frameHeight / InfoFilmSettingsDefault.ButtonHeightProportion, frameWidth / InfoFilmSettingsDefault.ButtonWidthProportion));
-	southPanel.add(actionPanel, BorderLayout.SOUTH);
-	actionPanel.add(save);
-	actionPanel.add(delete);
-	
-	southPanel.add(description, BorderLayout.NORTH);
-	westPanel.add(pic, BorderLayout.NORTH);
-	centralPanel.add(firstInfoPanel, BorderLayout.WEST);
-	centralPanel.add(secondInfoPanel, BorderLayout.CENTER);
-	title.setPreferredSize(new Dimension(frameWidth / InfoFilmSettingsDefault.JTextFieldHeightProportion, frameWidth / InfoFilmSettingsDefault.JTextFieldWidthProportion));
-	duration.setPreferredSize(new Dimension(frameWidth / InfoFilmSettingsDefault.JTextFieldHeightProportion, frameWidth / InfoFilmSettingsDefault.JTextFieldWidthProportion));
-	genre.setPreferredSize(new Dimension(frameWidth / InfoFilmSettingsDefault.JTextFieldHeightProportion, frameWidth / InfoFilmSettingsDefault.JTextFieldWidthProportion));
-	firstInfoPanel.add(title);
-	firstInfoPanel.add(duration);
-	secondInfoPanel.add(genre);
-	description.setPreferredSize(new Dimension(frameWidth, frameHeight / InfoFilmSettingsDefault.JTEXTAREAHEIGHTPROPORTION));
-	container.add(mainPanel);
-	frame.pack();
-	
-	
-	this.display();
-	frame.setSize(frameWidth, frameHeight);
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-	description.addFocusListener(new FocusListener() {
-	    public void focusGained(final FocusEvent e) {
-	        description.setText("");
-	    }
+        pic.setIcon(
+                factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
+        );
+        
+        pic.setMargin(new Insets(0, 0, 0, 0));
+        pic.setPreferredSize(new Dimension((int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
+        
+        
+        final JPanel firstInfoPanel =  factory.createPanel(new FlowLayout(FlowLayout.LEFT, InfoFilmSettingsDefault.HgapFlowLayout, InfoFilmSettingsDefault.VgapFlowLayout));
+        final JPanel secondInfoPanel =  factory.createPanel(new FlowLayout(FlowLayout.LEFT, InfoFilmSettingsDefault.HgapFlowLayout, InfoFilmSettingsDefault.VgapFlowLayout));
+        final JPanel actionPanel = factory.createPanel(new FlowLayout(FlowLayout.CENTER));
+        
+        mainPanel.add(centralPanel, BorderLayout.CENTER);
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
+        mainPanel.add(northPanel, BorderLayout.NORTH);
+        mainPanel.add(westPanel, BorderLayout.WEST); 
+        northPanel.add(back, BorderLayout.WEST);
+        back.setPreferredSize(new Dimension(frameHeight / InfoFilmSettingsDefault.ButtonHeightProportion, frameWidth / InfoFilmSettingsDefault.ButtonWidthProportion));
+        northPanel.add(home, BorderLayout.EAST);
+        home.setPreferredSize(new Dimension(frameHeight / InfoFilmSettingsDefault.ButtonHeightProportion, frameWidth / InfoFilmSettingsDefault.ButtonWidthProportion));
+        southPanel.add(actionPanel, BorderLayout.SOUTH);
+        actionPanel.add(save);
+        actionPanel.add(delete);
+        
+        southPanel.add(description, BorderLayout.NORTH);
+        westPanel.add(pic, BorderLayout.NORTH);
+        centralPanel.add(firstInfoPanel, BorderLayout.WEST);
+        centralPanel.add(secondInfoPanel, BorderLayout.CENTER);
+        title.setPreferredSize(new Dimension(frameWidth / InfoFilmSettingsDefault.JTextFieldHeightProportion, frameWidth / InfoFilmSettingsDefault.JTextFieldWidthProportion));
+        duration.setPreferredSize(new Dimension(frameWidth / InfoFilmSettingsDefault.JTextFieldHeightProportion, frameWidth / InfoFilmSettingsDefault.JTextFieldWidthProportion));
+        genre.setPreferredSize(new Dimension(frameWidth / InfoFilmSettingsDefault.JTextFieldHeightProportion, frameWidth / InfoFilmSettingsDefault.JTextFieldWidthProportion));
+        firstInfoPanel.add(title);
+        firstInfoPanel.add(duration);
+        secondInfoPanel.add(genre);
+        description.setPreferredSize(new Dimension(frameWidth, frameHeight / InfoFilmSettingsDefault.JTEXTAREAHEIGHTPROPORTION));
+        container.add(mainPanel);
+        frame.pack();
+        
+        
+        this.display();
+        frame.setSize(frameWidth, frameHeight);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        description.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                description.setText("");
+            }
 
-	    public void focusLost(final FocusEvent e) {
-	
-	    }
-	});
-	genre.addFocusListener(new FocusListener() {
+            public void focusLost(final FocusEvent e) {
+        
+            }
+        });
+        genre.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
                         genre.setText("");
             }
@@ -145,7 +145,7 @@ public class InfoFilmsImplGUI {
             public void focusLost(final FocusEvent e) {
             }
         });
-	title.addFocusListener(new FocusListener() {
+        title.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
                         title.setText("");
             }
@@ -153,7 +153,7 @@ public class InfoFilmsImplGUI {
             public void focusLost(final FocusEvent e) {
             }
         });
-	duration.addFocusListener(new FocusListener() {
+        duration.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
                         duration.setText("");
             }
@@ -161,48 +161,48 @@ public class InfoFilmsImplGUI {
             public void focusLost(final FocusEvent e) {
             }
         });
-	
-	
-	pic.addActionListener(e -> {
-	    final JFileChooser chooser = new JFileChooser();
-	    final FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG  & PNG Images", "jpg", "png", "jpeg");
-	    chooser.setFileFilter(filter);
-	    final int returnVal = chooser.showOpenDialog(frame);
-	    if (returnVal == JFileChooser.APPROVE_OPTION) {
-	       final File selectedFile = chooser.getSelectedFile();
-	       final File destFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "test");
-	       try {
-	           FileUtils.copyFile(selectedFile, destFile);
-	       } catch (IOException exception) {
-	           exception.printStackTrace();
-	       }
-	    }
-	}
-	);
-	
-	
-	
-	
-	
-	
-	
-	frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
-	frame.validate();
-	
-	}
-	
-	
-	private void display() {
-	    frame.setLocationByPlatform(true);
-	    frame.setVisible(true);
-	}
-	
-	private void loadFilm(final Film film) {
-	    title.setText(film.getName());
-	    genre.setText(film.getGenre());
-	    duration.setText(new Integer(film.getDuration()).toString());
-	    description.setText(film.getDescription());
-	    if (Optional.ofNullable(film.getCoverPath()) != null) {
+        
+        
+        pic.addActionListener(e -> {
+            final JFileChooser chooser = new JFileChooser();
+            final FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG  & PNG Images", "jpg", "png", "jpeg");
+            chooser.setFileFilter(filter);
+            final int returnVal = chooser.showOpenDialog(frame);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+               final File selectedFile = chooser.getSelectedFile();
+               final File destFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "test");
+               try {
+                   FileUtils.copyFile(selectedFile, destFile);
+               } catch (IOException exception) {
+                   exception.printStackTrace();
+               }
+            }
+        }
+        );
+        
+        
+        
+        
+        
+        
+        
+        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
+        frame.validate();
+        
+        }
+        
+        
+        private void display() {
+            frame.setLocationByPlatform(true);
+            frame.setVisible(true);
+        }
+        
+        private void loadFilm(final Film film) {
+            title.setText(film.getName());
+            genre.setText(film.getGenre());
+            duration.setText(new Integer(film.getDuration()).toString());
+            description.setText(film.getDescription());
+            if (Optional.ofNullable(film.getCoverPath()) != null) {
                 final ImageIcon icon = new ImageIcon(film.getCoverPath().get());
                 pic.setIcon(
                         factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
@@ -212,14 +212,14 @@ public class InfoFilmsImplGUI {
                 final ImageIcon icon = new ImageIcon(imgURL);
                 pic.setIcon(factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
             }
-	}	
-	
-	public static void main(String[] args) {
-		InfoFilmsImplGUI view = new InfoFilmsImplGUI();
-		
-		
+        }       
+        
+        public static void main(String[] args) {
+                InfoFilmsImplGUI view = new InfoFilmsImplGUI();
+                
+                
 
-	}
+        }
 
 }
 
