@@ -1,4 +1,4 @@
-package modelImpl;
+package modelImpl.ManageProgrammedFilms;
 
 public class ProgrammedFilmsModelImpl {
 

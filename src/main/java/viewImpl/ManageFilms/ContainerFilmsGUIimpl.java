@@ -43,7 +43,7 @@ import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Factory.FilmFactory;
-import utilitiesImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.Factory.ContainerFilmsGUIfactory;
