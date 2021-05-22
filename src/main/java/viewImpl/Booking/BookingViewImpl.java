@@ -59,8 +59,7 @@ public class BookingViewImpl implements BookingView {
         });
         Set<Seat<Row,Integer>> setSeats = observer.getSeatsFromFilm(film);
         row = Row.H;
-        
-        
+
         col = 10;
         JPanel center = new JPanel(new BorderLayout());
         JPanel gridPanel = new JPanel(new GridLayout(row.ordinal()+1, col) );

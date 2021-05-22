@@ -1,10 +1,14 @@
 package controllerImpl;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import controller.BookingController;
+import controllerImpl.InputOutput.RWcollection;
+import controllerImpl.InputOutput.RWfile;
 //import controllerImpl.InputOutput.RW;
 import model.BookingModel;
 import modelImpl.BookingModelImpl;
@@ -28,12 +32,14 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private  BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
-   
+  
     
     public BookingControllerImpl() {
 
-        seatSelected = new HashSet<>();
-        model = null;
+        RWcollection<Ticket> rw = new RWfile(pathname);
+        //rw.readCollection(Ticket.class)
+        Set<Ticket> setTicket = new HashSet<>();
+        model = new BookingModelImpl(setTicket);
         //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
 
         
@@ -62,7 +68,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
   
     }
     public void test() {
-        //this.showBookingView(new ProgrammedFilm());
+        this.showBookingView(new ProgrammedFilm());
     }
     public void addTicket(Ticket ticket) {
         

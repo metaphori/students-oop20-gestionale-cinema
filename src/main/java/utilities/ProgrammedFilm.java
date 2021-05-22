@@ -11,6 +11,13 @@ public class ProgrammedFilm {
     private final double ticketPrice;
     
     
+    public ProgrammedFilm() {
+        this.filmName = "";
+        this.date = LocalDate.now();
+        this.hallNumber = 1;
+        this.startTime = LocalTime.now();
+        this.ticketPrice = 0;
+    }
     public ProgrammedFilm(final String filmName, final LocalDate date, final  int hallNumber, final LocalTime startTime, final double ticketPrice) {
         super();
         this.filmName = filmName;
