@@ -54,7 +54,7 @@ public class TimeTableViewImpl implements TimeTableView {
                 LocalDate date = (LocalDate) table.getModel().getValueAt(row, 0);
                 LocalTime time = (LocalTime) table.getModel().getValueAt(row, 1);
                 String hall =  (String) table.getModel().getValueAt(row, 2);
-                observer.bookTicketForFilm(new ProgrammedFilm());
+                //observer.bookTicketForFilm(new ProgrammedFilm());
             }else {
                 this.notSelectedRow();
             }

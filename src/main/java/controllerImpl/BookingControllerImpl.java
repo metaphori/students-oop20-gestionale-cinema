@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import controller.BookingController;
-import controllerImpl.InputOutput.RW;
+//import controllerImpl.InputOutput.RW;
 import model.BookingModel;
 import modelImpl.BookingModelImpl;
 import utilities.Film;
@@ -31,8 +31,11 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
    
     
     public BookingControllerImpl() {
-       
-        model = new BookingModelImpl(RW.read(Ticket.class, pathname));
+
+        seatSelected = new HashSet<>();
+        model = null;
+        //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
+
         
     }
     
@@ -59,7 +62,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
   
     }
     public void test() {
-        this.showBookingView(new ProgrammedFilm());
+        //this.showBookingView(new ProgrammedFilm());
     }
     public void addTicket(Ticket ticket) {
         
@@ -98,8 +101,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showBackFromBooking(ProgrammedFilm film) {
-        Film film1 = new Film();
-       this.showTimeTableView(film1);
+       // Film film1 = new Film();
+       //this.showTimeTableView(film1);
         
     }
 

@@ -18,4 +18,7 @@ public final class GsonFactory {
                 .registerTypeAdapter(LocalTime.class, new LocalTimeConverter())
                 .create();
     }
+
 }
+
+

@@ -25,4 +25,7 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
        
         return new JsonPrimitive(DateTimeFormatter.ISO_LOCAL_TIME.format(src));
     }
+
 }
+
+
