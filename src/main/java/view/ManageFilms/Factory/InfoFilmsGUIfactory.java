@@ -1,4 +1,4 @@
-package view;
+package view.ManageFilms.Factory;
 
 import java.awt.LayoutManager;
 

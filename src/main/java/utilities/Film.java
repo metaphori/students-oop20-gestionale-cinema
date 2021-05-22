@@ -9,4 +9,5 @@ public interface Film {
     int getDuration();
     Optional<String> getCoverPath(); // returns an optional coverFilmPath
     String getDescription(); 
+    String toString();
 }
