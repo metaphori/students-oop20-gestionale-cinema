@@ -57,7 +57,7 @@ public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         this.createDIR(GeneralSettings.WORKINGDIR);
         this.createDIR(GeneralSettings.DATADIR);
         this.createDIR(GeneralSettings.IMAGESDIR);
-        this.createDIR(GeneralSettings.TEMPDIR);
+        //this.createDIR(GeneralSettings.TEMPDIR);
        // this.fillDIR(toCopy, pathDir);
         
     }

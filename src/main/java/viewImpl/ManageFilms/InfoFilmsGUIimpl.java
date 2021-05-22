@@ -92,14 +92,9 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         selectedImagePath = Optional.ofNullable(null);
         //filmFactory = new FilmFactoryImpl(observer.getManagerIdsFilms());
 
-        final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
-	ImageIcon icon = new ImageIcon(imgURL);
+        final URL imgURL = ClassLoader.getSystemResource(GeneralSettings.IMAGEFILMSTANDARD);
+	final ImageIcon icon = new ImageIcon(imgURL);
 	
-	/*
-        final Image image = icon.getImage(); // transform it
-        final Image newimg = image.getScaledInstance((int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-    	icon = new ImageIcon(newimg); // transform it back
-        */
 	pic.setIcon(
 	        factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion))
 	);
@@ -137,9 +132,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	description.setPreferredSize(new Dimension(frameWidth, frameHeight / InfoFilmSettingsDefault.JTEXTAREAHEIGHTPROPORTION));
 	container.add(mainPanel);
 	frame.pack();
-	
-	
-	//this.display();
+
 	frame.setSize(frameWidth, frameHeight);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
@@ -154,7 +147,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	
 	    }
 	});
-	
+
 	genre.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
                 if ("Genre".equals(genre.getText())) { 
@@ -194,11 +187,11 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	    final FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG  & PNG Images", "jpg", "png", "jpeg", "JPG");
 	    chooser.setFileFilter(filter);
 	    final int returnVal = chooser.showOpenDialog(frame);
-	    Optional<String> pathDestFile = Optional.ofNullable(null);
+	    final Optional<String> pathDestFile = Optional.ofNullable(null);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 	       final File selectedFile = chooser.getSelectedFile();
 	       final ManagerWorkingDIR manager = observer.getManagerWorkingDIR();
-	       ImageIcon img = new ImageIcon(selectedFile.getAbsolutePath());
+	       final ImageIcon img = new ImageIcon(selectedFile.getAbsolutePath());
 	       pic.setIcon(factory.getScaledIcon(img, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
 	       selectedImagePath = Optional.ofNullable(selectedFile.getAbsolutePath());
 	    }
@@ -206,7 +199,6 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	);	
 	back.addActionListener(event -> {
 	       frame.setVisible(false); 
-	       //frame.dispose();
 	       focusFilm = Optional.ofNullable(null);
 	       observer.showContainerFilmsView();
 	    }
@@ -217,7 +209,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	    String pathWhereStored = new String();
 	    Film film;
 	    FilmFactory filmFactory = new FilmFactoryImpl(observer.getManagerIdsFilms());
-	    
+
 	    int durationTime = 0;
 
             try {
@@ -225,7 +217,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
             } catch (java.lang.NumberFormatException exception) {
               durationTime = 0;
             }
-            if(focusFilm.isEmpty()) { // If users clicks on add new film
+            if (focusFilm.isEmpty()) { // If users clicks on add new film
                 if(selectedImagePath.isEmpty()) {// If users has not selected any image
                     film = filmFactory.createBasicFilm(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(null), durationTime);
                     System.out.println("Just created:"+film);
@@ -234,7 +226,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
                     try {
                         pathWhereStored = observer.getManagerWorkingDIR().copyFile(new File(selectedImagePath.get()), GeneralSettings.IMAGESSELECTEDDIR);
                         film = filmFactory.createBasicFilm(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime);
-                        System.out.println("Just created:"+film);
+                        System.out.println("Just created:" + film);
                         observer.addFilm(film);
                     } catch (IOException exception) {
                         exception.printStackTrace();
@@ -266,7 +258,6 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
                 System.out.println("Just modified:" + film);
             }
             System.out.print("newPath:" + pathWhereStored);
-           
 	    frame.setVisible(false);
 	    observer.showContainerFilmsView();
 	}
@@ -306,7 +297,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
 	    genre.setText(film.getGenre());
 	    duration.setText(new Integer(film.getDuration()).toString());
 	    description.setText(film.getDescription());
-	    
+
 	    if (film.getCoverPath().isPresent()) {
                 final ImageIcon icon = new ImageIcon(film.getCoverPath().get());
                // selectedImagePath = Optional.of(film.getCoverPath().get());
@@ -320,16 +311,15 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
                 pic.setIcon(factory.getScaledIcon(icon, (int) (frameWidth / InfoFilmSettingsDefault.ImageWidthProportion), (int) (frameHeight / InfoFilmSettingsDefault.ImageHeightProportion)));
             }
 
-	    
+
 	    System.out.print("focusFilm:" + film);
 	    delete.setEnabled(true);
 	}	
-    
+
     @Override
     public void start() {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        //frame.dispose();
     }
 
 
@@ -354,11 +344,7 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         );
         delete.setEnabled(false);
     }
-    /*
-    public static void main(String[] args) {
-        InfoFilmsGUIimpl view = new InfoFilmsGUIimpl();
-    }
-*/
+
 }
 
 

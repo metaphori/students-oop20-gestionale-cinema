@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -82,7 +85,6 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     public ContainerFilmsGUIimpl(final Set<Film> setFilm) {
 
     JPanel mainPanel = factory.createPanel(new BorderLayout());
-    //centerPanel = factoryFilmPanel.getFilmPanel(map, setFilm);
     final JPanel northPanel = factory.createPanel(new FlowLayout(FlowLayout.RIGHT));
     final JPanel southPanel = factory.createPanel(new FlowLayout(FlowLayout.CENTER));
     centerPanel = new JPanel();
@@ -101,9 +103,7 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
         final Film film = map.get(selectedFilm);
         frame.setVisible(false);
         System.out.println("ActionListener:" + map + " ");
-        //frame.validate();
         observer.showInfoFilmView(film);
-        //frame.dispose();
     };
     //add action listener to every buttons
     for (final var button: map.keySet()) {
@@ -113,13 +113,11 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     add.addActionListener(event -> {
         observer.showNewFilmView();
         frame.setVisible(false);
-        //frame.dispose();
     });
 
     home.addActionListener(event -> {
         observer.showMenu();
         frame.setVisible(false);
-        //frame.dispose();
     }
     );
 
@@ -138,6 +136,9 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     public void start() {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        if(observer.getFilms().isEmpty()) {
+            this.showNoFilmsDialog();
+        }
     }
 
     @Override
@@ -147,7 +148,7 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     @Override
     public void update() {//Reset map, take new films and rebuild central panel
         map.clear();
-        centerPanel.remove(0);
+        centerPanel.remove(0); //remove first child
 
         Set<Film> film = new HashSet<>(observer.getFilms());
         
@@ -157,5 +158,9 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
         }
         centerPanel.validate();
         frame.validate();
+    }
+    
+    private void showNoFilmsDialog() {
+        JOptionPane.showMessageDialog(frame,"There aren't films! Please click on Add button down below to insert a new Film");
     }
 }

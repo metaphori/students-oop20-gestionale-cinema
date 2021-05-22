@@ -42,8 +42,6 @@ public class Cinema {
         Film f6 = filmFactory.createBasicFilmById("ccc", "aaa", "aaa", Optional.ofNullable(null), 13, 8);
         
         System.out.println(f5.equals(f6));
-        
-        
         set.add(f1);
         set.add(f2);
         set.add(f3);

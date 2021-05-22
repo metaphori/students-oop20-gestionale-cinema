@@ -75,8 +75,6 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void showContainerFilmsView() {
         viewFilms.update();
-        //viewFilms = new ContainerFilmsGUIimpl(this.getFilms());
-        //viewFilms.setObserver(this);
         viewFilms.start();
     }
 
