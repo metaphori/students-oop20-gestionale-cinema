@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.ManageAccounts;
 
 // DA SISTEMARE
 
@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
-import view.ManagementAccountGUI;
+import view.ManageAccounts.ManagementAccountGUI;
 
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT ??

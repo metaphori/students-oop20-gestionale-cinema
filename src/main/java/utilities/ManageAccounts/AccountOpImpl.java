@@ -1,7 +1,7 @@
-package utilities;
+package utilities.ManageAccounts;
 
-public class AccountAdminImpl implements Account {
-    private String name, surname, username, pass;
+public class AccountOpImpl implements Account {
+    private String name, surname, username, password;
     private boolean type;
     
     /**
@@ -9,14 +9,14 @@ public class AccountAdminImpl implements Account {
      * @param name
      * @param surname
      * @param username
-     * @param pass 
+     * @param password 
      * @param type
      */
-    public AccountAdminImpl(String name, String surname, String username, String pass, boolean type) {
-        this.name = name; //Unique name
+    public AccountOpImpl(String name, String surname, String username, String password, boolean type) {
+        this.name = name;
         this.surname = surname;
         this.username = username;
-        this.pass = pass;
+        this.password = password;
         this.type = type;
     }
     
@@ -80,36 +80,36 @@ public class AccountAdminImpl implements Account {
     
     /**
      * Returns the account's password.
-     * @return pass
+     * @return password
      */
     @Override
     public String getPassword() {
-        return pass;
+        return password;
     }
     
     /**
      * Sets the account's password.
-     * @param pass 
+     * @param password 
      */
     @Override
-    public void setPassword(String pass) {
-        if (!pass.isEmpty() && !pass.equals(this.pass))
-            this.pass = pass;
+    public void setPassword(String password) {
+        if (!password.isEmpty() && !password.equals(this.password))
+            this.password = password;
     }
     
     /**
-     * Returns true if the account is an administrator.
+     * Returns False if the account is an operator.
      * @return type
      */
     @Override
     public boolean isAdmin() {
-        return type = true;
+        return type = false;
     }
     
     @Override
     public String toString() {
-        return "Account Administrator:"
-                + " Name:" + name + ", Surname" + surname + ", Username" + username + ", Is an administrator" + type;
+        return "Account Operator:"
+                + " Name:" + name + ", Surname:" + surname + ", Username:" + username + ", Is an administrator" + type;
     }
 
 
@@ -118,7 +118,7 @@ public class AccountAdminImpl implements Account {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((pass == null) ? 0 : pass.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((surname == null) ? 0 : surname.hashCode());
         result = prime * result + (type ? 1231 : 1237);
         result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -134,16 +134,16 @@ public class AccountAdminImpl implements Account {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AccountAdminImpl other = (AccountAdminImpl) obj;
+        AccountOpImpl other = (AccountOpImpl) obj;
         if (name == null) {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (pass == null) {
-            if (other.pass != null)
+        if (password == null) {
+            if (other.password != null)
                 return false;
-        } else if (!pass.equals(other.pass))
+        } else if (!password.equals(other.password))
             return false;
         if (surname == null) {
             if (other.surname != null)
@@ -160,4 +160,5 @@ public class AccountAdminImpl implements Account {
         return true;
     }
     
+
 }

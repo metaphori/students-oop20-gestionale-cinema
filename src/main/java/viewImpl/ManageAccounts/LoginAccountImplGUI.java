@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.ManageAccounts;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -42,10 +42,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import utilities.Account;
 import utilities.Film;
-import view.LoginAccountGUI;
-import view.LoginAccountGUIObserver;
+import utilities.ManageAccounts.Account;
+import view.ManageAccounts.LoginAccountGUI;
+import view.ManageAccounts.LoginAccountGUIObserver;
 
 import java.awt.event.*
 ;

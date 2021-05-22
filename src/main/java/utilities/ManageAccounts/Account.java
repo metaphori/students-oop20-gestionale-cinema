@@ -1,4 +1,4 @@
-package utilities;
+package utilities.ManageAccounts;
 
 public interface Account {
     String getName();

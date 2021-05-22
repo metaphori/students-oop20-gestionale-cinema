@@ -1,10 +1,10 @@
-package modelImpl;
+package modelImpl.ManageAccounts;
 
 import java.util.Collection;
 import java.util.HashSet;
 
-import model.AccountModel;
-import utilities.Account;
+import model.ManageAccounts.AccountModel;
+import utilities.ManageAccounts.Account;
 
 
 public class AccountModelImpl implements AccountModel{

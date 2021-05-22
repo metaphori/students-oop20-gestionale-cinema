@@ -1,8 +1,8 @@
-package controller;
+package controller.ManageAccounts;
 import java.util.Collection;
 
-import utilities.Account;
 import utilities.FilmBasicImpl;
+import utilities.ManageAccounts.Account;
 
 public interface AccountsController {
 	

@@ -3,7 +3,7 @@ package controllerImpl;
 import java.util.Calendar;
 
 import controller.StatisticsController;
-import model.AccountModel;
+import model.ManageAccounts.AccountModel;
 import utilities.FilmBasicImpl;
 
 public class StatisticsControllerImpl implements StatisticsController{

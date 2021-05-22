@@ -1,8 +1,8 @@
-package model;
+package model.ManageAccounts;
 
 import java.util.Collection;
 
-import utilities.Account;
+import utilities.ManageAccounts.Account;
 
 public interface AccountModel {
     

@@ -1,10 +1,10 @@
-package controllerImpl;
+package controllerImpl.ManageAccounts;
 
 import java.util.Collection;
 
-import controller.AccountsController;
-import model.AccountModel;
-import utilities.Account;
+import controller.ManageAccounts.AccountsController;
+import model.ManageAccounts.AccountModel;
+import utilities.ManageAccounts.Account;
 
 public class AccountsControllerImpl implements AccountsController{
     //implementes viewObserver

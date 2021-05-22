@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.ManageAccounts;
 
 import java.awt.BorderLayout;
 
@@ -43,8 +43,8 @@ import settings.view.InfoFilmSettingsDefault;
 import utilities.Film;
 import view.InfoFilmsGUIfactory;
 import view.InfoFilmsGUIfactoryImpl;
-import view.LoginAccountGUI;
-import view.RegistrationAccountGUI;
+import view.ManageAccounts.LoginAccountGUI;
+import view.ManageAccounts.RegistrationAccountGUI;
 
 import java.awt.event.*
 ;

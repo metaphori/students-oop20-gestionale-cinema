@@ -1,8 +1,8 @@
-package view;
+package view.ManageAccounts;
 
 import java.util.Collection;
 
-import utilities.Account;
+import utilities.ManageAccounts.Account;
 
 public interface LoginAccountGUIObserver {
     void showMenu();

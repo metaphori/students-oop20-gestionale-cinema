@@ -1,4 +1,4 @@
-package view;
+package view.ManageAccounts;
 
 public interface ManagementAccountGUI {
     void show();
