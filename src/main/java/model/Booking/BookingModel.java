@@ -1,4 +1,4 @@
-package model;
+package model.Booking;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package controllerImpl;
+package controllerImpl.Booking;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -6,12 +6,11 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import controller.BookingController;
+import controller.Booking.BookingController;
 import controllerImpl.InputOutput.RWcollection;
 import controllerImpl.InputOutput.RWfile;
-//import controllerImpl.InputOutput.RW;
-import model.BookingModel;
-import modelImpl.BookingModelImpl;
+import model.Booking.BookingModel;
+import modelImpl.Booking.BookingModelImpl;
 import utilities.Film;
 import utilities.ProgrammedFilm;
 import utilities.Row;

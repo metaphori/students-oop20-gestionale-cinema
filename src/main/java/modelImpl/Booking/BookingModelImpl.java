@@ -1,9 +1,9 @@
-package modelImpl;
+package modelImpl.Booking;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import model.BookingModel;
+import model.Booking.BookingModel;
 import utilities.ProgrammedFilm;
 import utilities.Row;
 import utilities.Seat;
