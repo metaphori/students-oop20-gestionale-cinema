@@ -1,13 +1,14 @@
-package controller;
+package controller.ManageStatistics;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
-import utilities.FilmBasicImpl;
+import utilities.Film;
 
 public interface StatisticsController {
 	
-	public FilmBasicImpl getMostedWatchedFilm(); // in a week
-	public Calendar getMostAffluentDays(); // in  a week
+	public Film getMostedWatchedFilm(); // in a week
+	public LocalDate getMostAffluentDays(); // in  a week
 	public Double getRecessed(); // in a week
 	
 }

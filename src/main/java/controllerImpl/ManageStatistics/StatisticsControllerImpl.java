@@ -1,30 +1,26 @@
-package controllerImpl;
+package controllerImpl.ManageStatistics;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
-import controller.StatisticsController;
-import model.AccountModel;
-import utilities.FilmBasicImpl;
+import controller.ManageStatistics.StatisticsController;
+import model.ManageAccounts.AccountModel;
+import utilities.Film;
 
 public class StatisticsControllerImpl implements StatisticsController{
-  //implementes viewObserver
     private AccountModel model;
     
     @Override
-    public FilmBasicImpl getMostedWatchedFilm() {
-        // TODO Auto-generated method stub
+    public Film getMostedWatchedFilm() {
         return null;
     }
 
     @Override
-    public Calendar getMostAffluentDays() {
-        // TODO Auto-generated method stub
+    public LocalDate getMostAffluentDays() {
         return null;
     }
 
     @Override
     public Double getRecessed() {
-        // TODO Auto-generated method stub
         return null;
     }
 

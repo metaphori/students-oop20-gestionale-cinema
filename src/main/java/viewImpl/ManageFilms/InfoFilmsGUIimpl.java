@@ -47,7 +47,7 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import org.apache.commons.io.*;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 
 public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         

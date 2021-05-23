@@ -1,4 +1,4 @@
-package controller;
+package controller.ManageFilms;
 
 
 import java.util.Set;

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;

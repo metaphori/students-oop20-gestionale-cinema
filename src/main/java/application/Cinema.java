@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 import controllerImpl.InputOutput.RWcollection;
 import controllerImpl.InputOutput.RWfile;
 import controllerImpl.InputOutput.RWobject;

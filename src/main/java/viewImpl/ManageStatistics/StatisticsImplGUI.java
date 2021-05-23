@@ -1,4 +1,4 @@
-package viewImpl;
+package viewImpl.ManageStatistics;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -26,7 +26,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import view.StatisticsGUI;
+import view.ManageStatistics.StatisticsGUI;
+
 
 public class StatisticsImplGUI implements StatisticsGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
