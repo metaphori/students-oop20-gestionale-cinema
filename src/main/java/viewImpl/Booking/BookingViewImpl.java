@@ -17,9 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import utilities.ProgrammedFilm;
-import utilities.Row;
-import utilities.Seat;
-import utilities.SeatState;
+import utilitiesImpl.Row;
+import utilitiesImpl.Seat;
+import utilitiesImpl.SeatState;
 import view.Booking.BookingView;
 import view.Booking.BookingViewObserver;
 import view.Booking.GUIFactoryBooking;

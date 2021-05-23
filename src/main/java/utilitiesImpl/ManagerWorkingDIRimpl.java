@@ -1,4 +1,4 @@
-package utilities;
+package utilitiesImpl;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +13,8 @@ import org.apache.commons.io.FileSystemUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+
+import utilities.ManagerWorkingDIR;
 
 public class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
     private final int lengthFileName = 15;

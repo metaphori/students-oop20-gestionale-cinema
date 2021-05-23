@@ -1,10 +1,12 @@
-package utilities;
+package utilitiesImpl.FactoryImpl;
 
 import java.util.Optional;
 
-import model.ContainerFilmsModel;
-import model.ManagerIdsFilms;
-import modelImpl.ContainerFilmsModelImpl;
+import model.ManageFilms.ContainerFilmsModel;
+import model.ManageFilms.ManagerIdsFilms;
+import modelImpl.ManageFilms.ContainerFilmsModelImpl;
+import utilities.Film;
+import utilities.Factory.FilmFactory;
 
 public class FilmFactoryImpl implements FilmFactory {
 

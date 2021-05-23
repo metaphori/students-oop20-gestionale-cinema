@@ -5,10 +5,10 @@ import java.util.Set;
 
 import model.Booking.BookingModel;
 import utilities.ProgrammedFilm;
-import utilities.Row;
-import utilities.Seat;
-import utilities.SeatState;
 import utilities.Ticket;
+import utilitiesImpl.Row;
+import utilitiesImpl.Seat;
+import utilitiesImpl.SeatState;
 
 public class BookingModelImpl implements BookingModel {
     private Set<Ticket> setTicket;

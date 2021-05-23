@@ -1,4 +1,4 @@
-package controllerImpl;
+package controllerImpl.ManageProgrammingFilms;
 
 public class ProgrammingFilmsControllerImpl {
 

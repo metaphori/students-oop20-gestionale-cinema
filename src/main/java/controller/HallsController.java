@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Collection;
 
-import utilities.Hall;
+import utilitiesImpl.Hall;
 
 public interface HallsController {
 

@@ -1,12 +1,12 @@
-package modelImpl;
+package modelImpl.ManageFilms;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import model.ContainerFilmsModel;
-import model.ManagerIdsFilms;
+import model.ManageFilms.ContainerFilmsModel;
+import model.ManageFilms.ManagerIdsFilms;
 import utilities.Film;
 
 public final class ContainerFilmsModelImpl implements ContainerFilmsModel {

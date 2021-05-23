@@ -1,11 +1,11 @@
-package modelImpl;
+package modelImpl.ManageFilms;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 
-import model.IdsGenerator;
-import model.ManagerIdsFilms;
+import model.ManageFilms.IdsGenerator;
+import model.ManageFilms.ManagerIdsFilms;
 
 public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     private  final Collection<Integer> containerFilmsIds;

@@ -9,20 +9,20 @@ import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.FilmsController;
-import controllerImpl.FilmsControllerImpl;
 import controllerImpl.InputOutput.RWcollection;
 import controllerImpl.InputOutput.RWfile;
 import controllerImpl.InputOutput.RWobject;
-import model.ContainerFilmsModel;
-import model.ManagerIdsFilms;
-import modelImpl.IdsGeneratorImpl;
-import modelImpl.ManagerIdsFilmImpl;
+import controllerImpl.ManageFilms.FilmsControllerImpl;
+import model.ManageFilms.ContainerFilmsModel;
+import model.ManageFilms.ManagerIdsFilms;
+import modelImpl.ManageFilms.ContainerFilmsModelImpl;
+import modelImpl.ManageFilms.IdsGeneratorImpl;
+import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
-import utilities.FilmBasicImpl;
-import utilities.FilmFactory;
-import utilities.FilmFactoryImpl;
-import utilities.GeneralSettings;
-import modelImpl.ContainerFilmsModelImpl;
+import utilities.Factory.FilmFactory;
+import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 
 public class Cinema {
 
