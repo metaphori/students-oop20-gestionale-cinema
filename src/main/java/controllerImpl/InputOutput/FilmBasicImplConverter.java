@@ -1,4 +1,4 @@
-package RW2;
+package controllerImpl.InputOutput;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
@@ -14,6 +14,8 @@ import com.google.gson.JsonSerializer;
 
 import utilities.Film;
 import utilities.FilmBasicImpl;
+import utilities.FilmFactory;
+import utilities.FilmFactoryImpl;
 
 public class FilmBasicImplConverter implements JsonSerializer<Film>, JsonDeserializer<Film> {
 
@@ -24,7 +26,7 @@ public class FilmBasicImplConverter implements JsonSerializer<Film>, JsonDeseria
         
         int id = 0;
         String title = null;
-        String genere = null;
+        String genre = null;
         int duration = 0;
         String path = null;
         String description = null;
@@ -35,8 +37,8 @@ public class FilmBasicImplConverter implements JsonSerializer<Film>, JsonDeseria
                     id = i.getValue().getAsInt();
                 case "title":
                     title = i.getValue().getAsString();
-                case "genere":
-                    genere = i.getValue().getAsString();
+                case "genre":
+                    genre = i.getValue().getAsString();
                 case "duration":
                     duration = i.getValue().getAsInt();
                 case "path":
@@ -46,21 +48,25 @@ public class FilmBasicImplConverter implements JsonSerializer<Film>, JsonDeseria
             }
         };
         
-       // FactoryFilm ff = new FactoryFilmImpl();
-        
-       // return new FactoryFilmImpl().;
+        FilmFactory factoryFilm = new FilmFactoryImpl(null);
+        Optional<String> pathOp = path.equals("") ? Optional.empty() : Optional.of(path) ;
+        return factoryFilm.createBasicFilmById(title, genre, description, pathOp, duration,id);
     }
 
     @Override
     public JsonElement serialize(Film src, Type typeOfSrc, JsonSerializationContext context) {
+        String path = new String();
+        path = src.getCoverPath().isEmpty() ? "" : src.getCoverPath().get();
+        
+        
         JsonObject obj = new JsonObject();
         obj.addProperty("id",src.getID());
         obj.addProperty("title", src.getName());
-        obj.addProperty("genere", src.getGenre());
+        obj.addProperty("genre", src.getGenre());
         obj.addProperty("duration", src.getDuration());
-        obj.addProperty("path", src.getCoverPath());
+        obj.addProperty("path", path);
         obj.addProperty("description", src.getDescription());
-        
+       
         return obj;
     }
 
