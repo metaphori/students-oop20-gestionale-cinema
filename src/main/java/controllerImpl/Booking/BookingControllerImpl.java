@@ -12,8 +12,9 @@ import controllerImpl.InputOutput.RWfile;
 import model.Booking.BookingModel;
 import modelImpl.Booking.BookingModelImpl;
 import utilities.Film;
-import utilities.ProgrammedFilm;
+
 import utilities.Ticket;
+import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.Row;
 import utilitiesImpl.Seat;
 import utilitiesImpl.SeatState;
@@ -67,7 +68,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
   
     }
     public void test() {
-        this.showBookingView(new ProgrammedFilm());
+       // ProgrammedFilmFactory f = new 
+        //this.showBookingView(new ProgrammedFilm());
     }
     public void addTicket(Ticket ticket) {
         
@@ -136,7 +138,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public Set<Seat<Row, Integer>> getSeatsSelected() {
-        
         return model.getSeatsSelected();
     }
 

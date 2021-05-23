@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import model.Booking.BookingModel;
-import utilities.ProgrammedFilm;
+import utilities.Factory.*;
 import utilities.Ticket;
 import utilitiesImpl.Row;
 import utilitiesImpl.Seat;

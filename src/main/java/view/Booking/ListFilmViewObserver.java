@@ -3,7 +3,7 @@ package view.Booking;
 import java.util.Set;
 
 import utilities.Film;
-import utilities.ProgrammedFilm;
+import utilities.Factory.*;
 
 public interface ListFilmViewObserver {
     void showMenu();
