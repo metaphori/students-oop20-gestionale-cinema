@@ -51,10 +51,12 @@ public class Cinema {
         
         System.out.println(managerIdsFilm.getUsedIDs());
         
-       // final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);*/
+       // final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);
         final FilmsController filmsController = new FilmsControllerImpl();
         filmsController.showContainerFilmsView();
-
+        */
+        
+        
 
     }
 

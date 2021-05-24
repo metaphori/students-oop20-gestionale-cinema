@@ -35,7 +35,6 @@ val jUnitVersion = "5.7.1"
 dependencies {
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
    implementation("com.google.code.gson:gson:2.8.6")
- 	implementation("come.google.code.gson:gson-extras:2.8.5") 
    implementation ("org.apache.commons:commons-io:1.3.2")
    implementation("org.apache.commons:commons-lang3:3.11")
    implementation("org.danilopianini:gson-extras:0.2.2-dev1n+f8657bfc")
