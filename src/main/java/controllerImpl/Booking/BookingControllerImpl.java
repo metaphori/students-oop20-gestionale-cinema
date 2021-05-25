@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import controller.Booking.BookingController;
 import controllerImpl.InputOutput.RWcollection;
@@ -15,6 +16,7 @@ import utilities.Film;
 
 import utilities.Ticket;
 import utilities.Factory.ProgrammedFilm;
+import utilities.Factory.ProgrammedFilmFactory;
 import utilitiesImpl.Row;
 import utilitiesImpl.Seat;
 import utilitiesImpl.SeatState;
@@ -32,12 +34,23 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private  BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
-  
+    Set<Film> setF;
+    Set<ProgrammedFilm> setP;
     
     public BookingControllerImpl() {
 
         RWcollection<Ticket> rw = new RWfile(pathname);
         //rw.readCollection(Ticket.class)
+        Set<Ticket> setTicket = new HashSet<>();
+        model = new BookingModelImpl(setTicket);
+        //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
+
+        
+    }
+    public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
+
+        this.setF = setF;
+        this.setP = setP;
         Set<Ticket> setTicket = new HashSet<>();
         model = new BookingModelImpl(setTicket);
         //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
@@ -53,8 +66,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
           final ListFilmView viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
     }
-    private void showTimeTableView(Film film) {
-        final TimeTableView viewTimeTable = new TimeTableViewImpl(this,new HashSet<>());
+    private void showTimeTableView(Set<ProgrammedFilm> setProgrammedFilm) {
+        final TimeTableView viewTimeTable = new TimeTableViewImpl(this,setProgrammedFilm);
         viewTimeTable.show();
     } 
     
@@ -64,7 +77,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
     @Override
     public void selectedFilm(Film film) {
-        this.showTimeTableView(film);
+        Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
+        this.showTimeTableView(setProgrammedFilm);
   
     }
     public void test() {
@@ -89,8 +103,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public Set<Film> getFilm() {
-        Set<Film> film = new HashSet<>();
-        return film;
+      //  Set<Film> film = new HashSet<>();
+        
+        //return film;
+        return setF;
     }
 
 
@@ -108,8 +124,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showBackFromBooking(ProgrammedFilm film) {
-       // Film film1 = new Film();
-       //this.showTimeTableView(film1);
+        Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
+        this.showTimeTableView(setProgrammedFilm);
         
     }
 
@@ -120,8 +136,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public void bookSeat() {
-        model.bookSeat();
+    public void bookSeat(ProgrammedFilm film) {
+        model.bookSeat(film);
     }
 
     @Override

@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import utilities.Factory.*;
+import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import view.Booking.GUIFactoryBooking;
 import view.Booking.TimeTableView;
 import view.Booking.TimeTableViewObserver;
@@ -53,8 +54,11 @@ public class TimeTableViewImpl implements TimeTableView {
             if(row!=-1) {
                 LocalDate date = (LocalDate) table.getModel().getValueAt(row, 0);
                 LocalTime time = (LocalTime) table.getModel().getValueAt(row, 1);
-                String hall =  (String) table.getModel().getValueAt(row, 2);
-                //observer.bookTicketForFilm(new ProgrammedFilm());
+                int hall =  (int) table.getModel().getValueAt(row, 2);
+                ProgrammedFilmFactory fP = new ProgrammedFilmFactoryImpl();
+                ProgrammedFilm p1 = fP.creteProgrammedFilm(1, 1, 5.5, date, time,time) ;
+                observer.bookTicketForFilm(p1);
+                frame.dispose();
             }else {
                 this.notSelectedRow();
             }

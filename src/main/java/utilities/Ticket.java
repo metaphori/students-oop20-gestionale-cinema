@@ -13,5 +13,5 @@ public interface Ticket {
     Set<Seat<Row, Integer>> getSetSeat();
     double getPrice();
     int getId();
-    String getHall();
+    int getHall();
 }

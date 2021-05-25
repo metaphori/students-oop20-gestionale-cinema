@@ -85,6 +85,7 @@ public class ListFilmViewImpl implements ListFilmView{
             bt.addActionListener(e -> {
                final JButton btn = (JButton) e.getSource();
                observer.selectedFilm(map.get(btn));
+               frame.dispose();
             });
         }
         

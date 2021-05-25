@@ -14,9 +14,9 @@ public class TicketImpl implements Ticket {
 	private final Set<Seat<Row,Integer>> setSeat;
 	private final double price;
 	private final int id;
-	private final String hall;
+	private final int hall;
 	
-	public TicketImpl(LocalDate data,LocalTime time, Set<Seat<Row,Integer>> setSeat, double price, int id, String hall) {
+	public TicketImpl(LocalDate data,LocalTime time, Set<Seat<Row,Integer>> setSeat, double price, int id, int hall) {
 		this.data = data;
 		this.hall = hall;
 		this.setSeat = setSeat;
@@ -39,23 +39,20 @@ public class TicketImpl implements Ticket {
 	public int getId() {
 		return id;
 	}	
-	public String getHall() {
+	public int getHall() {
 		return hall;
 	}
 	
 
 	
-	@Override
-	public String toString() {
-		return "Ticket [data=" + data + ", setSeat=" + setSeat + ", price=" + price + ", id=" + id
-				+ ", hall=" + hall + "]";
-	}
+	
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((data == null) ? 0 : data.hashCode());
-        result = prime * result + ((hall == null) ? 0 : hall.hashCode());
+        result = prime * result + hall;
+        result = prime * result + id;
         result = prime * result + ((time == null) ? 0 : time.hashCode());
         return result;
     }
@@ -73,10 +70,9 @@ public class TicketImpl implements Ticket {
                 return false;
         } else if (!data.equals(other.data))
             return false;
-        if (hall == null) {
-            if (other.hall != null)
-                return false;
-        } else if (!hall.equals(other.hall))
+        if (hall != other.hall)
+            return false;
+        if (id != other.id)
             return false;
         if (time == null) {
             if (other.time != null)
@@ -85,8 +81,13 @@ public class TicketImpl implements Ticket {
             return false;
         return true;
     }
-
-	
+    @Override
+    public String toString() {
+        return "TicketImpl [data=" + data + ", time=" + time + ", setSeat=" + setSeat + ", price=" + price + ", id="
+                + id + ", hall=" + hall + "]";
+    }
+    
+   
 	
 	
 }

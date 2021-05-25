@@ -46,6 +46,7 @@ public class BookingViewImpl implements BookingView {
     private int col;
     private Row row;
     public BookingViewImpl(BookingViewObserver observer, ProgrammedFilm film) {
+        System.out.println("Film" + film);
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
         this.film = film;
         this.frame = factory.getBaseFrame(TITLE);
@@ -59,7 +60,7 @@ public class BookingViewImpl implements BookingView {
         });
         Set<Seat<Row,Integer>> setSeats = observer.getSeatsFromFilm(film);
         row = Row.H;
-
+        System.out.print("AfterGet" + setSeats);
         col = 10;
         JPanel center = new JPanel(new BorderLayout());
         JPanel gridPanel = new JPanel(new GridLayout(row.ordinal()+1, col) );
@@ -75,8 +76,6 @@ public class BookingViewImpl implements BookingView {
                 JButton button = factory.getButtonSeat(state, i, j);
                 grid.put(button, new Seat<Row,Integer>(Row.values()[i],j));
                 gridPanel.add(button);
-                
-                
             }
         }
         grid.keySet().forEach(btn -> {
@@ -89,7 +88,9 @@ public class BookingViewImpl implements BookingView {
         JButton bookBt = new JButton(STRING_BTN_BOOK);
         bookBt.addActionListener(e -> {
             
-            observer.bookSeat();
+            observer.bookSeat(film);
+            this.refresh();
+            observer.newBooking();
         });
         center.add(gridPanel, BorderLayout.CENTER);
         mainPanel.add(north, BorderLayout.NORTH);

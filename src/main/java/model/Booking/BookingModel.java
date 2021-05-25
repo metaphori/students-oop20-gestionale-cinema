@@ -15,5 +15,5 @@ public interface BookingModel {
     void buttonSelected(Seat<Row,Integer> seat, ProgrammedFilm film);
     void newBooking();
     Set<Seat<Row,Integer>> getSeatsSelected();
-    void bookSeat();
+    void bookSeat(ProgrammedFilm film);
 }

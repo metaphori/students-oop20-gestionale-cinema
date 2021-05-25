@@ -100,10 +100,10 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
        Object[][] data = new Object[row][columnNames.length];
        int i = 0;
        for(var elem : film) {
-     //      data[i][0] = elem.getData();
-    //       data[i][1] = elem.getTime();
-    //       data[i][2] = elem.getHall();
-     //      i++;
+           data[i][0] = elem.getDate();
+           data[i][1] = elem.getStartTime();
+           data[i][2] = elem.getHall();
+           i++;
        }
        
        
