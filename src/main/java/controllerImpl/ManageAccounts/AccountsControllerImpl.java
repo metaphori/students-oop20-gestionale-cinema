@@ -5,11 +5,23 @@ import java.util.Collection;
 import controller.ManageAccounts.AccountsController;
 import model.ManageAccounts.AccountModel;
 import utilities.ManageAccounts.Account;
+import view.ManageAccounts.LoginAccountGUI;
+import view.ManageAccounts.ManagementAccountGUI;
+import view.ManageAccounts.RegistrationAccountGUI;
 
 public class AccountsControllerImpl implements AccountsController{
-    //implementes viewObserver
-    private AccountModel model;
     
+    private AccountModel model;
+    //implementes viewObserver
+    private LoginAccountGUI loginView;
+    private ManagementAccountGUI managementView;
+    private RegistrationAccountGUI registrationView;
+    
+    public AccountsControllerImpl () {
+       // model = new AccountModelimpl ();
+        
+    }
+        
     @Override
     public void showMenu() {
         // TODO Auto-generated method stub

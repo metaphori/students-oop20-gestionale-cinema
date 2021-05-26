@@ -42,10 +42,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import utilities.Film;
+import controller.ManageAccounts.AccountsController;
+import controller.ManageFilms.FilmsController;
 import utilities.ManageAccounts.Account;
 import view.ManageAccounts.LoginAccountGUI;
-import view.ManageAccounts.LoginAccountGUIObserver;
 
 import java.awt.event.*
 ;
@@ -56,6 +56,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     private static final String FRAME_NAME = "Login";
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
+    
+    //components
     final JLabel title = new JLabel("Login utente");
     final JLabel username = new JLabel ("Username:");
     final TextField TextUsername = new TextField ("Username", 12); //written that will be removed when clicked
@@ -64,12 +66,10 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     final JButton login = new JButton("Login");
     final JButton reset = new JButton("Reset");
     
+    private AccountsController observer;
+    
     HashMap<String,String> logininfo = new HashMap<String,String>();
-    //final JCheckBox showPwd = new JCheckBox();
-    
-    private LoginAccountGUIObserver observer;
-    //private Account user;
-    
+   
     public LoginAccountImplGUI() {
         
         //I create the frame and set the title and other properties
@@ -83,9 +83,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         cnst.insets = new Insets (5 ,5 ,5 , 5);
         cnst.fill = GridBagConstraints.HORIZONTAL;
         
-        //final Collection<Account> collectAccount = observer.getAccount();
-        
-        
         //I create the secondary panels for the various parts and add the components
         final JPanel pNorth = new JPanel (new FlowLayout ());
         pNorth.add(title, cnst);
@@ -95,11 +92,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         pWestInternal.add(TextUsername, cnst);
         cnst.gridy ++; 
         
-        
-        //TextPassword.setEchoChar('*'); // nascondo pwd con *
         pWestInternal.add(password, cnst);
         pWestInternal.add(TextPassword, cnst);
-        //pWestInternal.add(showPwd, cnst);
         cnst.gridy ++; 
                       
         final JPanel pWest = new JPanel (new FlowLayout ());
@@ -134,7 +128,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
             }
         });
        
-        //cancella le scritte al cliccare di reset
+       //method to remove writing
         reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
                         TextUsername.setText("");
@@ -145,36 +139,32 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
             }
         });
         
-        login.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
+        
+        
+        login.addActionListener(event -> { 
                 String userID = TextUsername.getText();
                 String password = String.valueOf(TextPassword.getPassword());
-                //final Collection<Account> getAccount = observer.getAccount();
                 if(logininfo.containsKey(userID)) {
                     if(logininfo.get(userID).equals(password)) {
                             JLabel successful = new JLabel("Login successful");
                             successful.setForeground(Color.GREEN);
                             frame.dispose();
-                            //page home
                             observer.showMenu();
-                            //HomePage menu = new HomePage(userID);
+                            frame.setVisible(false);
                     }
                     else {
                         JLabel wrong = new JLabel("wrong password");
-                        wrong.setForeground(Color.RED);
-                            
+                        wrong.setForeground(Color.RED);     
                     }
-
             }
             else {
                 JLabel notFound = new JLabel("username not found");
                 notFound.setForeground(Color.RED);
             }
                 
-            }
+        
 
-            public void focusLost(final FocusEvent e) {
-            }
+       
         });
         
         
@@ -191,11 +181,15 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
        }
     */
     
-    @Override
-    public void setObserver (LoginAccountGUIObserver observer) {
-        this . observer = observer ;
-    }
+   
+   // public void setObserver (LoginAccountGUIObserver observer) {
+     //   this . observer = observer ;
+    //}
     
+    @Override
+    public void setObserver(final AccountsController observer) {
+        this.observer = observer;
+    }
     
     @Override
     public void show () {
@@ -214,6 +208,12 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         LoginAccountImplGUI view = new LoginAccountImplGUI();
         view.show();
         view.setDimensions(400,200);
+    }
+
+    @Override
+    public void showMenu() {
+        // TODO Auto-generated method stub
+        
     }
     
 }
