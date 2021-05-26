@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
+import controller.ManageAccounts.AccountsController;
 import view.ManageAccounts.ManagementAccountGUI;
 
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
@@ -74,5 +75,25 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         ManagementAccountImplGUI view = new ManagementAccountImplGUI();
         view.show();
    
+    }
+
+
+
+
+
+    @Override
+    public void setObserver(AccountsController observer) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        
     }
 }

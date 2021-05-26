@@ -1,8 +1,8 @@
 package controller.ManageAccounts;
-import java.util.Collection;
+
+import java.util.Set;
 
 import utilities.ManageAccounts.Account;
-import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 
 public interface AccountsController {
 	
@@ -11,12 +11,13 @@ public interface AccountsController {
 	public void addAccount(Account newAccount);
 	public void deleteAccount(Account oldAccount);
 	
-	public Collection <Account> getAccounts();
+	public Set <Account> getAccounts();
 	
-	public void loadAccount(Collection <Account> loadedAccounts);
+	public void loadAccount(Set <Account> loadedAccounts);
 
-	public void showManageAccountsView();
-	
 	public void showMenu();
+	public void showRegistrationAccountView(Account acc);
+        public void showManagementAccountView();
+        public void showLoginAccounView();
 	
 }

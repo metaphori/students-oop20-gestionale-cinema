@@ -39,6 +39,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
+import controller.ManageAccounts.AccountsController;
+import utilities.Film;
+import utilities.Factory.FilmFactory;
+import utilities.ManageAccounts.Account;
+import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageAccounts.LoginAccountGUI;
 import view.ManageAccounts.RegistrationAccountGUI;
 
@@ -52,6 +58,8 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
+    
+    //components
     final JLabel title = new JLabel("Add account"); 
     final JLabel username = new JLabel ("Username:");
     final TextField TextUsername = new TextField ("Username", 12);
@@ -67,6 +75,8 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     
     final JButton add = new JButton("Add");
     final JButton close = new JButton("Close");
+    
+    private AccountsController observer;
     
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
@@ -117,7 +127,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add (type, cnst);
         cnst.gridy ++; 
         
-        
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal );
         
@@ -128,6 +137,8 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         frame.add (pWest , BorderLayout . CENTER );
         frame.add (pNorth , BorderLayout . NORTH);
         frame.add (pSouth , BorderLayout . SOUTH);
+        
+        
         
         //method to remove descriptive writing
         TextUsername.addFocusListener(new FocusListener() {
@@ -179,6 +190,18 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             }
         });
         
+        //method for returning to the previous page
+        close.addActionListener(event -> {
+            frame.setVisible(false); 
+            observer.showManagementAccountView();
+         }
+         );
+        
+      //method for add new account
+       
+        
+        
+        
         
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
@@ -199,5 +222,16 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         view.show();
         
     }
+    @Override
+    public void setObserver(AccountsController observer) {
+        // TODO Auto-generated method stub
+        
+    }
+    @Override
+    public void loadAccount(Account account) {
+        // TODO Auto-generated method stub
+        
+    }
+    
     
 }
