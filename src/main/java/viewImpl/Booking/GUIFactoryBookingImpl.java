@@ -28,9 +28,9 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import utilities.ProgrammedFilm;
-import utilities.Row;
-import utilities.SeatState;
+import utilities.Factory.*;
+import utilitiesImpl.Row;
+import utilitiesImpl.SeatState;
 import view.Booking.GUIFactoryBooking;
 
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {

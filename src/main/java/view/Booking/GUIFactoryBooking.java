@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import utilities.ProgrammedFilm;
-import utilities.SeatState;
+import utilities.Factory.*;
+import utilitiesImpl.SeatState;
 
 public interface GUIFactoryBooking {
     JFrame getBaseFrame(String title);

@@ -8,14 +8,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
+import model.ManageFilms.ContainerFilmsModel;
+import model.ManageFilms.IdsGenerator;
+import model.ManageFilms.ManagerIdsFilms;
+import modelImpl.ManageFilms.ContainerFilmsModelImpl;
+import modelImpl.ManageFilms.IdsGeneratorImpl;
+import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
-import utilities.FilmBasicImpl;
-import model.ContainerFilmsModel;
-import model.IdsGenerator;
-import model.ManagerIdsFilms;
-import modelImpl.ContainerFilmsModelImpl;
-import modelImpl.ManagerIdsFilmImpl;
-import modelImpl.IdsGeneratorImpl;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 
 public final class GsonFactory {
     private GsonFactory() { }

@@ -36,16 +36,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-
-import controller.FilmsController;
-import controllerImpl.FilmsControllerImpl;
-//import jdk.tools.jlink.internal.Platform;
-import modelImpl.IdsGeneratorImpl;
-import modelImpl.ManagerIdsFilmImpl;
+import controller.ManageFilms.FilmsController;
+import controllerImpl.ManageFilms.FilmsControllerImpl;
+import modelImpl.ManageFilms.IdsGeneratorImpl;
+import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
-import utilities.FilmBasicImpl;
-import utilities.FilmFactory;
-import utilities.FilmFactoryImpl;
+import utilities.Factory.FilmFactory;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.Factory.ContainerFilmsGUIfactory;
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;

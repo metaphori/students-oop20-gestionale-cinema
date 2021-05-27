@@ -39,10 +39,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import settings.view.InfoFilmSettingsDefault;
-import utilities.Film;
-import view.InfoFilmsGUIfactory;
-import view.InfoFilmsGUIfactoryImpl;
 import view.ManageAccounts.LoginAccountGUI;
 import view.ManageAccounts.RegistrationAccountGUI;
 

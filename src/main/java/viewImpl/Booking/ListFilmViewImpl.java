@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
 import utilities.Film;
-import utilities.ProgrammedFilm;
+import utilities.Factory.*;
 import view.Booking.GUIFactoryBooking;
 import view.Booking.ListFilmView;
 import view.Booking.ListFilmViewObserver;

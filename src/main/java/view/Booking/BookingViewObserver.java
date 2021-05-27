@@ -2,9 +2,9 @@ package view.Booking;
 
 import java.util.Set;
 
-import utilities.ProgrammedFilm;
-import utilities.Row;
-import utilities.Seat;
+import utilities.Factory.*;
+import utilitiesImpl.Row;
+import utilitiesImpl.Seat;
 
 public interface BookingViewObserver {
     void showBackFromBooking(ProgrammedFilm film);

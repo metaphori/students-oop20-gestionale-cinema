@@ -29,11 +29,11 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utilities.Film;
-import utilities.FilmBasicImpl;
-import utilities.FilmFactory;
-import utilities.FilmFactoryImpl;
-import utilities.GeneralSettings;
 import utilities.ManagerWorkingDIR;
+import utilities.Factory.FilmFactory;
+import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;
@@ -47,7 +47,7 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import org.apache.commons.io.*;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 
 public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         
