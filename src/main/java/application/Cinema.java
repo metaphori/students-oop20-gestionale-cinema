@@ -2,6 +2,7 @@ package application;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -73,9 +74,9 @@ public class Cinema {
         
         Set<ProgrammedFilm> setP = new HashSet<>();
         ProgrammedFilmFactory fP = new ProgrammedFilmFactoryImpl();
-        ProgrammedFilm p1 = fP.creteProgrammedFilm(f1.getID(), 1, 5.5, LocalDate.now(), LocalTime.now(), LocalTime.now()) ;
-        ProgrammedFilm p2 = fP.creteProgrammedFilm(f2.getID(), 1, 5.5, LocalDate.now(), LocalTime.now(), LocalTime.now()) ;
-        ProgrammedFilm p3 = fP.creteProgrammedFilm(f3.getID(), 1, 5.5, LocalDate.now(), LocalTime.now(), LocalTime.now()) ;
+        ProgrammedFilm p1 = fP.creteProgrammedFilm(f1.getID(), 1, 5.5, LocalDate.now(), LocalTime.now().truncatedTo(ChronoUnit.SECONDS), LocalTime.now().truncatedTo(ChronoUnit.SECONDS)) ;
+        ProgrammedFilm p2 = fP.creteProgrammedFilm(f2.getID(), 1, 5.5, LocalDate.now(), LocalTime.now().truncatedTo(ChronoUnit.SECONDS), LocalTime.now().truncatedTo(ChronoUnit.SECONDS)) ;
+        ProgrammedFilm p3 = fP.creteProgrammedFilm(f3.getID(), 1, 5.5, LocalDate.now(), LocalTime.now().truncatedTo(ChronoUnit.SECONDS), LocalTime.now().truncatedTo(ChronoUnit.SECONDS)) ;
         
         setP.add(p1);
         setP.add(p2);
