@@ -84,10 +84,7 @@ public class ProgrammingFilmsGUIimpl {
         JPanel eastPanel = new JPanel();
         
         JPanel optionPanel = new JPanel();
-        
-        
-        
-        
+           
         
         String[] columnNames = new String[] {"Film","Hall","Start time", "End time" };
         Object[][] data = new Object[2][4]; // row columns 
@@ -144,11 +141,6 @@ public class ProgrammingFilmsGUIimpl {
 			}
 		});
 		
-		
-		
-		
-		
-        
 		mainPanel.add(southPanel,BorderLayout.SOUTH);
 		mainPanel.add(northPanel,BorderLayout.NORTH);
 		mainPanel.add(westPanel,BorderLayout.WEST);
