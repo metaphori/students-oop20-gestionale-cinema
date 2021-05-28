@@ -210,10 +210,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         view.setDimensions(400,200);
     }
 
-    @Override
-    public void showMenu() {
-        // TODO Auto-generated method stub
-        
-    }
+  
     
 }
