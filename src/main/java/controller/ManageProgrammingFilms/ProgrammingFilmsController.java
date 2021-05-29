@@ -7,13 +7,11 @@ import java.util.Collection;
 import utilities.Factory.ProgrammedFilm;
 
 public interface ProgrammingFilmsController {
-
-	public Collection<ProgrammedFilm> getProgrammazioneFilm();
-	public void addProgrammedFilm(ProgrammedFilm newProgrammedFilm);
-	public void deleteProgrammedFilm(ProgrammedFilm oldProgrammedFilm);
-	public void getProgrammedFilmsBySelection(String film, LocalDate date); // return programmedFilms in a certain date for a specified film
-	public void showProgrammedFilmView();
-	public void showMenu();
-	
-	
+        
+        Collection<ProgrammedFilm> getProgrammazioneFilm();
+	void addProgrammedFilm(ProgrammedFilm newProgrammedFilm);
+	void deleteProgrammedFilm(ProgrammedFilm oldProgrammedFilm);
+	void getProgrammedFilmsBySelection(String film, LocalDate date); // return programmedFilms in a certain date for a specified film
+	void showProgrammedFilmView();
+	void showMenu();	
 }

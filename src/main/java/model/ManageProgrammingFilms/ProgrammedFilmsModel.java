@@ -10,6 +10,7 @@ public interface ProgrammedFilmsModel{
     
     void addFilmProgrammation(ProgrammedFilm programmedFilm);
     void deleteFilmProgrammation(ProgrammedFilm programmedFilm);
-       
+    
+   
     
 }

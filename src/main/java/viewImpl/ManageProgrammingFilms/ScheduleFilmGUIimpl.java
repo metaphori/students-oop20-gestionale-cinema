@@ -20,13 +20,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class ScheduleFilmGUIimpl  {
+import view.ManageProgrammingFilms.ScheduleFilmsGUI;
+
+public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
 	private static final long serialVersionUID = 1L;
-	//private AppointmentBookGUI mainGUI;
 	private DatePanelImpl dateSelector;
 	private InfoProgrammationPanelImpl infoProgrammation;
-	private TimePanel timeSelector;
+	private TimePanelImpl timeSelector;
 	private JFrame frame = new JFrame();
 	private Container container = frame.getContentPane();
 
@@ -76,7 +77,7 @@ public class ScheduleFilmGUIimpl  {
 								BorderFactory.createTitledBorder("Date and start time"),
 									BorderFactory.createEmptyBorder(20, 20, 20, 20)));
 		dateSelector = new DatePanelImpl(LocalDate.of(2021,1,5)); // year, month , day
-		timeSelector = new TimePanel();
+		timeSelector = new TimePanelImpl();
 		datePanel.add(dateSelector, BorderLayout.WEST);
 		datePanel.add(timeSelector, BorderLayout.EAST);
 		return datePanel;
@@ -96,19 +97,7 @@ public class ScheduleFilmGUIimpl  {
 					Calendar date = dateSelector.getDate();
 					date.set(Calendar.HOUR_OF_DAY, timeSelector.getHourOfDay());
 					date.set(Calendar.MINUTE, timeSelector.getMinutes());
-					/*((Schedulable<Appointment>) mainGUI.getModel())
-							.scheduleAppointment(new Appointment(date
-									.get(Calendar.YEAR), date
-									.get(Calendar.MONTH), date
-									.get(Calendar.DATE), date
-									.get(Calendar.HOUR_OF_DAY), date
-									.get(Calendar.MINUTE), new Person(
-									personalData.getFirstName(), personalData
-											.getLastName(), personalData
-											.getTelephoneNumber()),
-									personalData.getReason()));*/
-					//java.awt.Toolkit.getDefaultToolkit().beep();
-					JOptionPane.showMessageDialog(frame,"Appointment has been scheduled.");
+					JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
 				}
 
 			} catch (Exception e) {

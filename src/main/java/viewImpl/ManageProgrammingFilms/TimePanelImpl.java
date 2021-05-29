@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TimePanel extends JPanel {
+public class TimePanelImpl extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static final int topEmptyBorder = 10;
@@ -27,7 +27,7 @@ public class TimePanel extends JPanel {
 	private final JLabel hourLabel;
 	private final JLabel minLabel;
 	
-	public TimePanel() {
+	public TimePanelImpl() {
 		
 		final LocalTime localTime = LocalTime.now();
 		

@@ -85,7 +85,7 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
         if (getClass() != obj.getClass())
             return false;
         ProgrammedFilmImpl other = (ProgrammedFilmImpl) obj;
-        if (id != other.id && startTime != other.startTime && endTime != other.endTime && hall!=other.hall)
+        if (id != other.id && startTime != other.startTime && endTime != other.endTime && hall!=other.hall )
             return false;
         return true;
     }

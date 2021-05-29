@@ -44,22 +44,31 @@ import com.mindfusion.scheduling.Calendar;
 import com.mindfusion.scheduling.CalendarView;
 import com.mindfusion.scheduling.ThemeType;
 
+import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
+import view.ManageProgrammingFilms.Factory.ProgrammingFilmsGUIfactory;
+import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 
 
 
-public class ProgrammingFilmsGUIimpl {
+
+public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         private static final long serialVersionUID = 7114066347061701832L;
         
-       // private final InfoFilmsGUIfactory factory = new InfoFilmsGUIfactoryImpl();
+        private static final String firstColumnName = "Film";
+        private static final String secondColumnName = "Hall";
+        private static final String thirdColumnName = "Start time";
+        private static final String fourthColumnName = "End time";
         
         private static final String FRAME_NAME = "Programming  film";
         private static final double PROPORTION = 1.15;
         private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         private final JFrame frame = new JFrame(FRAME_NAME);
         private final Container container = frame.getContentPane();
-
+        private final ProgrammingFilmsGUIfactory factory = new ProgrammingFilmsGUIfactoryImpl() ;
+        
         //real dimension of the screen
         private final int screenWidth = (int) screen.getWidth();
         private final int screenHeight = (int) screen.getHeight();
@@ -67,26 +76,25 @@ public class ProgrammingFilmsGUIimpl {
         private final int frameWidth = (int) (screenWidth / PROPORTION);
         private final int frameHeight = (int) (screenHeight / PROPORTION);
         
-        //private final JLabel title = new JLabel ("Manage films programmation");
-        private JButton home = new JButton("Home");
-        private JButton addProgrammation = new JButton("Add programmation");
-        private JButton filterBy = new JButton("Filter by");
-        private Calendar calendar;
+        private final JButton home = factory.createButton("Home");
+        private final JButton addProgrammation = factory.createButton("Add programmation");
+        private final JButton filterBy = new JButton("Filter by");
+        private final Calendar calendar;
+        
+        private ProgrammingFilmsController observer;
         
         public ProgrammingFilmsGUIimpl() {     
         	
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        final JPanel mainPanel = factory.createPanel(new BorderLayout());
         
-        JPanel centerPanel = new JPanel(new BorderLayout());
-        JPanel southPanel = new JPanel();
-        JPanel northPanel = new JPanel(new BorderLayout());
-        JPanel westPanel = new JPanel(new BorderLayout(0,50));
-        JPanel eastPanel = new JPanel();
+        final JPanel centerPanel = factory.createPanel(new BorderLayout());
+        final JPanel northPanel = factory.createPanel(new BorderLayout());
+        final JPanel westPanel = factory.createPanel(new BorderLayout());
         
-        JPanel optionPanel = new JPanel();
+        final JPanel optionPanel = factory.createPanel(null);
            
         
-        String[] columnNames = new String[] {"Film","Hall","Start time", "End time" };
+        String[] columnNames = new String[] {firstColumnName,secondColumnName,thirdColumnName,fourthColumnName};
         Object[][] data = new Object[2][4]; // row columns 
         
         data[0][0] = "Film1";
@@ -141,10 +149,8 @@ public class ProgrammingFilmsGUIimpl {
 			}
 		});
 		
-		mainPanel.add(southPanel,BorderLayout.SOUTH);
 		mainPanel.add(northPanel,BorderLayout.NORTH);
 		mainPanel.add(westPanel,BorderLayout.WEST);
-		mainPanel.add(eastPanel,BorderLayout.EAST);
 		mainPanel.add(centerPanel,BorderLayout.CENTER);
 		
 		northPanel.add(home,BorderLayout.EAST);
@@ -198,11 +204,30 @@ public class ProgrammingFilmsGUIimpl {
     	}
         
         
-        
-        
-        public static void main (String [] args) {
-        	ProgrammingFilmsGUIimpl p = new ProgrammingFilmsGUIimpl();
+       
+
+        @Override
+        public void start() {
+            frame.setLocationByPlatform(true);
+            frame.setVisible(true);
+            /*if(observer.getFilms().isEmpty()) {
+                this.showNoFilmsDialog();
+            }*/
+            
         }
-        
+
+
+        @Override
+        public void setObserver(final ProgrammingFilmsController observer) {
+            this.observer = observer;
+        }
+
+
+        @Override
+        public void update() {
+            
+        }
+
+
         
 }

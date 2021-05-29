@@ -9,10 +9,12 @@ import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.ManageFilms.FilmsController;
+import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.InputOutput.RWcollection;
 import controllerImpl.InputOutput.RWfile;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
+import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;
@@ -23,6 +25,8 @@ import utilities.Factory.FilmFactory;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
+import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
+import viewImpl.ManageProgrammingFilms.ProgrammingFilmsGUIimpl;
 
 public class Cinema {
 
@@ -55,6 +59,11 @@ public class Cinema {
         final FilmsController filmsController = new FilmsControllerImpl();
         filmsController.showContainerFilmsView();
         */
+        
+        //ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
+        
+        ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
+        
         
         
 
