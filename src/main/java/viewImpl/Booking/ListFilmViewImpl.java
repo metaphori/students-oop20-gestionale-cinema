@@ -52,14 +52,14 @@ public class ListFilmViewImpl implements ListFilmView{
     private static final String INFO_STRING = "Choose film";
     private ListFilmViewObserver observer;
     private JFrame frame;
-    private Map<JButton, Film> map;
+    private Map<JButton, Film> map = new HashMap<>();
 
     public ListFilmViewImpl(final ListFilmViewObserver observer) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
       
         
         this.observer = observer;
-        map = new HashMap<>();
+       //map = new HashMap<>();
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
         final PanelFilmFactory factoryPanel = new PanelFilmFactoryImpl();
         final JPanel mainPanel = new JPanel(new BorderLayout());
@@ -81,7 +81,7 @@ public class ListFilmViewImpl implements ListFilmView{
         mainPanel.add(scroller, BorderLayout.CENTER);
         
         
-        for (var bt : map.keySet()) {
+        for (final var bt : map.keySet()) {
             bt.addActionListener(e -> {
                final JButton btn = (JButton) e.getSource();
                observer.selectedFilm(map.get(btn));

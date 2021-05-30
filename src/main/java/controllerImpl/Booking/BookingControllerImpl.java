@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -77,9 +78,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
     @Override
     public void selectedFilm(Film film) {
+        //setP=this.getProgrammedFilm();
         Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
         this.showTimeTableView(setProgrammedFilm);
   
+    }
+    public Set<ProgrammedFilm> getProgrammedFilm() {
+        return new HashSet<ProgrammedFilm>();
     }
     public void test() {
        // ProgrammedFilmFactory f = new 
@@ -100,7 +105,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     
-
+    
     @Override
     public Set<Film> getFilm() {
       //  Set<Film> film = new HashSet<>();
@@ -115,7 +120,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         this.showBookingView(film);
         
     }
-
+    @Override
+    public Film getFilmByProgrammedFilm(ProgrammedFilm film) {
+        return setF.stream().filter(f -> f.getID() == film.getIdProgrammation()).findAny().get();
+    }
     @Override
     public void showBackFromTimeTable() {
         this.showListFilmView();

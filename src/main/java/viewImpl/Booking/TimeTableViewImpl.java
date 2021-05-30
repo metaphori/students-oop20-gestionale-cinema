@@ -28,18 +28,20 @@ import view.Booking.TimeTableViewObserver;
 public class TimeTableViewImpl implements TimeTableView {
     private static final String TITLE = "Time Tabel Film";
     private static final String TEXT_BUTTON_SELECT = "Select";
-    private static final String INFO_STRING = "Select a film";
+    private static final String INFO_STRING = "Select a schedule from:";
+   
     private TimeTableViewObserver observer;
     private JFrame frame;
     
     
     
     public TimeTableViewImpl(TimeTableViewObserver observer, Set<ProgrammedFilm> setProgrammedFilm) {
+        String NAME = setProgrammedFilm.isEmpty() ? "No programmation for selected film" : "" + observer.getFilmByProgrammedFilm(setProgrammedFilm.stream().findAny().get()).getName();
         GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         this.observer = observer;
         this.frame = factory.getBaseFrame(TITLE);
         
-        JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
+        JPanel north = factory.getInfoPanel(INFO_STRING + NAME, e -> {
             observer.showBackFromTimeTable();
             frame.dispose();
         });
