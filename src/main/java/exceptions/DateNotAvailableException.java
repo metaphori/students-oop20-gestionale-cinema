@@ -18,7 +18,7 @@ public class DateNotAvailableException extends Exception {
 	 * @param message
 	 *            the specified error message.
 	 */
-	public DateNotAvailableException(String message) {
+	public DateNotAvailableException(final String message) {
 		super(message);
 	}
 

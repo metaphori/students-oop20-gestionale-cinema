@@ -32,7 +32,7 @@ public class DatePanelImpl extends JPanel {
 	private static final int hGapGrid = 5;
 	private static final int vGapGrid = 5;
 	
-	public DatePanelImpl(LocalDate selectedDate)
+	public DatePanelImpl(final LocalDate selectedDate)
 	{
 			
 		setLayout(new BorderLayout());

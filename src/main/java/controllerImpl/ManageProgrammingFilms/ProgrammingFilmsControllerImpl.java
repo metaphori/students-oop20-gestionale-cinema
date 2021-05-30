@@ -19,15 +19,17 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     final private ProgrammedFilmsModel programmedFilmsModel;
     
     
-    
     public ProgrammingFilmsControllerImpl() {
         filmsProgrammation = new ProgrammingFilmsGUIimpl(); 
         scheduleFilm = new ScheduleFilmGUIimpl();
         programmedFilmsModel = new ProgrammedFilmsModelImpl();
+        
+        filmsProgrammation.setObserver(this);
+       // scheduleFilm.setObserver(this);
     }
 
     @Override
-    public Collection<ProgrammedFilm> getProgrammazioneFilm() {
+    public Collection<ProgrammedFilm> getAllProgrammationFilms() {
         return null;
     }
 
@@ -56,6 +58,12 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     @Override
     public void showMenu() {
         // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void showScheduleFilmView() {
+        
         
     }
 
