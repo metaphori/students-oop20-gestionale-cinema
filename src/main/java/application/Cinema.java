@@ -32,10 +32,10 @@ import utilities.Factory.FilmFactory;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
 import utilitiesImpl.GeneralSettings;
-import utilitiesImpl.TimeSlotImpl;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
 import viewImpl.ManageProgrammingFilms.ProgrammingFilmsGUIimpl;
 
@@ -76,43 +76,6 @@ public class Cinema {
         //ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         
        // ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
-        LocalDate ld1 = LocalDate.of(1999, 3, 6);    
-        LocalDate ld2 = LocalDate.of(1999, 3, 6); 
-        LocalDate ld3 = LocalDate.of(1999, 3, 6); 
-        
-        LocalTime st1 = LocalTime.of(8, 30);
-        LocalTime st2 = LocalTime.of(6, 50);
-        LocalTime st3 = LocalTime.of(8, 27);
-        
-        LocalTime et1 = LocalTime.of(8, 45);
-        LocalTime et2 = LocalTime.of(7, 22);
-        LocalTime et3 = LocalTime.of(8, 29);
-        
-        ProgrammedFilmFactoryImpl factory = new ProgrammedFilmFactoryImpl();
-        ProgrammedFilm pf1 = factory.creteProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 8, 56, ld2, st2, et2);
-        ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 8, 56, ld3, st3, et3);
-        
-        ProgrammedFilmsModelImpl model = new ProgrammedFilmsModelImpl() ;
-        
-        model.addFilmProgrammation(pf1);
-        model.addFilmProgrammation(pf2);
-        model.addFilmProgrammation(pf3);
-        
-        TimeSlot timeSlotToTest = new TimeSlotImpl(LocalTime.of(8,31),LocalTime.of(8, 44));
-        LocalDate localDateToTest = LocalDate.of(1999, 3, 7);
-        
-        System.out.println(model.isAvailableProgrammation(timeSlotToTest, localDateToTest, 8));
-        
-        
-        
-        
-        
-       
-        
-        
-        
-
         
         //controller.addProgrammedFilm(null);
         

@@ -5,7 +5,6 @@ import java.time.LocalTime;
 
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
-import utilitiesImpl.TimeSlotImpl;
 
 public class ProgrammedFilmFactoryImpl implements ProgrammedFilmFactory {
 

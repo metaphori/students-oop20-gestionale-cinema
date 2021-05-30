@@ -17,10 +17,12 @@ import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.FilmFactory;
 import utilities.Factory.ProgrammedFilm;
-import utilitiesImpl.TimeSlotImpl;
+import utilities.Factory.TimeSlotFactory;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
 class TestProgrammationFilms {
     @Test
@@ -47,8 +49,8 @@ class TestProgrammationFilms {
         model.addFilmProgrammation(pf1);
         model.addFilmProgrammation(pf2);
         model.addFilmProgrammation(pf3);
-        
-        TimeSlot timeSlotToTest = new TimeSlotImpl(LocalTime.of(8,31),LocalTime.of(8, 44));
+        TimeSlotFactory factoryTimeSlot = new TimeSlotFactoryImpl();
+        TimeSlot timeSlotToTest = factoryTimeSlot.createTimeSlot(LocalTime.of(8,31),LocalTime.of(8, 44));
         LocalDate localDateToTest = LocalDate.of(1999, 3, 7);
         
         System.out.println(model.isAvailableProgrammation(timeSlotToTest, localDateToTest, 8));

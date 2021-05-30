@@ -1,4 +1,4 @@
-package utilitiesImpl;
+package utilitiesImpl.FactoryImpl;
 
 import java.time.LocalTime;
 
@@ -10,7 +10,7 @@ public class TimeSlotImpl implements TimeSlot {
     private final LocalTime endTime;
     
     
-    public TimeSlotImpl(final LocalTime startTime, final LocalTime endTime) {
+    TimeSlotImpl(final LocalTime startTime, final LocalTime endTime) {
         super();
         this.startTime = startTime;
         this.endTime = endTime;
