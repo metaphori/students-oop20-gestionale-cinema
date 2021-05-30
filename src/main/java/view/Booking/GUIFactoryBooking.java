@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import utilities.Factory.*;
 import utilitiesImpl.SeatState;
@@ -17,4 +18,5 @@ public interface GUIFactoryBooking {
     JButton getButtonImage(String title, String path);
     JTable getTable(Set<ProgrammedFilm> film);
     JButton getButtonSeat(SeatState state, int i,int j);
+    DefaultTableModel getModel(Set<ProgrammedFilm> film);
 }

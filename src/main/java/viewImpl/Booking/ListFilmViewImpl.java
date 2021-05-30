@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
@@ -59,7 +60,7 @@ public class ListFilmViewImpl implements ListFilmView{
       
         
         this.observer = observer;
-       //map = new HashMap<>();
+       
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
         final PanelFilmFactory factoryPanel = new PanelFilmFactoryImpl();
         final JPanel mainPanel = new JPanel(new BorderLayout());
@@ -72,15 +73,15 @@ public class ListFilmViewImpl implements ListFilmView{
         final JPanel centralPanel = factoryPanel.getFilmPanel(map, setFilm);
         final JScrollPane scroller = new JScrollPane(centralPanel);
        
-      
+        
         
         frame.getContentPane().add(mainPanel);
         frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_IMAGE_COVER), (int) (screenSize.getHeight() * HEIGHT_IMAGE_COVER)));
         
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(scroller, BorderLayout.CENTER);
-        
-        
+       
+       
         for (final var bt : map.keySet()) {
             bt.addActionListener(e -> {
                final JButton btn = (JButton) e.getSource();
@@ -96,4 +97,5 @@ public class ListFilmViewImpl implements ListFilmView{
     public void show() {
         frame.setVisible(true);
     }
+    
 }

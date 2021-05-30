@@ -80,7 +80,7 @@ public class Cinema {
         
         setP.add(p1);
         setP.add(p2);
-        setP.add(p3);
+      //  setP.add(p3);
         System.out.println(setP);
         BookingController b = new BookingControllerImpl(set,setP);
         b.start();

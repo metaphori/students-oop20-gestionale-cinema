@@ -122,6 +122,23 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
       
         return table;
     }
+    public DefaultTableModel getModel(Set<ProgrammedFilm> film) {
+        int row = film.size();
+        String[] columnNames = new String[] {"Date","Time","Hall" };
+        Object[][] data = new Object[row][columnNames.length];
+        int i = 0;
+        for(var elem : film) {
+            data[i][0] = elem.getDate();
+            data[i][1] = elem.getStartTime();
+            data[i][2] = elem.getHall();
+            i++;
+        }
+        
+        
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+  
+        return model;
+    }
     public JButton getButtonSeat(SeatState state, int i, int j) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         ImageIcon imageIcon = new ImageIcon();
@@ -144,6 +161,13 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         button.setMargin(new Insets(0, 0, 0, 0));
         return button;
        
+    }
+    public JPanel filterPanel() {
+        JPanel panelFilter = new JPanel(new BorderLayout());
+        
+        
+        
+        return panelFilter;
     }
    
 }
