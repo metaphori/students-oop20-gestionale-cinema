@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.ManageProgrammingFilms.HandlerList;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
@@ -13,17 +14,20 @@ import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
 import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
 public class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilms{
-
-    private final List <ProgrammedFilm> listToManage;
+    private final  List<ProgrammedFilm> listToManage;
+    private final  HandlerList<ProgrammedFilm> handlerList;   
     
-    public ManagerProgrammingFilmsImpl(final List <ProgrammedFilm> listToManage) {
+ public ManagerProgrammingFilmsImpl(List<ProgrammedFilm> listToManage) {
         this.listToManage = listToManage;
+        this.handlerList = new HandlerListImpl<>();
     }
-    
- @Override
+
+@Override
  public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final int hall) { // check if timeslot is available for specific date and hall 
         TimeSlotFactory timeSlotFactory= new TimeSlotFactoryImpl();
-        return !this.filterListByDateHall(date, hall)
+        //return !this.filterListByDateHall(date, hall)
+        
+        /*return !this.handlerList.filterListByDateHall(listToManage, date, hall)
         .stream()
         .anyMatch(pf -> {
            if( this.isAvailableTimeSlot(timeSlotFactory.createTimeSlot(pf.getStartTime(), pf.getEndTime()), timeSlotToCheck)) { // if it's available it means that there isn't any match , so return false
@@ -31,7 +35,16 @@ public class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilms{
            } 
            return true;
         }
-        );           
+        );   */
+        return !this.handlerList.filterBy(listToManage, new FilterByDateHallImpl(date,hall))
+                .stream()
+                .anyMatch(pf -> {
+                   if( this.isAvailableTimeSlot(timeSlotFactory.createTimeSlot(pf.getStartTime(), pf.getEndTime()), timeSlotToCheck)) { // if it's available it means that there isn't any match , so return false
+                       return false;
+                   } 
+                   return true;
+                }
+                ); 
     }
        
  private  boolean isAvailableTimeSlot(final TimeSlot inserted , final TimeSlot toCheck) { // check if specifif time slot is available compare to another time slot
@@ -64,16 +77,18 @@ public class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilms{
         
         return true;
         
-        }  
+        }
 
- @Override
- public List<ProgrammedFilm> filterListByDateHall(final LocalDate date , int hall) { // create 
-     
-     return  listToManage.stream().filter(pf -> {
-             return pf.getHall() == hall && pf.getDate().equals(date);})
-             .collect(Collectors.toList());
-     
-  }
+@Override
+public HandlerList<ProgrammedFilm> getHandlerList() {
+    return this.handlerList;
+}
+
+ 
+
+
+
+
  
  
 }

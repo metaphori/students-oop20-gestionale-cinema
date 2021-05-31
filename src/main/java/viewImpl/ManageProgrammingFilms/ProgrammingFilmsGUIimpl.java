@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.EventObject;
+import java.util.List;
 import java.util.Optional;
 
 import javax.swing.BorderFactory;
@@ -45,13 +46,11 @@ import com.mindfusion.scheduling.CalendarView;
 import com.mindfusion.scheduling.ThemeType;
 
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import model.ManageProgrammingFilms.ManagerProgrammingFilms;
+import utilities.Factory.ProgrammedFilm;
 import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
 import view.ManageProgrammingFilms.Factory.ProgrammingFilmsGUIfactory;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
-
-
-
-
 
 public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
@@ -61,6 +60,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         private static final String secondColumnName = "Hall";
         private static final String thirdColumnName = "Start time";
         private static final String fourthColumnName = "End time";
+        private static final int columnsNumber = 4;
         
         private static final String FRAME_NAME = "Programming  film";
         private static final double PROPORTION = 1.15;
@@ -83,8 +83,9 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         private ProgrammingFilmsController observer;
         
-        public ProgrammingFilmsGUIimpl() {     
-        	
+        public ProgrammingFilmsGUIimpl(final ProgrammingFilmsController observer) {     
+        
+        this.observer = observer;
         final JPanel mainPanel = factory.createPanel(new BorderLayout());
         
         final JPanel centerPanel = factory.createPanel(new BorderLayout());
@@ -94,8 +95,10 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         final JPanel optionPanel = factory.createPanel(null);
            
         
-        String[] columnNames = new String[] {firstColumnName,secondColumnName,thirdColumnName,fourthColumnName};
+        final String[] columnNames = new String[] {firstColumnName,secondColumnName,thirdColumnName,fourthColumnName};
         Object[][] data = new Object[2][4]; // row columns 
+        
+        
         
         data[0][0] = "Film1";
         data[0][1] = "Film1 Hall";
@@ -106,7 +109,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         data[1][1] = "Film2 Hall";
         data[1][2] = "Film2 start time";
         data[1][3] = "Film2 end time";
-        
+        /*
         
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model) {
@@ -115,9 +118,11 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
          }
         };
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+       */
         
-        
-        JScrollPane scrollPane = new JScrollPane(table);
+       // final JScrollPane scrollPane = new JScrollPane(table);
+        JTable table = factory.createTable(columnNames, data);
+        final JScrollPane scrollPane = new JScrollPane(table);
         
         centerPanel.add(scrollPane, BorderLayout.CENTER);
         
@@ -175,7 +180,32 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
 		
 		container.add(mainPanel);
 		
- 
+		addProgrammation.addActionListener(event->{
+		    Object[][] data1 = new Object[2][4]; // row columns 
+                    
+                    
+                    
+                    data1[0][0] = "vdvdvd";
+                    data1[0][1] = "Fildvdvdm1 Hall";
+                    data1[0][2] = "vdvd start time";
+                    data1[0][3] = "dvdv end time";
+                    
+                    data1[1][0] = "dvdv";
+                    data1[1][1] = "Fdvvdilm2 Hall";
+                    data1[1][2] = "dvdv start time";
+                    data1[1][3] = "dvvd end time";
+		    DefaultTableModel modelNew = new DefaultTableModel(data1, columnNames);
+		   table.setModel(modelNew);
+		   
+		   DefaultTableModel dfm = (DefaultTableModel) table.getModel();
+		   dfm.fireTableDataChanged();
+		   
+		   
+		        
+		        
+		    
+		}
+		);
 			
 		
         frame.pack();
@@ -187,7 +217,9 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         }
         
 
-        protected void onSelectionChanged() {
+        private void onSelectionChanged() { // when user clicks on specific date, table must be updated
+              
+            
     		if (calendar.getSelection().getIsEmpty())
     		{
     			//scheduler.getTimetableSettings().getDates().clear();
@@ -199,13 +231,30 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
     		int year = calendar.getSelection().getRanges().get(0).getYear();
     		
     		LocalDate localDate = LocalDate.of(year, month , day);
-    		System.out.println(localDate);
+    		//System.out.println(localDate);
     		
     	}
-        
-        
-       
-
+        /*
+        private void fillDataTable(final List<ProgrammedFilm> manipulatedList ,final Object [][] data, final LocalDate date) {
+            /*final ManagerProgrammingFilms manager = observer.getManagerProgrammingFilms();
+            
+            final List<ProgrammedFilm> filteredListByDate = manager.getFilterManager().filterListByDate(observer.getAllProgrammedFilms(), date);
+            final List<ProgrammedFilm> sortedFilteredList = manager.getFilterManager().sortListByHall(filteredListByDate);
+            final int rowsNumber = sortedFilteredList.size();
+            */
+        /*
+            final int rowsNumber = manipulatedList.size();
+            final int columnsNumber = manipulatedList.getClass().getDeclaredFields().length;
+            
+                for(int i=0; i< rowsNumber ; i++) {
+                    final ProgrammedFilm temp = manipulatedList.iterator().next();
+                    for(int j=0; j< columnsNumber; j++) {
+                         data [i][j] = temp.get
+                    }
+                }
+            
+        }
+        */
         @Override
         public void start() {
             frame.setLocationByPlatform(true);
@@ -222,12 +271,15 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             this.observer = observer;
         }
 
-
+        
         @Override
         public void update() {
             
         }
-
+        public static void main(String []args) {
+            ProgrammingFilmsGUIimpl a = new ProgrammingFilmsGUIimpl(null);
+            
+        }
 
         
 }

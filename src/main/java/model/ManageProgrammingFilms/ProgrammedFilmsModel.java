@@ -13,6 +13,7 @@ public interface ProgrammedFilmsModel{
     void deleteFilmProgrammation(ProgrammedFilm programmedFilm);
     boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, int hall);
     List<ProgrammedFilm> getAllProgrammedFilm();
+    ManagerProgrammingFilms getManagerProgrammingFilms();
     
    
     

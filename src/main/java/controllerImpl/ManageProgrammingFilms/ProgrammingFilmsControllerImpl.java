@@ -2,8 +2,10 @@ package controllerImpl.ManageProgrammingFilms;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import model.ManageProgrammingFilms.ProgrammedFilmsModel;
 import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
 import utilities.Factory.ProgrammedFilm;
@@ -20,7 +22,7 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     
     
     public ProgrammingFilmsControllerImpl() {
-        filmsProgrammation = new ProgrammingFilmsGUIimpl(); 
+        filmsProgrammation = new ProgrammingFilmsGUIimpl(this); 
         scheduleFilm = new ScheduleFilmGUIimpl();
         programmedFilmsModel = new ProgrammedFilmsModelImpl();
         
@@ -29,8 +31,8 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     }
 
     @Override
-    public Collection<ProgrammedFilm> getAllProgrammationFilms() {
-        return null;
+    public List<ProgrammedFilm> getAllProgrammedFilms() {
+        return programmedFilmsModel.getAllProgrammedFilm();
     }
 
     @Override
@@ -43,11 +45,6 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
         
     }
 
-    @Override
-    public void getProgrammedFilmsBySelection(String film, LocalDate date) {
-        
-        
-    }
 
     @Override
     public void showProgrammedFilmView() {
@@ -65,6 +62,11 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     public void showScheduleFilmView() {
         
         
+    }
+
+    @Override
+    public ManagerProgrammingFilms getManagerProgrammingFilms() {
+        return this.programmedFilmsModel.getManagerProgrammingFilms();
     }
 
 }

@@ -33,7 +33,7 @@ public class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUIfactor
 
     @Override
     public Calendar createCalendar() {
-        Calendar calendar = new Calendar();
+        final Calendar calendar = new Calendar();
         calendar.setCurrentTime(DateTime.now());
         calendar.setDate(DateTime.today());//year ,month, day
         
@@ -48,14 +48,13 @@ public class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUIfactor
         calendar.getMonthSettings().getDaySettings().setHeaderSize(0);
         calendar.endInit();
         // Calendar initialization end
-        
-        return null;
+        return calendar;
     }
 
     @Override
-    public JScrollPane createScrollableTable(final String[] columnNames, final Object[][] data) {
+    public JTable createTable(final String[] columnNames, final Object[][] data) {
         
-        final DefaultTableModel model = new DefaultTableModel(data, columnNames.length);
+        final DefaultTableModel model = new DefaultTableModel(data, columnNames);
         final JTable table = new JTable(model) {
                 private static final long serialVersionUID = 1L;
                 public boolean isCellEditable(int row, int column) {
@@ -64,7 +63,7 @@ public class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUIfactor
         };
         
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        return new JScrollPane(table);
+        return table;
     }
 
 }

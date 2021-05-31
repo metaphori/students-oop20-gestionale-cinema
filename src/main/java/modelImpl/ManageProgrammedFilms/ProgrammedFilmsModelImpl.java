@@ -16,9 +16,18 @@ import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
 public class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel{
     
-    private final List <ProgrammedFilm> programmedFilms = new ArrayList<>();
-    private final ManagerProgrammingFilms manager = new ManagerProgrammingFilmsImpl(programmedFilms);
+    private final List <ProgrammedFilm> programmedFilms;
+    private final ManagerProgrammingFilms manager;
     
+
+    public ProgrammedFilmsModelImpl(final List<ProgrammedFilm> programmedFilms) {
+        this.programmedFilms = programmedFilms;
+        manager = new ManagerProgrammingFilmsImpl(programmedFilms);
+    }
+    public ProgrammedFilmsModelImpl() {
+        this.programmedFilms = new ArrayList<>();
+        this.manager = new ManagerProgrammingFilmsImpl(programmedFilms);
+    }
 
     @Override
     public void addFilmProgrammation(final ProgrammedFilm programmedFilm) {
@@ -27,7 +36,7 @@ public class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel{
 
     @Override
     public void deleteFilmProgrammation(final ProgrammedFilm programmedFilm) {
-        
+        programmedFilms.remove(programmedFilm);
     }
         
     @Override
@@ -38,6 +47,10 @@ public class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel{
     @Override
     public List<ProgrammedFilm> getAllProgrammedFilm() {
         return this.programmedFilms;
+    }
+    @Override
+    public ManagerProgrammingFilms getManagerProgrammingFilms() {
+        return this.manager;
     }
     
 

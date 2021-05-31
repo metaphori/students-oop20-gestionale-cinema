@@ -26,9 +26,9 @@ import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
 class TestProgrammationFilms {
     @Test
-    void testScrittura() {
+    void testAvailability() {
         LocalDate ld1 = LocalDate.of(1999, 3, 6);    
-        LocalDate ld2 = LocalDate.of(1999, 3, 6); 
+        LocalDate ld2 = LocalDate.of(1999, 3, 7); 
         LocalDate ld3 = LocalDate.of(1999, 3, 6); 
         
         LocalTime st1 = LocalTime.of(8, 30);
@@ -41,20 +41,24 @@ class TestProgrammationFilms {
         
         ProgrammedFilmFactoryImpl factory = new ProgrammedFilmFactoryImpl();
         ProgrammedFilm pf1 = factory.creteProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 8, 56, ld2, st2, et2);
-        ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 8, 56, ld3, st3, et3);
+        ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 9, 56, ld2, st2, et2);
+        ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 1, 56, ld3, st3, et3);
         
         ProgrammedFilmsModelImpl model = new ProgrammedFilmsModelImpl() ;
         
         model.addFilmProgrammation(pf1);
         model.addFilmProgrammation(pf2);
         model.addFilmProgrammation(pf3);
-        TimeSlotFactory factoryTimeSlot = new TimeSlotFactoryImpl();
+        /*TimeSlotFactory factoryTimeSlot = new TimeSlotFactoryImpl();
         TimeSlot timeSlotToTest = factoryTimeSlot.createTimeSlot(LocalTime.of(8,31),LocalTime.of(8, 44));
         LocalDate localDateToTest = LocalDate.of(1999, 3, 7);
         
-        System.out.println(model.isAvailableProgrammation(timeSlotToTest, localDateToTest, 8));
+        System.out.println(model.isAvailableProgrammation(timeSlotToTest, localDateToTest, 8));*/
+        //System.out.println(model.getManagerProgrammingFilms().sortListByHall(model.getAllProgrammedFilm()));
+        
     }
+    
+    
     
     
     
