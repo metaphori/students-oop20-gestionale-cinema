@@ -1,7 +1,7 @@
 package viewImpl.ManageAccounts;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 
@@ -34,22 +34,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
 import controller.ManageAccounts.AccountsController;
-import utilities.Film;
-import utilities.Factory.FilmFactory;
 import utilities.ManageAccounts.Account;
-import utilitiesImpl.GeneralSettings;
-import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
-import view.ManageAccounts.LoginAccountGUI;
 import view.ManageAccounts.RegistrationAccountGUI;
 
-import java.awt.event.*
-;
+import java.awt.event.*;
 
 public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
@@ -73,8 +66,13 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     final TextField TextSecondPwd = new TextField ("Repeat Password", 12);
     final JLabel isAdmin = new JLabel ("Type:");
     
+    final String [] s = new String [] {"Administrator", "Operator"};
+    final JComboBox type = new JComboBox < String >(s);
+    
     final JButton add = new JButton("Add");
     final JButton close = new JButton("Close");
+
+    final JButton reset = new JButton("Reset");
     
     private AccountsController observer;
     
@@ -120,19 +118,17 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add(TextSecondPwd, cnst);
         cnst.gridy ++;
         
-        final String [] s = new String [] {"Administrator", "Operator"};
-        
         pWestInternal.add(isAdmin, cnst);
-        final JComboBox type = new JComboBox < String >(s);
         pWestInternal.add (type, cnst);
         cnst.gridy ++; 
-        
+                                  
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal );
         
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         pSouth.add(add);
         pSouth.add(close);
+        pSouth.add(reset);
         
         frame.add (pWest , BorderLayout . CENTER );
         frame.add (pNorth , BorderLayout . NORTH);
@@ -197,10 +193,32 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
          }
          );
         
-      //method for add new account
-       
         
+        //method to remove writing
+        reset.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) { 
+                        TextUsername.setText("");
+                        TextName.setText("");
+                        TextSurname.setText("");
+                        TextPassword.setText("");
+                        TextSecondPwd.setText("");   
+            }
+
+            public void focusLost(final FocusEvent e) {
+            }
+        });
         
+      //method to add new account
+        add.addActionListener(event -> {
+            
+            Account account;
+
+            if(!(TextPassword.getText()).equals(TextSecondPwd)) {
+                JLabel wrong = new JLabel("wrong password");
+                wrong.setForeground(Color.RED);      
+            }
+
+        });
         
         
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
@@ -209,7 +227,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     }
         @Override
         public void show () {
-        //ridimensiona la finestra e rendo visibile il Frame 
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
@@ -224,12 +241,24 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     }
     @Override
     public void setObserver(AccountsController observer) {
-        // TODO Auto-generated method stub
+        this.observer = observer;
         
     }
+    
     @Override
     public void loadAccount(Account account) {
-        // TODO Auto-generated method stub
+        TextName.setText(account.getName());
+        TextSurname.setText(account.getSurname());
+        TextUsername.setText(account.getUsername());
+        TextPassword.setText(account.getPassword());
+        
+        if(type.getSelectedItem().equals("Administrator")) {
+            boolean t = true;
+            t = account.isAdmin();
+        } else if(type.getSelectedItem().equals("operator")) {
+            boolean f = false;
+            f = account.isAdmin();        
+        }
         
     }
     

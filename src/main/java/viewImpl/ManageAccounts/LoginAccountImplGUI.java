@@ -43,7 +43,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.io.FileUtils;
 
 import controller.ManageAccounts.AccountsController;
-import controller.ManageFilms.FilmsController;
 import utilities.ManageAccounts.Account;
 import view.ManageAccounts.LoginAccountGUI;
 
@@ -161,10 +160,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                 JLabel notFound = new JLabel("username not found");
                 notFound.setForeground(Color.RED);
             }
-                
-        
 
-       
         });
         
         
@@ -181,10 +177,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
        }
     */
     
-   
-   // public void setObserver (LoginAccountGUIObserver observer) {
-     //   this . observer = observer ;
-    //}
     
     @Override
     public void setObserver(final AccountsController observer) {

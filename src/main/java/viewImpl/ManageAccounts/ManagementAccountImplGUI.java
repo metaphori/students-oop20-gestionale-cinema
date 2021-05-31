@@ -8,8 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.TextField;
 import java.awt.Toolkit;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,11 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.ManageAccounts.AccountsController;
-import utilities.Film;
 import view.ManageAccounts.ManagementAccountGUI;
 
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
@@ -33,6 +32,9 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     final JFrame frame = new JFrame();
     
     //components
+    final JLabel title = new JLabel("List account"); 
+    final JButton add = new JButton("Add");
+    final JButton home = new JButton("Home");
     
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
@@ -43,36 +45,53 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     
     private AccountsController observer;
     
-    
     public ManagementAccountImplGUI () {
         
         frame.setTitle(FRAME_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    /*
-        final JPanel pNorth = new JPanel (new FlowLayout ());
-        pNorth.add(new JLabel("Account list"));
-        
+    
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
         cnst.insets = new Insets (5 ,5 ,5 , 5);
         cnst.fill = GridBagConstraints.HORIZONTAL;
         
+        final JPanel pNorth = new JPanel (new FlowLayout ());
+        pNorth.add(title);
+        cnst.gridy ++;
         
         
-        final JScrollPane scrollPane = new JScrollPane (); //visione scorrevole del componente
-        //tra le () posso aggiungere una tabella img ecc
+        DefaultTableModel dm = new DefaultTableModel();
+        dm.setDataVector(new Object[][] {}, new Object[] {"Username", "Name", "Surname","Option"});
+        JTable table = new JTable (dm);
         
         
+        final JScrollPane scroll = new JScrollPane (table); //visione scorrevole del componente
+
+       // getContentPane().add(scroll);
         
-        final JScrollPane scroll = new JScrollPane ( ); // Pannello con barra
+        
+        //final JScrollPane scroll = new JScrollPane ( ); // Pannello con barra
         scroll . setVerticalScrollBarPolicy ( ScrollPaneConstants .   VERTICAL_SCROLLBAR_AS_NEEDED );
         pWestInternal.add(scroll);
         
+        final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
+        pSouth.add(add);
+        
         frame.add (pNorth, BorderLayout.NORTH);
         frame.add (pWestInternal, BorderLayout.CENTER);
+        frame.add(pSouth, BorderLayout.SOUTH);
         
-      */  
+        
+        //method to registration view 
+        add.addActionListener(event -> { 
+            frame.dispose();
+            observer.showRegistrationAccountView(null);
+            frame.setVisible(false);
+        });
+        
+     
+       
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
      
@@ -95,20 +114,10 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         this.observer = observer;
     }
     
-    
+    //update table of list account
     @Override
-    public void update() {//Reset map, take new films and rebuild central panel
-       /* map.clear();
-        centerPanel.remove(0); //remove first child
-
-        Set<Film> film = new HashSet<>(observer.getFilms());
+    public void update() {
         
-        centerPanel.add(factoryFilmPanel.getFilmPanel(map, film));
-        for (final var button: map.keySet()) {
-            button.addActionListener(al);
-        }
-        centerPanel.validate();
-        frame.validate();*/
     }    
     
     public static void main(String[] args) {
