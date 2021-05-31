@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 import utilities.Factory.*;
 import utilitiesImpl.Row;
-import utilitiesImpl.Seat;
+import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 import view.Booking.BookingView;
 import view.Booking.BookingViewObserver;
@@ -31,7 +31,7 @@ public class BookingViewImpl implements BookingView {
     private static final String INFO_STRING = "Choose seats and book";
     private static final String STRING_BTN_BOOK = "Book"; 
     private ProgrammedFilm film; 
-    private Map<JButton,Seat<Row,Integer>> grid = new HashMap<>();
+    private Map<JButton,SeatImpl<Row,Integer>> grid = new HashMap<>();
     
     private static final String FS = File.separator;
     private static final double WIDTH_PERC_FRAME = 0.5;
@@ -58,7 +58,7 @@ public class BookingViewImpl implements BookingView {
             frame.dispose();
             
         });
-        Set<Seat<Row,Integer>> setSeats = observer.getSeatsFromFilm(film);
+        Set<SeatImpl<Row,Integer>> setSeats = observer.getSeatsFromFilm(film);
         row = Row.H;
         System.out.print("AfterGet" + setSeats);
         col = 10;
@@ -68,13 +68,13 @@ public class BookingViewImpl implements BookingView {
         for(int i = 0; i< row.ordinal()+1; i++) {
             for(int j = 0; j< col; j++) {
                 SeatState state;
-                if(setSeats.contains(new Seat<Row,Integer>(Row.values()[i],j))){
+                if(setSeats.contains(new SeatImpl<Row,Integer>(Row.values()[i],j))){
                     state  = SeatState.TAKEN;
                 }else {
                     state = SeatState.FREE;
                 }
                 JButton button = factory.getButtonSeat(state, i, j);
-                grid.put(button, new Seat<Row,Integer>(Row.values()[i],j));
+                grid.put(button, new SeatImpl<Row,Integer>(Row.values()[i],j));
                 gridPanel.add(button);
             }
         }
@@ -110,8 +110,8 @@ public class BookingViewImpl implements BookingView {
     @Override
     public void refresh() {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Set<Seat<Row,Integer>> setSeatsTaken = observer.getSeatsFromFilm(film);
-        Set<Seat<Row,Integer>> setSeatsSelected = observer.getSeatsSelected();
+        Set<SeatImpl<Row,Integer>> setSeatsTaken = observer.getSeatsFromFilm(film);
+        Set<SeatImpl<Row,Integer>> setSeatsSelected = observer.getSeatsSelected();
       
               for(var bt : grid.keySet()) {       
                     ImageIcon imageIcon;

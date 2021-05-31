@@ -2,12 +2,14 @@ package viewImpl.Booking;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -48,12 +50,12 @@ public class TimeTableViewImpl implements TimeTableView {
             frame.dispose();
         });
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JButton bookBt = new JButton(TEXT_BUTTON_SELECT);
+        JButton bookBtn = new JButton(TEXT_BUTTON_SELECT);
         
 
        
         JTable table = factory.getTable(setProgrammedFilm);
-        bookBt.addActionListener(e -> {
+        bookBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
             System.out.println("RIGA SELECTED" + row);
             if(row!=-1) {
@@ -86,13 +88,36 @@ public class TimeTableViewImpl implements TimeTableView {
             
         });
         
+        
+        JPanel filterPanel = new JPanel(new BorderLayout()); 
+        JPanel panelCheckBox = new JPanel(new FlowLayout());
+        JButton filterBtn = new JButton("Filter");
+        
+        ButtonGroup checkBoxGroup = new ButtonGroup();
+        JCheckBox jcb1, jcb2, jcb3;
+        jcb1 = new JCheckBox("Data", false);
+        jcb2 = new JCheckBox("Time", false);
+        jcb3 = new JCheckBox("Australia", false);
+        
+        checkBoxGroup.add(jcb1);
+        checkBoxGroup.add(jcb2);
+        checkBoxGroup.add(jcb3);
+        panelCheckBox.add(jcb1);
+        panelCheckBox.add(jcb2);
+        panelCheckBox.add(jcb3);
+        
+        filterPanel.add(panelCheckBox,BorderLayout.CENTER);
+        filterPanel.add(filterBtn, BorderLayout.SOUTH);
+        
+       
+        mainPanel.add(filterPanel, BorderLayout.WEST);
         mainPanel.add(add,BorderLayout.EAST);
         mainPanel.add(north, BorderLayout.NORTH);
         mainPanel.add(scroll, BorderLayout.CENTER);
-        mainPanel.add(bookBt, BorderLayout.SOUTH);
+        mainPanel.add(bookBtn, BorderLayout.SOUTH);
         frame.add(mainPanel);
         
-        JCheckBox box = new JCheckBox();
+        
         
     }
     

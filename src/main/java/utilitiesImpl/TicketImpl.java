@@ -11,12 +11,12 @@ public class TicketImpl implements Ticket {
     
         private final LocalDate data;
         private final LocalTime time;
-	private final Set<Seat<Row,Integer>> setSeat;
+	private final Set<SeatImpl<Row,Integer>> setSeat;
 	private final double price;
 	private final int id;
 	private final int hall;
 	
-	public TicketImpl(LocalDate data,LocalTime time, Set<Seat<Row,Integer>> setSeat, double price, int id, int hall) {
+	public TicketImpl(LocalDate data,LocalTime time, Set<SeatImpl<Row,Integer>> setSeat, double price, int id, int hall) {
 		this.data = data;
 		this.hall = hall;
 		this.setSeat = setSeat;
@@ -30,7 +30,7 @@ public class TicketImpl implements Ticket {
 	public LocalDate getData() {
 		return data;
 	}
-	public Set<Seat<Row, Integer>> getSetSeat() {
+	public Set<SeatImpl<Row, Integer>> getSetSeat() {
 		return setSeat;
 	}
 	public double getPrice() {

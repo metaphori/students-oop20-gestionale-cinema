@@ -1,10 +1,12 @@
 package utilitiesImpl;
 
-public class Seat<X,Y> {
+import utilities.Seat;
+
+public class SeatImpl<X,Y> implements Seat<X,Y> {
 	private final X x;
 	private final Y y;
 	
-	public Seat(X x, Y y) {
+	public SeatImpl(X x, Y y) {
 		super();
 		this.x=x;
 		this.y=y;
@@ -36,7 +38,7 @@ public class Seat<X,Y> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Seat other = (Seat) obj;
+		SeatImpl other = (SeatImpl) obj;
 		if (x == null) {
 			if (other.x != null)
 				return false;

@@ -5,12 +5,12 @@ import java.time.LocalTime;
 import java.util.Set;
 
 import utilitiesImpl.Row;
-import utilitiesImpl.Seat;
+import utilitiesImpl.SeatImpl;
 
 public interface Ticket {
     LocalTime getTime();
     LocalDate getData();
-    Set<Seat<Row, Integer>> getSetSeat();
+    Set<SeatImpl<Row, Integer>> getSetSeat();
     double getPrice();
     int getId();
     int getHall();

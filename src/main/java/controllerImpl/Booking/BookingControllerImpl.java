@@ -19,7 +19,7 @@ import utilities.Ticket;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
 import utilitiesImpl.Row;
-import utilitiesImpl.Seat;
+import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 import view.Booking.BookingView;
 import view.Booking.BookingViewObserver;
@@ -138,7 +138,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public Set<Seat<Row, Integer>> getSeatsFromFilm(ProgrammedFilm film) {
+    public Set<SeatImpl<Row, Integer>> getSeatsFromFilm(ProgrammedFilm film) {
         return this.model.getSeatsFromFilm(film);
        
     }
@@ -149,7 +149,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public void buttonSelected(Seat<Row, Integer> seat, ProgrammedFilm film) {
+    public void buttonSelected(SeatImpl<Row, Integer> seat, ProgrammedFilm film) {
       model.buttonSelected(seat, film);
       
     }
@@ -161,7 +161,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public Set<Seat<Row, Integer>> getSeatsSelected() {
+    public Set<SeatImpl<Row, Integer>> getSeatsSelected() {
         return model.getSeatsSelected();
     }
 

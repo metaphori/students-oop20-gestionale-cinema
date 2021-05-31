@@ -9,13 +9,13 @@ import model.Booking.BookingModel;
 import utilities.Factory.*;
 import utilities.Ticket;
 import utilitiesImpl.Row;
-import utilitiesImpl.Seat;
+import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 import utilitiesImpl.TicketImpl;
 
 public class BookingModelImpl implements BookingModel {
     private Set<Ticket> setTicket;
-    private Set<Seat<Row,Integer>> seatSelected;
+    private Set<SeatImpl<Row,Integer>> seatSelected;
     
     public BookingModelImpl(Set<Ticket> setTicket) {
         seatSelected = new HashSet<>();
@@ -26,11 +26,11 @@ public class BookingModelImpl implements BookingModel {
         
     }
     @Override
-    public Set<Seat<Row, Integer>> getSeats() {
+    public Set<SeatImpl<Row, Integer>> getSeats() {
         // TODO Auto-generated method stub
         return null;
     }
-    public Set<Seat<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film){
+    public Set<SeatImpl<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film){
         System.out.println("TicketGet" + setTicket);
         setTicket.stream()
         .filter(f -> f.getId() == film.getIdProgrammation())
@@ -47,8 +47,8 @@ public class BookingModelImpl implements BookingModel {
                 .collect(Collectors.toSet());
     }
     
-    public void buttonSelected(Seat<Row,Integer> seat, ProgrammedFilm film) {
-        Set<Seat<Row,Integer>> set = this.getSeatsFromFilm(film);
+    public void buttonSelected(SeatImpl<Row,Integer> seat, ProgrammedFilm film) {
+        Set<SeatImpl<Row,Integer>> set = this.getSeatsFromFilm(film);
         if(!set.contains(seat)) {
             if(seatSelected.contains(seat)) {
         
@@ -66,7 +66,7 @@ public class BookingModelImpl implements BookingModel {
         
     }
     @Override
-    public Set<Seat<Row, Integer>> getSeatsSelected() {
+    public Set<SeatImpl<Row, Integer>> getSeatsSelected() {
         
         return seatSelected;
     }
