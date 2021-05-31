@@ -26,6 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
+import controller.ManageStatistics.StatisticsController;
 import view.ManageStatistics.StatisticsGUI;
 
 
@@ -51,6 +52,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private final int frameWidth = (int) (screenWidth / PROPORTION);
     private final int frameHeight = (int) (screenHeight / PROPORTION);
         
+    private StatisticsController observer;
     
     public StatisticsImplGUI () {
         
@@ -149,5 +151,11 @@ public class StatisticsImplGUI implements StatisticsGUI{
         StatisticsImplGUI view = new StatisticsImplGUI();
         view.show();
     }
+    @Override
+    public void setObserver(StatisticsController observer) {
+        this.observer = observer;
+        
+    }
+    
     
 }
