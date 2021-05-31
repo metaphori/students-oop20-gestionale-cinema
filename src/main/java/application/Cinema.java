@@ -2,11 +2,7 @@ package application;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
-<<<<<<< HEAD
 import java.time.temporal.ChronoUnit;
-=======
-import java.util.ArrayList;
->>>>>>> manageProgrammingFilms
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
