@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -37,78 +38,66 @@ import view.Booking.GUIFactoryBooking;
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGHT_PERC_FRAME = 0.5;
-    
     private static final double WIDTH_IMAGE_COVER = WIDTH_PERC_FRAME / 5;
     private static final double HEIGHT_IMAGE_COVER = HEIGHT_PERC_FRAME / 2;
-    
     private static final Color COLOR_BORDER_INFOPANEL = Color.black;
-   
-    private static final String FS = File.separator;
-    private static final String pathSeatTaken = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "imageSeatTaken.png";
-    private static final String pathSeatFree = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "imageSeatFree.png";
-    private static final String pathSeatSelected = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "imageSeatSelected.png";
     private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
     private static final double HEIGHT_IMAGE_SEAT = HEIGHT_PERC_FRAME/ 15;
     
+    private static final String STRING_BUTTON_BACK = "back";
+    
     public JFrame getBaseFrame(String title) {
         final JFrame frame = new JFrame();
- 
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) (screenSize.getWidth() * WIDTH_PERC_FRAME), (int) (screenSize.getHeight() * HEIGHT_PERC_FRAME));
-  
         frame.setTitle(title);
         frame.setLocationByPlatform(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         return frame;
     }
     
     public JPanel getInfoPanel(String info, ActionListener action) {
         JPanel infoPanel = new JPanel(new BorderLayout());
-        JButton button = new JButton("back");
-        
+        JButton button = new JButton(STRING_BUTTON_BACK);
         JLabel label = new JLabel(info);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
-        infoPanel.add(label,BorderLayout.CENTER);
+        infoPanel.add(label, BorderLayout.CENTER);
         infoPanel.setBorder(BorderFactory.createLineBorder(COLOR_BORDER_INFOPANEL));
         infoPanel.add(button, BorderLayout.WEST);
-        
-        button.addActionListener( action );
-        
+        button.addActionListener( action);
         return infoPanel;
     }
-    
-    public JButton getButtonImage(String title, String path) {
+
+    public JButton getButtonImage(ImageIcon icon) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-   
-        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        ImageIcon imageIcon = icon;
         Image image = imageIcon.getImage(); // transform it 
         Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_COVER), (int) (screenSize.getHeight() * HEIGHT_IMAGE_COVER),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon = new ImageIcon(newimg);  // transform it back
       
-        JButton button = new JButton("Title:" + title, imageIcon);
+        JButton button = new JButton(imageIcon);
       
         button.setIcon(imageIcon);
-        button.setHorizontalTextPosition(JButton.CENTER);
-        button.setVerticalTextPosition(JButton.TOP);
+       // button.setHorizontalTextPosition(JButton.CENTER);
+      //  button.setVerticalTextPosition(JButton.TOP);
         button.setMargin(new Insets(0, 0, 0, 0));
         return button;
     }
+
     public JTable getTable(Set<ProgrammedFilm> film) {
-       int row = film.size();
-       String[] columnNames = new String[] {"Date","Time","Hall" };
-       Object[][] data = new Object[row][columnNames.length];
-       int i = 0;
-       for(var elem : film) {
-           data[i][0] = elem.getDate();
-           data[i][1] = elem.getStartTime();
-           data[i][2] = elem.getHall();
-           i++;
-       }
-       
-       
-       DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        int row = film.size();
+        String[] columnNames = new String[] { "Date", "Time", "Hall" };
+        Object[][] data = new Object[row][columnNames.length];
+        int i = 0;
+        for (final var elem : film) {
+           
+            data[i][0] = elem.getDate();
+            data[i][1] = elem.getStartTime();
+            data[i][2] = elem.getHall();
+            i++;
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
        JTable table = new JTable(model) {    
            /**
             * 
@@ -123,7 +112,7 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
       
         return table;
     }
-    public DefaultTableModel getModel(Set<ProgrammedFilm> film) {
+    public DefaultTableModel getModel(Collection<ProgrammedFilm> film) {
         int row = film.size();
         String[] columnNames = new String[] {"Date","Time","Hall" };
         Object[][] data = new Object[row][columnNames.length];

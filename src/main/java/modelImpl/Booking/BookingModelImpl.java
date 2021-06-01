@@ -15,15 +15,13 @@ import utilitiesImpl.TicketImpl;
 
 public class BookingModelImpl implements BookingModel {
     private Set<Ticket> setTicket;
-    private Set<SeatImpl<Row,Integer>> seatSelected;
+    private Set<SeatImpl<Row, Integer>> seatSelected;
     
-    public BookingModelImpl(Set<Ticket> setTicket) {
+    public BookingModelImpl(final Set<Ticket> setTicket) {
         seatSelected = new HashSet<>();
         this.setTicket = setTicket;
-        
     }
     public void addTicket(Ticket ticket) {
-        
     }
     @Override
     public Set<SeatImpl<Row, Integer>> getSeats() {
