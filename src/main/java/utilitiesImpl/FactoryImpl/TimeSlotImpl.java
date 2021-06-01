@@ -67,6 +67,12 @@ public class TimeSlotImpl implements TimeSlot {
         }
         return true;
     }
+
+
+    @Override
+    public String toString() {
+        return "TimeSlotImpl [startTime=" + startTime + ", endTime=" + endTime + "]";
+    }
     
     
 

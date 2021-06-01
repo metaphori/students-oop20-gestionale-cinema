@@ -51,7 +51,7 @@ public class HandlerListImpl<X> implements HandlerList<X> {
     }
 */
     @Override
-    public List<X> filterBy(List<X> list, Filter<X> filter) {
+    public List<X> filterBy(final List<X> list, final Filter<X> filter) {
         
         return list.stream()
                 .filter(filter.getPredicate())
@@ -60,7 +60,7 @@ public class HandlerListImpl<X> implements HandlerList<X> {
     }
 
     @Override
-    public List<X> sortBy(List<X> list, Sorter<X> sorter) {
+    public List<X> sortBy(final List<X> list, final Sorter<X> sorter) {
         return list.stream()
                 .sorted(sorter.getComparator())
                 .collect(Collectors.toList());

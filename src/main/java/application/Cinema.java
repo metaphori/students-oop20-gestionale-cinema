@@ -23,9 +23,11 @@ import controllerImpl.ManageFilms.FilmsControllerImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
+import model.ManageProgrammingFilms.HandlerList;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
+import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
 import utilities.Film;
 import utilities.TimeSlot;
@@ -79,6 +81,8 @@ public class Cinema {
        // ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
         
         //controller.addProgrammedFilm(null);
+        
+        
         
         
     }
