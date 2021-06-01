@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -112,15 +113,19 @@ public class BookingViewImpl implements BookingView {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Set<SeatImpl<Row,Integer>> setSeatsTaken = observer.getSeatsFromFilm(film);
         Set<SeatImpl<Row,Integer>> setSeatsSelected = observer.getSeatsSelected();
-      
+        
+        final URL urlTaken = ClassLoader.getSystemResource("images/imageSeatTaken.png");
+        final URL urlSelected = ClassLoader.getSystemResource("images/imageSeatSelected.png");
+        final URL urlFree = ClassLoader.getSystemResource("images/imageSeatFree.png");
+                        
               for(var bt : grid.keySet()) {       
                     ImageIcon imageIcon;
                      if(setSeatsTaken.contains(grid.get(bt))){
-                        imageIcon = new ImageIcon(pathSeatTaken);
+                        imageIcon = new ImageIcon(urlTaken);
                      }else if (setSeatsSelected.contains(grid.get(bt))) {
-                         imageIcon =  new ImageIcon(pathSeatSelected);
+                         imageIcon =  new ImageIcon(urlSelected);
                      }else {
-                         imageIcon = new ImageIcon(pathSeatFree);
+                         imageIcon = new ImageIcon(urlFree);
                      }
                      Image image = imageIcon.getImage(); // transform it 
                      Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_SEAT), (int) (screenSize.getHeight() * HEIGHT_IMAGE_SEAT),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  

@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.URL;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -141,13 +142,14 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     }
     public JButton getButtonSeat(SeatState state, int i, int j) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      //  final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
         ImageIcon imageIcon = new ImageIcon();
         if(state.equals(SeatState.FREE)) {
-             imageIcon = new ImageIcon(pathSeatFree); // load the image to a imageIcon
+             imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatFree.png")); // load the image to a imageIcon
         }if(state.equals(SeatState.SELECTED)) {
-             imageIcon = new ImageIcon(pathSeatSelected); // load the image to a imageIcon
+             imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatSelected.png")); // load the image to a imageIcon
         }if(state.equals(SeatState.TAKEN)) {
-             imageIcon = new ImageIcon(pathSeatTaken); // load the image to a imageIcon
+             imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatTaken.png")); // load the image to a imageIcon
         }
         
         Image image = imageIcon.getImage(); // transform it 

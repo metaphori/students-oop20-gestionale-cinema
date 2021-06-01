@@ -23,11 +23,15 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import com.mindfusion.common.DateTime;
+import com.mindfusion.scheduling.Calendar;
+
 import utilities.Factory.*;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import view.Booking.GUIFactoryBooking;
 import view.Booking.TimeTableView;
 import view.Booking.TimeTableViewObserver;
+import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 public class TimeTableViewImpl implements TimeTableView {
     private static final String TITLE = "Time Tabel Film";
@@ -105,11 +109,21 @@ public class TimeTableViewImpl implements TimeTableView {
         panelCheckBox.add(jcb1);
         panelCheckBox.add(jcb2);
         panelCheckBox.add(jcb3);
-        
+        ProgrammingFilmsGUIfactoryImpl fctFilm = new ProgrammingFilmsGUIfactoryImpl();
+    
+        Calendar calendar = fctFilm.createCalendar(); 
+        filterPanel.add(calendar, BorderLayout.NORTH);
         filterPanel.add(panelCheckBox,BorderLayout.CENTER);
         filterPanel.add(filterBtn, BorderLayout.SOUTH);
         
-       
+        filterBtn.addActionListener(e -> {
+            if(!calendar.getSelection().getRanges().isEmpty()) {
+                DateTime dataCalendar= calendar.getSelection().getRanges().get(0);
+                LocalDate date = LocalDate.of(dataCalendar.getYear(), dataCalendar.getMonth(), dataCalendar.getDay());
+            }
+         
+        });
+        
         mainPanel.add(filterPanel, BorderLayout.WEST);
         mainPanel.add(add,BorderLayout.EAST);
         mainPanel.add(north, BorderLayout.NORTH);
