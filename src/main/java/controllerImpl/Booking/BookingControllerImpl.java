@@ -11,8 +11,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import controller.Booking.BookingController;
+import com.google.gson.reflect.TypeToken;
 
+import controller.Booking.BookingController;
+import controllerImpl.InputOutput.RWobject;
+import controllerImpl.InputOutput.RWobjectImpl;
 import model.Booking.BookingModel;
 import model.ManageProgrammingFilms.Filter;
 import model.ManageProgrammingFilms.HandlerList;
@@ -40,16 +43,22 @@ import viewImpl.Booking.TimeTableViewImpl;
 public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver, BookingViewObserver {
     private  BookingModel model;
     private final String FS = File.separator;
-    private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
+    private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BF.json";
     Set<Film> setF;
     Set<ProgrammedFilm> setP;
     
     public BookingControllerImpl() {
 
-       // RWcollection<Ticket> rw = new RWfile(pathname);
-        //rw.readCollection(Ticket.class)
-        Set<Ticket> setTicket = new HashSet<>();
-        model = new BookingModelImpl(setTicket);
+        RWobject<Set<Ticket>> rw = new RWobjectImpl(pathname);
+        final var type = new TypeToken<Set<Ticket>> () {}.getType();
+       
+        Optional<Set<Ticket>> OpSetTicket = rw.readObj(type);
+        if(OpSetTicket.isEmpty()) {
+            model = new BookingModelImpl(new HashSet<>());
+        }else {
+            model = new BookingModelImpl(OpSetTicket.get());
+        }
+     
         //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
 
         
@@ -58,8 +67,18 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
         this.setF = setF;
         this.setP = setP;
-        Set<Ticket> setTicket = new HashSet<>();
-        model = new BookingModelImpl(setTicket);
+
+        RWobject<Set<Ticket>> rw = new RWobjectImpl(pathname);
+        final var type = new TypeToken<Set<Ticket>> () {}.getType();
+       
+        Optional<Set<Ticket>> OpSetTicket = rw.readObj(type);
+        System.out.println("LETTURA:   "  + OpSetTicket);
+        if(OpSetTicket.isEmpty()) {
+            System.out.println("LETTURA:   "  + OpSetTicket);
+            model = new BookingModelImpl(new HashSet<>());
+        }else {
+            model = new BookingModelImpl(OpSetTicket.get());
+        }
         //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
 
         
@@ -138,7 +157,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showBackFromBooking(ProgrammedFilm film) {
-        Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
+        final Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
         this.showTimeTableView(setProgrammedFilm);
         
     }
@@ -152,6 +171,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void bookSeat(final ProgrammedFilm film) {
         model.bookSeat(film);
+        Set<Ticket> set = model.getSeats();
+        final var type = new TypeToken<Set<Ticket>>() {}.getType();
+        RWobject rw = new RWobjectImpl(pathname);
+        rw.writeObj(set,  type);
     }
 
     @Override

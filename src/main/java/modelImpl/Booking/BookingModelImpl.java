@@ -20,16 +20,19 @@ public class BookingModelImpl implements BookingModel {
     public BookingModelImpl(final Set<Ticket> setTicket) {
         seatSelected = new HashSet<>();
         this.setTicket = setTicket;
+        System.out.print("MODEL" + setTicket);
     }
     public void addTicket(Ticket ticket) {
     }
     @Override
-    public Set<SeatImpl<Row, Integer>> getSeats() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Ticket> getSeats() {
+        
+        return setTicket;
     }
     public Set<SeatImpl<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film){
         System.out.println("TicketGet" + setTicket);
+        System.out.print("Film" + film);
+        System.out.print(film.getStartTime());
         setTicket.stream()
         .filter(f -> f.getId() == film.getIdProgrammation())
         .filter(f -> f.getData().equals(film.getDate()))
@@ -49,7 +52,6 @@ public class BookingModelImpl implements BookingModel {
         Set<SeatImpl<Row,Integer>> set = this.getSeatsFromFilm(film);
         if(!set.contains(seat)) {
             if(seatSelected.contains(seat)) {
-        
                 seatSelected.remove(seat);
             }else {
             
@@ -70,18 +72,19 @@ public class BookingModelImpl implements BookingModel {
     }
     @Override
     public void bookSeat(ProgrammedFilm film) {
-       Optional<Ticket> ticket = setTicket.stream()
-       .filter(f -> f.getId() == film.getIdProgrammation())
-       .filter(f -> f.getData().equals(film.getDate()))
-       .filter(f -> f.getTime().equals(film.getStartTime()))
-       .filter(f -> f.getHall()==film.getHall()).findAny();
-       if(ticket.isPresent()){
-           ticket.get().getSetSeat().addAll(seatSelected);
-       }else {
-           Ticket newTicket = new TicketImpl(film.getDate(),film.getStartTime(),seatSelected,film.getProgrammationPrice(),film.getIdProgrammation(),film.getHall());
-           setTicket.add(newTicket);
+       if(!seatSelected.isEmpty()) { 
+           Optional<Ticket> ticket = setTicket.stream()
+           .filter(f -> f.getId() == film.getIdProgrammation())
+           .filter(f -> f.getData().equals(film.getDate()))
+           .filter(f -> f.getTime().equals(film.getStartTime()))
+           .filter(f -> f.getHall()==film.getHall()).findAny();
+           if(ticket.isPresent()){
+               ticket.get().getSetSeat().addAll(seatSelected);
+           }else {
+               Ticket newTicket = new TicketImpl(film.getDate(),film.getStartTime(),seatSelected,film.getProgrammationPrice(),film.getIdProgrammation(),film.getHall());
+               setTicket.add(newTicket);
+           }
        }
-       
            
        //System.out.println("SetTicket:" + setTicket);    
       // System.out.println("TicketSelected" + seatSelected);

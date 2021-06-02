@@ -79,6 +79,7 @@ public class BookingViewImpl implements BookingView {
                 gridPanel.add(button);
             }
         }
+      
         grid.keySet().forEach(btn -> {
             btn.addActionListener( e -> {
                 JButton button = (JButton) e.getSource();

@@ -10,7 +10,7 @@ import utilitiesImpl.SeatState;
 
 public interface BookingModel {
     void addTicket(Ticket ticket);
-    Set<SeatImpl<Row,Integer>> getSeats();
+    Set<Ticket> getSeats();
     Set<SeatImpl<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film);
     void buttonSelected(SeatImpl<Row,Integer> seat, ProgrammedFilm film);
     void newBooking();
