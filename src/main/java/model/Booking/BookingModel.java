@@ -5,15 +5,15 @@ import java.util.Set;
 import utilities.Factory.*;
 import utilities.Ticket;
 import utilitiesImpl.Row;
-import utilitiesImpl.Seat;
+import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 
 public interface BookingModel {
     void addTicket(Ticket ticket);
-    Set<Seat<Row,Integer>> getSeats();
-    Set<Seat<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film);
-    void buttonSelected(Seat<Row,Integer> seat, ProgrammedFilm film);
+    Set<SeatImpl<Row,Integer>> getSeats();
+    Set<SeatImpl<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film);
+    void buttonSelected(SeatImpl<Row,Integer> seat, ProgrammedFilm film);
     void newBooking();
-    Set<Seat<Row,Integer>> getSeatsSelected();
-    void bookSeat();
+    Set<SeatImpl<Row,Integer>> getSeatsSelected();
+    void bookSeat(ProgrammedFilm film);
 }

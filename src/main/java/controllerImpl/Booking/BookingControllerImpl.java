@@ -3,19 +3,29 @@ package controllerImpl.Booking;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import controller.Booking.BookingController;
 
 import model.Booking.BookingModel;
+import model.ManageProgrammingFilms.Filter;
+import model.ManageProgrammingFilms.HandlerList;
+import model.ManageProgrammingFilms.Sorter;
 import modelImpl.Booking.BookingModelImpl;
+import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import utilities.Film;
 
 import utilities.Ticket;
 import utilities.Factory.ProgrammedFilm;
+import utilities.Factory.ProgrammedFilmFactory;
 import utilitiesImpl.Row;
-import utilitiesImpl.Seat;
+import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 import view.Booking.BookingView;
 import view.Booking.BookingViewObserver;
@@ -31,12 +41,23 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private  BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BookingFile.json";
-  
+    Set<Film> setF;
+    Set<ProgrammedFilm> setP;
     
     public BookingControllerImpl() {
 
        // RWcollection<Ticket> rw = new RWfile(pathname);
         //rw.readCollection(Ticket.class)
+        Set<Ticket> setTicket = new HashSet<>();
+        model = new BookingModelImpl(setTicket);
+        //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
+
+        
+    }
+    public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
+
+        this.setF = setF;
+        this.setP = setP;
         Set<Ticket> setTicket = new HashSet<>();
         model = new BookingModelImpl(setTicket);
         //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
@@ -52,8 +73,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
           final ListFilmView viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
     }
-    private void showTimeTableView(Film film) {
-        final TimeTableView viewTimeTable = new TimeTableViewImpl(this,new HashSet<>());
+    private void showTimeTableView(Set<ProgrammedFilm> setProgrammedFilm) {
+        final TimeTableView viewTimeTable = new TimeTableViewImpl(this,setProgrammedFilm);
         viewTimeTable.show();
     } 
     
@@ -63,8 +84,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
     @Override
     public void selectedFilm(Film film) {
-        this.showTimeTableView(film);
+        //setP=this.getProgrammedFilm();
+        Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
+        this.showTimeTableView(setProgrammedFilm);
   
+    }
+    public Set<ProgrammedFilm> getProgrammedFilm() {
+        return new HashSet<ProgrammedFilm>();
     }
     public void test() {
        // ProgrammedFilmFactory f = new 
@@ -85,11 +111,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     
-
+    
     @Override
     public Set<Film> getFilm() {
-        Set<Film> film = new HashSet<>();
-        return film;
+      //  Set<Film> film = new HashSet<>();
+        
+        //return film;
+        return setF;
     }
 
 
@@ -98,7 +126,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         this.showBookingView(film);
         
     }
-
+    @Override
+    public Film getFilmByProgrammedFilm(ProgrammedFilm film) {
+        return setF.stream().filter(f -> f.getID() == film.getIdProgrammation()).findAny().get();
+    }
     @Override
     public void showBackFromTimeTable() {
         this.showListFilmView();
@@ -107,24 +138,24 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showBackFromBooking(ProgrammedFilm film) {
-       // Film film1 = new Film();
-       //this.showTimeTableView(film1);
+        Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
+        this.showTimeTableView(setProgrammedFilm);
         
     }
 
     @Override
-    public Set<Seat<Row, Integer>> getSeatsFromFilm(ProgrammedFilm film) {
+    public Set<SeatImpl<Row, Integer>> getSeatsFromFilm(final ProgrammedFilm film) {
         return this.model.getSeatsFromFilm(film);
        
     }
 
     @Override
-    public void bookSeat() {
-        model.bookSeat();
+    public void bookSeat(final ProgrammedFilm film) {
+        model.bookSeat(film);
     }
 
     @Override
-    public void buttonSelected(Seat<Row, Integer> seat, ProgrammedFilm film) {
+    public void buttonSelected(final SeatImpl<Row, Integer> seat, final ProgrammedFilm film) {
       model.buttonSelected(seat, film);
       
     }
@@ -132,18 +163,23 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void newBooking() {
         model.newBooking();
-        
     }
 
     @Override
-    public Set<Seat<Row, Integer>> getSeatsSelected() {
+    public Set<SeatImpl<Row, Integer>> getSeatsSelected() {
         return model.getSeatsSelected();
     }
 
+    public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Filter<ProgrammedFilm> filter) {
+        final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
+        final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
+        return handler.filterBy(listFilm, filter);
+    }
 
+    public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Sorter<ProgrammedFilm> sorter) {
+        final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
+        final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
+        return handler.sortBy(listFilm, sorter);
+    }
 
-
- 
-   
-    
 }
