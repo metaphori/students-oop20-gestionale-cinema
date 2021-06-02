@@ -15,7 +15,11 @@ import modelImpl.ManageFilms.ContainerFilmsModelImpl;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
+import utilities.Ticket;
+import utilities.Factory.ProgrammedFilm;
+import utilitiesImpl.TicketImpl;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.ProgrammedFilmImpl;
 
 public final class GsonFactory {
     private GsonFactory() { }
@@ -24,19 +28,22 @@ public final class GsonFactory {
      */
 
     public static Gson getMyGson() {
-        final RuntimeTypeAdapterFactory<Film> adapterFilm = RuntimeTypeAdapterFactory.of(Film.class, "type")
+        final RuntimeTypeAdapterFactory<Film> adapterFilm = RuntimeTypeAdapterFactory
+                .of(Film.class, "type")
                 .registerSubtype(FilmBasicImpl.class, FilmBasicImpl.class.getName());
-        final RuntimeTypeAdapterFactory<ContainerFilmsModel> adapterModelFilm = RuntimeTypeAdapterFactory.of(ContainerFilmsModel.class, "type")
-                .registerSubtype(ContainerFilmsModelImpl.class, ContainerFilmsModelImpl.class.getName());
-        final RuntimeTypeAdapterFactory<ManagerIdsFilms> adapterManagerIds = RuntimeTypeAdapterFactory.of(ManagerIdsFilms.class, "type")
-                .registerSubtype(ManagerIdsFilmImpl.class, ManagerIdsFilmImpl.class.getName());
-        final RuntimeTypeAdapterFactory<IdsGenerator> adapterIdsGenerator = RuntimeTypeAdapterFactory.of(IdsGenerator.class, "type")
-                .registerSubtype(IdsGeneratorImpl.class, IdsGeneratorImpl.class.getName()); 
+
+        final RuntimeTypeAdapterFactory<ProgrammedFilm> adapterProgrammedFilm = RuntimeTypeAdapterFactory
+                .of(ProgrammedFilm.class, "type")
+                .registerSubtype(ProgrammedFilmImpl.class, ProgrammedFilmImpl.class.getName());
+
+        final RuntimeTypeAdapterFactory<Ticket> adapterTicket = RuntimeTypeAdapterFactory
+                .of(Ticket.class, "Type")
+                .registerSubtype(TicketImpl.class, TicketImpl.class.getName());
+     
         return new GsonBuilder()
                 .registerTypeAdapterFactory(adapterFilm)
-                .registerTypeAdapterFactory(adapterModelFilm)
-                .registerTypeAdapterFactory(adapterManagerIds)
-                .registerTypeAdapterFactory(adapterIdsGenerator)
+                .registerTypeAdapterFactory(adapterProgrammedFilm)
+                .registerTypeAdapterFactory(adapterTicket)
                 .create();
     }
 }
