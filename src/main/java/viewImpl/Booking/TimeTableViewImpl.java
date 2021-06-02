@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultButtonModel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -55,8 +56,8 @@ public class TimeTableViewImpl implements TimeTableView {
     
     public TimeTableViewImpl(TimeTableViewObserver observer, Set<ProgrammedFilm> setProgrammedFilm) {
         
-        String NAME = setProgrammedFilm.isEmpty() ? "No programmation for selected film" : "" + observer.getFilmByProgrammedFilm(setProgrammedFilm.stream().findAny().get()).getName();
-        GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
+        final String NAME = setProgrammedFilm.isEmpty() ? "No programmation for selected film" : "" + observer.getFilmByProgrammedFilm(setProgrammedFilm.stream().findAny().get()).getName();
+        final GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         this.observer = observer;
         this.frame = factory.getBaseFrame(TITLE);
             
@@ -66,10 +67,11 @@ public class TimeTableViewImpl implements TimeTableView {
         });
         JPanel mainPanel = new JPanel(new BorderLayout());
         JButton bookBtn = new JButton(TEXT_BUTTON_SELECT);
-        
+        JTable table = factory.getTable(setProgrammedFilm);
+      
 
        
-        JTable table = factory.getTable(setProgrammedFilm);
+        
         bookBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
             if(row!=-1) {
@@ -89,71 +91,63 @@ public class TimeTableViewImpl implements TimeTableView {
             }
         });
         final JScrollPane scroll = new JScrollPane(table);
-        JPanel filterPanel = new JPanel(new BorderLayout());
-        JPanel panelCalendar = new JPanel(new BorderLayout());
-        JPanel panelCheckBox = new JPanel(new BorderLayout());
-        //
+        /*
+         * filterPanel 
+         */
+        final JPanel filterPanel = new JPanel(new BorderLayout());
+        final JPanel panelCalendar = new JPanel(new BorderLayout());
+        final JPanel panelCheckBox = new JPanel(new BorderLayout());
         JButton filterBtn = new JButton(BTN_FILTER_STRING);
-        
+        /*
+         * checkBoxGroup
+         */
         ButtonGroup checkBoxGroup = new ButtonGroup();
-        JCheckBox jcb1, jcb2, jcb3;
+        JCheckBox jcb1, jcb2;
         jcb1 = new JCheckBox("Data", false);
         jcb2 = new JCheckBox("Time", false);
-     
+
         checkBoxGroup.add(jcb1);
         checkBoxGroup.add(jcb2);
-  
-        JPanel panelCheckBoxIntern= new JPanel();
+
+        JPanel panelCheckBoxInternal = new JPanel();
         JLabel labelCheckBox = new JLabel(CHECKBOX_TITLE);
         labelCheckBox.setForeground(Color.BLACK);
-        panelCheckBox.add(labelCheckBox,BorderLayout.NORTH);
-        panelCheckBoxIntern.add(jcb1);
-        panelCheckBoxIntern.add(jcb2);
+        panelCheckBox.add(labelCheckBox, BorderLayout.NORTH);
+        panelCheckBoxInternal.add(jcb1);
+        panelCheckBoxInternal.add(jcb2);
 
-        
-        panelCheckBox.add(panelCheckBoxIntern,BorderLayout.CENTER);
-       //
-        
-        //
+        panelCheckBox.add(panelCheckBoxInternal, BorderLayout.CENTER);
+
         final JButton resetBtn = new JButton("Reset");
         resetBtn.addActionListener(e -> {
            this.refresh(table, setProgrammedFilm);
-           jcb1.setSelected(false);
-           jcb2.setSelected(false);
-           jcb1.setBorderPaintedFlat(false);
-           jcb2.setBorderPaintedFlat(false);
-           jcb1.validate();
-           jcb2.validate();
-      //     panelCheckBoxIntern.res
         });
-        ProgrammingFilmsGUIfactoryImpl fctFilm = new ProgrammingFilmsGUIfactoryImpl();
+
+        final ProgrammingFilmsGUIfactoryImpl fctFilm = new ProgrammingFilmsGUIfactoryImpl();
         final Calendar calendar = fctFilm.createCalendar(); 
         panelCalendar.add(calendar, BorderLayout.CENTER);
         panelCalendar.add(new Label("Filter by date"), BorderLayout.NORTH);
-        
-        
+
         filterPanel.add(panelCalendar, BorderLayout.NORTH);
         filterPanel.add(panelCheckBox, BorderLayout.CENTER);
-        JPanel panelButtonFilter = new JPanel();
+        final JPanel panelButtonFilter = new JPanel();
         panelButtonFilter.add(filterBtn);
         panelButtonFilter.add(resetBtn);
         filterPanel.add(panelButtonFilter, BorderLayout.SOUTH);
-        
-    
-        
+
         filterBtn.addActionListener(e -> {
-            HandlerList handler = new HandlerListImpl();
+          
             List<ProgrammedFilm> film = new ArrayList<>(setProgrammedFilm); 
-            if(!calendar.getSelection().getRanges().isEmpty()) {
-                DateTime dataCalendar= calendar.getSelection().getRanges().get(0);
+            if (!calendar.getSelection().getRanges().isEmpty()) {
+                final DateTime dataCalendar = calendar.getSelection().getRanges().get(0);
                 LocalDate date = LocalDate.of(dataCalendar.getYear(), dataCalendar.getMonth(), dataCalendar.getDay());
-                film = handler.filterBy(film, new FilterByDateImpl(date));
+                film = observer.handlerProgrammedFilm(film, new FilterByDateImpl(date));
             }
-            if(jcb1.isSelected()) {
-                film = handler.sortBy(film, new SorterByLocalDate());
+            if (jcb1.isSelected()) {
+                film = observer.handlerProgrammedFilm(film, new SorterByLocalDate());
             }
-            if(jcb2.isSelected()) {
-                film = handler.sortBy(film, new SorterByLocalTime());
+            if (jcb2.isSelected()) {
+                film = observer.handlerProgrammedFilm(film, new SorterByLocalTime());
             }
             this.refresh(table, film);
         });
@@ -163,32 +157,22 @@ public class TimeTableViewImpl implements TimeTableView {
         mainPanel.add(scroll, BorderLayout.CENTER);
         mainPanel.add(bookBtn, BorderLayout.SOUTH);
         frame.add(mainPanel);
-        
-        
-        
     }
-    
-  
     
     @Override
     public void show() {
        frame.setVisible(true);
-        
     }
-  
+
     private void notSelectedRow() {
         JOptionPane.showMessageDialog(frame, "Not selected row", 
                 "Incorrect Row", JOptionPane.ERROR_MESSAGE);
-        
     }
-    private void refresh(JTable table, Collection<ProgrammedFilm> list) {
+    public void refresh(final JTable table, final Collection<ProgrammedFilm> list) {
         GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
-        
         table.setModel(factory.getModel(list));
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.fireTableDataChanged();
     }
-    
-  
 }
 

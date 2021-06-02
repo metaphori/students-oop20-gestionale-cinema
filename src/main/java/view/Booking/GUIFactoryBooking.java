@@ -21,7 +21,7 @@ public interface GUIFactoryBooking {
     JTable getTable(Set<ProgrammedFilm> film);
     JButton getButtonSeat(SeatState state, int i, int j);
     DefaultTableModel getModel(Collection<ProgrammedFilm> film);
-    
+    JPanel filterPanel(ActionListener actionBtnReset, ActionListener actionBtnApply);
     
 
 }

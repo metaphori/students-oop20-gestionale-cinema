@@ -3,7 +3,10 @@ package controllerImpl.Booking;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,7 +15,11 @@ import controller.Booking.BookingController;
 import controllerImpl.InputOutput.RWcollection;
 import controllerImpl.InputOutput.RWfile;
 import model.Booking.BookingModel;
+import model.ManageProgrammingFilms.Filter;
+import model.ManageProgrammingFilms.HandlerList;
+import model.ManageProgrammingFilms.Sorter;
 import modelImpl.Booking.BookingModelImpl;
+import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import utilities.Film;
 
 import utilities.Ticket;
@@ -138,18 +145,18 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public Set<SeatImpl<Row, Integer>> getSeatsFromFilm(ProgrammedFilm film) {
+    public Set<SeatImpl<Row, Integer>> getSeatsFromFilm(final ProgrammedFilm film) {
         return this.model.getSeatsFromFilm(film);
        
     }
 
     @Override
-    public void bookSeat(ProgrammedFilm film) {
+    public void bookSeat(final ProgrammedFilm film) {
         model.bookSeat(film);
     }
 
     @Override
-    public void buttonSelected(SeatImpl<Row, Integer> seat, ProgrammedFilm film) {
+    public void buttonSelected(final SeatImpl<Row, Integer> seat, final ProgrammedFilm film) {
       model.buttonSelected(seat, film);
       
     }
@@ -157,7 +164,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void newBooking() {
         model.newBooking();
-        
     }
 
     @Override
@@ -165,10 +171,16 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         return model.getSeatsSelected();
     }
 
+    public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Filter<ProgrammedFilm> filter) {
+        final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
+        final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
+        return handler.filterBy(listFilm, filter);
+    }
 
+    public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Sorter<ProgrammedFilm> sorter) {
+        final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
+        final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
+        return handler.sortBy(listFilm, sorter);
+    }
 
-
- 
-   
-    
 }
