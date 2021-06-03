@@ -16,18 +16,18 @@ import viewImpl.ManageProgrammingFilms.ScheduleFilmGUIimpl;
 
 public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsController{
     
-    final private ProgrammingFilmsGUI filmsProgrammation;
-    final private ScheduleFilmsGUI scheduleFilm;
+    final private ProgrammingFilmsGUI filmsProgrammationView;
+    final private ScheduleFilmsGUI scheduleFilmView;
     final private ProgrammedFilmsModel programmedFilmsModel;
     
     
     public ProgrammingFilmsControllerImpl() {
-        filmsProgrammation = new ProgrammingFilmsGUIimpl(this); 
-        scheduleFilm = new ScheduleFilmGUIimpl();
+        filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
+        scheduleFilmView = new ScheduleFilmGUIimpl();
         programmedFilmsModel = new ProgrammedFilmsModelImpl();
         
-        filmsProgrammation.setObserver(this);
-       // scheduleFilm.setObserver(this);
+        filmsProgrammationView.setObserver(this);
+        scheduleFilmView.setObserver(this);
     }
 
     @Override
@@ -37,24 +37,23 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
 
     @Override
     public void addProgrammedFilm(final ProgrammedFilm newProgrammedFilm) {
-        
+        programmedFilmsModel.addFilmProgrammation(newProgrammedFilm);   
     }
 
     @Override
     public void deleteProgrammedFilm(final ProgrammedFilm oldProgrammedFilm) {
-        
+        programmedFilmsModel.deleteFilmProgrammation(oldProgrammedFilm);
     }
-
 
     @Override
     public void showProgrammedFilmView() {
-        
-        
+        filmsProgrammationView.update();
+        filmsProgrammationView.start();
     }
 
     @Override
     public void showMenu() {
-        // TODO Auto-generated method stub
+        
         
     }
 

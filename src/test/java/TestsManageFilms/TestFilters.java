@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,8 @@ import modelImpl.ManageProgrammedFilms.FilterByDateHallImpl;
 import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
 import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
+import modelImpl.ManageProgrammedFilms.SorterByHallImpl;
+import modelImpl.ManageProgrammedFilms.SorterByTimeImpl;
 import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.FilmFactory;
@@ -30,7 +33,7 @@ import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
 import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
-class TestProgrammationFilms {
+class TestFilters {
     
         
     private List<ProgrammedFilm> createList() {
@@ -62,7 +65,7 @@ class TestProgrammationFilms {
         return list;
         
     }
-    /*
+    
     @Test
     void testFilterByDate() {
         final LocalDate dateForFilter = LocalDate.of(1999, 3, 6);
@@ -72,35 +75,55 @@ class TestProgrammationFilms {
         
         this.checkDate(filteredList, dateForFilter);
     }
-    */
-    
+ 
    @Test
     void testFilterByDateHall() {
         final LocalDate date = LocalDate.of(1999, 3, 7);
         final int hall = 9;
         final List<ProgrammedFilm> list = this.createList();
-        System.out.println("Before filter : ");
-        System.out.println(list);
-        
         final  HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>() ;
-        System.out.println("After filter : ");
         final List<ProgrammedFilm> filteredList = handler.filterBy(list, new FilterByDateHallImpl(date, hall));
-        System.out.println(filteredList);
-        
-        final ProgrammedFilmFactoryImpl factory = new ProgrammedFilmFactoryImpl();
-        
+            
         this.checkDate(filteredList, date);
         this.checkHall(filteredList, hall);
     }
+    @Test //TODO must be added checkTimeOrder
+    
+    void testSorterByTime() {
+       final List<ProgrammedFilm> list = this.createList();
+       final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>() ;
+       final List<ProgrammedFilm> filteredList = handler.sortBy(list, new SorterByTimeImpl());
+  
+   }
+   
+   @Test 
+    void testSorterByHall() {
+       final List<ProgrammedFilm> list = this.createList();
+       final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>() ;
+       final List<ProgrammedFilm> filteredList = handler.sortBy(list, new SorterByHallImpl());
+       System.out.println(list);
+       System.out.println(filteredList);
+   }
     
     private void checkDate(final List<ProgrammedFilm> list, final LocalDate date) {
         assertFalse(list.stream().anyMatch(pf -> !pf.getDate().equals(date)));
     }
+    
     private void checkHall(final List<ProgrammedFilm> list, final int hall) {
         assertFalse(list.stream().anyMatch(pf -> pf.getHall()!= hall));
     }
     
     
+    //TODO
+    private void checkHallOrder(final List<ProgrammedFilm> list ) {
+      
+      /* list.stream()
+           .mapToInt(pf -> pf.getHall())
+           .anyMatch(pf);*/
+        
+    }
+    //TODO 
+    private void checkTimeStartOrder(final List<ProgrammedFilm> list) {}
     
 
 

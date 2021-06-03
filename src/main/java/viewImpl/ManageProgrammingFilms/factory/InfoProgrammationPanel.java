@@ -1,4 +1,4 @@
-package viewImpl.ManageProgrammingFilms;
+package viewImpl.ManageProgrammingFilms.factory;
 
 
 import java.awt.BorderLayout;
@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 
 
-public class InfoProgrammationPanelImpl extends JPanel {
+public class InfoProgrammationPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String defaultStringPrice = "3.4 e.g. (euro)";
@@ -33,11 +33,10 @@ public class InfoProgrammationPanelImpl extends JPanel {
 	final private JTextField price;
 	final private JComboBox halls;
 
-	public InfoProgrammationPanelImpl(final List <Integer> hallsNumber) {
+	InfoProgrammationPanel(final List <Integer> hallsNumber) {
 		
 		halls = new JComboBox(hallsNumber.toArray());
 		price = new JTextField(defaultStringPrice);
-		
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createCompoundBorder(
 					BorderFactory.createTitledBorder("Info"),
@@ -68,8 +67,8 @@ public class InfoProgrammationPanelImpl extends JPanel {
 	public String getPrice() {
 		return price.getText();
 	}
-
-
+	
+	
 	public void setPrice(final String priceValue) {
 		price.setText(priceValue);
 		price.setFocusable(true);
@@ -77,7 +76,7 @@ public class InfoProgrammationPanelImpl extends JPanel {
 	}
 	
 	public String getHall() {
-		return (String) halls.getSelectedItem();
+		return halls.getSelectedItem().toString();
 	}
 
 

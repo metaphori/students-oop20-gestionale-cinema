@@ -10,10 +10,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 
-public class DatePanelImpl extends JPanel {
+public class DatePanel extends JPanel  {
 	private static final long serialVersionUID = 1L;
 	private final JComboBox monthNamesComboBox;
 	private final JTextField dayTextField;
@@ -32,12 +34,11 @@ public class DatePanelImpl extends JPanel {
 	private static final int hGapGrid = 5;
 	private static final int vGapGrid = 5;
 	
-	public DatePanelImpl(final LocalDate selectedDate)
+	public DatePanel(final LocalDate selectedDate)
 	{
-			
-		setLayout(new BorderLayout());
-		setBorder(createCompoundBorder
-					(createTitledBorder("Enter Date"),
+	    setLayout(new BorderLayout());
+	    setBorder(createCompoundBorder
+	            (createTitledBorder("Enter Date"),
 						createEmptyBorder(topEmptyBorder,leftEmptyBorder,bottomEmptyBorder,rightEmptyBorder)));
 												
 		final JPanel monthPanel = new JPanel(new GridLayout(rowsGrid,colsGrid,hGapGrid,vGapGrid));
@@ -70,8 +71,8 @@ public class DatePanelImpl extends JPanel {
 		
 	}
 	
-	 
-	public Calendar getDate() throws NumberFormatException
+	
+	public LocalDate getDate() throws NumberFormatException
 	{
 		if (yearTextField.getText().length() != 4)
 		{
@@ -83,19 +84,22 @@ public class DatePanelImpl extends JPanel {
 		int year = Integer.parseInt(yearTextField.getText());
 		int day = Integer.parseInt(dayTextField.getText());
 				
-		int month = monthNamesComboBox.getSelectedIndex();
-		Calendar requestedDate = Calendar.getInstance();
-		requestedDate.set(year,month,1,0,0,0);
-		requestedDate.set(Calendar.MILLISECOND,0);
+		int month = monthNamesComboBox.getSelectedIndex()+1;
+		LocalDate requestedDate = LocalDate.of(year, month, day);
+		/*requestedDate.set(year,month,1,0,0,0);
+		requestedDate.set(Calendar.MILLISECOND,0);*/
 		//validate date
-		int max = requestedDate.getActualMaximum(Calendar.DAY_OF_MONTH); // get day of this specific month and year
+		
+		final LocalDate start = requestedDate.withDayOfMonth(1);
+		final LocalDate lastDayOfMonth = start.withDayOfMonth(start.lengthOfMonth());
+		
+		final int max = lastDayOfMonth.getDayOfMonth(); // get day of this specific month and year
 		if (day < 1 || day > max)
 		{
 			throw new NumberFormatException
 				("Day must be between 1 and " + max +"!");
 		}
-		
-		requestedDate.set(Calendar.DATE,day);
+
 		return requestedDate;
 	}
 	
@@ -106,6 +110,8 @@ public class DatePanelImpl extends JPanel {
 		yearTextField.setText("" + date.get(Calendar.YEAR));
 		
 	}
+	
+	
 
 }
 

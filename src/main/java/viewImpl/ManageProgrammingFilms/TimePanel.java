@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TimePanelImpl extends JPanel {
+public class TimePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static final int topEmptyBorder = 10;
@@ -27,7 +27,7 @@ public class TimePanelImpl extends JPanel {
 	private final JLabel hourLabel;
 	private final JLabel minLabel;
 	
-	public TimePanelImpl() {
+	public TimePanel() {
 		
 		final LocalTime localTime = LocalTime.now();
 		
@@ -49,7 +49,7 @@ public class TimePanelImpl extends JPanel {
 		add(minTextField);
 	}
 
-	public int getHourOfDay() throws IllegalArgumentException {
+	public int getHour() throws IllegalArgumentException {
 		int hour;
 		try {
 			hour = Integer.parseInt(hourTextField.getText());
@@ -78,7 +78,7 @@ public class TimePanelImpl extends JPanel {
 		return min;
 	}
 
-	public void setHourTextField(int hour) throws IllegalArgumentException {
+	public void setHourTextField(final int hour) throws IllegalArgumentException {
 		if (hour < 0 || hour > 23)
 			throw new IllegalArgumentException	
 				("Hours must be between 0 to 23!");
@@ -86,7 +86,7 @@ public class TimePanelImpl extends JPanel {
 		hourTextField.setText("" + hour);
 	}
 
-	public void setMinTextField(int min) throws IllegalArgumentException {
+	public void setMinTextField(final int min) throws IllegalArgumentException {
 		if (min < 0 || min > 59) {
 			throw new IllegalArgumentException(
 					"Minutes must be between 0 and 59!");
@@ -94,7 +94,7 @@ public class TimePanelImpl extends JPanel {
 		minTextField.setText("" + min);
 	}
 
-	public void setTime(int hour, int min) {
+	public void setTime(final int hour, final int min) {
 		setHourTextField(hour);
 		setMinTextField(min);
 	}

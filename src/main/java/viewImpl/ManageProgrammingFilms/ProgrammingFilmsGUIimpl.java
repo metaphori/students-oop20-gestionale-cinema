@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.EventObject;
 import java.util.List;
 import java.util.Optional;
@@ -46,8 +47,13 @@ import com.mindfusion.scheduling.CalendarView;
 import com.mindfusion.scheduling.ThemeType;
 
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import model.ManageProgrammingFilms.HandlerList;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
+import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
+import modelImpl.ManageProgrammedFilms.SorterByTimeImpl;
 import utilities.Factory.ProgrammedFilm;
+import utilities.Factory.ProgrammedFilmFactory;
+import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
 import view.ManageProgrammingFilms.Factory.ProgrammingFilmsGUIfactory;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
@@ -61,6 +67,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         private static final String thirdColumnName = "Start time";
         private static final String fourthColumnName = "End time";
         private static final int columnsNumber = 4;
+        private static final String[] columnNames = new String[] {firstColumnName,secondColumnName,thirdColumnName,fourthColumnName};
         
         private static final String FRAME_NAME = "Programming  film";
         private static final double PROPORTION = 1.15;
@@ -78,14 +85,13 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         private final JButton home = factory.createButton("Home");
         private final JButton addProgrammation = factory.createButton("Add programmation");
-        private final JButton filterBy = new JButton("Filter by");
+        private final JButton filterBy = factory.createButton("Filter by");
         private final Calendar calendar;
-        
+        private final JTable table;
         private ProgrammingFilmsController observer;
         
-        public ProgrammingFilmsGUIimpl(final ProgrammingFilmsController observer) {     
+        public ProgrammingFilmsGUIimpl() {     
         
-        this.observer = observer;
         final JPanel mainPanel = factory.createPanel(new BorderLayout());
         
         final JPanel centerPanel = factory.createPanel(new BorderLayout());
@@ -94,167 +100,114 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         final JPanel optionPanel = factory.createPanel(null);
            
-        
-        final String[] columnNames = new String[] {firstColumnName,secondColumnName,thirdColumnName,fourthColumnName};
-        Object[][] data = new Object[2][4]; // row columns 
-        
-        
-        
-        data[0][0] = "Film1";
-        data[0][1] = "Film1 Hall";
-        data[0][2] = "Film1 start time";
-        data[0][3] = "Film1 end time";
-        
-        data[1][0] = "Film2";
-        data[1][1] = "Film2 Hall";
-        data[1][2] = "Film2 start time";
-        data[1][3] = "Film2 end time";
-        /*
-        
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable(model) {
-        	public boolean isCellEditable(int row, int column) {
-                return false;
-         }
-        };
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       */
-        
-       // final JScrollPane scrollPane = new JScrollPane(table);
-        JTable table = factory.createTable(columnNames, data);
+        final Object[][] data = new Object[1][4]; // row columns        
+      
+        table = factory.createTable(columnNames, data);
         final JScrollPane scrollPane = new JScrollPane(table);
         
         centerPanel.add(scrollPane, BorderLayout.CENTER);
         
-        calendar = new Calendar();
+        calendar = factory.createCalendar();
         
-        
-        calendar.setCurrentTime(DateTime.now());
-		calendar.setDate(DateTime.today());//year ,month, day
+        calendar.getSelection().addChangeListener(new ChangeListener(){
+            @Override
+            public void changed(EventObject e) {
+                    System.out.println(getCalendarSelectionDate());
+                    onSelectionChanged();	
+                }
+            }
+        );
 		
+        mainPanel.add(northPanel,BorderLayout.NORTH);
+        mainPanel.add(westPanel,BorderLayout.WEST);
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
 		
-		// Calendar initialization start
-		calendar.beginInit();
-		calendar.setCurrentView(CalendarView.SingleMonth);
-		calendar.setTheme(ThemeType.Silver);
-		calendar.getMonthRangeSettings().setMonthsPerRow(1);
-		calendar.getMonthRangeSettings().setNumberOfMonths(1);
-		//calendar.getMonthRangeSettings().setScrollInterval(1);
-		calendar.getSelection().setAllowMultiple(false);
-		calendar.getMonthSettings().getDaySettings().setHeaderSize(0);
-		calendar.endInit();
-		// Calendar initialization end
+        northPanel.add(home,BorderLayout.EAST);
+        optionPanel.setLayout(new BoxLayout(optionPanel,BoxLayout.Y_AXIS));
+        westPanel.add(optionPanel,BorderLayout.SOUTH); // add panel in south of west panel
+        westPanel.add(calendar, BorderLayout.NORTH);
+        calendar.setPreferredSize(new Dimension(250,300));
+        optionPanel.add(addProgrammation);
+	addProgrammation.setMaximumSize(new Dimension(250,100)); //width , height
+	addProgrammation.setPreferredSize(new Dimension(250,100));
+	optionPanel.add(filterBy,BorderLayout.CENTER);
+	filterBy.setMaximumSize(new Dimension(250,100)); //width,height 
+	filterBy.setPreferredSize(new Dimension(250,100));
+	container.add(mainPanel);
+	
+	
+	addProgrammation.addActionListener(event -> {
+	    
+	    frame.setVisible(false);
+	    observer.showScheduleFilmView();	    
+	});
+	
+	
+	
+	
 		
-		// Listen for selection changes
-		calendar.getSelection().addChangeListener(new ChangeListener(){
-		@Override
-			public void changed(EventObject e) {
-					onSelectionChanged();
-					//System.out.println(calendar.getDa);
-			}
-		});
-		
-		mainPanel.add(northPanel,BorderLayout.NORTH);
-		mainPanel.add(westPanel,BorderLayout.WEST);
-		mainPanel.add(centerPanel,BorderLayout.CENTER);
-		
-		northPanel.add(home,BorderLayout.EAST);
-		
-		
-		optionPanel.setLayout(new BoxLayout(optionPanel,BoxLayout.Y_AXIS));
-		
-		westPanel.add(optionPanel,BorderLayout.SOUTH); // add panel in south of west panel
-			
-		westPanel.add(calendar, BorderLayout.NORTH);
-		calendar.setPreferredSize(new Dimension(250,300));
-		
-		
-		optionPanel.add(addProgrammation);
-		addProgrammation.setMaximumSize(new Dimension(250,100)); //width , height
-		addProgrammation.setPreferredSize(new Dimension(250,100));
-				
-		optionPanel.add(filterBy,BorderLayout.CENTER);
-		filterBy.setMaximumSize(new Dimension(250,100)); //width,height 
-		filterBy.setPreferredSize(new Dimension(250,100));
-
-		
-		container.add(mainPanel);
-		
-		addProgrammation.addActionListener(event->{
-		    Object[][] data1 = new Object[2][4]; // row columns 
-                    
-                    
-                    
-                    data1[0][0] = "vdvdvd";
-                    data1[0][1] = "Fildvdvdm1 Hall";
-                    data1[0][2] = "vdvd start time";
-                    data1[0][3] = "dvdv end time";
-                    
-                    data1[1][0] = "dvdv";
-                    data1[1][1] = "Fdvvdilm2 Hall";
-                    data1[1][2] = "dvdv start time";
-                    data1[1][3] = "dvvd end time";
-		    DefaultTableModel modelNew = new DefaultTableModel(data1, columnNames);
-		   table.setModel(modelNew);
-		   
-		   DefaultTableModel dfm = (DefaultTableModel) table.getModel();
-		   dfm.fireTableDataChanged();
-		   
-		   
-		        
-		        
-		    
-		}
-		);
-			
 		
         frame.pack();
         frame.setMinimumSize(new Dimension(screenWidth/2,screenHeight/2));
         frame.setSize(700, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        
         
         }
         
 
         private void onSelectionChanged() { // when user clicks on specific date, table must be updated
               
+            final LocalDate selectedDate = this.getCalendarSelectionDate();
+            final List<ProgrammedFilm> list = observer.getAllProgrammedFilms();
+            final HandlerList<ProgrammedFilm> handler = observer.getManagerProgrammingFilms().getHandlerList();
+           
+            final List<ProgrammedFilm> filtByDate = handler.filterBy(list, new FilterByDateImpl(selectedDate)); // filter for selected date
+            System.out.println(filtByDate);
+            final List<ProgrammedFilm> sortByTime = handler.sortBy(filtByDate, new SorterByTimeImpl());
+            System.out.println(sortByTime);
             
-    		if (calendar.getSelection().getIsEmpty())
-    		{
-    			//scheduler.getTimetableSettings().getDates().clear();
-    			return;
-    		}
-
-    		int day = calendar.getSelection().getRanges().get(0).getDay();
-    		int month = calendar.getSelection().getRanges().get(0).getMonth();
-    		int year = calendar.getSelection().getRanges().get(0).getYear();
-    		
-    		LocalDate localDate = LocalDate.of(year, month , day);
-    		//System.out.println(localDate);
-    		
+            this.fillDataTable(sortByTime);	
+            
     	}
-        /*
-        private void fillDataTable(final List<ProgrammedFilm> manipulatedList ,final Object [][] data, final LocalDate date) {
-            /*final ManagerProgrammingFilms manager = observer.getManagerProgrammingFilms();
+        
+        private LocalDate getCalendarSelectionDate() {
+            if (calendar.getSelection().getIsEmpty())
+            {
+                    
+                    return LocalDate.now();
+            }
             
-            final List<ProgrammedFilm> filteredListByDate = manager.getFilterManager().filterListByDate(observer.getAllProgrammedFilms(), date);
-            final List<ProgrammedFilm> sortedFilteredList = manager.getFilterManager().sortListByHall(filteredListByDate);
-            final int rowsNumber = sortedFilteredList.size();
-            */
-        /*
-            final int rowsNumber = manipulatedList.size();
-            final int columnsNumber = manipulatedList.getClass().getDeclaredFields().length;
+            final int day = calendar.getSelection().getRanges().get(0).getDay();
+            final int month = calendar.getSelection().getRanges().get(0).getMonth();
+            final int year = calendar.getSelection().getRanges().get(0).getYear();
             
-                for(int i=0; i< rowsNumber ; i++) {
-                    final ProgrammedFilm temp = manipulatedList.iterator().next();
-                    for(int j=0; j< columnsNumber; j++) {
-                         data [i][j] = temp.get
-                    }
-                }
+            return LocalDate.of(year, month , day);
             
         }
-        */
+        
+        private void fillDataTable(final List<ProgrammedFilm> manipulatedList ) {
+            /*ProgrammingFilmsController controller; // CREO UN'ISTANZA CON TUTTI I DATI DEI FILM
+            //FACCIO UNA RICERCA SELL'ID PER TROVARE IL NOME CORRELATO
+            */
+            final Object [][] data = new Object[manipulatedList.size()][columnsNumber];
+            for(int i=0; i< manipulatedList.size();i++) {
+                data[i][0] = manipulatedList.get(i).getIdProgrammation();
+                data[i][1] = manipulatedList.get(i).getHall();
+                data[i][2] = manipulatedList.get(i).getStartTime();
+                data[i][3] = manipulatedList.get(i).getEndTime();
+            }
+             
+            final DefaultTableModel modelNew = new DefaultTableModel(data, columnNames);
+            table.setModel(modelNew);
+           
+            final DefaultTableModel dfm = (DefaultTableModel) table.getModel();
+            dfm.fireTableDataChanged();      
+            
+        }
+        
+       
+        
         @Override
         public void start() {
             frame.setLocationByPlatform(true);
@@ -274,12 +227,9 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         @Override
         public void update() {
+            this.onSelectionChanged(); //update table
             
         }
-        public static void main(String []args) {
-            ProgrammingFilmsGUIimpl a = new ProgrammingFilmsGUIimpl(null);
-            
-        }
-
+        
         
 }

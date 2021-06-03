@@ -20,6 +20,5 @@ public interface FilmsController {
 
         ManagerWorkingDIR getManagerWorkingDIR();
         ManagerIdsFilms getManagerIdsFilms();
-        
 
 }

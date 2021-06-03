@@ -83,11 +83,32 @@ public class Cinema {
         //controller.addProgrammedFilm(null);
         
         
+        final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
+        final ProgrammedFilmFactory factory = new ProgrammedFilmFactoryImpl();
         
+        final LocalDate ld1 = LocalDate.of(2021, 6, 3);    
+        final LocalDate ld2 = LocalDate.of(2021, 6, 3); 
+        final LocalDate ld3 = LocalDate.of(2021, 6, 4); 
         
+        final LocalTime st1 = LocalTime.of(8, 30);
+        final LocalTime st2 = LocalTime.of(6, 50);
+        final LocalTime st3 = LocalTime.of(8, 27);
+        
+        final LocalTime et1 = LocalTime.of(8, 45);
+        final LocalTime et2 = LocalTime.of(7, 22);
+        final LocalTime et3 = LocalTime.of(8, 29);
+        final ProgrammedFilm pf1 = factory.creteProgrammedFilm(12, 8, 56, ld1, st1, et1);
+        final ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 9, 56, ld2, st2, et2);
+        final ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 1, 56, ld3, st3, et3);
+        final ProgrammedFilm pf4 = factory.creteProgrammedFilm(15, 9, 56, ld2, st3, et3);
+        
+       controller.addProgrammedFilm(pf1);
+       controller.addProgrammedFilm(pf2);
+       controller.addProgrammedFilm(pf3);
+       controller.addProgrammedFilm(pf4);
+       
+       System.out.println(controller.getAllProgrammedFilms());
+       controller.showProgrammedFilmView();
     }
     
-    
-
-
 }
