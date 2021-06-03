@@ -1,4 +1,4 @@
-package viewImpl.ManageProgrammingFilms;
+package viewImpl.ManageProgrammingFilms.factory;
 
 import static javax.swing.BorderFactory.*;
 
@@ -34,7 +34,8 @@ public class DatePanel extends JPanel  {
 	private static final int hGapGrid = 5;
 	private static final int vGapGrid = 5;
 	
-	public DatePanel(final LocalDate selectedDate)
+	
+	DatePanel(final LocalDate selectedDate)
 	{
 	    setLayout(new BorderLayout());
 	    setBorder(createCompoundBorder

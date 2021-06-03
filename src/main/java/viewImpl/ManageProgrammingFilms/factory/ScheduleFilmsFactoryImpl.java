@@ -7,9 +7,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.ManageFilms.FilmsController;
 import view.ManageProgrammingFilms.Factory.ScheduleFilmsFactory;
-import viewImpl.ManageProgrammingFilms.DatePanel;
-import viewImpl.ManageProgrammingFilms.TimePanel;
 
 
 public class ScheduleFilmsFactoryImpl implements ScheduleFilmsFactory {
@@ -38,8 +37,8 @@ public class ScheduleFilmsFactoryImpl implements ScheduleFilmsFactory {
     }
 
     @Override
-    public InfoProgrammationPanel getInfoProgrammationPanel(final List<Integer> halls) {
-        return new InfoProgrammationPanel(halls);
+    public InfoProgrammationPanel getInfoProgrammationPanel(FilmsController filmsController) {
+        return new InfoProgrammationPanel(filmsController);
     }
 
     

@@ -4,15 +4,16 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import viewImpl.ManageProgrammingFilms.DatePanel;
-import viewImpl.ManageProgrammingFilms.TimePanel;
+import controller.ManageFilms.FilmsController;
+import viewImpl.ManageProgrammingFilms.factory.DatePanel;
 import viewImpl.ManageProgrammingFilms.factory.InfoProgrammationPanel;
+import viewImpl.ManageProgrammingFilms.factory.TimePanel;
 
 public interface ScheduleFilmsFactory {
 	
 	TimePanel getTimePanel();
 	DatePanel getDatePanel();
 	JPanel getBottomPanel(ActionListener al);
-	InfoProgrammationPanel getInfoProgrammationPanel(List<Integer> halls);
+	InfoProgrammationPanel getInfoProgrammationPanel(FilmsController filmsController);
 
 }

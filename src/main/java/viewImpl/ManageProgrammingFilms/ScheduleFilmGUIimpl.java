@@ -9,9 +9,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,11 +22,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import controllerImpl.ManageFilms.FilmsControllerImpl;
+import modelImpl.ManageFilms.IdsGeneratorImpl;
+import modelImpl.ManageFilms.ManagerIdsFilmImpl;
+import utilities.Film;
+import utilities.Factory.FilmFactory;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageProgrammingFilms.ScheduleFilmsGUI;
 import view.ManageProgrammingFilms.Factory.ScheduleFilmsFactory;
+import viewImpl.ManageProgrammingFilms.factory.DatePanel;
 import viewImpl.ManageProgrammingFilms.factory.InfoProgrammationPanel;
 import viewImpl.ManageProgrammingFilms.factory.ScheduleFilmsFactoryImpl;
+import viewImpl.ManageProgrammingFilms.factory.TimePanel;
 
 public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
@@ -34,29 +45,51 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 	
 	private final InfoProgrammationPanel infoProgrammation;
 	private final JPanel bottomPanel;
+	
 	private final JFrame frame = new JFrame();
 	private final Container container = frame.getContentPane();
 	
 	private final ScheduleFilmsFactory factory = new ScheduleFilmsFactoryImpl();
 	
 	private ProgrammingFilmsController observer ;
+	private final FilmsController filmsController ;
 
 	public ScheduleFilmGUIimpl() {
 	    
 	    final JPanel mainPanel = new JPanel(new BorderLayout());
+	    final JPanel dateTimePanel = new JPanel(new BorderLayout());
+	    
+	    
+	    //TEST init controller
+	    FilmFactory filmFactory = new FilmFactoryImpl(new ManagerIdsFilmImpl(new IdsGeneratorImpl()));
+	    filmsController = new FilmsControllerImpl();
+	    filmsController.addFilm(filmFactory.createBasicFilm("Spiderman", "", "", Optional.ofNullable(null), 40));
+	    filmsController.addFilm(filmFactory.createBasicFilm("Batman", "", "", Optional.ofNullable(null), 40));
+	    filmsController.addFilm(filmFactory.createBasicFilm("Thor", "", "", Optional.ofNullable(null), 40));
+	    
+	   
+	    
 	    mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-	    ArrayList <Integer> arr = new ArrayList<>();
-	    arr.add(new Integer(1));
-	    arr.add(new Integer(2));
-	    arr.add(new Integer(3));
-	    arr.add(new Integer(4));  
+	    
 	    
 	    bottomPanel = factory.getBottomPanel(new ScheduleButtonListener());
-	    infoProgrammation = (InfoProgrammationPanel) factory.getInfoProgrammationPanel(arr);
+	    infoProgrammation =  factory.getInfoProgrammationPanel(filmsController);
 		
 	    mainPanel.add(infoProgrammation,BorderLayout.CENTER);
 	    mainPanel.add(bottomPanel,BorderLayout.SOUTH);
-	    mainPanel.add(this.getDateAndTimePanel(),BorderLayout.NORTH);
+	    
+	    
+            dateTimePanel.setBorder(BorderFactory.createCompoundBorder(
+                                                            BorderFactory.createTitledBorder("Date and start time"),
+                                                                    BorderFactory.createEmptyBorder(20, 20, 20, 20)));
+            dateSelector = factory.getDatePanel(); // year, month , day
+            timeSelector = factory.getTimePanel();
+            
+            dateTimePanel.add(dateSelector, BorderLayout.WEST);
+            dateTimePanel.add(timeSelector, BorderLayout.EAST);
+	     
+	    
+	    mainPanel.add(dateTimePanel,BorderLayout.NORTH);
 			
 	    container.add(mainPanel);
 	
@@ -68,21 +101,6 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 	    frame.setLocationRelativeTo(null);
 	    frame.setVisible(true);
 	}
-
-	private JPanel getDateAndTimePanel() {
-		// date and time panel selection
-		JPanel dateTimePanel = new JPanel(new BorderLayout());
-		dateTimePanel.setBorder(BorderFactory.createCompoundBorder(
-								BorderFactory.createTitledBorder("Date and start time"),
-									BorderFactory.createEmptyBorder(20, 20, 20, 20)));
-		dateSelector = new DatePanel(LocalDate.of(2021,1,5)); // year, month , day
-		timeSelector = new TimePanel();
-		dateTimePanel.add(dateSelector, BorderLayout.WEST);
-		dateTimePanel.add(timeSelector, BorderLayout.EAST);
-		
-		return dateTimePanel;
-	}
-
 
     @Override
     public void start() {
@@ -105,31 +123,31 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
     
     private class ScheduleButtonListener implements ActionListener {
         public void actionPerformed(final ActionEvent ae) {
-            
-           
+ 
                 try {
-
-                        // check if all required fields have been entered
-                        if (infoProgrammation.getPrice().equals("") ) {
-                                JOptionPane.showMessageDialog(frame,
-                                                "You must enter all fields",
-                                                "Invalid Data", JOptionPane.ERROR_MESSAGE);
-                        } else {
-                                final LocalDate date = dateSelector.getDate();
+                        
+                        final LocalDate selectedDate = dateSelector.getDate();
+                        final LocalTime selectedTime = timeSelector.getTime();
+                        final int selectedHall =  Integer.parseInt(infoProgrammation.getHall());
+                        final double selectedPrice = Double.parseDouble(infoProgrammation.getPrice());
+                        final Film selectedFilm = infoProgrammation.getSelectedFilm();
+                        
+                        
                                 
-                                System.out.println(infoProgrammation.getHall());
-                                
-                                JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
-                        }
-
+                        JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
                 } catch (Exception e) {
 
                         JOptionPane.showMessageDialog(frame,e.getMessage(), "Invalid Data",JOptionPane.ERROR_MESSAGE);
                 }
         }
 
-}
+    }
 
+    
+
+    
+    
+    
 
     public static void main(String [] args) {
         ScheduleFilmGUIimpl s = new ScheduleFilmGUIimpl();
