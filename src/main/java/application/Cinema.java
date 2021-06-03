@@ -101,11 +101,11 @@ public class Cinema {
         final ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 9, 56, ld2, st2, et2);
         final ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 1, 56, ld3, st3, et3);
         final ProgrammedFilm pf4 = factory.creteProgrammedFilm(15, 9, 56, ld2, st3, et3);
-        
+       /* 
        controller.addProgrammedFilm(pf1);
        controller.addProgrammedFilm(pf2);
        controller.addProgrammedFilm(pf3);
-       controller.addProgrammedFilm(pf4);
+       controller.addProgrammedFilm(pf4);*/
        
        System.out.println(controller.getAllProgrammedFilms());
        controller.showProgrammedFilmView();

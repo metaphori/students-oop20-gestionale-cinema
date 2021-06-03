@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import model.ManageProgrammingFilms.ProgrammedFilmsModel;
 import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
@@ -36,7 +37,7 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     }
 
     @Override
-    public void addProgrammedFilm(final ProgrammedFilm newProgrammedFilm) {
+    public void addProgrammedFilm(final ProgrammedFilm newProgrammedFilm) throws ProgrammationNotAvailableException{
         programmedFilmsModel.addFilmProgrammation(newProgrammedFilm);   
     }
 
@@ -59,8 +60,7 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
 
     @Override
     public void showScheduleFilmView() {
-        
-        
+   
     }
 
     @Override

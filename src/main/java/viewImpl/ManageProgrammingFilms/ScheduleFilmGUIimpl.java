@@ -25,11 +25,16 @@ import javax.swing.border.EmptyBorder;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
+import exceptions.ProgrammationNotAvailableException;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Factory.FilmFactory;
+import utilities.Factory.ProgrammedFilmFactory;
+import utilities.Factory.TimeSlotFactory;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
+import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
 import view.ManageProgrammingFilms.ScheduleFilmsGUI;
 import view.ManageProgrammingFilms.Factory.ScheduleFilmsFactory;
 import viewImpl.ManageProgrammingFilms.factory.DatePanel;
@@ -122,32 +127,35 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
     
     
     private class ScheduleButtonListener implements ActionListener {
+        ProgrammedFilmFactory programmedFilmFactory = new ProgrammedFilmFactoryImpl();
+        
         public void actionPerformed(final ActionEvent ae) {
- 
-                try {
-                        
-                        final LocalDate selectedDate = dateSelector.getDate();
-                        final LocalTime selectedTime = timeSelector.getTime();
-                        final int selectedHall =  Integer.parseInt(infoProgrammation.getHall());
-                        final double selectedPrice = Double.parseDouble(infoProgrammation.getPrice());
-                        final Film selectedFilm = infoProgrammation.getSelectedFilm();
-                        
-                        
-                                
-                        JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
-                } catch (Exception e) {
-
-                        JOptionPane.showMessageDialog(frame,e.getMessage(), "Invalid Data",JOptionPane.ERROR_MESSAGE);
-                }
-        }
+            Film selectedFilm;
+            LocalDate selectedDate;
+            LocalTime selectedTime;
+            int selectedHall;
+            double selectedPrice;
+            try {
+                    selectedDate = dateSelector.getDate();
+                    selectedTime = timeSelector.getTime();
+                    selectedHall =  Integer.parseInt(infoProgrammation.getHall());
+                    selectedPrice = Double.parseDouble(infoProgrammation.getPrice());
+                    selectedFilm = infoProgrammation.getSelectedFilm();
+                    JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
+             } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame,e.getMessage(), "Invalid Data",JOptionPane.ERROR_MESSAGE);
+             }  
+           
+            try {
+                    observer.addProgrammedFilm(null);
+            } catch (ProgrammationNotAvailableException e) {
+                    JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
+            }
 
     }
 
-    
+    }
 
-    
-    
-    
 
     public static void main(String [] args) {
         ScheduleFilmGUIimpl s = new ScheduleFilmGUIimpl();
