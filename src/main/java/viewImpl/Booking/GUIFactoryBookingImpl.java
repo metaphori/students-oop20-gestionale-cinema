@@ -28,7 +28,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import utilities.ProgrammedFilm;
+import utilities.Factory.*;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatState;
 import view.Booking.GUIFactoryBooking;

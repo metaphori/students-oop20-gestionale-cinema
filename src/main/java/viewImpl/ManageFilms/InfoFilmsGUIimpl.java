@@ -31,8 +31,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import utilities.Film;
 import utilities.ManagerWorkingDIR;
 import utilities.Factory.FilmFactory;
-import utilitiesImpl.FilmBasicImpl;
 import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
@@ -47,7 +47,7 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import org.apache.commons.io.*;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 
 public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         

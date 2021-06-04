@@ -1,0 +1,114 @@
+package utilitiesImpl.FactoryImpl;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import utilities.TimeSlot;
+import utilities.Factory.ProgrammedFilm;
+
+public class ProgrammedFilmImpl implements ProgrammedFilm {
+    
+    final int id;// reference to idFilms
+    final int hall;
+    final double price;
+    final LocalDate date;
+    final TimeSlot timeSlot;
+    
+    
+    ProgrammedFilmImpl(final int id, final  int hall, final  double price, final  LocalDate date, final TimeSlot timeSlot) {
+        super();
+        this.id = id;
+        this.hall = hall;
+        this.price = price;
+        this.date = date;
+        this.timeSlot = timeSlot;
+    }
+
+    @Override
+    public int getIdProgrammation() {
+        return this.id;
+    }
+
+    @Override
+    public int getHall() {
+        return this.hall;
+    }
+
+    @Override
+    public double getProgrammationPrice() {
+        return this.price;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    @Override
+    public LocalTime getStartTime() {
+        return this.timeSlot.getStartTime();
+    }
+
+    @Override
+    public LocalTime getEndTime() {
+        return this.timeSlot.getEndTime();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + hall;
+        result = prime * result + id;
+        long temp;
+        temp = Double.doubleToLongBits(price);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + ((timeSlot == null) ? 0 : timeSlot.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ProgrammedFilmImpl other = (ProgrammedFilmImpl) obj;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (hall != other.hall)
+            return false;
+        if (id != other.id)
+            return false;
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+            return false;
+        if (timeSlot == null) {
+            if (other.timeSlot != null)
+                return false;
+        } else if (!timeSlot.equals(other.timeSlot))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ProgrammedFilmImpl [id=" + id + ", hall=" + hall + ", price=" + price + ", date=" + date + ", timeSlot="
+                + timeSlot + "]";
+    }
+
+  
+
+  
+
+   
+    
+    
+    
+
+}

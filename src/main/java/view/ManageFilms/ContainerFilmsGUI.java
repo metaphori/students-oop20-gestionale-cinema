@@ -1,6 +1,6 @@
 package view.ManageFilms;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 
 public interface ContainerFilmsGUI {
     void start();

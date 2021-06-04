@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;
@@ -14,8 +14,8 @@ import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.ManagerWorkingDIR;
-import utilitiesImpl.FilmBasicImpl;
 import utilitiesImpl.ManagerWorkingDIRimpl;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import viewImpl.ManageFilms.ContainerFilmsGUIimpl;
@@ -38,6 +38,11 @@ public class FilmsControllerImpl implements FilmsController {
         this.infoFilms.setObserver(this);
 
     }
+    
+    
+    
+    
+    
 
     public FilmsControllerImpl(final Set<Film> set, final ManagerIdsFilms managerIdsFilm) { // IT'S A TEST !!!!!!!!!!!!!!!!!!
         model = new ContainerFilmsModelImpl(set, managerIdsFilm);
@@ -53,13 +58,13 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void addFilm(final Film f) {
         this.model.addFilm(f);
-        System.out.println("Add new film:"+ f);
+        //System.out.println("Add new film:"+ f);
     }
 
     @Override
     public void deleteFilm(final Film f) {
         this.model.removeFilm(f);
-        System.out.println("Delete film:"+ f);
+        //System.out.println("Delete film:"+ f);
     }
 
     @Override

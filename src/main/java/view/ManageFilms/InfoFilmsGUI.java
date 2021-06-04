@@ -1,6 +1,6 @@
 package view.ManageFilms;
 
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 import utilities.Film;
 
 public interface InfoFilmsGUI {

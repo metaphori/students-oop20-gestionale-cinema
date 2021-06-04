@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import utilities.ProgrammedFilm;
+import utilities.Factory.*;
 import utilitiesImpl.Row;
 import utilitiesImpl.Seat;
 import utilitiesImpl.SeatState;

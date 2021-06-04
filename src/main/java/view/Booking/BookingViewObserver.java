@@ -2,7 +2,7 @@ package view.Booking;
 
 import java.util.Set;
 
-import utilities.ProgrammedFilm;
+import utilities.Factory.*;
 import utilitiesImpl.Row;
 import utilitiesImpl.Seat;
 

@@ -36,14 +36,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-
-import controller.FilmsController;
+import controller.ManageFilms.FilmsController;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Factory.FilmFactory;
-import utilitiesImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.Factory.ContainerFilmsGUIfactory;
