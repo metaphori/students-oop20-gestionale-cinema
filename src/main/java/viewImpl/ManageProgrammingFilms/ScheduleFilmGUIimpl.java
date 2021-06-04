@@ -58,7 +58,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 	private final ScheduleFilmsFactory factory = new ScheduleFilmsFactoryImpl();
 	
 	protected ProgrammingFilmsController observer ;
-	private final FilmsController filmsController ;
+	private FilmsController filmsController ;
 
 	public ScheduleFilmGUIimpl(final FilmsController filmsController) {
 	    
@@ -95,7 +95,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 	    frame.pack();
 	    frame.setSize(400, 500);
 		
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);
 	}
 
@@ -141,15 +141,18 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
                     
                     try {     
                         
-                        final ProgrammedFilm film = programmedFilmFactory.createProgrammedFilm(selectedFilm.getID(), selectedHall, selectedPrice, selectedDate, selectedTime, selectedTime.plusHours(selectedFilm.getDuration()));
+                        final ProgrammedFilm film = programmedFilmFactory.createProgrammedFilm(selectedFilm.getID(), selectedHall, selectedPrice, selectedDate, selectedTime, selectedTime.plusMinutes(selectedFilm.getDuration()));
                         observer.addProgrammedFilm(film);
+                        JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
                     } catch (final ProgrammationNotAvailableException e) {
                         JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
                     }
-                    JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
+                   
              } catch (final Exception e) {
-                    JOptionPane.showMessageDialog(frame,"Insert all fields", "Invalid Data",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,e.getMessage(), "Invalid Data",JOptionPane.ERROR_MESSAGE);
              }  
+            
+            
 
     }
 
@@ -159,7 +162,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
     @Override
     public void setFilmsController(FilmsController filmsController) {
-        // TODO Auto-generated method stub
+        this.filmsController = filmsController;
         
     }
 

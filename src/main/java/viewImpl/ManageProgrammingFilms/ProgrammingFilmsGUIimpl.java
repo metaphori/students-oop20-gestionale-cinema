@@ -199,8 +199,8 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
                 
                 //data[i][0] = manipulatedList.get(i).getIdProgrammation(); // QUI VA INSERITO IL NOME DEL FILM CORRISPONDENTE AL FILM
                 final int id =  manipulatedList.get(i).getIdProgrammation();
-                filmsController.getFilms().stream().filter(film -> film.getID() == id).collect(Collectors.toList()).get(0).getName();
-                
+                System.out.println(filmsController.getFilms());
+                data[i][0] = filmsController.getFilms().stream().filter(film -> film.getID() == id).collect(Collectors.toList()).get(0).getName();
                 data[i][1] = manipulatedList.get(i).getHall();
                 data[i][2] = manipulatedList.get(i).getStartTime();
                 data[i][3] = manipulatedList.get(i).getEndTime();
