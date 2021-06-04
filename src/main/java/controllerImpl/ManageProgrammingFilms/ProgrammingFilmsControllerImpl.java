@@ -34,23 +34,11 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     final private ProgrammedFilmsModel programmedFilmsModel;
     final private FilmsController filmsController;
     
-    /*
-    public ProgrammingFilmsControllerImpl() { // to test 
-        this.filmsController = new FilmsControllerImpl();
-        filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
-        filmsProgrammationView.setFilmsController(filmsController);
-        
-        scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
-        programmedFilmsModel = new ProgrammedFilmsModelImpl();
-        
-        filmsProgrammationView.setObserver(this);
-        scheduleFilmView.setObserver(this);
-    }*/
     
     public ProgrammingFilmsControllerImpl() {
         
         filmsController = new FilmsControllerImpl();
-        Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
+        final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
 
         if(programmedFilms.isEmpty()) {
             programmedFilmsModel = new ProgrammedFilmsModelImpl();

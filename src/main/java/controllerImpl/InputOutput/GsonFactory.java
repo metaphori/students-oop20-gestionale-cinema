@@ -16,10 +16,12 @@ import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Ticket;
+import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.TicketImpl;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
 public final class GsonFactory {
     private GsonFactory() { }
@@ -48,8 +50,22 @@ public final class GsonFactory {
                 .of(IdsGenerator.class, "Type")
                 .registerSubtype(IdsGeneratorImpl.class, IdsGeneratorImpl.class.getName());
         
+        final RuntimeTypeAdapterFactory<TimeSlot> adapterTimeSlot= RuntimeTypeAdapterFactory
+                .of(TimeSlot.class, "Type")
+                .registerSubtype(TimeSlotImpl.class, TimeSlotImpl.class.getName());
+        
+
+    /*    final RuntimeTypeAdapterFactory<LocalTime> adapterLocalTime = RuntimeTypeAdapterFactory
+                .of(LocalTime.class, "Type");
+                
+        final RuntimeTypeAdapterFactory<LocalDate> adapterLocalDate = RuntimeTypeAdapterFactory
+                .of(LocalDate.class, "Type");
+        */        
+
         
         return new GsonBuilder()
+             
+                .registerTypeAdapterFactory(adapterTimeSlot)
                 .registerTypeAdapterFactory(adapterIdsGenerator)
                 .registerTypeAdapterFactory(adapterManagerIdsFilms)
                 .registerTypeAdapterFactory(adapterFilm)

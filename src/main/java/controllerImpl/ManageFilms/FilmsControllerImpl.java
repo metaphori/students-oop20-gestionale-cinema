@@ -41,8 +41,7 @@ public class FilmsControllerImpl implements FilmsController {
         Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
         
         if(films.isEmpty()|| managerIdsFilm.isEmpty() ) {
-            model = new ContainerFilmsModelImpl(); 
-            
+            model = new ContainerFilmsModelImpl();  
         }else {
             model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
         }

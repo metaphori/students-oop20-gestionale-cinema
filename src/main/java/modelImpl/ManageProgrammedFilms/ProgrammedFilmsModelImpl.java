@@ -21,7 +21,6 @@ public class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel{
     
     private final List <ProgrammedFilm> programmedFilms;
     private final ManagerProgrammingFilms manager;
-    
 
     public ProgrammedFilmsModelImpl(final List<ProgrammedFilm> programmedFilms) {
         this.programmedFilms = programmedFilms;

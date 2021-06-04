@@ -8,13 +8,13 @@ import utilities.Factory.ProgrammedFilm;
 
 public class ProgrammedFilmImpl implements ProgrammedFilm {
     
-    final int id;// reference to idFilms
-    final int hall;
-    final double price;
-    final LocalDate date;
-    final TimeSlot timeSlot;
+    private final int id;// reference to idFilms
+    private final int hall;
+    private final double price;
+    private LocalDate date;
+    private TimeSlot timeSlot;
     
-    
+  
     ProgrammedFilmImpl(final int id, final  int hall, final  double price, final  LocalDate date, final TimeSlot timeSlot) {
         super();
         this.id = id;

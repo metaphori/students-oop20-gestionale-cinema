@@ -241,8 +241,8 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
 
 
         @Override
-        public void setFilmsController(FilmsController filmsController) {
-            filmsController = filmsController;
+        public void setFilmsController(final FilmsController filmsController) {
+            this.filmsController = filmsController;
         }
         
         
