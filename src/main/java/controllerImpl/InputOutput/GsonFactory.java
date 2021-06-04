@@ -49,7 +49,6 @@ public final class GsonFactory {
                 .registerSubtype(IdsGeneratorImpl.class, IdsGeneratorImpl.class.getName());
         
         
-        
         return new GsonBuilder()
                 .registerTypeAdapterFactory(adapterIdsGenerator)
                 .registerTypeAdapterFactory(adapterManagerIdsFilms)

@@ -55,18 +55,6 @@ public class FilmsControllerImpl implements FilmsController {
         this.infoFilms.setObserver(this);
     }  
     
-    
-/*
-    public FilmsControllerImpl(final Set<Film> set, final ManagerIdsFilms managerIdsFilm) { // IT'S A TEST !!!!!!!!!!!!!!!!!!
-        model = new ContainerFilmsModelImpl(set, managerIdsFilm);
-        viewFilms = new ContainerFilmsGUIimpl(this.model.getFilms()); // Empty set, there aren't films
-        infoFilms = new InfoFilmsGUIimpl();
-        managerWorkingDIR = new ManagerWorkingDIRimpl();
-
-        this.viewFilms.setObserver(this);
-        this.infoFilms.setObserver(this);
-    }
-*/
  
     @Override
     public void addFilm(final Film f) {

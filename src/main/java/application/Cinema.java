@@ -170,9 +170,10 @@ public class Cinema {
         
         //programmingFilmsController.showScheduleFilmView();
         
-        FilmsController filmsController = new FilmsControllerImpl();
-        filmsController.showContainerFilmsView();
+        /*FilmsController filmsController = new FilmsControllerImpl();
+        filmsController.showContainerFilmsView();*/
         
+       
         
         
     }

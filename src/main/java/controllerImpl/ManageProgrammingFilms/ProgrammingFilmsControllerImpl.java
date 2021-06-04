@@ -3,15 +3,25 @@ package controllerImpl.ManageProgrammingFilms;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import com.google.gson.reflect.TypeToken;
 
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import controllerImpl.InputOutput.RWobject;
+import controllerImpl.InputOutput.RWobjectImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import exceptions.ProgrammationNotAvailableException;
+import model.ManageFilms.ManagerIdsFilms;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import model.ManageProgrammingFilms.ProgrammedFilmsModel;
+import modelImpl.ManageFilms.ContainerFilmsModelImpl;
 import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
+import utilities.Film;
 import utilities.Factory.ProgrammedFilm;
+import utilitiesImpl.GeneralSettings;
 import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
 import view.ManageProgrammingFilms.ScheduleFilmsGUI;
 import viewImpl.ManageProgrammingFilms.ProgrammingFilmsGUIimpl;
@@ -24,7 +34,7 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     final private ProgrammedFilmsModel programmedFilmsModel;
     final private FilmsController filmsController;
     
-    
+    /*
     public ProgrammingFilmsControllerImpl() { // to test 
         this.filmsController = new FilmsControllerImpl();
         filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
@@ -34,6 +44,26 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
         programmedFilmsModel = new ProgrammedFilmsModelImpl();
         
         filmsProgrammationView.setObserver(this);
+        scheduleFilmView.setObserver(this);
+    }*/
+    
+    public ProgrammingFilmsControllerImpl() {
+        
+        filmsController = new FilmsControllerImpl();
+        Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
+
+        if(programmedFilms.isEmpty()) {
+            programmedFilmsModel = new ProgrammedFilmsModelImpl();
+            
+        }else {
+            programmedFilmsModel = new ProgrammedFilmsModelImpl(programmedFilms.get());
+        }
+        
+        filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
+        filmsProgrammationView.setFilmsController(filmsController);
+        filmsProgrammationView.setObserver(this);
+        
+        scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         scheduleFilmView.setObserver(this);
     }
     
@@ -46,11 +76,13 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     @Override
     public void addProgrammedFilm(final ProgrammedFilm newProgrammedFilm) throws ProgrammationNotAvailableException{
         programmedFilmsModel.addFilmProgrammation(newProgrammedFilm);   
+        this.writeProgrammedFilmsOnFile();
     }
 
     @Override
     public void deleteProgrammedFilm(final ProgrammedFilm oldProgrammedFilm) {
         programmedFilmsModel.deleteFilmProgrammation(oldProgrammedFilm);
+        this.writeProgrammedFilmsOnFile();
     }
 
     @Override
@@ -78,6 +110,18 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     @Override
     public FilmsController getFilmsController() {
         return this.filmsController;
+    }
+    
+    private void writeProgrammedFilmsOnFile() {
+        final RWobject<List<ProgrammedFilm>> rw = new RWobjectImpl<>(GeneralSettings.PROGRAMMEDFILMSPATH);
+        final var type = new TypeToken<List<ProgrammedFilm>>() {}.getType();
+        rw.writeObj(programmedFilmsModel.getAllProgrammedFilm(), type);
+    }
+    
+    private Optional<List<ProgrammedFilm>> readProgrammedFilmsFromFile() {
+        final RWobject<List<ProgrammedFilm>> rw = new RWobjectImpl<>(GeneralSettings.PROGRAMMEDFILMSPATH);
+        final var type = new TypeToken<List<ProgrammedFilm>>() {}.getType();
+        return rw.readObj(type);
     }
 
 }
