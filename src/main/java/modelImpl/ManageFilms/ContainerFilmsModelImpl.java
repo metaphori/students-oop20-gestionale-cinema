@@ -10,7 +10,6 @@ import model.ManageFilms.ManagerIdsFilms;
 import utilities.Film;
 
 public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
-    protected String type = getClass().getName();
     private final Set<Film> containerFilms;
     private final ManagerIdsFilms manager; // verrà utilizzato dal controller per poter istanziare il film e passarlo con l'id disponibile richiesto al manager
 

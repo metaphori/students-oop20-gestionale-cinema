@@ -16,6 +16,12 @@ public class GeneralSettings {
     public static final String DATADIR = WORKINGDIR +  FS  + DATADIRNAME;
     public static final String IMAGESSELECTEDDIR =  WORKINGDIR +  FS  + IMAGESDIRNAME + FS + IMAGESSELECTEDDIRNAME + FS;
     
+    public static final String FILMSFILE = "FILMS.json";
+    public static final String FILMSPATH = DATADIR + FS + FILMSFILE;
+    public static final String MANAGERIDSFILMSFILE = "MANAGERIDSFILMS.json";
+    public static final String MANAGERIDSFILMSPATH = DATADIR + FS + MANAGERIDSFILMSFILE;
+    
+    
     //File options
     
   

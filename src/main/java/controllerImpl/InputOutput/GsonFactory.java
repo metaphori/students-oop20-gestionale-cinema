@@ -39,8 +39,20 @@ public final class GsonFactory {
         final RuntimeTypeAdapterFactory<Ticket> adapterTicket = RuntimeTypeAdapterFactory
                 .of(Ticket.class, "Type")
                 .registerSubtype(TicketImpl.class, TicketImpl.class.getName());
+        
+        final RuntimeTypeAdapterFactory<ManagerIdsFilms> adapterManagerIdsFilms= RuntimeTypeAdapterFactory
+                .of(ManagerIdsFilms.class, "Type")
+                .registerSubtype(ManagerIdsFilmImpl.class, ManagerIdsFilmImpl.class.getName());
      
+        final RuntimeTypeAdapterFactory<IdsGenerator> adapterIdsGenerator= RuntimeTypeAdapterFactory
+                .of(IdsGenerator.class, "Type")
+                .registerSubtype(IdsGeneratorImpl.class, IdsGeneratorImpl.class.getName());
+        
+        
+        
         return new GsonBuilder()
+                .registerTypeAdapterFactory(adapterIdsGenerator)
+                .registerTypeAdapterFactory(adapterManagerIdsFilms)
                 .registerTypeAdapterFactory(adapterFilm)
                 .registerTypeAdapterFactory(adapterProgrammedFilm)
                 .registerTypeAdapterFactory(adapterTicket)

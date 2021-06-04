@@ -151,7 +151,7 @@ public class Cinema {
         
         System.out.println(filmsController.getFilms());
         */
-        
+        /*
         final ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
         final FilmsController filmsController = programmingFilmsController.getFilmsController();
         
@@ -162,11 +162,17 @@ public class Cinema {
         filmsController.addFilm(f1);
         programmingFilmsController.showProgrammedFilmView();
         
+        */
+        
         
         
         
         
         //programmingFilmsController.showScheduleFilmView();
+        
+        FilmsController filmsController = new FilmsControllerImpl();
+        filmsController.showContainerFilmsView();
+        
         
         
     }
