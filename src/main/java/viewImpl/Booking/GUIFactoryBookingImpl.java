@@ -77,10 +77,20 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         infoPanel.add(label, BorderLayout.CENTER);
         infoPanel.setBorder(BorderFactory.createLineBorder(COLOR_BORDER_INFOPANEL));
         infoPanel.add(button, BorderLayout.WEST);
-        button.addActionListener( action);
+        button.addActionListener(action);
         return infoPanel;
     }
-
+    public JLabel getLabelImage(ImageIcon icon, int width, int height) {
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        JLabel labelIcon = new JLabel();
+        ImageIcon imageIcon = icon;
+        Image image = imageIcon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        labelIcon.setIcon(imageIcon);
+        
+        return labelIcon;
+    }
     public JButton getButtonImage(ImageIcon icon) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         ImageIcon imageIcon = icon;

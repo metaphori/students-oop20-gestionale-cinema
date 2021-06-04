@@ -46,6 +46,9 @@ public class BookingViewImpl implements BookingView {
     private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
     private static final double HEIGHT_IMAGE_SEAT = HEIGHT_PERC_FRAME/ 15;
     
+    private static final double HEIGHT_IMAGE_LEGEND = HEIGHT_PERC_FRAME/ 5;
+    private static final double WIDTH_IMAGE_LEGEND = WIDTH_PERC_FRAME / 5;
+    
     private int col;
     private Row row;
     public BookingViewImpl(BookingViewObserver observer, ProgrammedFilm film) {
@@ -101,6 +104,13 @@ public class BookingViewImpl implements BookingView {
         mainPanel.add(north, BorderLayout.NORTH);
         mainPanel.add(center, BorderLayout.CENTER);
         mainPanel.add(bookBt, BorderLayout.SOUTH);
+      
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        ImageIcon imageLegend = new ImageIcon(ClassLoader.getSystemResource("images/leggenda.png"));
+        int width =(int) (screenSize.getWidth() * WIDTH_IMAGE_LEGEND);
+        int height = (int) (screenSize.getHeight() * HEIGHT_IMAGE_LEGEND);
+        JLabel labelLegend = factory.getLabelImage(imageLegend, width, height);
+        mainPanel.add(labelLegend,BorderLayout.EAST);
         frame.getContentPane().add(mainPanel);
     }
     @Override
