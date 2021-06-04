@@ -3,8 +3,10 @@ package viewImpl.Booking;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -45,6 +47,11 @@ import view.Booking.TimeTableViewObserver;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 public class TimeTableViewImpl implements TimeTableView {
+    private static final double WIDTH_PERC_FRAME = 0.5;
+    private static final double HEIGTH_PERC_FRAME = 0.5;
+    private static final double WIDTH_MINIMUN_FRAME = WIDTH_PERC_FRAME /1;
+    private static final double HEIGTH_MINMUN_FRAME = HEIGTH_PERC_FRAME / 0.9;
+    
     private static final String TITLE = "Time Tabel Film";
     private static final String TEXT_BUTTON_SELECT = "Select";
     private static final String INFO_STRING = "Select a schedule from:";
@@ -60,7 +67,9 @@ public class TimeTableViewImpl implements TimeTableView {
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         this.observer = observer;
         this.frame = factory.getBaseFrame(TITLE);
-            
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUN_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUN_FRAME)));
+
         JPanel north = factory.getInfoPanel(INFO_STRING + NAME, e -> {
             observer.showBackFromTimeTable();
             frame.dispose();
@@ -157,6 +166,7 @@ public class TimeTableViewImpl implements TimeTableView {
         mainPanel.add(scroll, BorderLayout.CENTER);
         mainPanel.add(bookBtn, BorderLayout.SOUTH);
         frame.add(mainPanel);
+        
     }
     
     @Override

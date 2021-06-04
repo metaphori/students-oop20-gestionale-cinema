@@ -37,9 +37,9 @@ import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 public class ListFilmViewImpl implements ListFilmView{
 
     private static final double WIDTH_PERC_FRAME = 0.5;
-    private static final double HEIGHT_PERC_FRAME = 0.5;
-    private static final double WIDTH_IMAGE_COVER = WIDTH_PERC_FRAME / 5;
-    private static final double HEIGHT_IMAGE_COVER = HEIGHT_PERC_FRAME / 2;
+    private static final double HEIGTH_PERC_FRAME = 0.5;
+    private static final double WIDTH_MINIMUN_FRAME = WIDTH_PERC_FRAME /3;
+    private static final double HEIGTH_MINMUN_FRAME = HEIGTH_PERC_FRAME / 1;
     private static final String FS = File.separator;
     private static final String PATH = System.getProperty("user.home") +  FS + "OOPcinemaFile" + FS + "aquaman.jpg"; 
     private static final long serialVersionUID = 1L;
@@ -64,7 +64,7 @@ public class ListFilmViewImpl implements ListFilmView{
         final JPanel centralPanel = factoryPanel.getFilmPanel(map, setFilm);
         final JScrollPane scroller = new JScrollPane(centralPanel);
         frame.getContentPane().add(mainPanel);
-        frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_IMAGE_COVER), (int) (screenSize.getHeight() * HEIGHT_IMAGE_COVER)));
+        frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUN_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUN_FRAME)));
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(scroller, BorderLayout.CENTER);
         for (final var bt : map.keySet()) {

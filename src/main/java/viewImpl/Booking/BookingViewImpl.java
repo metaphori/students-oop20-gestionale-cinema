@@ -41,22 +41,33 @@ public class BookingViewImpl implements BookingView {
     private Map<JButton, SeatImpl<Row, Integer>> grid = new HashMap<>();
     
     private static final double WIDTH_PERC_FRAME = 0.5;
-    private static final double HEIGHT_PERC_FRAME = 0.5;
+    private static final double HEIGTH_PERC_FRAME = 0.5;
    
     private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
-    private static final double HEIGHT_IMAGE_SEAT = HEIGHT_PERC_FRAME/ 15;
+    private static final double HEIGHT_IMAGE_SEAT = HEIGTH_PERC_FRAME/ 15;
     
-    private static final double HEIGHT_IMAGE_LEGEND = HEIGHT_PERC_FRAME/ 5;
+    private static final double HEIGHT_IMAGE_LEGEND = HEIGTH_PERC_FRAME/ 5;
     private static final double WIDTH_IMAGE_LEGEND = WIDTH_PERC_FRAME / 5;
+    
+    
+    private static final double WIDTH_MINIMUN_FRAME = WIDTH_PERC_FRAME /0.7;
+    private static final double HEIGTH_MINMUN_FRAME = HEIGTH_PERC_FRAME / 0.7;
     
     private int col;
     private Row row;
     public BookingViewImpl(BookingViewObserver observer, ProgrammedFilm film) {
-        System.out.println("Film" + film);
+       
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
         this.film = film;
         this.frame = factory.getBaseFrame(TITLE);
         this.observer = observer;
+
+
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUN_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUN_FRAME)));
+
+        
+        
         observer.newBooking();
         JPanel mainPanel = new JPanel(new BorderLayout()); 
         JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
@@ -105,7 +116,7 @@ public class BookingViewImpl implements BookingView {
         mainPanel.add(center, BorderLayout.CENTER);
         mainPanel.add(bookBt, BorderLayout.SOUTH);
       
-        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+       
         ImageIcon imageLegend = new ImageIcon(ClassLoader.getSystemResource("images/leggenda.png"));
         int width =(int) (screenSize.getWidth() * WIDTH_IMAGE_LEGEND);
         int height = (int) (screenSize.getHeight() * HEIGHT_IMAGE_LEGEND);
