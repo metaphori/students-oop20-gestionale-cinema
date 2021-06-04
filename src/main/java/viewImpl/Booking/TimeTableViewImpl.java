@@ -49,8 +49,8 @@ import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 public class TimeTableViewImpl implements TimeTableView {
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGTH_PERC_FRAME = 0.5;
-    private static final double WIDTH_MINIMUN_FRAME = WIDTH_PERC_FRAME /1;
-    private static final double HEIGTH_MINMUN_FRAME = HEIGTH_PERC_FRAME / 0.9;
+    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME /1;
+    private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 0.9;
     
     private static final String TITLE = "Time Tabel Film";
     private static final String TEXT_BUTTON_SELECT = "Select";
@@ -68,7 +68,7 @@ public class TimeTableViewImpl implements TimeTableView {
         this.observer = observer;
         this.frame = factory.getBaseFrame(TITLE);
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUN_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUN_FRAME)));
+        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
 
         JPanel north = factory.getInfoPanel(INFO_STRING + NAME, e -> {
             observer.showBackFromTimeTable();
@@ -178,7 +178,7 @@ public class TimeTableViewImpl implements TimeTableView {
         JOptionPane.showMessageDialog(frame, "Not selected row", 
                 "Incorrect Row", JOptionPane.ERROR_MESSAGE);
     }
-    public void refresh(final JTable table, final Collection<ProgrammedFilm> list) {
+    private void refresh(final JTable table, final Collection<ProgrammedFilm> list) {
         GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         table.setModel(factory.getModel(list));
         DefaultTableModel model = (DefaultTableModel) table.getModel();

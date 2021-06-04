@@ -38,8 +38,8 @@ public class ListFilmViewImpl implements ListFilmView{
 
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGTH_PERC_FRAME = 0.5;
-    private static final double WIDTH_MINIMUN_FRAME = WIDTH_PERC_FRAME /3;
-    private static final double HEIGTH_MINMUN_FRAME = HEIGTH_PERC_FRAME / 1;
+    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME /3;
+    private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 1;
     private static final String FS = File.separator;
     private static final String PATH = System.getProperty("user.home") +  FS + "OOPcinemaFile" + FS + "aquaman.jpg"; 
     private static final long serialVersionUID = 1L;
@@ -48,7 +48,7 @@ public class ListFilmViewImpl implements ListFilmView{
     private ListFilmViewObserver observer;
     private final JFrame frame;
     private final Map<JButton, Film> map = new HashMap<>();
-
+    
     public ListFilmViewImpl(final ListFilmViewObserver observer) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.observer = observer;
@@ -64,7 +64,7 @@ public class ListFilmViewImpl implements ListFilmView{
         final JPanel centralPanel = factoryPanel.getFilmPanel(map, setFilm);
         final JScrollPane scroller = new JScrollPane(centralPanel);
         frame.getContentPane().add(mainPanel);
-        frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUN_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUN_FRAME)));
+        frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(scroller, BorderLayout.CENTER);
         for (final var bt : map.keySet()) {
@@ -74,8 +74,16 @@ public class ListFilmViewImpl implements ListFilmView{
                frame.dispose();
             });
         }
+        
     }
     public void show() {
         frame.setVisible(true);
+    }
+   
+    public void check() {
+        if(map.values().isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Not selected row", 
+                    "Incorrect Row", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

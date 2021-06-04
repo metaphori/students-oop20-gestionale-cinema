@@ -44,6 +44,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private  BookingModel model;
     private final String FS = File.separator;
     private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BF.json";
+    private ListFilmView viewFilm;
+    private TimeTableView viewTimeTable;
+    private BookingView viewBooking;
+    
     Set<Film> setF;
     Set<ProgrammedFilm> setP;
     
@@ -89,16 +93,17 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         this.showListFilmView();
     }
     private void showListFilmView() {
-          final ListFilmView viewFilm = new ListFilmViewImpl(this);
+          this.viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
+          viewFilm.check();
     }
     private void showTimeTableView(Set<ProgrammedFilm> setProgrammedFilm) {
-        final TimeTableView viewTimeTable = new TimeTableViewImpl(this,setProgrammedFilm);
+       this.viewTimeTable = new TimeTableViewImpl(this,setProgrammedFilm);
         viewTimeTable.show();
     } 
     
     private void showBookingView(ProgrammedFilm film) {
-        final BookingView viewBooking = new BookingViewImpl(this,film);
+        this.viewBooking = new BookingViewImpl(this,film);
         viewBooking.show();
     }
     @Override

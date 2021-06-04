@@ -121,6 +121,7 @@ public class Cinema {
         setP.add(p8);
         setP.add(p9);
         System.out.println(setP);
+
         BookingController b = new BookingControllerImpl(set,setP);
         b.start();
 

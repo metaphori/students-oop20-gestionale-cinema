@@ -50,8 +50,8 @@ public class BookingViewImpl implements BookingView {
     private static final double WIDTH_IMAGE_LEGEND = WIDTH_PERC_FRAME / 5;
     
     
-    private static final double WIDTH_MINIMUN_FRAME = WIDTH_PERC_FRAME /0.7;
-    private static final double HEIGTH_MINMUN_FRAME = HEIGTH_PERC_FRAME / 0.7;
+    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME /0.7;
+    private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 0.7;
     
     private int col;
     private Row row;
@@ -64,7 +64,7 @@ public class BookingViewImpl implements BookingView {
 
 
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUN_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUN_FRAME)));
+        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
 
         
         
