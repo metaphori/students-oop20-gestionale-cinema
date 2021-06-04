@@ -38,6 +38,11 @@ public class FilmsControllerImpl implements FilmsController {
         this.infoFilms.setObserver(this);
 
     }
+    
+    
+    
+    
+    
 
     public FilmsControllerImpl(final Set<Film> set, final ManagerIdsFilms managerIdsFilm) { // IT'S A TEST !!!!!!!!!!!!!!!!!!
         model = new ContainerFilmsModelImpl(set, managerIdsFilm);

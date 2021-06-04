@@ -19,6 +19,7 @@ import java.time.LocalTime;
 import java.util.EventObject;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -46,6 +47,7 @@ import com.mindfusion.scheduling.Calendar;
 import com.mindfusion.scheduling.CalendarView;
 import com.mindfusion.scheduling.ThemeType;
 
+import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import model.ManageProgrammingFilms.HandlerList;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
@@ -89,8 +91,10 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         private final Calendar calendar;
         private final JTable table;
         private ProgrammingFilmsController observer;
+        private FilmsController filmsController;
         
-        public ProgrammingFilmsGUIimpl() {     
+
+        public ProgrammingFilmsGUIimpl() {    
         
         final JPanel mainPanel = factory.createPanel(new BorderLayout());
         
@@ -111,7 +115,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         calendar.getSelection().addChangeListener(new ChangeListener(){
             @Override
-            public void changed(EventObject e) {
+            public void changed(final EventObject e) {
                     System.out.println(getCalendarSelectionDate());
                     onSelectionChanged();	
                 }
@@ -138,7 +142,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
 	
 	addProgrammation.addActionListener(event -> {
 	    
-	    frame.setVisible(false);
+	    //frame.setVisible(false);
 	    observer.showScheduleFilmView();	    
 	});
 	
@@ -192,7 +196,11 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             */
             final Object [][] data = new Object[manipulatedList.size()][columnsNumber];
             for(int i=0; i< manipulatedList.size();i++) {
-                data[i][0] = manipulatedList.get(i).getIdProgrammation();
+                
+                //data[i][0] = manipulatedList.get(i).getIdProgrammation(); // QUI VA INSERITO IL NOME DEL FILM CORRISPONDENTE AL FILM
+                final int id =  manipulatedList.get(i).getIdProgrammation();
+                filmsController.getFilms().stream().filter(film -> film.getID() == id).collect(Collectors.toList()).get(0).getName();
+                
                 data[i][1] = manipulatedList.get(i).getHall();
                 data[i][2] = manipulatedList.get(i).getStartTime();
                 data[i][3] = manipulatedList.get(i).getEndTime();
@@ -229,6 +237,12 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         public void update() {
             this.onSelectionChanged(); //update table
             
+        }
+
+
+        @Override
+        public void setFilmsController(FilmsController filmsController) {
+            filmsController = filmsController;
         }
         
         

@@ -30,6 +30,7 @@ import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Factory.FilmFactory;
+import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
 import utilities.Factory.TimeSlotFactory;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
@@ -56,22 +57,14 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 	
 	private final ScheduleFilmsFactory factory = new ScheduleFilmsFactoryImpl();
 	
-	private ProgrammingFilmsController observer ;
+	protected ProgrammingFilmsController observer ;
 	private final FilmsController filmsController ;
 
-	public ScheduleFilmGUIimpl() {
+	public ScheduleFilmGUIimpl(final FilmsController filmsController) {
 	    
+	    this.filmsController = filmsController;
 	    final JPanel mainPanel = new JPanel(new BorderLayout());
 	    final JPanel dateTimePanel = new JPanel(new BorderLayout());
-	    
-	    
-	    //TEST init controller
-	    FilmFactory filmFactory = new FilmFactoryImpl(new ManagerIdsFilmImpl(new IdsGeneratorImpl()));
-	    filmsController = new FilmsControllerImpl();
-	    filmsController.addFilm(filmFactory.createBasicFilm("Spiderman", "", "", Optional.ofNullable(null), 40));
-	    filmsController.addFilm(filmFactory.createBasicFilm("Batman", "", "", Optional.ofNullable(null), 40));
-	    filmsController.addFilm(filmFactory.createBasicFilm("Thor", "", "", Optional.ofNullable(null), 40));
-	    
 	   
 	    
 	    mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -104,12 +97,12 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 		
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setLocationRelativeTo(null);
-	    frame.setVisible(true);
 	}
 
     @Override
     public void start() {
-        frame.setLocationByPlatform(true);
+        //frame.setLocationByPlatform(true);
+        this.update();
         frame.setVisible(true);   
     }
 
@@ -120,46 +113,60 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
     @Override
     public void update() {
-       
-        
+        //devo aggiornare la lista dei film e la lista delle
+        infoProgrammation.update();
     }
     
     
     
     private class ScheduleButtonListener implements ActionListener {
-        ProgrammedFilmFactory programmedFilmFactory = new ProgrammedFilmFactoryImpl();
         
+        
+        final private ProgrammedFilmFactory programmedFilmFactory = new ProgrammedFilmFactoryImpl();
+       
+
         public void actionPerformed(final ActionEvent ae) {
             Film selectedFilm;
             LocalDate selectedDate;
             LocalTime selectedTime;
             int selectedHall;
             double selectedPrice;
+            
             try {
                     selectedDate = dateSelector.getDate();
                     selectedTime = timeSelector.getTime();
                     selectedHall =  Integer.parseInt(infoProgrammation.getHall());
                     selectedPrice = Double.parseDouble(infoProgrammation.getPrice());
                     selectedFilm = infoProgrammation.getSelectedFilm();
+                    
+                    try {     
+                        
+                        final ProgrammedFilm film = programmedFilmFactory.createProgrammedFilm(selectedFilm.getID(), selectedHall, selectedPrice, selectedDate, selectedTime, selectedTime.plusHours(selectedFilm.getDuration()));
+                        observer.addProgrammedFilm(film);
+                    } catch (final ProgrammationNotAvailableException e) {
+                        JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
+                    }
                     JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
-             } catch (Exception e) {
-                    JOptionPane.showMessageDialog(frame,e.getMessage(), "Invalid Data",JOptionPane.ERROR_MESSAGE);
+             } catch (final Exception e) {
+                    JOptionPane.showMessageDialog(frame,"Insert all fields", "Invalid Data",JOptionPane.ERROR_MESSAGE);
              }  
-           
-            try {
-                    observer.addProgrammedFilm(null);
-            } catch (ProgrammationNotAvailableException e) {
-                    JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
-            }
 
     }
 
     }
 
 
+
+    @Override
+    public void setFilmsController(FilmsController filmsController) {
+        // TODO Auto-generated method stub
+        
+    }
+
+/*
     public static void main(String [] args) {
-        ScheduleFilmGUIimpl s = new ScheduleFilmGUIimpl();
-    }
+        //ScheduleFilmGUIimpl s = new ScheduleFilmGUIimpl();
+    }*/
 
 }
 

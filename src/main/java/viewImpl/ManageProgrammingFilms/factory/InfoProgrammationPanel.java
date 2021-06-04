@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,7 +40,7 @@ public class InfoProgrammationPanel extends JPanel {
 	private static final int vGapGrid = 5;
 	
 	final private JTextField price;
-	private JComboBox films;
+	private JComboBox films = new JComboBox<>();
 	final private JComboBox halls;
 	
 	private FilmsController filmsController;
@@ -47,7 +48,7 @@ public class InfoProgrammationPanel extends JPanel {
 	
 	private Map<Integer,Film > map = new HashMap<>(); // map selectedIndexItem to filmId
 
-	InfoProgrammationPanel( final FilmsController filmsController) {
+	InfoProgrammationPanel(final FilmsController filmsController) {
 	    this.filmsController = filmsController;
 		//hallsController = new HallsControllerImpl();
 	        List<String> hallsNumber = new ArrayList<>();
@@ -151,6 +152,7 @@ public class InfoProgrammationPanel extends JPanel {
                 map.put(i, film);
                 i++;
             }
+            System.out.print(map);
 	}
 	
 	private void fillComboBox() {
@@ -158,11 +160,19 @@ public class InfoProgrammationPanel extends JPanel {
 	    for(final Film film: map.values()) {
 	       list.add(film.getName() +" id: " + film.getID()) ;
 	    }
-	    films = new JComboBox(list.toArray());
+	    films.setModel(new DefaultComboBoxModel(list.toArray()));
+	  ///  films.addItem(list);
+	   // films = new JComboBox<>(list.toArray());
+	    
 	}
 	
 	public Film getSelectedFilm() {
         return map.get(this.getSelectedIndex());
 	    
+	}
+	
+	public void update() {
+	    this.fillMap();
+	    this.fillComboBox();
 	}
 }

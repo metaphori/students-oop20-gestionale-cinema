@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import controllerImpl.ManageFilms.FilmsControllerImpl;
 import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import model.ManageProgrammingFilms.ProgrammedFilmsModel;
@@ -20,16 +22,21 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     final private ProgrammingFilmsGUI filmsProgrammationView;
     final private ScheduleFilmsGUI scheduleFilmView;
     final private ProgrammedFilmsModel programmedFilmsModel;
+    final private FilmsController filmsController;
     
     
-    public ProgrammingFilmsControllerImpl() {
+    public ProgrammingFilmsControllerImpl() { // to test 
+        this.filmsController = new FilmsControllerImpl();
         filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
-        scheduleFilmView = new ScheduleFilmGUIimpl();
+        filmsProgrammationView.setFilmsController(filmsController);
+        
+        scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         programmedFilmsModel = new ProgrammedFilmsModelImpl();
         
         filmsProgrammationView.setObserver(this);
         scheduleFilmView.setObserver(this);
     }
+    
 
     @Override
     public List<ProgrammedFilm> getAllProgrammedFilms() {
@@ -55,17 +62,22 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     @Override
     public void showMenu() {
         
-        
     }
 
     @Override
     public void showScheduleFilmView() {
-   
+        scheduleFilmView.start();
     }
 
     @Override
     public ManagerProgrammingFilms getManagerProgrammingFilms() {
         return this.programmedFilmsModel.getManagerProgrammingFilms();
+    }
+
+
+    @Override
+    public FilmsController getFilmsController() {
+        return this.filmsController;
     }
 
 }

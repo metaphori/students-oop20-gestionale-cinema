@@ -38,8 +38,10 @@ public class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel{
         TimeSlot timeSlot = timeSlotFactory.createTimeSlot(programmedFilm.getStartTime(), programmedFilm.getEndTime());
         if(!this.isAvailableProgrammation(timeSlot, programmedFilm.getDate(), programmedFilm.getHall())) {
            throw new ProgrammationNotAvailableException();
+        }else {
+            programmedFilms.add(programmedFilm); 
         }
-        programmedFilms.add(programmedFilm);
+        
     }
 
     @Override

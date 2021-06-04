@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import controller.ManageFilms.FilmsController;
 import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import utilities.Factory.ProgrammedFilm;
@@ -19,4 +20,5 @@ public interface ProgrammingFilmsController {
 	void showProgrammedFilmView();
 	void showScheduleFilmView();
 	void showMenu();	
+	FilmsController getFilmsController();
 }

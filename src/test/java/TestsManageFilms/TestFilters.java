@@ -11,7 +11,6 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
-import controllerImpl.InputOutput.RWfile;
 import controllerImpl.InputOutput.RWobject;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageProgrammingFilms.HandlerList;
@@ -51,10 +50,10 @@ class TestFilters {
         final LocalTime et3 = LocalTime.of(8, 29);
         
         final ProgrammedFilmFactoryImpl factory = new ProgrammedFilmFactoryImpl();
-        final ProgrammedFilm pf1 = factory.creteProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        final ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 9, 56, ld2, st2, et2);
-        final ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 1, 56, ld3, st3, et3);
-        final ProgrammedFilm pf4 = factory.creteProgrammedFilm(15, 9, 56, ld2, st3, et3);
+        final ProgrammedFilm pf1 = factory.createProgrammedFilm(12, 8, 56, ld1, st1, et1);
+        final ProgrammedFilm pf2 = factory.createProgrammedFilm(13, 9, 56, ld2, st2, et2);
+        final ProgrammedFilm pf3 = factory.createProgrammedFilm(14, 1, 56, ld3, st3, et3);
+        final ProgrammedFilm pf4 = factory.createProgrammedFilm(15, 9, 56, ld2, st3, et3);
         
         final List<ProgrammedFilm> list = new ArrayList<>();
         list.add(pf1);

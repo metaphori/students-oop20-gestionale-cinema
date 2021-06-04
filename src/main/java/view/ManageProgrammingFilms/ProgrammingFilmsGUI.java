@@ -13,5 +13,6 @@ public interface ProgrammingFilmsGUI {
     void start();
     void setObserver(ProgrammingFilmsController observer);
     void update();
+    void setFilmsController(FilmsController filmsController);
     
 }
