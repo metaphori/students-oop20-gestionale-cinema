@@ -178,7 +178,7 @@ public class InfoProgrammationPanel extends JPanel {
 	
 	public void reset() {
 	   this.setPrice(defaultStringPrice); 
-	   this.halls.setSelectedIndex(0);
-	   this.films.setSelectedIndex(0);
+	   this.halls.setSelectedItem(null);
+	   this.films.setSelectedItem(null);
 	}
 }

@@ -56,7 +56,7 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     }
     
     
-    public ProgrammingFilmsControllerImpl(FilmsController filmsController) {
+    public ProgrammingFilmsControllerImpl(final FilmsController filmsController) {
         
         this.filmsController = filmsController;
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
