@@ -57,6 +57,9 @@ public class TimeTableViewImpl implements TimeTableView {
     private static final String INFO_STRING = "Select a schedule from:";
     private static final String BTN_FILTER_STRING = "Apply";
     private static final String CHECKBOX_TITLE = "Order by:";
+    private static final String CALENDAR_STRING = "Filter by date: ";
+    private static final Color COLOR_STRING = Color.BLACK;
+    
     private TimeTableViewObserver observer;
     private JFrame frame;
    
@@ -120,7 +123,7 @@ public class TimeTableViewImpl implements TimeTableView {
 
         JPanel panelCheckBoxInternal = new JPanel();
         JLabel labelCheckBox = new JLabel(CHECKBOX_TITLE);
-        labelCheckBox.setForeground(Color.BLACK);
+        labelCheckBox.setForeground(COLOR_STRING);
         panelCheckBox.add(labelCheckBox, BorderLayout.NORTH);
         panelCheckBoxInternal.add(jcb1);
         panelCheckBoxInternal.add(jcb2);
@@ -135,7 +138,9 @@ public class TimeTableViewImpl implements TimeTableView {
         final ProgrammingFilmsGUIfactoryImpl fctFilm = new ProgrammingFilmsGUIfactoryImpl();
         final Calendar calendar = fctFilm.createCalendar(); 
         panelCalendar.add(calendar, BorderLayout.CENTER);
-        panelCalendar.add(new Label("Filter by date"), BorderLayout.NORTH);
+        JLabel labelCalendar = new JLabel(CALENDAR_STRING);
+        labelCalendar.setForeground(COLOR_STRING);
+        panelCalendar.add(labelCalendar, BorderLayout.NORTH);
 
         filterPanel.add(panelCalendar, BorderLayout.NORTH);
         filterPanel.add(panelCheckBox, BorderLayout.CENTER);
