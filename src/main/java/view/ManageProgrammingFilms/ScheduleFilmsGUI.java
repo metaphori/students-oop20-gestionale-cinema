@@ -8,4 +8,5 @@ public interface ScheduleFilmsGUI {
     void setObserver(ProgrammingFilmsController observer);
     void update();
     void setFilmsController(FilmsController filmsController);
+    void reset();
 }

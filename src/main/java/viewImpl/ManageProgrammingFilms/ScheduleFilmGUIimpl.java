@@ -144,8 +144,12 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
                         final ProgrammedFilm film = programmedFilmFactory.createProgrammedFilm(selectedFilm.getID(), selectedHall, selectedPrice, selectedDate, selectedTime, selectedTime.plusMinutes(selectedFilm.getDuration()));
                         observer.addProgrammedFilm(film);
                         JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
+                        //JOptionPane.showConfirmDialog(frame, "Film has been scheduled");
+                        
+                        
                     } catch (final ProgrammationNotAvailableException e) {
                         JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
+                        
                     }
                    
              } catch (final Exception e) {
@@ -163,6 +167,11 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
     @Override
     public void setFilmsController(FilmsController filmsController) {
         this.filmsController = filmsController;
+        
+    }
+
+    @Override
+    public void reset() {
         
     }
 

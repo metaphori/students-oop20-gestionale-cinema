@@ -5,11 +5,15 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +21,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.EventObject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -29,7 +35,10 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -93,6 +102,8 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         private ProgrammingFilmsController observer;
         private FilmsController filmsController;
         
+        private Map<Integer,ProgrammedFilm> map ;// map row number to ProgrammedFilm
+        
 
         public ProgrammingFilmsGUIimpl() {    
         
@@ -103,10 +114,14 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         final JPanel westPanel = factory.createPanel(new BorderLayout());
         
         final JPanel optionPanel = factory.createPanel(null);
+        map = new HashMap<>();
            
         final Object[][] data = new Object[1][4]; // row columns        
       
         table = factory.createTable(columnNames, data);
+        
+        
+        
         final JScrollPane scrollPane = new JScrollPane(table);
         
         centerPanel.add(scrollPane, BorderLayout.CENTER);
@@ -142,14 +157,26 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
 	
 	addProgrammation.addActionListener(event -> {
 	    
-	    //frame.setVisible(false);
 	    observer.showScheduleFilmView();	    
 	});
 	
 	
 	
-	
-		
+	table.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                final JTable table =(JTable) mouseEvent.getSource();
+                final int clickCount = mouseEvent.getClickCount() ;
+                final int selectedRow = table.getSelectedRow();
+                if (clickCount == 2 && selectedRow != -1) {
+                   
+                    int option = JOptionPane.showConfirmDialog(frame,"Do you want delete this selected programmation?","Deleting",JOptionPane.YES_NO_OPTION);
+                    if(option == 0) { // yes 0 option , no 1 option 
+                       observer.deleteProgrammedFilm(map.get(selectedRow)); 
+                    } 
+                }
+            }   
+        });
+        	
 		
         frame.pack();
         frame.setMinimumSize(new Dimension(screenWidth/2,screenHeight/2));
@@ -167,9 +194,9 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             final HandlerList<ProgrammedFilm> handler = observer.getManagerProgrammingFilms().getHandlerList();
            
             final List<ProgrammedFilm> filtByDate = handler.filterBy(list, new FilterByDateImpl(selectedDate)); // filter for selected date
-            System.out.println(filtByDate);
+            //System.out.println(filtByDate);
             final List<ProgrammedFilm> sortByTime = handler.sortBy(filtByDate, new SorterByTimeImpl());
-            System.out.println(sortByTime);
+            //System.out.println(sortByTime);
             
             this.fillDataTable(sortByTime);	
             
@@ -194,18 +221,20 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             /*ProgrammingFilmsController controller; // CREO UN'ISTANZA CON TUTTI I DATI DEI FILM
             //FACCIO UNA RICERCA SELL'ID PER TROVARE IL NOME CORRELATO
             */
+            map.clear(); // empty map
             final Object [][] data = new Object[manipulatedList.size()][columnsNumber];
             for(int i=0; i< manipulatedList.size();i++) {
                 
                 //data[i][0] = manipulatedList.get(i).getIdProgrammation(); // QUI VA INSERITO IL NOME DEL FILM CORRISPONDENTE AL FILM
                 final int id =  manipulatedList.get(i).getIdProgrammation();
-                System.out.println(filmsController.getFilms());
                 data[i][0] = filmsController.getFilms().stream().filter(film -> film.getID() == id).collect(Collectors.toList()).get(0).getName();
                 data[i][1] = manipulatedList.get(i).getHall();
                 data[i][2] = manipulatedList.get(i).getStartTime();
                 data[i][3] = manipulatedList.get(i).getEndTime();
+                map.put(i, manipulatedList.get(i));
+                
             }
-             
+            
             final DefaultTableModel modelNew = new DefaultTableModel(data, columnNames);
             table.setModel(modelNew);
            
@@ -244,6 +273,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         public void setFilmsController(final FilmsController filmsController) {
             this.filmsController = filmsController;
         }
+        
         
         
 }
