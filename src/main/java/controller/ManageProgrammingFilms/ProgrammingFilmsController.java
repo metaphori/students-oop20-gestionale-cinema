@@ -8,6 +8,7 @@ import java.util.List;
 import controller.ManageFilms.FilmsController;
 import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
+import utilities.Film;
 import utilities.Factory.ProgrammedFilm;
 
 public interface ProgrammingFilmsController {
@@ -21,4 +22,5 @@ public interface ProgrammingFilmsController {
 	void showScheduleFilmView();
 	void showMenu();
 	FilmsController getFilmsController();
+	void deleteAllFilmProgrammation(Film film);
 }

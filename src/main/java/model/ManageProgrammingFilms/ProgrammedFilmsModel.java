@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 import exceptions.ProgrammationNotAvailableException;
+import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
@@ -15,7 +16,7 @@ public interface ProgrammedFilmsModel{
     boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, int hall);
     List<ProgrammedFilm> getAllProgrammedFilm();
     ManagerProgrammingFilms getManagerProgrammingFilms();
-    
+    void deleteAllFilmProgrammation(Film film);
    
     
 }

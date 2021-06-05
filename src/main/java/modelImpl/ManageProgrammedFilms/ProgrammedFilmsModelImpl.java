@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import model.ManageProgrammingFilms.ProgrammedFilmsModel;
+import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.TimeSlotFactory;
@@ -60,6 +61,10 @@ public class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel{
     @Override
     public ManagerProgrammingFilms getManagerProgrammingFilms() {
         return this.manager;
+    }
+    @Override
+    public void deleteAllFilmProgrammation(final Film film) {
+       this.programmedFilms.removeIf(pf -> pf.getIdProgrammation() == film.getID());
     }
     
 

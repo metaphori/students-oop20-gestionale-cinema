@@ -55,6 +55,27 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
         scheduleFilmView.setObserver(this);
     }
     
+    
+    public ProgrammingFilmsControllerImpl(FilmsController filmsController) {
+        
+        this.filmsController = filmsController;
+        final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
+
+        if(programmedFilms.isEmpty()) {
+            programmedFilmsModel = new ProgrammedFilmsModelImpl();
+            
+        }else {
+            programmedFilmsModel = new ProgrammedFilmsModelImpl(programmedFilms.get());
+        }
+        
+        filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
+        filmsProgrammationView.setFilmsController(filmsController);
+        filmsProgrammationView.setObserver(this);
+        
+        scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
+        scheduleFilmView.setObserver(this);
+    }
+    
 
     @Override
     public List<ProgrammedFilm> getAllProgrammedFilms() {
@@ -110,6 +131,14 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
         final RWobject<List<ProgrammedFilm>> rw = new RWobjectImpl<>(GeneralSettings.PROGRAMMEDFILMSPATH);
         final var type = new TypeToken<List<ProgrammedFilm>>() {}.getType();
         return rw.readObj(type);
+    }
+
+
+    @Override
+    public void deleteAllFilmProgrammation(final Film film) {
+        this.programmedFilmsModel.deleteAllFilmProgrammation(film);
+        this.writeProgrammedFilmsOnFile();
+        
     }
 
 }

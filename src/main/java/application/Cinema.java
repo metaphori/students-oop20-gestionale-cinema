@@ -176,6 +176,7 @@ public class Cinema {
         
         ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
         programmingFilmsController.showProgrammedFilmView();
+        
 
     }
     
