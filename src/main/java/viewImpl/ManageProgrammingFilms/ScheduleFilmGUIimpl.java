@@ -117,6 +117,32 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
         //devo aggiornare la lista dei film e la lista delle
         infoProgrammation.update();
     }
+    
+    private void checkDateTime(final LocalTime time ,final  LocalDate date) throws IllegalArgumentException {
+        if(date.isEqual(LocalDate.now()) && time.getHour() < LocalTime.now().getHour()) {
+            throw new IllegalArgumentException("Cannot schedule in the past, please change time");
+        } 
+        if(date.isEqual(LocalDate.now()) && time.getHour() == LocalTime.now().getHour()  && time.getMinute() < LocalTime.now().getMinute()) {
+            throw new IllegalArgumentException("Cannot schedule in the past, please change time");
+        } 
+        
+       
+    }
+
+    @Override
+    public void setFilmsController(FilmsController filmsController) {
+        this.filmsController = filmsController;
+        
+    }
+
+    @Override
+    public void reset() {
+        infoProgrammation.reset();
+        dateSelector.reset();
+        timeSelector.reset();
+    }
+    
+    
     private class ScheduleButtonListener implements ActionListener {
         
         
@@ -145,10 +171,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
                         //JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
                         int input = JOptionPane.showOptionDialog(frame, "Film has been scheduled", "Info", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, null, null);
                         frame.setVisible(false);
-                        
-
-                        //JOptionPane.showConfirmDialog(frame, "Film has been scheduled");
-                        
+                        observer.updateGUI();
                         
                     } catch (final ProgrammationNotAvailableException e) {
                         JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
@@ -165,29 +188,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
     }
 
-    private void checkDateTime(final LocalTime time ,final  LocalDate date) throws IllegalArgumentException {
-        if(date.isEqual(LocalDate.now()) && time.getHour() < LocalTime.now().getHour()) {
-            throw new IllegalArgumentException("Cannot schedule in the past, please change time");
-        } 
-        if(date.isEqual(LocalDate.now()) && time.getHour() == LocalTime.now().getHour()  && time.getMinute() < LocalTime.now().getMinute()) {
-            throw new IllegalArgumentException("Cannot schedule in the past, please change time");
-        } 
-        
-       
-    }
 
-    @Override
-    public void setFilmsController(FilmsController filmsController) {
-        this.filmsController = filmsController;
-        
-    }
-
-    @Override
-    public void reset() {
-        infoProgrammation.reset();
-        dateSelector.reset();
-        timeSelector.reset();
-    }
 
 /*
     public static void main(String [] args) {

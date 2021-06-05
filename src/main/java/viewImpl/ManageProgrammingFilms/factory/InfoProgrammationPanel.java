@@ -176,9 +176,6 @@ public class InfoProgrammationPanel extends JPanel {
 	       list.add(film.getName() +" id: " + film.getID()) ;
 	    }
 	    films.setModel(new DefaultComboBoxModel(list.toArray()));
-	  ///  films.addItem(list);
-	   // films = new JComboBox<>(list.toArray());
-	    
 	}
 	
 	public Film getSelectedFilm() throws IllegalArgumentException {

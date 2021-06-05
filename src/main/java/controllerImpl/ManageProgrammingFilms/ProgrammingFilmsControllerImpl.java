@@ -141,4 +141,10 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
         
     }
 
+
+    @Override
+    public void updateGUI() {
+        filmsProgrammationView.update();
+    }
+
 }

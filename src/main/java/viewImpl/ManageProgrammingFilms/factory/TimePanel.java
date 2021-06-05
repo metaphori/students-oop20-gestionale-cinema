@@ -61,12 +61,6 @@ public class TimePanel extends JPanel {
 		if (hour < 0 || hour > 23) {
 			throw new IllegalArgumentException("Hours must be between 0 to 23!");
 		}
-		/*
-		if (hour < LocalTime.now().getHour()) {
-                    throw new IllegalArgumentException(
-                                    "You cannot schedule in the past, please change hour ");
-                }
-		*/
 		return hour;
 	}
 
@@ -81,14 +75,7 @@ public class TimePanel extends JPanel {
 		if (min < 0 || min > 59) {
 			throw new IllegalArgumentException(
 					"Minutes must be between 0 and 59!");
-		}
-		/*
-		if (min < LocalTime.now().getMinute()) {
-		    throw new IllegalArgumentException(
-                            "You cannot schedule in the past, please change minutes");
-		}*/
-		
-		
+		}		
 		return min;
 	}
 

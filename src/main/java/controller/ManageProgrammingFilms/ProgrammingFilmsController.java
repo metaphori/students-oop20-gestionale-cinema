@@ -23,4 +23,5 @@ public interface ProgrammingFilmsController {
 	void showMenu();
 	FilmsController getFilmsController();
 	void deleteAllFilmProgrammation(Film film);
+	void updateGUI();
 }
