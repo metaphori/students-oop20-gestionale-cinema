@@ -111,12 +111,27 @@ public class InfoProgrammationPanel extends JPanel {
 		price.selectAll();
 	}
 	
-	public String getHall() {
-		return  halls.getSelectedItem().toString();
+	public String getHall() throws IllegalArgumentException {
+	    String selectedHall;
+	        try {
+	            selectedHall = halls.getSelectedItem().toString();
+	            return selectedHall;
+	        }
+	        catch(Exception e) {
+	            throw new IllegalArgumentException("Please select hall");
+	        }  
 	}
 	
-	public String getFilmName() {
-            return  films.getSelectedItem().toString();
+	public String getFilmName() throws IllegalArgumentException {
+	    String selectedFilm;
+	    try {
+	        selectedFilm = films.getSelectedItem().toString();
+                return selectedFilm;
+            }
+            catch(Exception e) {
+                throw new IllegalArgumentException("Please select film");
+            }  
+              
         }
 	
 	public int getSelectedIndex() {
@@ -166,9 +181,14 @@ public class InfoProgrammationPanel extends JPanel {
 	    
 	}
 	
-	public Film getSelectedFilm() {
-        return map.get(this.getSelectedIndex());
+	public Film getSelectedFilm() throws IllegalArgumentException {
+	    final Film selectedFilm = map.get(this.getSelectedIndex());
 	    
+	    if(selectedFilm != null) {
+	        return selectedFilm ;
+	    }else {
+	        throw new IllegalArgumentException("Please selected a film");
+	    }
 	}
 	
 	public void update() {
