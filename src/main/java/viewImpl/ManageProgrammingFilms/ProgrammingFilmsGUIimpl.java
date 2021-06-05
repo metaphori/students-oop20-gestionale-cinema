@@ -98,7 +98,7 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
         private final JButton home = factory.createButton("Home");
         private final JButton addProgrammation = factory.createButton("Add programmation");
-        private final JButton filterBy = factory.createButton("Filter by");
+        //private final JButton filterBy = factory.createButton("Filter by");
         private final Calendar calendar;
         private final JTable table;
         private ProgrammingFilmsController observer;
@@ -151,9 +151,9 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         optionPanel.add(addProgrammation);
 	addProgrammation.setMaximumSize(new Dimension(250,100)); //width , height
 	addProgrammation.setPreferredSize(new Dimension(250,100));
-	optionPanel.add(filterBy,BorderLayout.CENTER);
-	filterBy.setMaximumSize(new Dimension(250,100)); //width,height 
-	filterBy.setPreferredSize(new Dimension(250,100));
+	//optionPanel.add(filterBy,BorderLayout.CENTER);
+	//filterBy.setMaximumSize(new Dimension(250,100)); //width,height 
+	//filterBy.setPreferredSize(new Dimension(250,100));
 	container.add(mainPanel);
 	
 	
