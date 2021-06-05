@@ -132,7 +132,8 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
             
             try {
                     selectedDate = dateSelector.getDate();
-                    selectedTime = timeSelector.getTime();
+                    selectedTime = timeSelector.getTime(selectedDate);
+                    checkDateTime(selectedTime,selectedDate);
                     selectedHall =  Integer.parseInt(infoProgrammation.getHall());
                     selectedPrice = Double.parseDouble(infoProgrammation.getPrice());
                     selectedFilm = infoProgrammation.getSelectedFilm();
@@ -164,7 +165,16 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
     }
 
-
+    private void checkDateTime(final LocalTime time ,final  LocalDate date) throws IllegalArgumentException {
+        if(date.isEqual(LocalDate.now()) && time.getHour() < LocalTime.now().getHour()) {
+            throw new IllegalArgumentException("Cannot schedule in the past, please change time");
+        } 
+        if(date.isEqual(LocalDate.now()) && time.getHour() == LocalTime.now().getHour()  && time.getMinute() < LocalTime.now().getMinute()) {
+            throw new IllegalArgumentException("Cannot schedule in the past, please change time");
+        } 
+        
+       
+    }
 
     @Override
     public void setFilmsController(FilmsController filmsController) {

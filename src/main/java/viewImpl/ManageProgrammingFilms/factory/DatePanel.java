@@ -75,7 +75,7 @@ public class DatePanel extends JPanel  {
 	}
 	
 	
-	public LocalDate getDate() throws NumberFormatException
+	public LocalDate getDate() throws NumberFormatException, IllegalArgumentException
 	{
 		if (yearTextField.getText().length() != 4)
 		{
@@ -97,10 +97,13 @@ public class DatePanel extends JPanel  {
 		final LocalDate lastDayOfMonth = start.withDayOfMonth(start.lengthOfMonth());
 		
 		final int max = lastDayOfMonth.getDayOfMonth(); // get day of this specific month and year
-		if (day < 1 || day > max)
-		{
+		if (day < 1 || day > max){
 			throw new NumberFormatException
 				("Day must be between 1 and " + max +"!");
+		}
+		
+		if (requestedDate.isBefore(LocalDate.now())) {
+		    throw new IllegalArgumentException("You cannot schedule in the past. Please change date");
 		}
 
 		return requestedDate;

@@ -1,6 +1,7 @@
 package viewImpl.ManageProgrammingFilms.factory;
 
 import java.awt.GridLayout;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
@@ -57,9 +58,15 @@ public class TimePanel extends JPanel {
 			throw new NumberFormatException("Hour must be number!");
 		}
 
-		if (hour < 0 || hour > 23)
-			throw new IllegalArgumentException
-				("Hours must be between 0 to 23!");
+		if (hour < 0 || hour > 23) {
+			throw new IllegalArgumentException("Hours must be between 0 to 23!");
+		}
+		/*
+		if (hour < LocalTime.now().getHour()) {
+                    throw new IllegalArgumentException(
+                                    "You cannot schedule in the past, please change hour ");
+                }
+		*/
 		return hour;
 	}
 
@@ -75,6 +82,13 @@ public class TimePanel extends JPanel {
 			throw new IllegalArgumentException(
 					"Minutes must be between 0 and 59!");
 		}
+		/*
+		if (min < LocalTime.now().getMinute()) {
+		    throw new IllegalArgumentException(
+                            "You cannot schedule in the past, please change minutes");
+		}*/
+		
+		
 		return min;
 	}
 
@@ -100,7 +114,7 @@ public class TimePanel extends JPanel {
 	}
 	
 	
-	public LocalTime getTime() {
+	public LocalTime getTime(final LocalDate date) throws IllegalArgumentException  {    
 	    return LocalTime.of(this.getHour(), this.getMinutes());
 	}
 	
