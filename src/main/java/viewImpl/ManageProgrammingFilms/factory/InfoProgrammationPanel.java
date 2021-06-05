@@ -175,4 +175,10 @@ public class InfoProgrammationPanel extends JPanel {
 	    this.fillMap();
 	    this.fillComboBox();
 	}
+	
+	public void reset() {
+	   this.setPrice(defaultStringPrice); 
+	   this.halls.setSelectedIndex(0);
+	   this.films.setSelectedIndex(0);
+	}
 }

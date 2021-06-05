@@ -103,4 +103,8 @@ public class TimePanel extends JPanel {
 	public LocalTime getTime() {
 	    return LocalTime.of(this.getHour(), this.getMinutes());
 	}
+	
+	public void reset() {
+	    this.setTime(LocalTime.now());
+	}
 }

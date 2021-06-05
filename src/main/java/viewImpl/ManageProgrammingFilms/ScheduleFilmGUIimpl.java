@@ -103,6 +103,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
     public void start() {
         //frame.setLocationByPlatform(true);
         this.update();
+        this.reset();
         frame.setVisible(true);   
     }
 
@@ -116,9 +117,6 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
         //devo aggiornare la lista dei film e la lista delle
         infoProgrammation.update();
     }
-    
-    
-    
     private class ScheduleButtonListener implements ActionListener {
         
         
@@ -143,7 +141,11 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
                         
                         final ProgrammedFilm film = programmedFilmFactory.createProgrammedFilm(selectedFilm.getID(), selectedHall, selectedPrice, selectedDate, selectedTime, selectedTime.plusMinutes(selectedFilm.getDuration()));
                         observer.addProgrammedFilm(film);
-                        JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
+                        //JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
+                        int input = JOptionPane.showOptionDialog(frame, "Film has been scheduled", "Info", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                        frame.setVisible(false);
+                        
+
                         //JOptionPane.showConfirmDialog(frame, "Film has been scheduled");
                         
                         
@@ -172,7 +174,9 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
     @Override
     public void reset() {
-        
+        infoProgrammation.reset();
+        dateSelector.reset();
+        timeSelector.reset();
     }
 
 /*

@@ -14,6 +14,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -169,9 +171,10 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
                 final int selectedRow = table.getSelectedRow();
                 if (clickCount == 2 && selectedRow != -1) {
                    
-                    int option = JOptionPane.showConfirmDialog(frame,"Do you want delete this selected programmation?","Deleting",JOptionPane.YES_NO_OPTION);
+                    final int option = JOptionPane.showConfirmDialog(frame,"Do you want delete this selected programmation?","Deleting",JOptionPane.YES_NO_OPTION);
                     if(option == 0) { // yes 0 option , no 1 option 
                        observer.deleteProgrammedFilm(map.get(selectedRow)); 
+                       onSelectionChanged();
                     } 
                 }
             }   
@@ -182,7 +185,13 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         frame.setMinimumSize(new Dimension(screenWidth/2,screenHeight/2));
         frame.setSize(700, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowIconified(final WindowEvent winEvent) {
+               //((JFrame)winEvent.getSource()).dispose();
+                update();
+            }
+        });
         
         }
         
@@ -192,34 +201,26 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             final LocalDate selectedDate = this.getCalendarSelectionDate();
             final List<ProgrammedFilm> list = observer.getAllProgrammedFilms();
             final HandlerList<ProgrammedFilm> handler = observer.getManagerProgrammingFilms().getHandlerList();
-           
             final List<ProgrammedFilm> filtByDate = handler.filterBy(list, new FilterByDateImpl(selectedDate)); // filter for selected date
-            //System.out.println(filtByDate);
-            final List<ProgrammedFilm> sortByTime = handler.sortBy(filtByDate, new SorterByTimeImpl());
-            //System.out.println(sortByTime);
-            
+            final List<ProgrammedFilm> sortByTime = handler.sortBy(filtByDate, new SorterByTimeImpl());            
             this.fillDataTable(sortByTime);	
             
     	}
         
         private LocalDate getCalendarSelectionDate() {
-            if (calendar.getSelection().getIsEmpty())
-            {
-                    
+            if (calendar.getSelection().getIsEmpty()){    
                     return LocalDate.now();
             }
-            
             final int day = calendar.getSelection().getRanges().get(0).getDay();
             final int month = calendar.getSelection().getRanges().get(0).getMonth();
             final int year = calendar.getSelection().getRanges().get(0).getYear();
-            
             return LocalDate.of(year, month , day);
             
         }
         
         private void fillDataTable(final List<ProgrammedFilm> manipulatedList ) {
             /*ProgrammingFilmsController controller; // CREO UN'ISTANZA CON TUTTI I DATI DEI FILM
-            //FACCIO UNA RICERCA SELL'ID PER TROVARE IL NOME CORRELATO
+            //DO A RESEARCH TO FIND CORRELATE NAME
             */
             map.clear(); // empty map
             final Object [][] data = new Object[manipulatedList.size()][columnsNumber];
@@ -237,7 +238,6 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             
             final DefaultTableModel modelNew = new DefaultTableModel(data, columnNames);
             table.setModel(modelNew);
-           
             final DefaultTableModel dfm = (DefaultTableModel) table.getModel();
             dfm.fireTableDataChanged();      
             

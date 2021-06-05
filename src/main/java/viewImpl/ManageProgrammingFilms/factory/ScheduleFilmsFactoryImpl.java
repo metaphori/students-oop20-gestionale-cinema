@@ -33,7 +33,7 @@ public class ScheduleFilmsFactoryImpl implements ScheduleFilmsFactory {
 
     @Override
     public DatePanel getDatePanel() {
-        return new DatePanel(LocalDate.now());
+        return new DatePanel();
     }
 
     @Override

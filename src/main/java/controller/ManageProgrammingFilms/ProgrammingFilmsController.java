@@ -19,6 +19,6 @@ public interface ProgrammingFilmsController {
 	//void getProgrammedFilmsBySelection(String film, LocalDate date); // return programmedFilms in a certain date for a specified film
 	void showProgrammedFilmView();
 	void showScheduleFilmView();
-	void showMenu();	
+	void showMenu();
 	FilmsController getFilmsController();
 }

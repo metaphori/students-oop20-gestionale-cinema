@@ -35,7 +35,7 @@ public class DatePanel extends JPanel  {
 	private static final int vGapGrid = 5;
 	
 	
-	DatePanel(final LocalDate selectedDate)
+	DatePanel()
 	{
 	    setLayout(new BorderLayout());
 	    setBorder(createCompoundBorder
@@ -58,9 +58,11 @@ public class DatePanel extends JPanel  {
 		yearTextField.setHorizontalAlignment(JTextField.RIGHT);
 		
 		//set date values
-		monthNamesComboBox.setSelectedIndex(selectedDate.getMonthValue()-1);
-		dayTextField.setText(Integer.toString(selectedDate.getDayOfMonth()));
-		yearTextField.setText(Integer.toString(selectedDate.getYear()));
+		LocalDate todayDate = LocalDate.now();
+		
+		monthNamesComboBox.setSelectedIndex(todayDate.getMonthValue()-1);
+		dayTextField.setText(Integer.toString(todayDate.getDayOfMonth()));
+		yearTextField.setText(Integer.toString(todayDate.getYear()));
 		
 		dayYearPanel.add(new JLabel("Day",JLabel.RIGHT));
 		dayYearPanel.add(new JLabel("Year",JLabel.RIGHT));
@@ -104,14 +106,20 @@ public class DatePanel extends JPanel  {
 		return requestedDate;
 	}
 	
-	public void setDate(Calendar date)
+	public void setDate(LocalDate date)
 	{
-		monthNamesComboBox.setSelectedIndex(date.get(Calendar.MONTH));
+		/*monthNamesComboBox.setSelectedIndex(date.get(Calendar.MONTH));
 		dayTextField.setText("" + date.get(Calendar.DAY_OF_MONTH));
 		yearTextField.setText("" + date.get(Calendar.YEAR));
-		
+		*/
+	    monthNamesComboBox.setSelectedIndex(date.getMonthValue()-1);
+	    dayTextField.setText(""+date.getDayOfMonth());
+	    yearTextField.setText(""+date.getYear());
 	}
 	
+	public void reset() {
+	    this.setDate(LocalDate.now());
+	}
 	
 
 }
