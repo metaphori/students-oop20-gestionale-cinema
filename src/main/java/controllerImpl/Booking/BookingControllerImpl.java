@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import controller.Booking.BookingController;
-import controllerImpl.InputOutput.RWcollection;
-import controllerImpl.InputOutput.RWfile;
 import model.Booking.BookingModel;
 import modelImpl.Booking.BookingModelImpl;
 import utilities.Film;
@@ -36,7 +34,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     
     public BookingControllerImpl() {
 
-        RWcollection<Ticket> rw = new RWfile(pathname);
+        //RWcollection<Ticket> rw = new RWfile(pathname);
         //rw.readCollection(Ticket.class)
         Set<Ticket> setTicket = new HashSet<>();
         model = new BookingModelImpl(setTicket);

@@ -3,26 +3,25 @@ package utilitiesImpl.FactoryImpl;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
 
 public class ProgrammedFilmImpl implements ProgrammedFilm {
     
-    final int id;// reference to idFilms
-    final int hall;
-    final double price;
-    final LocalDate date;
-    final LocalTime startTime;
-    final LocalTime endTime;
+    private final int id;// reference to idFilms
+    private final int hall;
+    private final double price;
+    private LocalDate date;
+    private TimeSlot timeSlot;
     
-    
-    ProgrammedFilmImpl(final int id, final  int hall, final  double price, final  LocalDate date, final LocalTime startTime, final LocalTime endTime) {
+  
+    ProgrammedFilmImpl(final int id, final  int hall, final  double price, final  LocalDate date, final TimeSlot timeSlot) {
         super();
         this.id = id;
         this.hall = hall;
         this.price = price;
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeSlot = timeSlot;
     }
 
     @Override
@@ -47,18 +46,12 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
 
     @Override
     public LocalTime getStartTime() {
-        return this.startTime;
+        return this.timeSlot.getStartTime();
     }
 
     @Override
     public LocalTime getEndTime() {
-        return this.endTime;
-    }
-
-    @Override
-    public String toString() {
-        return "ProgrammedFilmImpl [id=" + id + ", hall=" + hall + ", price=" + price + ", date=" + date
-                + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+        return this.timeSlot.getEndTime();
     }
 
     @Override
@@ -66,13 +59,12 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
         result = prime * result + hall;
         result = prime * result + id;
         long temp;
         temp = Double.doubleToLongBits(price);
         result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+        result = prime * result + ((timeSlot == null) ? 0 : timeSlot.hashCode());
         return result;
     }
 
@@ -85,11 +77,36 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
         if (getClass() != obj.getClass())
             return false;
         ProgrammedFilmImpl other = (ProgrammedFilmImpl) obj;
-        if (id != other.id && startTime != other.startTime && endTime != other.endTime && hall!=other.hall)
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (hall != other.hall)
+            return false;
+        if (id != other.id)
+            return false;
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+            return false;
+        if (timeSlot == null) {
+            if (other.timeSlot != null)
+                return false;
+        } else if (!timeSlot.equals(other.timeSlot))
             return false;
         return true;
     }
-    
+
+    @Override
+    public String toString() {
+        return "ProgrammedFilmImpl [id=" + id + ", hall=" + hall + ", price=" + price + ", date=" + date + ", timeSlot="
+                + timeSlot + "]";
+    }
+
+  
+
+  
+
+   
     
     
     
