@@ -18,7 +18,6 @@ public class FilterByDateHallImpl implements Filter <ProgrammedFilm> {
 
     @Override
     public Predicate<ProgrammedFilm> getPredicate() {
-        
         return pf ->  pf.getHall() == hall && pf.getDate().equals(localDate);
     }
 

@@ -5,7 +5,7 @@ import java.util.Comparator;
 import model.ManageProgrammingFilms.Sorter;
 import utilities.Factory.ProgrammedFilm;
 
-public class SorterListByHallImpl implements Sorter<ProgrammedFilm> {
+public class SorterByHallImpl implements Sorter<ProgrammedFilm> {
 
     @Override
     public Comparator<ProgrammedFilm> getComparator() {

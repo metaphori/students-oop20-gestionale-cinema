@@ -16,15 +16,19 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
-import controllerImpl.Booking.BookingControllerImpl;
+
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
+import exceptions.ProgrammationNotAvailableException;
 import model.ManageFilms.ContainerFilmsModel;
+import model.ManageFilms.IdsGenerator;
 import model.ManageFilms.ManagerIdsFilms;
+import model.ManageProgrammingFilms.HandlerList;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
+import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
 import utilities.Film;
 
@@ -41,7 +45,7 @@ public class Cinema {
     
     
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args){
 /*
         final Set<Film> set = new HashSet<>();
         final ManagerIdsFilms managerIdsFilm = new ManagerIdsFilmImpl(new IdsGeneratorImpl());
@@ -90,6 +94,7 @@ public class Cinema {
         LocalTime time8s = LocalTime.of(17, 5, 1);
         LocalTime time9s = LocalTime.of(18, 5, 1);
         
+
         LocalTime time1f = LocalTime.of(10, 55, 1);
         LocalTime time2f = LocalTime.of(11, 55, 1);
         LocalTime time3f = LocalTime.of(12, 55, 1);
@@ -125,9 +130,7 @@ public class Cinema {
         BookingController b = new BookingControllerImpl(set,setP);
         b.start();
 
+
     }
     
-    
-
-
 }

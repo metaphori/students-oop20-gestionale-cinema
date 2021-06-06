@@ -5,7 +5,6 @@ import java.util.Optional;
 import utilities.Film;
 
 public final class FilmBasicImpl implements Film {
-    protected final String type = getClass().getName();
     private final String name; //unique name
     private final String genre;
     private final String description;

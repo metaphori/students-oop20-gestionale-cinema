@@ -44,7 +44,7 @@ public class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilms{
                    } 
                    return true;
                 }
-                ); 
+        ); 
     }
        
  private  boolean isAvailableTimeSlot(final TimeSlot inserted , final TimeSlot toCheck) { // check if specifif time slot is available compare to another time slot

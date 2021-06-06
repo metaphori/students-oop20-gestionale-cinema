@@ -47,7 +47,11 @@ public class RWobjectImpl<X> implements RWobject<X> {
         return res;
     } 
 
+<<<<<<< HEAD
 }
 
 
 
+=======
+}
+>>>>>>> master

@@ -8,6 +8,3 @@ public interface RWobject<X> {
     void writeObj(X obj ,Type type);
   
 }
-
-
-

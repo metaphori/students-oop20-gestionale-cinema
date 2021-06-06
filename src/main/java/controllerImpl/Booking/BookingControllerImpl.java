@@ -14,8 +14,11 @@ import java.util.stream.Collectors;
 import com.google.gson.reflect.TypeToken;
 
 import controller.Booking.BookingController;
+<<<<<<< HEAD
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
+=======
+>>>>>>> master
 import model.Booking.BookingModel;
 import model.ManageProgrammingFilms.Filter;
 import model.ManageProgrammingFilms.HandlerList;
@@ -53,6 +56,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     
     public BookingControllerImpl() {
 
+<<<<<<< HEAD
         RWobject<Set<Ticket>> rw = new RWobjectImpl(pathname);
         final var type = new TypeToken<Set<Ticket>> () {}.getType();
        
@@ -83,6 +87,12 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         }else {
             model = new BookingModelImpl(OpSetTicket.get());
         }
+=======
+        //RWcollection<Ticket> rw = new RWfile(pathname);
+        //rw.readCollection(Ticket.class)
+        Set<Ticket> setTicket = new HashSet<>();
+        model = new BookingModelImpl(setTicket);
+>>>>>>> master
         //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
 
         

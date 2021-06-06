@@ -40,6 +40,7 @@ repositories {
 
 dependencies {
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
+
    implementation("com.google.code.gson:gson:2.8.6")
 
    implementation ("org.apache.commons:commons-io:1.3.2")

@@ -10,7 +10,6 @@ import model.ManageFilms.ManagerIdsFilms;
 public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     private  final Collection<Integer> containerFilmsIds;
     private  final IdsGenerator idsGenerator;
-    protected String type = getClass().getName();
 
     //Passo al manager Ids films l' idsGenerator e il containerFilmsIds
     public ManagerIdsFilmImpl(final IdsGenerator idsGenerator, final Collection<Integer> containerFilmsIds) { 
