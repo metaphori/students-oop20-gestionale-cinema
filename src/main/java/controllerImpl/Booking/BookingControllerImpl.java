@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 import com.google.gson.reflect.TypeToken;
 
 import controller.Booking.BookingController;
-
+import controller.ManageFilms.FilmsController;
+import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
-
+import controllerImpl.ManageFilms.FilmsControllerImpl;
+import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import model.Booking.BookingModel;
 import model.ManageProgrammingFilms.Filter;
 import model.ManageProgrammingFilms.HandlerList;
@@ -29,6 +31,7 @@ import utilities.Film;
 import utilities.Ticket;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
+import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
@@ -50,13 +53,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private TimeTableView viewTimeTable;
     private BookingView viewBooking;
     
-    Set<Film> setF;
-    Set<ProgrammedFilm> setP;
+    private Set<Film> setFilm;
+    private Set<ProgrammedFilm> setProgrammedFilm;
     
     public BookingControllerImpl() {
 
 
-        RWobject<Set<Ticket>> rw = new RWobjectImpl(pathname);
+        RWobject<Set<Ticket>> rw = new RWobjectImpl(GeneralSettings.TICKET_FILE_PATH);
         final var type = new TypeToken<Set<Ticket>> () {}.getType();
        
         Optional<Set<Ticket>> OpSetTicket = rw.readObj(type);
@@ -65,34 +68,33 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         }else {
             model = new BookingModelImpl(OpSetTicket.get());
         }
-     
-        //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
+        FilmsController controllerFilms = new FilmsControllerImpl();
+        
+        ProgrammingFilmsController controllerFilmProgrammed = new ProgrammingFilmsControllerImpl();
+        
+        setProgrammedFilm = new HashSet<>(controllerFilmProgrammed.getAllProgrammedFilms());
+        setFilm = controllerFilms.getFilms();
+  
 
         
     }
     public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
 
-        this.setF = setF;
-        this.setP = setP;
+        this.setFilm = setF;
+        this.setProgrammedFilm = setP;
 
-        RWobject<Set<Ticket>> rw = new RWobjectImpl(pathname);
+        RWobject<Set<Ticket>> rw = new RWobjectImpl(GeneralSettings.TICKET_FILE_PATH);
         final var type = new TypeToken<Set<Ticket>> () {}.getType();
        
-        Optional<Set<Ticket>> OpSetTicket = rw.readObj(type);
-        System.out.println("LETTURA:   "  + OpSetTicket);
-        if(OpSetTicket.isEmpty()) {
-            System.out.println("LETTURA:   "  + OpSetTicket);
+        Optional<Set<Ticket>> opSetTicket = rw.readObj(type);
+  
+        if(opSetTicket.isEmpty()) {
             model = new BookingModelImpl(new HashSet<>());
         }else {
-            model = new BookingModelImpl(OpSetTicket.get());
+            model = new BookingModelImpl(opSetTicket.get());
         }
-
-        //RWcollection<Ticket> rw = new RWfile(pathname);
-        //rw.readCollection(Ticket.class)
         Set<Ticket> setTicket = new HashSet<>();
         model = new BookingModelImpl(setTicket);
-
-        //model = new BookingModelImpl(RW.read(Ticket.class, pathname));
 
         
     }
@@ -118,24 +120,14 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void selectedFilm(Film film) {
         //setP=this.getProgrammedFilm();
-        Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
-        this.showTimeTableView(setProgrammedFilm);
+     
+        Set<ProgrammedFilm> setFiltered= setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
+      //  Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
+        this.showTimeTableView(setFiltered);
   
     }
     public Set<ProgrammedFilm> getProgrammedFilm() {
         return new HashSet<ProgrammedFilm>();
-    }
-    public void test() {
-       // ProgrammedFilmFactory f = new 
-        //this.showBookingView(new ProgrammedFilm());
-    }
-    public void addTicket(Ticket ticket) {
-        
-    }
-    @Override
-    public void getSpecifiedBooking() {
-        // TODO Auto-generated method stub
-        
     }
     @Override
     public void showMenu() {
@@ -143,16 +135,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         
     }
 
-    
-    
     @Override
     public Set<Film> getFilm() {
-      //  Set<Film> film = new HashSet<>();
-        
-        //return film;
-        return setF;
+        return setFilm;
     }
-
 
     @Override
     public void bookTicketForFilm(ProgrammedFilm film) {
@@ -161,7 +147,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
     @Override
     public Film getFilmByProgrammedFilm(ProgrammedFilm film) {
-        return setF.stream().filter(f -> f.getID() == film.getIdProgrammation()).findAny().get();
+        return setFilm.stream().filter(f -> f.getID() == film.getIdProgrammation()).findAny().get();
     }
     @Override
     public void showBackFromTimeTable() {
@@ -171,8 +157,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showBackFromBooking(ProgrammedFilm film) {
-        final Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
-        this.showTimeTableView(setProgrammedFilm);
+        final Set<ProgrammedFilm> setPF= setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
+        this.showTimeTableView(setPF);
         
     }
 

@@ -25,9 +25,14 @@ public class GeneralSettings {
     public static final String PROGRAMMEDFILMSFILE = "PROGRAMMEDFILMS.json";
     public static final String PROGRAMMEDFILMSPATH = DATADIR + FS + PROGRAMMEDFILMSFILE;
 
-    
+    public static final String TICKET_FILE = "Ticket.json";
+    public static final String TICKET_FILE_PATH = DATADIR + FS + TICKET_FILE;
     
   
     //Res options
     public static final String IMAGEFILMSTANDARD = "images/filmStandardIco.png";
+    public static final String IMAGE_SEAT_FREE = "images/imageSeatFree.png";
+    public static final String IMAGE_SEAT_SELECTED = "images/imageSeatSelected.png";
+    public static final String IMAGE_SEAT_TAKEN = "images/imageSeatTaken.png";
+    public static final String IMAGE_LEGEND = "images/legend.png";
 }

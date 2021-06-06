@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import utilities.Factory.*;
+import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
@@ -116,8 +117,8 @@ public class BookingViewImpl implements BookingView {
         mainPanel.add(center, BorderLayout.CENTER);
         mainPanel.add(bookBt, BorderLayout.SOUTH);
       
-       
-        ImageIcon imageLegend = new ImageIcon(ClassLoader.getSystemResource("images/leggenda.png"));
+      
+        ImageIcon imageLegend = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_LEGEND));
         int width =(int) (screenSize.getWidth() * WIDTH_IMAGE_LEGEND);
         int height = (int) (screenSize.getHeight() * HEIGHT_IMAGE_LEGEND);
         JLabel labelLegend = factory.getLabelImage(imageLegend, width, height);
@@ -136,11 +137,11 @@ public class BookingViewImpl implements BookingView {
         for (final var bt : grid.keySet()) {       
             ImageIcon imageIcon;
             if (setSeatsTaken.contains(grid.get(bt))){
-                imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatTaken.png"));
+                imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_TAKEN));
             } else if (setSeatsSelected.contains(grid.get(bt))) {
-                imageIcon =  new ImageIcon(ClassLoader.getSystemResource("images/imageSeatSelected.png"));
+                imageIcon =  new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_SELECTED));
             } else {
-                imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatFree.png"));
+                imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_FREE));
             }
             final Image image = imageIcon.getImage(); // transform it 
             final Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_SEAT), (int) (screenSize.getHeight() * HEIGHT_IMAGE_SEAT), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  

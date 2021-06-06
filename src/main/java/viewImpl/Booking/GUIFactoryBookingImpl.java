@@ -42,6 +42,7 @@ import model.ManageProgrammingFilms.HandlerList;
 import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
 import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import utilities.Factory.*;
+import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatState;
 import view.Booking.GUIFactoryBooking;
@@ -151,11 +152,11 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
       //  final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
         ImageIcon imageIcon = new ImageIcon();
         if(state.equals(SeatState.FREE)) {
-             imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatFree.png")); // load the image to a imageIcon
+             imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_FREE)); // load the image to a imageIcon
         }if(state.equals(SeatState.SELECTED)) {
-             imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatSelected.png")); // load the image to a imageIcon
+             imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_SELECTED)); // load the image to a imageIcon
         }if(state.equals(SeatState.TAKEN)) {
-             imageIcon = new ImageIcon(ClassLoader.getSystemResource("images/imageSeatTaken.png")); // load the image to a imageIcon
+             imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_TAKEN)); // load the image to a imageIcon
         }
         
         Image image = imageIcon.getImage(); // transform it 

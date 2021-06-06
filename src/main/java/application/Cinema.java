@@ -16,6 +16,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
+import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.Booking.BookingControllerImpl;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
@@ -127,10 +128,13 @@ public class Cinema {
         setP.add(p9);
         System.out.println(setP);
 
-        BookingController b = new BookingControllerImpl(set,setP);
+     //   BookingController b = new BookingControllerImpl(set,setP);
+        BookingController b = new BookingControllerImpl();
         b.start();
-
-
+      //  FilmsController controllerFilm = new FilmsControllerImpl();
+       // controllerFilm.showContainerFilmsView();
+      //  ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
+        //controllerProgrammedFilm.showProgrammedFilmView();
     }
     
 }

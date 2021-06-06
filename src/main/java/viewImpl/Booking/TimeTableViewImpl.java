@@ -54,10 +54,14 @@ public class TimeTableViewImpl implements TimeTableView {
     
     private static final String TITLE = "Time Tabel Film";
     private static final String TEXT_BUTTON_SELECT = "Select";
+    private static final String TEXT_BUTTON_RESET = "Reset"; 
+    private static final String TEXT_JCOMBOBOX_1 = "Data";
+    private static final String TEXT_JCOMBOBOX_2 = "Time";
     private static final String INFO_STRING = "Select a schedule from:";
     private static final String BTN_FILTER_STRING = "Apply";
     private static final String CHECKBOX_TITLE = "Order by:";
     private static final String CALENDAR_STRING = "Filter by date: ";
+    
     private static final Color COLOR_STRING = Color.BLACK;
     
     private TimeTableViewObserver observer;
@@ -115,8 +119,8 @@ public class TimeTableViewImpl implements TimeTableView {
          */
         ButtonGroup checkBoxGroup = new ButtonGroup();
         JCheckBox jcb1, jcb2;
-        jcb1 = new JCheckBox("Data", false);
-        jcb2 = new JCheckBox("Time", false);
+        jcb1 = new JCheckBox(TEXT_JCOMBOBOX_1, false);
+        jcb2 = new JCheckBox(TEXT_JCOMBOBOX_2, false);
 
         checkBoxGroup.add(jcb1);
         checkBoxGroup.add(jcb2);
@@ -130,7 +134,7 @@ public class TimeTableViewImpl implements TimeTableView {
 
         panelCheckBox.add(panelCheckBoxInternal, BorderLayout.CENTER);
 
-        final JButton resetBtn = new JButton("Reset");
+        final JButton resetBtn = new JButton(TEXT_BUTTON_RESET);
         resetBtn.addActionListener(e -> {
            this.refresh(table, setProgrammedFilm);
         });

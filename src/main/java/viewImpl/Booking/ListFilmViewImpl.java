@@ -40,8 +40,6 @@ public class ListFilmViewImpl implements ListFilmView{
     private static final double HEIGTH_PERC_FRAME = 0.5;
     private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME /3;
     private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 1;
-    private static final String FS = File.separator;
-    private static final String PATH = System.getProperty("user.home") +  FS + "OOPcinemaFile" + FS + "aquaman.jpg"; 
     private static final long serialVersionUID = 1L;
     private static final String FRAME_NAME = "ListFilm"; 
     private static final String INFO_STRING = "Choose film";
