@@ -40,15 +40,16 @@ class TestProgrammationFilms {
         LocalTime et3 = LocalTime.of(8, 29);
         
         ProgrammedFilmFactoryImpl factory = new ProgrammedFilmFactoryImpl();
-        ProgrammedFilm pf1 = factory.creteProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        ProgrammedFilm pf2 = factory.creteProgrammedFilm(13, 9, 56, ld2, st2, et2);
-        ProgrammedFilm pf3 = factory.creteProgrammedFilm(14, 1, 56, ld3, st3, et3);
+        ProgrammedFilm pf1 = factory.createProgrammedFilm(12, 8, 56, ld1, st1, et1);
+        ProgrammedFilm pf2 = factory.createProgrammedFilm(13, 9, 56, ld2, st2, et2);
+        ProgrammedFilm pf3 = factory.createProgrammedFilm(14, 1, 56, ld3, st3, et3);
         
         ProgrammedFilmsModelImpl model = new ProgrammedFilmsModelImpl() ;
-        
+   /*     
         model.addFilmProgrammation(pf1);
         model.addFilmProgrammation(pf2);
         model.addFilmProgrammation(pf3);
+        */
         /*TimeSlotFactory factoryTimeSlot = new TimeSlotFactoryImpl();
         TimeSlot timeSlotToTest = factoryTimeSlot.createTimeSlot(LocalTime.of(8,31),LocalTime.of(8, 44));
         LocalDate localDateToTest = LocalDate.of(1999, 3, 7);

@@ -16,7 +16,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
-
+import controllerImpl.Booking.BookingControllerImpl;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
@@ -106,15 +106,15 @@ public class Cinema {
         LocalTime time9f = LocalTime.of(18, 55, 1);
         Set<ProgrammedFilm> setP = new HashSet<>();
         ProgrammedFilmFactory fP = new ProgrammedFilmFactoryImpl();
-        ProgrammedFilm p1 = fP.creteProgrammedFilm(f1.getID(), 12, 5.5, date, time1s, time1f) ;
-        ProgrammedFilm p2 = fP.creteProgrammedFilm(f2.getID(), 22, 5.5, date, time2s, time2f) ;
-        ProgrammedFilm p3 = fP.creteProgrammedFilm(f3.getID(), 32, 5.5, date, time3s, time3f) ;
-        ProgrammedFilm p4 = fP.creteProgrammedFilm(f1.getID(), 42, 5.5, LocalDate.now(), time4s,time4f) ;
-        ProgrammedFilm p5 = fP.creteProgrammedFilm(f2.getID(), 252, 5.5, LocalDate.now(),time5s, time5f) ;
-        ProgrammedFilm p6 = fP.creteProgrammedFilm(f3.getID(), 162, 5.5, LocalDate.now(),time6s, time6f) ;
-        ProgrammedFilm p7 = fP.creteProgrammedFilm(f1.getID(), 123, 5.5, LocalDate.now(), time7s, time7f) ;
-        ProgrammedFilm p8 = fP.creteProgrammedFilm(f2.getID(), 13, 5.5, LocalDate.now(), time8s, time8f) ;
-        ProgrammedFilm p9 = fP.creteProgrammedFilm(f3.getID(), 13, 5.5, LocalDate.now(), time9s, time9f) ;
+        ProgrammedFilm p1 = fP.createProgrammedFilm(f1.getID(), 12, 5.5, date, time1s, time1f) ;
+        ProgrammedFilm p2 = fP.createProgrammedFilm(f2.getID(), 22, 5.5, date, time2s, time2f) ;
+        ProgrammedFilm p3 = fP.createProgrammedFilm(f3.getID(), 32, 5.5, date, time3s, time3f) ;
+        ProgrammedFilm p4 = fP.createProgrammedFilm(f1.getID(), 42, 5.5, LocalDate.now(), time4s,time4f) ;
+        ProgrammedFilm p5 = fP.createProgrammedFilm(f2.getID(), 252, 5.5, LocalDate.now(),time5s, time5f) ;
+        ProgrammedFilm p6 = fP.createProgrammedFilm(f3.getID(), 162, 5.5, LocalDate.now(),time6s, time6f) ;
+        ProgrammedFilm p7 = fP.createProgrammedFilm(f1.getID(), 123, 5.5, LocalDate.now(), time7s, time7f) ;
+        ProgrammedFilm p8 = fP.createProgrammedFilm(f2.getID(), 13, 5.5, LocalDate.now(), time8s, time8f) ;
+        ProgrammedFilm p9 = fP.createProgrammedFilm(f3.getID(), 13, 5.5, LocalDate.now(), time9s, time9f) ;
         
         setP.add(p1);
         setP.add(p2);
