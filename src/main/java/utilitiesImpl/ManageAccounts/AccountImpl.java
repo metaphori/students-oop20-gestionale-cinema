@@ -1,10 +1,11 @@
 package utilitiesImpl.ManageAccounts;
 
 import utilities.ManageAccounts.Account;
+import utilities.ManageAccounts.LoggedAccount;
 
 public class AccountImpl implements Account {
     private String name, surname, username, pass;
-    private boolean type;
+    private LoggedAccount type;
     
     /**
      * Constructor for the class Account.
@@ -14,7 +15,7 @@ public class AccountImpl implements Account {
      * @param pass 
      * @param type
      */
-    public AccountImpl(String name, String surname, String username, String pass, boolean type) {
+    public AccountImpl(String name, String surname, String username, String pass, LoggedAccount type) {
         this.name = name; //Unique name
         this.surname = surname;
         this.username = username;
@@ -104,14 +105,14 @@ public class AccountImpl implements Account {
      * @return type
      */
     @Override
-    public boolean isAdmin() {
-        return type = true;
+    public LoggedAccount isAdmin() {
+        return this.type;
     }
     
     @Override
     public String toString() {
-        return "Account Administrator:"
-                + " Name: " + name + ", Surname: " + surname + ", Username: " + username + ", Is an administrator: " + type;
+        return "Account :"
+                + " Name: " + name + ", Surname: " + surname + ", Username: " + username + ", Type: " + type;
     }
 
 
@@ -122,7 +123,7 @@ public class AccountImpl implements Account {
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((pass == null) ? 0 : pass.hashCode());
         result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-        result = prime * result + (type ? 1231 : 1237);
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
         result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
@@ -161,5 +162,7 @@ public class AccountImpl implements Account {
             return false;
         return true;
     }
-    
+
+
+   
 }
