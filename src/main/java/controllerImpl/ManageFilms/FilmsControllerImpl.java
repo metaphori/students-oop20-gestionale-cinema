@@ -59,6 +59,30 @@ public class FilmsControllerImpl implements FilmsController {
         this.infoFilms.setObserver(this);
     }  
     
+  public FilmsControllerImpl( ProgrammingFilmsController programmingFilmsController) { // must be invoked on the first use of application 
+        
+        Optional<Set<Film>> films = this.readFilmsFromFile();
+        Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
+        
+        
+        if(films.isEmpty()|| managerIdsFilm.isEmpty() ) {
+            model = new ContainerFilmsModelImpl();  
+        }else {
+            model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
+        }
+
+        viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
+        infoFilms = new InfoFilmsGUIimpl();
+        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        this.programmingFilmsController = programmingFilmsController;
+        
+        this.viewFilms.setObserver(this);
+        this.infoFilms.setObserver(this);
+    } 
+    
+    
+    
+    
  
     @Override
     public void addFilm(final Film f) {
