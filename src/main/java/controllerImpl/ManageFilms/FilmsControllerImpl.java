@@ -147,7 +147,7 @@ public class FilmsControllerImpl implements FilmsController {
          final var type = new TypeToken<Set<Film>>() {}.getType();
          rw.writeObj(model.getFilms(), type);
     }
-    
+
     private void writeManagerIdsFilmsOnFile() {
         final RWobject<ManagerIdsFilms> rw = new RWobjectImpl<>(GeneralSettings.MANAGERIDSFILMSPATH) ;
         final var type = new TypeToken<ManagerIdsFilms>() {}.getType();
