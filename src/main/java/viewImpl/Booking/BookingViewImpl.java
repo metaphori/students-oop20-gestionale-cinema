@@ -65,7 +65,6 @@ public class BookingViewImpl implements BookingView {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
 
-
         observer.newBooking();
         final JPanel mainPanel = new JPanel(new BorderLayout()); 
         final JPanel north = factory.getInfoPanel(INFO_STRING, e -> {

@@ -77,9 +77,9 @@ public class ListFilmViewImpl implements ListFilmView{
     public void show() {
         frame.setVisible(true);
     }
-   
+
     public void check() {
-        if(map.values().isEmpty()) {
+        if (map.values().isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Not selected row", 
                     "Incorrect Row", JOptionPane.INFORMATION_MESSAGE);
         }
