@@ -1,5 +1,5 @@
 package utilities.ManageAccounts;
 
-public enum LoggedAccount {
+public enum SeatTypeAccount {
     ADMINISTRATOR, OPERATOR
 }

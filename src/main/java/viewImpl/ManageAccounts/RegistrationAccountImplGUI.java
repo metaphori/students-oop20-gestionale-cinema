@@ -40,7 +40,7 @@ import org.apache.commons.io.FileUtils;
 
 import controller.ManageAccounts.AccountsController;
 import utilities.ManageAccounts.Account;
-import utilities.ManageAccounts.LoggedAccount;
+import utilities.ManageAccounts.SeatTypeAccount;
 import view.ManageAccounts.RegistrationAccountGUI;
 
 import java.awt.event.*;
@@ -254,9 +254,9 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         TextPassword.setText(account.getPassword());
         
         if(type.getSelectedItem().equals("Administrator")) {
-            account.isAdmin().equals(LoggedAccount.ADMINISTRATOR);
+            account.isAdmin().equals(SeatTypeAccount.ADMINISTRATOR);
         } else if(type.getSelectedItem().equals("operator")) {
-            account.isAdmin().equals(LoggedAccount.OPERATOR);   
+            account.isAdmin().equals(SeatTypeAccount.OPERATOR);   
         }
         
     }
