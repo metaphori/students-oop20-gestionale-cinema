@@ -47,38 +47,25 @@ import viewImpl.Booking.TimeTableViewImpl;
 
 public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver, BookingViewObserver {
     private  BookingModel model;
-    private final String FS = File.separator;
-    private final String pathname = System.getProperty("user.home") + FS + "OOPcinemaFile" + FS + "BF.json";
     private ListFilmView viewFilm;
     private TimeTableView viewTimeTable;
     private BookingView viewBooking;
-    
-    private Set<Film> setFilm;
-    private Set<ProgrammedFilm> setProgrammedFilm;
-    
+    private final Set<Film> setFilm;
+    private final Set<ProgrammedFilm> setProgrammedFilm;
     public BookingControllerImpl() {
+        final Optional<Set<Ticket>> opSetTicket = this.readTicketOnFile();
+        final FilmsController controllerFilms = new FilmsControllerImpl();
+        final ProgrammingFilmsController controllerFilmProgrammed = new ProgrammingFilmsControllerImpl();
 
-        System.out.print(GeneralSettings.TICKET_FILE_PATH);
-        RWobject<Set<Ticket>> rw = new RWobjectImpl(GeneralSettings.TICKET_FILE_PATH);
-        final var type = new TypeToken<Set<Ticket>> () {}.getType();
-       
-        Optional<Set<Ticket>> opSetTicket = rw.readObj(type);
-        if(opSetTicket.isEmpty()) {
+        if (opSetTicket.isEmpty()) {
             model = new BookingModelImpl(new HashSet<>());
-        }else {
+        } else {
             model = new BookingModelImpl(opSetTicket.get());
         }
-        FilmsController controllerFilms = new FilmsControllerImpl();
-        
-        ProgrammingFilmsController controllerFilmProgrammed = new ProgrammingFilmsControllerImpl();
-        
         setProgrammedFilm = new HashSet<>(controllerFilmProgrammed.getAllProgrammedFilms());
         setFilm = controllerFilms.getFilms();
-  
-
-        
     }
-    public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
+  /*  public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
 
         this.setFilm = setF;
         this.setProgrammedFilm = setP;
@@ -97,8 +84,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
      //   model = new BookingModelImpl(setTicket);
 
         
-    }
-    
+    }*/
+
     @Override
     public void start() {
         this.showListFilmView();
@@ -108,30 +95,23 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
           viewFilm.show();
           viewFilm.check();
     }
-    private void showTimeTableView(Set<ProgrammedFilm> setProgrammedFilm) {
-       this.viewTimeTable = new TimeTableViewImpl(this,setProgrammedFilm);
+    private void showTimeTableView(final Set<ProgrammedFilm> setProgrammedFilm) {
+       this.viewTimeTable = new TimeTableViewImpl(this, setProgrammedFilm);
         viewTimeTable.show();
     } 
     
-    private void showBookingView(ProgrammedFilm film) {
-        this.viewBooking = new BookingViewImpl(this,film);
+    private void showBookingView(final ProgrammedFilm film) {
+        this.viewBooking = new BookingViewImpl(this, film);
         viewBooking.show();
     }
     @Override
-    public void selectedFilm(Film film) {
-        //setP=this.getProgrammedFilm();
-     
-        Set<ProgrammedFilm> setFiltered= setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
-      //  Set<ProgrammedFilm> setProgrammedFilm = setP.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
+    public void selectedFilm(final Film film) {
+        final Set<ProgrammedFilm> setFiltered = setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
         this.showTimeTableView(setFiltered);
-  
     }
-    public Set<ProgrammedFilm> getProgrammedFilm() {
-        return new HashSet<ProgrammedFilm>();
-    }
+
     @Override
     public void showMenu() {
-        // TODO Auto-generated method stub
         
     }
 
@@ -141,46 +121,39 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public void bookTicketForFilm(ProgrammedFilm film) {
+    public void bookTicketForFilm(final ProgrammedFilm film) {
         this.showBookingView(film);
         
     }
     @Override
-    public Film getFilmByProgrammedFilm(ProgrammedFilm film) {
+    public Film getFilmByProgrammedFilm(final ProgrammedFilm film) {
         return setFilm.stream().filter(f -> f.getID() == film.getIdProgrammation()).findAny().get();
     }
     @Override
     public void showBackFromTimeTable() {
         this.showListFilmView();
-        
     }
 
     @Override
-    public void showBackFromBooking(ProgrammedFilm film) {
-        final Set<ProgrammedFilm> setPF= setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
+    public void showBackFromBooking(final ProgrammedFilm film) {
+        final Set<ProgrammedFilm> setPF = setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
         this.showTimeTableView(setPF);
-        
     }
 
     @Override
     public Set<SeatImpl<Row, Integer>> getSeatsFromFilm(final ProgrammedFilm film) {
         return this.model.getSeatsFromFilm(film);
-       
     }
 
     @Override
     public void bookSeat(final ProgrammedFilm film) {
         model.bookSeat(film);
-        Set<Ticket> set = model.getSeats();
-        final var type = new TypeToken<Set<Ticket>>() {}.getType();
-        RWobject rw = new RWobjectImpl(GeneralSettings.TICKET_FILE_PATH);
-        rw.writeObj(set,  type);
+        this.writeTicketOnFile(model.getSeats());
     }
 
     @Override
     public void buttonSelected(final SeatImpl<Row, Integer> seat, final ProgrammedFilm film) {
       model.buttonSelected(seat, film);
-      
     }
 
     @Override
@@ -192,17 +165,28 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     public Set<SeatImpl<Row, Integer>> getSeatsSelected() {
         return model.getSeatsSelected();
     }
-
+    
+    @Override
     public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Filter<ProgrammedFilm> filter) {
         final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
         final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
         return handler.filterBy(listFilm, filter);
     }
-
+    @Override
     public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Sorter<ProgrammedFilm> sorter) {
         final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
         final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
         return handler.sortBy(listFilm, sorter);
     }
-
+    private void writeTicketOnFile(final Set<Ticket> set) {
+        final Set<Ticket> setToWrite = set;
+        final var type = new TypeToken<Set<Ticket>>() { }.getType();
+        final RWobject<Set<Ticket>> rw = new RWobjectImpl<>(GeneralSettings.TICKET_FILE_PATH);
+        rw.writeObj(setToWrite,  type);
+    }
+    private  Optional<Set<Ticket>> readTicketOnFile() {
+        final RWobject<Set<Ticket>> rw = new RWobjectImpl<>(GeneralSettings.TICKET_FILE_PATH);
+        final var type = new TypeToken<Set<Ticket>>() { }.getType();
+        return rw.readObj(type);
+    }
 }
