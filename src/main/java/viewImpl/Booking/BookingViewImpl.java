@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import utilities.Factory.*;
@@ -38,26 +39,23 @@ public class BookingViewImpl implements BookingView {
     private static final String INFO_STRING = "Choose seats and book";
     private static final String STRING_BTN_BOOK = "Book"; 
     private static final String STRING_SCREEN_LABEL = "SCREEN"; 
-    private ProgrammedFilm film; 
-    private Map<JButton, SeatImpl<Row, Integer>> grid = new HashMap<>();
-    
+    private final ProgrammedFilm film; 
+    private final Map<JButton, SeatImpl<Row, Integer>> grid = new HashMap<>();
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGTH_PERC_FRAME = 0.5;
-   
+
     private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
-    private static final double HEIGHT_IMAGE_SEAT = HEIGTH_PERC_FRAME/ 15;
-    
-    private static final double HEIGHT_IMAGE_LEGEND = HEIGTH_PERC_FRAME/ 5;
+    private static final double HEIGHT_IMAGE_SEAT = HEIGTH_PERC_FRAME / 15;
+    private static final double HEIGHT_IMAGE_LEGEND = HEIGTH_PERC_FRAME / 5;
     private static final double WIDTH_IMAGE_LEGEND = WIDTH_PERC_FRAME / 5;
-    
-    
-    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME /0.7;
+
+    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME / 0.7;
     private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 0.7;
-    
-    private int col;
-    private Row row;
-    public BookingViewImpl(BookingViewObserver observer, ProgrammedFilm film) {
-       
+
+    private final int col;
+    private final Row row;
+    public BookingViewImpl(final BookingViewObserver observer, final ProgrammedFilm film) {
+
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
         this.film = film;
         this.frame = factory.getBaseFrame(TITLE);
@@ -67,62 +65,58 @@ public class BookingViewImpl implements BookingView {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
 
-        
-        
+
         observer.newBooking();
-        JPanel mainPanel = new JPanel(new BorderLayout()); 
-        JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
+        final JPanel mainPanel = new JPanel(new BorderLayout()); 
+        final JPanel north = factory.getInfoPanel(INFO_STRING, e -> {
             observer.showBackFromBooking(film);
             frame.dispose();
         });
-        Set<SeatImpl<Row,Integer>> setSeats = observer.getSeatsFromFilm(film);
-        row = Row.H;
-        System.out.print("AfterGet" + setSeats);
+        final Set<SeatImpl<Row, Integer>> setSeats = observer.getSeatsFromFilm(film);
+        row = Row.Z;
         col = 10;
-        JPanel center = new JPanel(new BorderLayout());
-        JPanel gridPanel = new JPanel(new GridLayout(row.ordinal()+1, col));
-        for(int i = 0; i< row.ordinal()+1; i++) {
-            for(int j = 0; j< col; j++) {
+        final JPanel center = new JPanel(new BorderLayout());
+        final JPanel gridPanel = new JPanel(new GridLayout(row.ordinal() + 1, col));
+        for (int i = 0; i < row.ordinal() + 1; i++) {
+            for (int j = 0; j < col; j++) {
                 SeatState state;
-                if(setSeats.contains(new SeatImpl<Row,Integer>(Row.values()[i],j))){
+                if (setSeats.contains(new SeatImpl<Row, Integer>(Row.values()[i], j))) {
                     state  = SeatState.TAKEN;
-                }else {
+                } else {
                     state = SeatState.FREE;
                 }
-                JButton button = factory.getButtonSeat(state, i, j);
-                grid.put(button, new SeatImpl<Row,Integer>(Row.values()[i],j));
+                final JButton button = factory.getButtonSeat(state, i, j);
+                grid.put(button, new SeatImpl<Row, Integer>(Row.values()[i], j));
                 gridPanel.add(button);
             }
         }
-      
         grid.keySet().forEach(btn -> {
-            btn.addActionListener( e -> {
-                JButton button = (JButton) e.getSource();
+            btn.addActionListener(e -> {
+                final JButton button = (JButton) e.getSource();
                 observer.buttonSelected(grid.get(button), film);
                 this.refresh();
             });
         });
-        JButton bookBt = new JButton(STRING_BTN_BOOK);
+        final JButton bookBt = new JButton(STRING_BTN_BOOK);
         bookBt.addActionListener(e -> {
             observer.bookSeat(film);
             this.refresh();
             observer.newBooking();
         });
-        JLabel label = new JLabel(STRING_SCREEN_LABEL);
+        final JLabel label = new JLabel(STRING_SCREEN_LABEL);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
-        center.add( label , BorderLayout.NORTH);   
-        center.add(gridPanel, BorderLayout.CENTER);
+        center.add(label, BorderLayout.NORTH);
+        center.add(new JScrollPane(gridPanel), BorderLayout.CENTER);
         mainPanel.add(north, BorderLayout.NORTH);
         mainPanel.add(center, BorderLayout.CENTER);
         mainPanel.add(bookBt, BorderLayout.SOUTH);
-      
-      
-        ImageIcon imageLegend = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_LEGEND));
-        int width =(int) (screenSize.getWidth() * WIDTH_IMAGE_LEGEND);
-        int height = (int) (screenSize.getHeight() * HEIGHT_IMAGE_LEGEND);
-        JLabel labelLegend = factory.getLabelImage(imageLegend, width, height);
-        mainPanel.add(labelLegend,BorderLayout.EAST);
+
+        final ImageIcon imageLegend = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_LEGEND));
+        final int width = (int) (screenSize.getWidth() * WIDTH_IMAGE_LEGEND);
+        final int height = (int) (screenSize.getHeight() * HEIGHT_IMAGE_LEGEND);
+        final JLabel labelLegend = factory.getLabelImage(imageLegend, width, height);
+        mainPanel.add(labelLegend, BorderLayout.EAST);
         frame.getContentPane().add(mainPanel);
     }
     @Override
@@ -134,9 +128,9 @@ public class BookingViewImpl implements BookingView {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         final Set<SeatImpl<Row, Integer>> setSeatsTaken = observer.getSeatsFromFilm(film);
         final Set<SeatImpl<Row, Integer>> setSeatsSelected = observer.getSeatsSelected();
-        for (final var bt : grid.keySet()) {       
+        for (final var bt : grid.keySet()) {
             ImageIcon imageIcon;
-            if (setSeatsTaken.contains(grid.get(bt))){
+            if (setSeatsTaken.contains(grid.get(bt))) {
                 imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_TAKEN));
             } else if (setSeatsSelected.contains(grid.get(bt))) {
                 imageIcon =  new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_SELECTED));
@@ -144,7 +138,7 @@ public class BookingViewImpl implements BookingView {
                 imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_FREE));
             }
             final Image image = imageIcon.getImage(); // transform it 
-            final Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_SEAT), (int) (screenSize.getHeight() * HEIGHT_IMAGE_SEAT), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            final Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_SEAT), (int) (screenSize.getHeight() * HEIGHT_IMAGE_SEAT), java.awt.Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(newimg);  // transform it back
             bt.setIcon(imageIcon);
         }
