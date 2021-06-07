@@ -73,8 +73,7 @@ public class FilmsControllerImpl implements FilmsController {
         this.model.removeFilm(f);
         this.programmingFilmsController.deleteAllFilmProgrammation(f);
         this.writeFilmsOnFile();
-        this.writeManagerIdsFilmsOnFile();
-        
+        this.writeManagerIdsFilmsOnFile();   
     }
 
     @Override

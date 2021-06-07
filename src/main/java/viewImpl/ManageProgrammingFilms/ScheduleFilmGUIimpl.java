@@ -4,6 +4,7 @@ package viewImpl.ManageProgrammingFilms;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -169,12 +170,29 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
                         final ProgrammedFilm film = programmedFilmFactory.createProgrammedFilm(selectedFilm.getID(), selectedHall, selectedPrice, selectedDate, selectedTime, selectedTime.plusMinutes(selectedFilm.getDuration()));
                         observer.addProgrammedFilm(film);
                         //JOptionPane.showMessageDialog(frame,"Film has been scheduled.");
-                        int input = JOptionPane.showOptionDialog(frame, "Film has been scheduled", "Info", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                        //int input = JOptionPane.showOptionDialog(frame, "Film has been scheduled", "Info", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                       
+                        EventQueue.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                int input = JOptionPane.showOptionDialog(frame, "Film has been scheduled", "Info", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                            }
+                            });
+                        
+                        
                         frame.setVisible(false);
                         observer.updateGUI();
                         
                     } catch (final ProgrammationNotAvailableException e) {
-                        JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
+                        
+                        EventQueue.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                JOptionPane.showMessageDialog(frame,e.getMessage(), "Film not scheduled",JOptionPane.ERROR_MESSAGE);
+                            }
+                            });
+                       
                         
                     }
                    
