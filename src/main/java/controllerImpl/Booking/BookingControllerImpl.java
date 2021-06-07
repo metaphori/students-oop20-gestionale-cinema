@@ -1,8 +1,5 @@
 package controllerImpl.Booking;
 
-import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -30,11 +27,9 @@ import utilities.Film;
 
 import utilities.Ticket;
 import utilities.Factory.ProgrammedFilm;
-import utilities.Factory.ProgrammedFilmFactory;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
-import utilitiesImpl.SeatState;
 import view.Booking.BookingView;
 import view.Booking.BookingViewObserver;
 import view.Booking.ListFilmView;
@@ -64,7 +59,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         }
         setProgrammedFilm = new HashSet<>(controllerFilmProgrammed.getAllProgrammedFilms());
         setFilm = controllerFilms.getFilms();
-       
     }
   /*  public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
 
