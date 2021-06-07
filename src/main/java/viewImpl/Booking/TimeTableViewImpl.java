@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultButtonModel;
@@ -57,7 +58,7 @@ public class TimeTableViewImpl implements TimeTableView {
     private static final String TITLE = "Time Tabel Film";
     private static final String TEXT_BUTTON_SELECT = "Select";
     private static final String TEXT_BUTTON_RESET = "Reset"; 
-    private static final String TEXT_JCOMBOBOX_1 = "Data";
+    private static final String TEXT_JCOMBOBOX_1 = "Date";
     private static final String TEXT_JCOMBOBOX_2 = "Time";
     private static final String INFO_STRING = "Select a schedule from:";
     private static final String BTN_FILTER_STRING = "Apply";
@@ -66,9 +67,14 @@ public class TimeTableViewImpl implements TimeTableView {
     private static final Color COLOR_STRING = Color.BLACK;
     private TimeTableViewObserver observer;
     private JFrame frame;
-
-    public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilm, final Film film) {
-
+    private Set<ProgrammedFilm> setProgrammedFilm;
+    public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilmOriginal, final Film film) {
+        
+        setProgrammedFilm = setProgrammedFilmOriginal.stream()
+                .filter(f -> (f.getDate().equals(LocalDate.now()) && f.getStartTime().isAfter(LocalTime.now())) ||
+                             (f.getDate().isAfter(LocalDate.now()) || f.getDate().isEqual(LocalDate.now()))
+                        )
+                .collect(Collectors.toSet());
         final String nameFilm = film.getName();
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         this.observer = observer;
@@ -90,6 +96,7 @@ public class TimeTableViewImpl implements TimeTableView {
                 final LocalDate date = (LocalDate) table.getModel().getValueAt(row, 0);
                 final LocalTime time = (LocalTime) table.getModel().getValueAt(row, 1);
                 final int hall =  (int) table.getModel().getValueAt(row, 2);
+                
                 ProgrammedFilm programmedFilm = setProgrammedFilm.stream()
                         .filter(f -> f.getStartTime().equals(time))
                         .filter(f -> f.getHall() == hall)
@@ -180,10 +187,10 @@ public class TimeTableViewImpl implements TimeTableView {
 
     @Override
     public void checkEmptyProgrammation(final Collection<ProgrammedFilm> collProgrammedFilm) {
-        if (collProgrammedFilm.isEmpty()) {
+       if (collProgrammedFilm.isEmpty()) {
             EventQueue.invokeLater(new Runnable() {
                 @Override
-                public void run() {
+            public void run() {
                     JOptionPane.showMessageDialog(frame,  "Empty programmation for film", "No programmation for film ",
                             JOptionPane.INFORMATION_MESSAGE);
                 }

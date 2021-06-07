@@ -59,6 +59,7 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final String CHECKBOX_TITLE = "Order by:";
     private static final String STRING_BUTTON_BACK = "back";
     private static final String BTN_FILTER_STRING = "Apply";
+    
     public JFrame getBaseFrame(String title) {
         final JFrame frame = new JFrame();
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -68,11 +69,11 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return frame;
     }
-    
+
     public JPanel getInfoPanel(String info, ActionListener action) {
-        JPanel infoPanel = new JPanel(new BorderLayout());
-        JButton button = new JButton(STRING_BUTTON_BACK);
-        JLabel label = new JLabel(info);
+        final JPanel infoPanel = new JPanel(new BorderLayout());
+        final JButton button = new JButton(STRING_BUTTON_BACK);
+        final JLabel label = new JLabel(info);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
         infoPanel.add(label, BorderLayout.CENTER);
@@ -83,10 +84,10 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     }
     public JLabel getLabelImage(ImageIcon icon, int width, int height) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        JLabel labelIcon = new JLabel();
+        final JLabel labelIcon = new JLabel();
         ImageIcon imageIcon = icon;
         Image image = imageIcon.getImage(); // transform it 
-        Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        Image newimg = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);  // transform it back
         labelIcon.setIcon(imageIcon);
         
@@ -108,8 +109,8 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     }
 
     public JTable getTable(Set<ProgrammedFilm> film) {
-        int row = film.size();
-        String[] columnNames = new String[] { "Date", "Time", "Hall" };
+        final int row = film.size();
+        final String[] columnNames = { "Date", "Time", "Hall" };
         Object[][] data = new Object[row][columnNames.length];
         int i = 0;
         for (final var elem : film) {
@@ -151,15 +152,15 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
       //  final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
         ImageIcon imageIcon = new ImageIcon();
-        if(state.equals(SeatState.FREE)) {
+        if (state.equals(SeatState.FREE)) {
              imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_FREE)); // load the image to a imageIcon
-        }if(state.equals(SeatState.SELECTED)) {
+        } if (state.equals(SeatState.SELECTED)) {
              imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_SELECTED)); // load the image to a imageIcon
-        }if(state.equals(SeatState.TAKEN)) {
+        } if (state.equals(SeatState.TAKEN)) {
              imageIcon = new ImageIcon(ClassLoader.getSystemResource(GeneralSettings.IMAGE_SEAT_TAKEN)); // load the image to a imageIcon
         }
         
-        Image image = imageIcon.getImage(); // transform it 
+        final Image image = imageIcon.getImage(); // transform it 
         Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE_SEAT), (int) (screenSize.getHeight() * HEIGHT_IMAGE_SEAT),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon = new ImageIcon(newimg);  // transform it back
       

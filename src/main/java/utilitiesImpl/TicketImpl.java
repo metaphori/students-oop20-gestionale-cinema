@@ -8,15 +8,15 @@ import java.util.Set;
 import utilities.Ticket;
 
 public class TicketImpl implements Ticket {
-    
+
         private final LocalDate data;
         private final LocalTime time;
-	private final Set<SeatImpl<Row,Integer>> setSeat;
+	private final Set<SeatImpl<Row, Integer>> setSeat;
 	private final double price;
 	private final int id;
 	private final int hall;
 	
-	public TicketImpl(LocalDate data,LocalTime time, Set<SeatImpl<Row,Integer>> setSeat, double price, int id, int hall) {
+	public TicketImpl(final LocalDate data, final LocalTime time, final Set<SeatImpl<Row, Integer>> setSeat, final double price, final int id, final int hall) {
 		this.data = data;
 		this.hall = hall;
 		this.setSeat = setSeat;
