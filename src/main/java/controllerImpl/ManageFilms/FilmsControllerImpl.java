@@ -71,7 +71,6 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void deleteFilm(final Film f) {
         this.model.removeFilm(f);
-        this.programmingFilmsController.deleteAllFilmProgrammation(f);
         this.writeFilmsOnFile();
         this.writeManagerIdsFilmsOnFile();   
     }
@@ -96,7 +95,6 @@ public class FilmsControllerImpl implements FilmsController {
     public void showInfoFilmView(final Film f) {
         infoFilms.start();
         infoFilms.loadFilm(f);
-        System.out.println("Load specific film"+ f);
     }
 
     @Override
@@ -146,4 +144,14 @@ public class FilmsControllerImpl implements FilmsController {
         return rw.readObj(type);
     
     }
+
+
+    @Override
+    public void deleteFilmAndProgrammation(final Film f) {
+        this.deleteFilm(f);
+        this.programmingFilmsController.deleteAllFilmProgrammation(f);
+        
+    }
+    
+    
 }

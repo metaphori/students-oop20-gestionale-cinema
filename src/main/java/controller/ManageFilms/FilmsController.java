@@ -12,7 +12,8 @@ public interface FilmsController {
         void deleteFilm(Film f);
         Set<Film> getFilms(); //recupera i film da file
         void loadFilm(Set<Film> loadedFilms); //Carica i film sul model
-
+        void deleteFilmAndProgrammation(Film f);
+        
         void showMenu();
         void showContainerFilmsView();
         void showInfoFilmView(Film f);
