@@ -133,7 +133,7 @@ public class Cinema {
         b.start();
        //FilmsController controllerFilm = new FilmsControllerImpl();
        // controllerFilm.showContainerFilmsView();
-      // ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
+       //ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
        //controllerProgrammedFilm.showProgrammedFilmView();
     }
     

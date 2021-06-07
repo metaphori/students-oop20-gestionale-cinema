@@ -70,8 +70,9 @@ public class TimeTableViewImpl implements TimeTableView {
     private Set<ProgrammedFilm> setProgrammedFilm;
     public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilmOriginal, final Film film) {
         setProgrammedFilm = setProgrammedFilmOriginal.stream()
-                .filter(f -> (f.getDate().equals(LocalDate.now()) && f.getStartTime().isAfter(LocalTime.now())) ||
-                             (f.getDate().isAfter(LocalDate.now()) || f.getDate().isEqual(LocalDate.now()))
+                .filter(f -> f.getDate().isAfter(LocalDate.now()) 
+                        || f.getDate().equals(LocalDate.now()) 
+                        && f.getStartTime().isAfter(LocalTime.now())
                         )
                 .collect(Collectors.toSet());
         final String nameFilm = film.getName();
