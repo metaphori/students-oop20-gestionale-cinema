@@ -3,6 +3,7 @@ package viewImpl.ManageFilms;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -159,6 +160,14 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     }
     
     private void showNoFilmsDialog() {
-        JOptionPane.showMessageDialog(frame,"There aren't films! Please click on Add button down below to insert a new Film");
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JOptionPane.showMessageDialog(frame,"There aren't films! Please click on Add button down below to insert a new Film");
+            }
+            });
+        
+        
+        
     }
 }
