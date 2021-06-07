@@ -64,6 +64,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         }
         setProgrammedFilm = new HashSet<>(controllerFilmProgrammed.getAllProgrammedFilms());
         setFilm = controllerFilms.getFilms();
+       
     }
   /*  public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
 
@@ -93,11 +94,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private void showListFilmView() {
           this.viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
-          viewFilm.check();
+          viewFilm.checkEmptyFilm();
     }
-    private void showTimeTableView(final Set<ProgrammedFilm> setProgrammedFilm) {
-       this.viewTimeTable = new TimeTableViewImpl(this, setProgrammedFilm);
+    private void showTimeTableView(final Set<ProgrammedFilm> setProgrammedFilm, final Film film) {
+       this.viewTimeTable = new TimeTableViewImpl(this, setProgrammedFilm, film);
         viewTimeTable.show();
+        viewTimeTable.checkEmptyProgrammation(setProgrammedFilm);
+        
     } 
     
     private void showBookingView(final ProgrammedFilm film) {
@@ -107,7 +110,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void selectedFilm(final Film film) {
         final Set<ProgrammedFilm> setFiltered = setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getID()).collect(Collectors.toSet());
-        this.showTimeTableView(setFiltered);
+        this.showTimeTableView(setFiltered, film);
     }
 
     @Override
@@ -123,7 +126,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void bookTicketForFilm(final ProgrammedFilm film) {
         this.showBookingView(film);
-        
     }
     @Override
     public Film getFilmByProgrammedFilm(final ProgrammedFilm film) {
@@ -135,9 +137,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public void showBackFromBooking(final ProgrammedFilm film) {
-        final Set<ProgrammedFilm> setPF = setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == film.getIdProgrammation()).collect(Collectors.toSet());
-        this.showTimeTableView(setPF);
+    public void showBackFromBooking(final ProgrammedFilm programmedFilm) {
+        final Set<ProgrammedFilm> setPF = setProgrammedFilm.stream().filter(i -> i.getIdProgrammation() == programmedFilm.getIdProgrammation()).collect(Collectors.toSet());
+        final Film film = setFilm.stream().filter(f -> f.getID() == programmedFilm.getIdProgrammation()).findAny().get();
+        this.showTimeTableView(setPF, film);
     }
 
     @Override
@@ -169,14 +172,17 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Filter<ProgrammedFilm> filter) {
         final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
-        final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
-        return handler.filterBy(listFilm, filter);
+        List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
+        listFilm = handler.filterBy(listFilm, filter);
+        this.viewTimeTable.checkEmptyProgrammation(listFilm);
+        return listFilm;
     }
     @Override
     public List<ProgrammedFilm> handlerProgrammedFilm(final Collection<ProgrammedFilm> coll, final Sorter<ProgrammedFilm> sorter) {
         final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
-        final List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
-        return handler.sortBy(listFilm, sorter);
+        List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
+        listFilm = handler.sortBy(listFilm, sorter);
+        return listFilm;
     }
     private void writeTicketOnFile(final Set<Ticket> set) {
         final Set<Ticket> setToWrite = set;

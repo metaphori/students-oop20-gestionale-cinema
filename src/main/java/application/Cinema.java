@@ -131,10 +131,10 @@ public class Cinema {
      //   BookingController b = new BookingControllerImpl(set,setP);
         BookingController b = new BookingControllerImpl();
         b.start();
-      //  FilmsController controllerFilm = new FilmsControllerImpl();
+       //FilmsController controllerFilm = new FilmsControllerImpl();
        // controllerFilm.showContainerFilmsView();
-      //  ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
-        //controllerProgrammedFilm.showProgrammedFilmView();
+      // ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
+       //controllerProgrammedFilm.showProgrammedFilmView();
     }
     
 }

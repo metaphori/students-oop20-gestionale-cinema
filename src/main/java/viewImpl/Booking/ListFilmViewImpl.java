@@ -3,6 +3,7 @@ package viewImpl.Booking;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
@@ -34,11 +35,11 @@ import view.Booking.ListFilmViewObserver;
 import view.ManageFilms.Factory.PanelFilmFactory;
 import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
-public class ListFilmViewImpl implements ListFilmView{
+public class ListFilmViewImpl implements ListFilmView {
 
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGTH_PERC_FRAME = 0.5;
-    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME /3;
+    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME / 3;
     private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 1;
     private static final long serialVersionUID = 1L;
     private static final String FRAME_NAME = "ListFilm"; 
@@ -46,7 +47,7 @@ public class ListFilmViewImpl implements ListFilmView{
     private ListFilmViewObserver observer;
     private final JFrame frame;
     private final Map<JButton, Film> map = new HashMap<>();
-    
+
     public ListFilmViewImpl(final ListFilmViewObserver observer) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.observer = observer;
@@ -72,16 +73,23 @@ public class ListFilmViewImpl implements ListFilmView{
                frame.dispose();
             });
         }
-        
     }
+
+    @Override
     public void show() {
         frame.setVisible(true);
     }
-
-    public void check() {
+    @Override
+    public void checkEmptyFilm() {
         if (map.values().isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Not selected row", 
-                    "Incorrect Row", JOptionPane.INFORMATION_MESSAGE);
+            EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showMessageDialog(frame, "there aren't any film", "No film", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
         }
     }
+ 
 }
