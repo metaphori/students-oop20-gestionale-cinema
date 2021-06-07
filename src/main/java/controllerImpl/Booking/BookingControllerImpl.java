@@ -100,9 +100,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
        this.viewTimeTable = new TimeTableViewImpl(this, setProgrammedFilm, film);
         viewTimeTable.show();
         viewTimeTable.checkEmptyProgrammation(setProgrammedFilm);
-        
     } 
-    
+
     private void showBookingView(final ProgrammedFilm film) {
         this.viewBooking = new BookingViewImpl(this, film);
         viewBooking.show();
