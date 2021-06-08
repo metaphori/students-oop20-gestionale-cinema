@@ -70,7 +70,7 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final Container container = frame.getContentPane();
     private FilmsController observer;
     private Map<JButton, Film> map = new HashMap<>();
-    
+
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
     private final int screenHeight = (int) screen.getHeight();
@@ -95,7 +95,7 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     northPanel.add(home);
     southPanel.add(add);
 
-     al = (e) -> { 
+    al = (e) -> { 
         //this is what must be done when users click on specific film . So specific film gui must be viewed
         final JButton selectedFilm = (JButton) e.getSource(); 
         System.out.println("key" + map.containsKey(selectedFilm));
