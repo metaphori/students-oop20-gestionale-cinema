@@ -53,9 +53,17 @@ public final class GeneralSettings {
     /**Describes programmed films file path where programmed films data will be stored.*/
     public static final String PROGRAMMEDFILMSPATH = DATADIR + FS + PROGRAMMEDFILMSFILE;
 
+
     /**Describes standard cover image name for film if user doesn't choose any images. */
     //Res options
     public static final String IMAGEFILMSTANDARD = "images/filmStandardIco.png";
+
+    public static final String TICKET_FILE = "Ticket.json";
+    public static final String TICKET_FILE_PATH = DATADIR + FS + TICKET_FILE;
+    public static final String IMAGE_SEAT_FREE = "images/imageSeatFree.png";
+    public static final String IMAGE_SEAT_SELECTED = "images/imageSeatSelected.png";
+    public static final String IMAGE_SEAT_TAKEN = "images/imageSeatTaken.png";
+    public static final String IMAGE_LEGEND = "images/legend.png";
 
     /**Private constructor. This class can't be instantiated. It's used to access paths where application will work.*/
     private GeneralSettings() { }; 

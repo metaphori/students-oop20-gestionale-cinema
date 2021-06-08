@@ -13,4 +13,6 @@ public class ProgrammedFilmFactoryImpl implements ProgrammedFilmFactory {
         return new ProgrammedFilmImpl(idFilm,hall,price,date,new TimeSlotImpl(startTime,endTime));
     }
 
+ 
+
 }

@@ -17,11 +17,14 @@ import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Ticket;
 import utilities.TimeSlot;
+
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.TicketImpl;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmImpl;
+
 import utilitiesImpl.FactoryImpl.TimeSlotImpl;
+
 
 public final class GsonFactory {
     private GsonFactory() { }
@@ -53,7 +56,7 @@ public final class GsonFactory {
         final RuntimeTypeAdapterFactory<TimeSlot> adapterTimeSlot= RuntimeTypeAdapterFactory
                 .of(TimeSlot.class, "Type")
                 .registerSubtype(TimeSlotImpl.class, TimeSlotImpl.class.getName());
-        
+                
 
     /*    final RuntimeTypeAdapterFactory<LocalTime> adapterLocalTime = RuntimeTypeAdapterFactory
                 .of(LocalTime.class, "Type");
