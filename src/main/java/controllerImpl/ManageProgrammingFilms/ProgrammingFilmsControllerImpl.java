@@ -37,7 +37,7 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     
     public ProgrammingFilmsControllerImpl() {
         
-        filmsController = new FilmsControllerImpl();
+        filmsController = new FilmsControllerImpl(this);
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
 
         if(programmedFilms.isEmpty()) {

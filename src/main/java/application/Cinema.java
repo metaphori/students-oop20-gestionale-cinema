@@ -71,6 +71,7 @@ public class Cinema {
         
         System.out.println(managerIdsFilm.getUsedIDs());
         
+<<<<<<< HEAD
 
        // final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);*/
      //   final FilmsController filmsController = new FilmsControllerImpl();
@@ -94,7 +95,7 @@ public class Cinema {
         LocalTime time7s = LocalTime.of(16, 5, 1);
         LocalTime time8s = LocalTime.of(17, 5, 1);
         LocalTime time9s = LocalTime.of(18, 5, 1);
-        
+
 
         LocalTime time1f = LocalTime.of(10, 55, 1);
         LocalTime time2f = LocalTime.of(11, 55, 1);

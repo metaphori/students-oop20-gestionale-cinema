@@ -59,6 +59,30 @@ public class FilmsControllerImpl implements FilmsController {
         this.infoFilms.setObserver(this);
     }  
     
+  public FilmsControllerImpl( ProgrammingFilmsController programmingFilmsController) { // must be invoked on the first use of application 
+        
+        Optional<Set<Film>> films = this.readFilmsFromFile();
+        Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
+        
+        
+        if(films.isEmpty()|| managerIdsFilm.isEmpty() ) {
+            model = new ContainerFilmsModelImpl();  
+        }else {
+            model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
+        }
+
+        viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
+        infoFilms = new InfoFilmsGUIimpl();
+        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        this.programmingFilmsController = programmingFilmsController;
+        
+        this.viewFilms.setObserver(this);
+        this.infoFilms.setObserver(this);
+    } 
+    
+    
+    
+    
  
     @Override
     public void addFilm(final Film f) {
@@ -71,10 +95,8 @@ public class FilmsControllerImpl implements FilmsController {
     @Override
     public void deleteFilm(final Film f) {
         this.model.removeFilm(f);
-        this.programmingFilmsController.deleteAllFilmProgrammation(f);
         this.writeFilmsOnFile();
-        this.writeManagerIdsFilmsOnFile();
-        
+        this.writeManagerIdsFilmsOnFile();   
     }
 
     @Override
@@ -97,7 +119,6 @@ public class FilmsControllerImpl implements FilmsController {
     public void showInfoFilmView(final Film f) {
         infoFilms.start();
         infoFilms.loadFilm(f);
-        System.out.println("Load specific film"+ f);
     }
 
     @Override
@@ -126,7 +147,7 @@ public class FilmsControllerImpl implements FilmsController {
          final var type = new TypeToken<Set<Film>>() {}.getType();
          rw.writeObj(model.getFilms(), type);
     }
-    
+
     private void writeManagerIdsFilmsOnFile() {
         final RWobject<ManagerIdsFilms> rw = new RWobjectImpl<>(GeneralSettings.MANAGERIDSFILMSPATH) ;
         final var type = new TypeToken<ManagerIdsFilms>() {}.getType();
@@ -147,4 +168,14 @@ public class FilmsControllerImpl implements FilmsController {
         return rw.readObj(type);
     
     }
+
+
+    @Override
+    public void deleteFilmAndProgrammation(final Film f) {
+        this.deleteFilm(f);
+        this.programmingFilmsController.deleteAllFilmProgrammation(f);
+        
+    }
+    
+    
 }

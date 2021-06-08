@@ -264,16 +264,17 @@ public class InfoFilmsGUIimpl implements InfoFilmsGUI {
         
         delete.
         addActionListener(event -> {
-            System.out.println("focus film in delete listener:"+focusFilm);
+            //System.out.println("focus film in delete listener:"+focusFilm);
             final Optional<String> imagePathToDelete = focusFilm.get().getCoverPath();
-            System.out.println("Ids before delete:"+ observer.getManagerIdsFilms().getUsedIDs());
+            //System.out.println("Ids before delete:"+ observer.getManagerIdsFilms().getUsedIDs());
             if (imagePathToDelete.isPresent()) {
                 observer.getManagerWorkingDIR().deleteFileWithSpecificName(new File(imagePathToDelete.get()));
-                System.out.println("Deleted image");
+                //System.out.println("Deleted image");
             }
             observer.getManagerIdsFilms().removeFilmId(focusFilm.get().getID());
-            observer.deleteFilm(focusFilm.get());
-            System.out.println("Ids before delete:"+ observer.getManagerIdsFilms().getUsedIDs());
+            //observer.deleteFilm(focusFilm.get());
+            observer.deleteFilmAndProgrammation(focusFilm.get());
+            //System.out.println("Ids before delete:"+ observer.getManagerIdsFilms().getUsedIDs());
             frame.setVisible(false);
             observer.showContainerFilmsView();
         }
