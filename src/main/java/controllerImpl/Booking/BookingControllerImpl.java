@@ -167,7 +167,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         final HandlerList<ProgrammedFilm> handler = new HandlerListImpl<>();
         List<ProgrammedFilm> listFilm = new ArrayList<>(coll);
         listFilm = handler.filterBy(listFilm, filter);
-        this.viewTimeTable.checkEmptyProgrammation(listFilm);
         return listFilm;
     }
     @Override

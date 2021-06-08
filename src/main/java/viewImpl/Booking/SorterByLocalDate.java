@@ -7,6 +7,9 @@ import utilities.Factory.ProgrammedFilm;
 
 public class SorterByLocalDate implements Sorter<ProgrammedFilm>{
     
+    public SorterByLocalDate() {
+        
+    }
     @Override
     public Comparator<ProgrammedFilm> getComparator() {
        return (f1, f2)->{

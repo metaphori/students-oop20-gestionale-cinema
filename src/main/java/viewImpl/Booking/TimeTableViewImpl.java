@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -69,12 +70,14 @@ public class TimeTableViewImpl implements TimeTableView {
     private JFrame frame;
     private Set<ProgrammedFilm> setProgrammedFilm;
     public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilmOriginal, final Film film) {
-        setProgrammedFilm = setProgrammedFilmOriginal.stream()
+     /*   setProgrammedFilm = setProgrammedFilmOriginal.stream()
                 .filter(f -> f.getDate().isAfter(LocalDate.now()) 
                         || f.getDate().equals(LocalDate.now()) 
                         && f.getStartTime().isAfter(LocalTime.now())
                         )
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
+        setProgrammedFilm = new HashSet<>(observer.handlerProgrammedFilm(setProgrammedFilmOriginal, new FilterOldDateImpl()));
+        
         final String nameFilm = film.getName();
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         this.observer = observer;
@@ -177,7 +180,6 @@ public class TimeTableViewImpl implements TimeTableView {
         mainPanel.add(scroll, BorderLayout.CENTER);
         mainPanel.add(bookBtn, BorderLayout.SOUTH);
         frame.add(mainPanel);
-
     }
 
     @Override
