@@ -176,6 +176,11 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         listFilm = handler.sortBy(listFilm, sorter);
         return listFilm;
     }
+    
+    @Override
+    public Set<Ticket> getTicket(){
+        return model.getSeats();
+    }
     private void writeTicketOnFile(final Set<Ticket> set) {
         final Set<Ticket> setToWrite = set;
         final var type = new TypeToken<Set<Ticket>>() { }.getType();

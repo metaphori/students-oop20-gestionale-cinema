@@ -56,7 +56,7 @@ public final class GsonFactory {
         final RuntimeTypeAdapterFactory<TimeSlot> adapterTimeSlot= RuntimeTypeAdapterFactory
                 .of(TimeSlot.class, "Type")
                 .registerSubtype(TimeSlotImpl.class, TimeSlotImpl.class.getName());
-        
+                
 
     /*    final RuntimeTypeAdapterFactory<LocalTime> adapterLocalTime = RuntimeTypeAdapterFactory
                 .of(LocalTime.class, "Type");
