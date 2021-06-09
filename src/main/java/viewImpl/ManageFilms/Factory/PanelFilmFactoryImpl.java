@@ -44,7 +44,6 @@ public class PanelFilmFactoryImpl implements PanelFilmFactory {
         }
         for (var bt : mapFilm.keySet()) {
             centralPanel.add(bt);
-            
         }
         return centralPanel;
     }

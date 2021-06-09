@@ -35,8 +35,8 @@ public class CinemaControllerImpl implements CinemaController{
         filmsController.setProgrammingFilmsController(programmingFilmsController);
         programmingFilmsController.setFilmsController(filmsController);
         
-        //filmsController.showContainerFilmsView();
-        programmingFilmsController.showProgrammedFilmView();
+        filmsController.showContainerFilmsView();
+        //programmingFilmsController.showProgrammedFilmView();
     }
 
 }

@@ -8,7 +8,7 @@ public interface ContainerFilmsGUI {
      */
     void start();
     /**
-        Set GUI observer.
+        Set GUI films controller observer.
         @param observer observer to set.
      */
     void setObserver(FilmsController observer);
