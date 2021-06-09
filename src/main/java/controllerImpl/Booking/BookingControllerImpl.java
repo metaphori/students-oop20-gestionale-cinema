@@ -62,32 +62,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         setProgrammedFilm = new HashSet<>(controllerFilmProgrammed.getAllProgrammedFilms());
         setFilm = controllerFilms.getFilms();
     }
-  /*  public BookingControllerImpl(Set<Film> setF, Set<ProgrammedFilm> setP) {
-
-        this.setFilm = setF;
-        this.setProgrammedFilm = setP;
-
-        RWobject<Set<Ticket>> rw = new RWobjectImpl(GeneralSettings.TICKET_FILE_PATH);
-        final var type = new TypeToken<Set<Ticket>> () {}.getType();
-       
-        Optional<Set<Ticket>> opSetTicket = rw.readObj(type);
-  
-        if(opSetTicket.isEmpty()) {
-            model = new BookingModelImpl(new HashSet<>());
-        }else {
-            model = new BookingModelImpl(opSetTicket.get());
-        }
-        //Set<Ticket> setTicket = new HashSet<>();
-     //   model = new BookingModelImpl(setTicket);
-
-        
-    }*/
-
+    /**
+     * 
+     */
     @Override
     public void start() {
         this.showListFilmView();
     }
-    
     private void showListFilmView() {
           this.viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
@@ -111,7 +92,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showMenu() {
-        
+
     }
 
     @Override
@@ -196,16 +177,16 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
     
     @Override
-    public void setControllerFilms(FilmsController controllerFilms) {
-        this.controllerFilms=controllerFilms;
+    public void setControllerFilms(final FilmsController controllerFilms) {
+        this.controllerFilms = controllerFilms;
         this.updateFilmsController();
     }
     private void updateFilmsController() {
         this.setFilm = controllerFilms.getFilms();
     }
     @Override
-    public void setControllerProgrammingFilms(ProgrammingFilmsController controllerProgrammingFilms) {
-        this.controllerProgrammingFilms = controllerProgrammingFilms;  
+    public void setControllerProgrammingFilms(final ProgrammingFilmsController controllerProgrammingFilms) {
+        this.controllerProgrammingFilms = controllerProgrammingFilms;
         this.updateControllerProgrammingFilms();
     }
     private void updateControllerProgrammingFilms() {
