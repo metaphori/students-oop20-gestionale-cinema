@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import controller.CinemaController;
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import controllerImpl.CinemaControllerImpl;
 import controllerImpl.Booking.BookingControllerImpl;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.ManageFilms.FilmsControllerImpl;

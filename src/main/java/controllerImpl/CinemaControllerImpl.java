@@ -1,5 +1,6 @@
-package application;
+package controllerImpl;
 
+import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
