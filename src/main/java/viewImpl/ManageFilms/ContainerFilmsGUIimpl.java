@@ -78,16 +78,16 @@ public class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final int frameWidth = (int) (screenWidth / PROPORTION);
     private final int frameHeight = (int) (screenHeight / PROPORTION);
 
-    private JPanel centerPanel;
-    final ActionListener al;
+    private final JPanel centerPanel;
+    private final ActionListener al;
 
-    public ContainerFilmsGUIimpl(final Set<Film> setFilm) {
+    public ContainerFilmsGUIimpl() {
 
     JPanel mainPanel = factory.createPanel(new BorderLayout());
     final JPanel northPanel = factory.createPanel(new FlowLayout(FlowLayout.RIGHT));
     final JPanel southPanel = factory.createPanel(new FlowLayout(FlowLayout.CENTER));
     centerPanel = new JPanel();
-    centerPanel.add(factoryFilmPanel.getFilmPanel(map, setFilm));
+    centerPanel.add(factoryFilmPanel.getFilmPanel(map, new HashSet<>()));
     mainPanel.add(centerPanel, BorderLayout.CENTER);
     mainPanel.add(northPanel, BorderLayout.NORTH);
     mainPanel.add(southPanel, BorderLayout.SOUTH);

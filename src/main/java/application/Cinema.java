@@ -144,12 +144,14 @@ public class Cinema {
         //programmingFilmsController.showScheduleFilmView();
         /*
         FilmsController filmsController = new FilmsControllerImpl();
-        filmsController.showContainerFilmsView();
-        */
-       
+        filmsController.showContainerFilmsView();*/
+        
+       /*
         ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
-        programmingFilmsController.showProgrammedFilmView();
- 
+        programmingFilmsController.showProgrammedFilmView();*/
+
+        CinemaController cinemaController = new CinemaControllerImpl();
+        
     }
     
 }

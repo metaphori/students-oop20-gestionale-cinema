@@ -35,9 +35,9 @@ public class FilmsControllerImpl implements FilmsController {
     private ContainerFilmsGUI viewFilms;
     private final InfoFilmsGUI infoFilms;
     private final ManagerWorkingDIR managerWorkingDIR;
-    private final ProgrammingFilmsController programmingFilmsController;
+    private ProgrammingFilmsController programmingFilmsController;
     
-
+/*
     public FilmsControllerImpl() { // must be invoked on the first use of application 
         
         Optional<Set<Film>> films = this.readFilmsFromFile();
@@ -58,7 +58,26 @@ public class FilmsControllerImpl implements FilmsController {
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
     }  
-    
+    */
+
+    public FilmsControllerImpl() { // must be invoked on the first use of application 
+
+        final Optional<Set<Film>> films = this.readFilmsFromFile();
+        final Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
+
+        if (films.isEmpty() || managerIdsFilm.isEmpty()) {
+            model = new ContainerFilmsModelImpl();
+        } else {
+            model =  new ContainerFilmsModelImpl(films.get(), managerIdsFilm.get());
+        }
+
+        viewFilms = new ContainerFilmsGUIimpl();
+        infoFilms = new InfoFilmsGUIimpl();
+        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        this.viewFilms.setObserver(this);
+        this.infoFilms.setObserver(this);
+    }
+
   public FilmsControllerImpl( ProgrammingFilmsController programmingFilmsController) { // must be invoked on the first use of application 
         
         Optional<Set<Film>> films = this.readFilmsFromFile();
@@ -71,7 +90,7 @@ public class FilmsControllerImpl implements FilmsController {
             model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
         }
 
-        viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
+        viewFilms = new ContainerFilmsGUIimpl(); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
         managerWorkingDIR = new ManagerWorkingDIRimpl();
         this.programmingFilmsController = programmingFilmsController;
@@ -176,6 +195,10 @@ public class FilmsControllerImpl implements FilmsController {
         this.programmingFilmsController.deleteAllFilmProgrammation(f);
         
     }
-    
-    
+
+    @Override
+    public void setProgrammingFilmsController(final ProgrammingFilmsController programmingFilmsController) {
+        this.programmingFilmsController = programmingFilmsController;
+    }
+
 }

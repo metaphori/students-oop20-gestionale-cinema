@@ -3,6 +3,7 @@ package controller.ManageFilms;
 
 import java.util.Set;
 
+import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import model.ManageFilms.ManagerIdsFilms;
 import utilities.Film;
 import utilities.ManagerWorkingDIR;
@@ -21,5 +22,5 @@ public interface FilmsController {
 
         ManagerWorkingDIR getManagerWorkingDIR();
         ManagerIdsFilms getManagerIdsFilms();
-
+        void setProgrammingFilmsController(ProgrammingFilmsController programmingFilmsController);
 }
