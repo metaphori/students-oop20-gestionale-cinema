@@ -45,8 +45,10 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private ListFilmView viewFilm;
     private TimeTableView viewTimeTable;
     private BookingView viewBooking;
-    private final Set<Film> setFilm;
-    private final Set<ProgrammedFilm> setProgrammedFilm;
+    private Set<Film> setFilm;
+    private Set<ProgrammedFilm> setProgrammedFilm;
+    private ProgrammingFilmsController controllerProgrammingFilms;
+    private FilmsController controllerFilms;
     public BookingControllerImpl() {
         final Optional<Set<Ticket>> opSetTicket = this.readTicketOnFile();
         final FilmsController controllerFilms = new FilmsControllerImpl();
@@ -85,6 +87,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     public void start() {
         this.showListFilmView();
     }
+    
     private void showListFilmView() {
           this.viewFilm = new ListFilmViewImpl(this);
           viewFilm.show();
@@ -176,7 +179,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         listFilm = handler.sortBy(listFilm, sorter);
         return listFilm;
     }
-    
     @Override
     public Set<Ticket> getTicket(){
         return model.getSeats();
@@ -191,5 +193,22 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         final RWobject<Set<Ticket>> rw = new RWobjectImpl<>(GeneralSettings.TICKET_FILE_PATH);
         final var type = new TypeToken<Set<Ticket>>() { }.getType();
         return rw.readObj(type);
+    }
+    
+    @Override
+    public void setControllerFilms(FilmsController controllerFilms) {
+        this.controllerFilms=controllerFilms;
+        this.updateFilmsController();
+    }
+    private void updateFilmsController() {
+        this.setFilm = controllerFilms.getFilms();
+    }
+    @Override
+    public void setControllerProgrammingFilms(ProgrammingFilmsController controllerProgrammingFilms) {
+        this.controllerProgrammingFilms = controllerProgrammingFilms;  
+        this.updateControllerProgrammingFilms();
+    }
+    private void updateControllerProgrammingFilms() {
+        this.setProgrammedFilm = new HashSet<>(controllerProgrammingFilms.getAllProgrammedFilms());
     }
 }
