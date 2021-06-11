@@ -41,7 +41,7 @@ import viewImpl.Booking.ListFilmViewImpl;
 import viewImpl.Booking.TimeTableViewImpl;
 
 public class BookingControllerImpl implements BookingController, ListFilmViewObserver, TimeTableViewObserver, BookingViewObserver {
-    private  BookingModel model;
+    private  BookingModel modelBooking;
     private ListFilmView viewFilm;
     private TimeTableView viewTimeTable;
     private BookingView viewBooking;
@@ -55,9 +55,9 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         final ProgrammingFilmsController controllerFilmProgrammed = new ProgrammingFilmsControllerImpl();
 
         if (opSetTicket.isEmpty()) {
-            model = new BookingModelImpl(new HashSet<>());
+            modelBooking = new BookingModelImpl(new HashSet<>());
         } else {
-            model = new BookingModelImpl(opSetTicket.get());
+            modelBooking = new BookingModelImpl(opSetTicket.get());
         }
         setProgrammedFilm = new HashSet<>(controllerFilmProgrammed.getAllProgrammedFilms());
         setFilm = controllerFilms.getFilms();
@@ -121,29 +121,29 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public Set<SeatImpl<Row, Integer>> getSeatsFromFilm(final ProgrammedFilm film) {
-        return this.model.getSeatsFromFilm(film);
+    public Set<SeatImpl> getSeatsFromFilm(final ProgrammedFilm film) {
+        return this.modelBooking.getSeatsFromFilm(film);
     }
 
     @Override
     public void bookSeat(final ProgrammedFilm film) {
-        model.bookSeat(film);
-        this.writeTicketOnFile(model.getSeats());
+        modelBooking.bookSeat(film);
+        this.writeTicketOnFile(modelBooking.getSeats());
     }
 
     @Override
-    public void buttonSelected(final SeatImpl<Row, Integer> seat, final ProgrammedFilm film) {
-      model.buttonSelected(seat, film);
+    public void buttonSelected(final SeatImpl seat, final ProgrammedFilm film) {
+        modelBooking.buttonSelected(seat, film);
     }
 
     @Override
     public void newBooking() {
-        model.newBooking();
+        modelBooking.newBooking();
     }
 
     @Override
-    public Set<SeatImpl<Row, Integer>> getSeatsSelected() {
-        return model.getSeatsSelected();
+    public Set<SeatImpl> getSeatsSelected() {
+        return modelBooking.getSeatsSelected();
     }
     
     @Override
@@ -162,7 +162,15 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
     @Override
     public Set<Ticket> getTicket(){
-        return model.getSeats();
+        return modelBooking.getSeats();
+    }
+    @Override
+    public void deleteTicket(final Film film) {
+        this.modelBooking.deleteTicket(film);
+    }
+    @Override
+    public void deleteTicket(final ProgrammedFilm programmedFilm) {
+        this.modelBooking.deleteTicket(programmedFilm);
     }
     private void writeTicketOnFile(final Set<Ticket> set) {
         final Set<Ticket> setToWrite = set;

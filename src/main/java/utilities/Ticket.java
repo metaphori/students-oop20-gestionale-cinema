@@ -9,8 +9,8 @@ import utilitiesImpl.SeatImpl;
 
 public interface Ticket {
     LocalTime getTime();
-    LocalDate getData();
-    Set<SeatImpl<Row, Integer>> getSetSeat();
+    LocalDate getDate();
+    Set<SeatImpl> getSetSeat();
     double getPrice();
     int getId();
     int getHall();
