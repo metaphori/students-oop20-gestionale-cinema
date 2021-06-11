@@ -327,6 +327,9 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
                     observer.deleteFilm(focusFilm.get());
                     observer.addFilm(film);
                 }
+                if (!String.valueOf(focusFilm.get().getDuration()).equals(duration.getText())) {
+                    JOptionPane.showMessageDialog(frame, "You have just changed film duration. In the next future programming of this film the duration will be changed.");
+                }
             }
             frame.setVisible(false);
             observer.showContainerFilmsView();

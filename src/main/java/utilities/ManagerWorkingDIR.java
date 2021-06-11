@@ -14,13 +14,15 @@ public interface ManagerWorkingDIR {
         Copy source file to destination folder with the same name.
         @param src File to copy
         @param folder Path where src will be copied
+        @return  path of destFile
      */
-    String copyFile(File src, String folder) throws IOException; //return path of destFile
+    String copyFile(File src, String folder) throws IOException; 
     /**
         Copy source file to destination folder with specific name.
         @param src File to copy
         @param folder Path where src will be copied
         @param name name using during copying operation
+        @return  path of destFile
      */
     String copyFileWithSpecificName(File src, String folder, String name) throws IOException;
 
