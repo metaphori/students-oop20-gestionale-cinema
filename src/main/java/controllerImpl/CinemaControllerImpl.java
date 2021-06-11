@@ -17,7 +17,6 @@ public class CinemaControllerImpl implements CinemaController{
     @Override
     public void showMenu() {
         //menu.start();
-        
     }
 
     public CinemaControllerImpl() {
@@ -35,8 +34,9 @@ public class CinemaControllerImpl implements CinemaController{
         programmingFilmsController = new ProgrammingFilmsControllerImpl();
         filmsController.setProgrammingFilmsController(programmingFilmsController);
         programmingFilmsController.setFilmsController(filmsController);
+        filmsController.getFilms();
         //filmsController.showContainerFilmsView();
-        programmingFilmsController.showProgrammedFilmView();
+        //programmingFilmsController.showProgrammedFilmView();
     }
 
 }

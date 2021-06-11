@@ -116,14 +116,10 @@ public class Cinema {
             programmingFilmsController.addProgrammedFilm(pf1);
             programmingFilmsController.addProgrammedFilm(pf2);
             programmingFilmsController.addProgrammedFilm(pf3);
-  
         }catch(Exception e) {
             System.out.println("eccezione");
         };
-        
-        
-        
-        
+
         System.out.println(filmsController.getFilms());
         */
         /*
@@ -148,7 +144,7 @@ public class Cinema {
         programmingFilmsController.showProgrammedFilmView();*/
 
         CinemaController cinemaController = new CinemaControllerImpl();
-        
+
     }
     
 }
