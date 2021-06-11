@@ -1,7 +1,9 @@
 package utilities;
 
 import java.util.Optional;
-
+/**
+ *  Describe a film with some property to save.
+ * */
 public interface Film {
 
     /**

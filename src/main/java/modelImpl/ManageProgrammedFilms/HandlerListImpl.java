@@ -1,30 +1,33 @@
 package modelImpl.ManageProgrammedFilms;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Comparator;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import model.ManageProgrammingFilms.Filter;
 import model.ManageProgrammingFilms.HandlerList;
 import model.ManageProgrammingFilms.Sorter;
-import utilities.TimeSlot;
-import utilities.Factory.ProgrammedFilm;
-
-public class HandlerListImpl<X> implements HandlerList<X> {
-    
+/**
+ * Describe a generic HandlerList.
+ * @param <X> type in handler list.
+ * */
+public final  class HandlerListImpl<X> implements HandlerList<X> {
+    /** 
+     * Filter a specific list with a specific filter.
+     * @param list list to filter
+     * @param filter filter to use
+     * @return List<X> filtered list
+     * */
     @Override
     public List<X> filterBy(final List<X> list, final Filter<X> filter) {
-        
         return list.stream()
                 .filter(filter.getPredicate())
                 .collect(Collectors.toList());
-     
     }
-
+    /** 
+     * Sort a specific list with a specific sorter.
+     * @param list list to sort
+     * @param sorter sorter to use
+     * @return List<X> sorted list
+     * */
     @Override
     public List<X> sortBy(final List<X> list, final Sorter<X> sorter) {
         return list.stream()

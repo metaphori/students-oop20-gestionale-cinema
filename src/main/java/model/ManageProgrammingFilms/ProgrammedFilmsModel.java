@@ -1,22 +1,45 @@
 package model.ManageProgrammingFilms;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import exceptions.ProgrammationNotAvailableException;
 import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
-import utilitiesImpl.FactoryImpl.FilmBasicImpl;
-
-public interface ProgrammedFilmsModel{
-    
+/** 
+ * Describe a model where data about programmed films are stored .
+ * */
+public interface ProgrammedFilmsModel {
+    /** 
+     * Add film programmation. If it's not available throws ProgrammationNotAvailableException.
+     * @param programmedFilm to add.
+     * @throws ProgrammationNotAvailableException 
+     */
     void addFilmProgrammation(ProgrammedFilm programmedFilm) throws ProgrammationNotAvailableException;
+    /** 
+     * Delete film programmation. 
+     * @param programmedFilm to delete.
+     */
     void deleteFilmProgrammation(ProgrammedFilm programmedFilm);
+    /** 
+     * Check if a specific timeslot, date and hall are available.
+     * @param timeSlotToCheck time slot to check
+     * @param date date to check
+     * @param hall hall to check
+     * @return boolean 
+     * */
     boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, int hall);
+    /** 
+     * Get all programmed films as list.
+     * @return List<ProgrammedFilm>
+     * */
     List<ProgrammedFilm> getAllProgrammedFilm();
+    /**Get ManagerProgrammingFilms.
+     * @return ManagerProgrammingFilms
+    */
     ManagerProgrammingFilms getManagerProgrammingFilms();
+    /**Delete all programmation of specific film.
+     * @param film film to delete.
+    */
     void deleteAllFilmProgrammation(Film film);
-   
-    
 }

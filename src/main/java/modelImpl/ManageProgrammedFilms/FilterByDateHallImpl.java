@@ -6,10 +6,13 @@ import java.util.function.Predicate;
 import model.ManageProgrammingFilms.Filter;
 import utilities.Factory.ProgrammedFilm;
 
-public class FilterByDateHallImpl implements Filter <ProgrammedFilm> {
-    final private  LocalDate localDate;
-    final private  int hall;
-    
+/** 
+ * Describe a filter by date and hall on programmed film.
+ * */
+public final class FilterByDateHallImpl implements Filter<ProgrammedFilm> {
+    private final LocalDate localDate; // date
+    private final int hall; // hall
+
     public FilterByDateHallImpl(final LocalDate localDate, final int hall) {
         super();
         this.localDate = localDate;

@@ -1,9 +1,11 @@
 package model.ManageProgrammingFilms;
-
-import java.util.function.Predicate;
-
+/**
+ * Filter factory to create a parameterized filter.
+ * @param <X> type
+ * */
 public interface FilterFactory<X> {
-    
-    Filter createFilter();
-
+    /** 
+     * Get filter.
+     * */
+     Filter<X> createFilter();
 }

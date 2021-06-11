@@ -5,10 +5,11 @@ import java.util.function.Predicate;
 
 import model.ManageProgrammingFilms.Filter;
 import utilities.Factory.ProgrammedFilm;
-
-public class FilterByDateImpl implements Filter<ProgrammedFilm>{
-    final private  LocalDate localDate;
-      
+/** 
+ * Describe a filter by date on programmed film.
+ * */
+public final class FilterByDateImpl implements Filter<ProgrammedFilm> {
+    private final  LocalDate localDate; // date to filter
     public FilterByDateImpl(final LocalDate localDate) {
         super();
         this.localDate = localDate;
