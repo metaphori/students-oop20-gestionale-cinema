@@ -6,6 +6,7 @@ import controller.ManageAccounts.AccountsController;
 import model.ManageAccounts.AccountModel;
 import modelImpl.ManageAccounts.AccountModelImpl;
 import utilities.ManageAccounts.Account;
+import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.LoginAccountGUI;
 import view.ManageAccounts.ManagementAccountGUI;
 import view.ManageAccounts.RegistrationAccountGUI;
@@ -37,16 +38,18 @@ public class AccountsControllerImpl implements AccountsController{
         // TODO Auto-generated method stub
     }
 
+    /*
     @Override
     public Account login(String username, String password) {
-        // TODO Auto-generated method stub
-        return null;
+        return (Account) LoggedAccount.getLoggedAccount();
     }
-
+    */
+    
     @Override
     public void addAccount(Account newAccount) {
         this.model.addAccount(newAccount);
-        System.out.println("Add new account:"+ newAccount);        
+        System.out.println("Add new account:"+ newAccount);  
+        //this.write
     }
 
     @Override
@@ -61,8 +64,8 @@ public class AccountsControllerImpl implements AccountsController{
     }
 
     @Override
-    public void loadAccount(Set<Account> loadedAccounts) {
-        // TODO Auto-generated method stub  
+    public LoggedAccount loadAccount(Set<Account> loadedAccounts) {
+        return LoggedAccount.getLoggedAccount();  
     }
 
     @Override
@@ -82,4 +85,5 @@ public class AccountsControllerImpl implements AccountsController{
         loginView.show();
     }
 
+    //write account on files
 }

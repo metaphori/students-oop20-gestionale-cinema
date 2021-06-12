@@ -2,16 +2,19 @@ package application;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import controller.ManageAccounts.AccountsController;
 import controller.ManageFilms.FilmsController;
 import controllerImpl.InputOutput.RWcollection;
 import controllerImpl.InputOutput.RWfile;
 import controllerImpl.InputOutput.RWobject;
+import controllerImpl.ManageAccounts.AccountsControllerImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
@@ -20,9 +23,12 @@ import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Factory.FilmFactory;
+import utilities.ManageAccounts.Account;
+import utilities.ManageAccounts.SeatTypeAccount;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
+import utilitiesImpl.ManageAccounts.AccountImpl;
 
 public class Cinema {
 
@@ -54,7 +60,15 @@ public class Cinema {
        // final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);*/
         final FilmsController filmsController = new FilmsControllerImpl();
         filmsController.showContainerFilmsView();
+        
+        //HashMap <String, String> logininfo = new HashMap <String,String> (); //hashset
+        //Account e = new AccountImpl("ari", "pag", "gg", "pass", SeatTypeAccount.ADMINISTRATOR);
+        //logininfo.put(e.getUsername(), e.getPassword());
+        
+        //final AccountsController a = new AccountsControllerImpl();
+        //a.showLoginAccounView();
 
+        //a.showRegistrationAccountView(new Account acc);
 
     }
 

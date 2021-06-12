@@ -48,7 +48,7 @@ import java.awt.event.*;
 public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
     
-    private static final String FRAME_NAME = "Registrazione";
+    private static final String FRAME_NAME = "Registration";
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
@@ -77,6 +77,8 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     
     private AccountsController observer;
     
+    public static final int SPACE = 5;
+    
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
     private final int screenHeight = (int) screen.getHeight();
@@ -95,7 +97,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
-        cnst.insets = new Insets (5 ,5 ,5 , 5);
+        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE);
         cnst.fill = GridBagConstraints.HORIZONTAL;
         
         //I create the secondary panels for the various parts and add the components
@@ -136,63 +138,68 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         frame.add (pSouth , BorderLayout . SOUTH);
         
         
-        
-        //method to remove descriptive writing
+       //method to remove descriptive writing
         TextUsername.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
+            public void focusGained(final FocusEvent e) {
+                if ("Username".equals(TextUsername.getText())) { 
                         TextUsername.setText("");
+                }
             }
-
             public void focusLost(final FocusEvent e) {
             }
         });
 
-        //method to remove descriptive writing
+       //method to remove descriptive writing
         TextPassword.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                        TextPassword.setText("");
+            public void focusGained(final FocusEvent e) {
+                if ("Password".equals(TextPassword.getText())) { 
+                    TextPassword.setText("");
+                }
             }
 
             public void focusLost(final FocusEvent e) {
             }
         });
+        
        
-        //method to remove descriptive writing
+       //method to remove descriptive writing
         TextName.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                TextName.setText("");
+            public void focusGained(final FocusEvent e) {
+                if ("Name".equals(TextName.getText())) { 
+                    TextName.setText("");
+                }
             }
-
             public void focusLost(final FocusEvent e) {
             }
         });
         
-        //method to remove descriptive writing
+       //method to remove descriptive writing
         TextSurname.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                TextSurname.setText("");
+            public void focusGained(final FocusEvent e) {
+                if ("Surname".equals(TextSurname.getText())) { 
+                    TextSurname.setText("");
+                }
             }
-
             public void focusLost(final FocusEvent e) {
             }
         });
         
-        //method to remove descriptive writing
+      //method to remove descriptive writing
         TextSecondPwd.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                TextSecondPwd.setText("");
+            public void focusGained(final FocusEvent e) {
+                if ("Repeat Password".equals(TextSecondPwd.getText())) { 
+                    TextSecondPwd.setText("");
+                }
             }
-
             public void focusLost(final FocusEvent e) {
             }
         });
         
         //method for returning to the previous page
         close.addActionListener(event -> {
-            frame.setVisible(false); 
             observer.showManagementAccountView();
-         }
-         );
+            frame.setVisible(false); 
+         });
         
         
         //method to remove writing
@@ -233,17 +240,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         frame.setVisible(true);
         
      }
-       
-
-    public static void main(String[] args) {
-        RegistrationAccountImplGUI view = new RegistrationAccountImplGUI();
-        view.show();
-        
-    }
+      
     @Override
     public void setObserver(AccountsController observer) {
         this.observer = observer;
-        
     }
     
     @Override

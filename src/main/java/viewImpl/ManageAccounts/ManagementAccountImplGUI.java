@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,10 +24,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ManageAccounts.AccountsController;
+import utilities.ManageAccounts.Account;
 import view.ManageAccounts.ManagementAccountGUI;
 
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
-    //GRID BAG LAYOUT + FLOW LAYOUT ??
+    //GRID BAG LAYOUT + FLOW LAYOUT 
     
     private static final String FRAME_NAME = "Management account";
     private static final double PROPORTION = 1.15;
@@ -34,6 +38,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     //components
     final JLabel title = new JLabel("List account"); 
     final JButton add = new JButton("Add");
+    final JButton delete = new JButton ("Delete");
     final JButton home = new JButton("Home");
     
     //real dimension of the screen
@@ -44,6 +49,10 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     private final int frameHeight = (int) (screenHeight / PROPORTION);
     
     private AccountsController observer;
+    public static final int SPACE = 5;
+
+    //final ActionListener al;
+    private Map<JButton, Account> map = new HashMap<>();
     
     public ManagementAccountImplGUI () {
         
@@ -53,7 +62,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
-        cnst.insets = new Insets (5 ,5 ,5 , 5);
+        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE); 
         cnst.fill = GridBagConstraints.HORIZONTAL;
         
         final JPanel pNorth = new JPanel (new FlowLayout ());
@@ -62,7 +71,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         
         
         DefaultTableModel dm = new DefaultTableModel();
-        dm.setDataVector(new Object[][] {}, new Object[] {"Username", "Name", "Surname","Option"});
+        dm.setDataVector(new Object[][] {}, new Object[] {"Username", "Name", "Surname"});
         JTable table = new JTable (dm);
         
         
@@ -77,20 +86,51 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         pSouth.add(add);
-        
+       
         frame.add (pNorth, BorderLayout.NORTH);
         frame.add (pWestInternal, BorderLayout.CENTER);
         frame.add(pSouth, BorderLayout.SOUTH);
         
         
+        /*
+        al = (e) -> { 
+            //this is what must be done when users click on specific film . So specific film gui must be viewed
+            final JButton selected = (JButton) e.getSource(); 
+            System.out.println("key" + map.containsKey(selected));
+            final Account a = map.get(selected);
+            frame.setVisible(false);
+            System.out.println("ActionListener:" + map + " ");
+            //observer.showInfoFilmView(a); mostro le info del account
+        };
+        
+        
+       //add action listener to every buttons
+        for (final var button: map.keySet()) {
+            button.addActionListener(al);
+        }
+        
+        */
+        
+        
+        
+        
+        
         //method to registration view 
         add.addActionListener(event -> { 
             frame.dispose();
-            observer.showRegistrationAccountView(null);
+            observer.showRegistrationAccountView(null); //no null ma account
             frame.setVisible(false);
         });
         
      
+        
+        
+        
+        
+        
+        
+        
+        
        
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
@@ -120,10 +160,11 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         
     }    
     
+    /*
     public static void main(String[] args) {
         ManagementAccountImplGUI view = new ManagementAccountImplGUI();
         view.show();
    
     }
-    
+    */
 }
