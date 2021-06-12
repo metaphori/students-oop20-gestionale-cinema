@@ -38,12 +38,16 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
     
-    final JLabel title = new JLabel("Statistiche settimanali"); 
+    final JLabel title = new JLabel("Weekly Statistics"); 
     final JLabel movie = new JLabel ("Most watched movie :");
     final JLabel money = new JLabel ("Weekly money collection : ");
     final JLabel people = new JLabel ("Day with the most people of the week : ");
     
     final JButton back = new JButton("Back");
+    
+    public static final int SPACE = 5;
+    public static final int SP = 90;
+    public static final int SC = 3;
     
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
@@ -64,7 +68,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
-        cnst.insets = new Insets (5 ,5 ,5 , 5);
+        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE);
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
         //I create the secondary panels for the various parts and add the components
@@ -80,7 +84,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
         ImageIcon icon = new ImageIcon(imgURL);
         final JButton pic = new JButton(icon);
-        pic.setMargin(new Insets(3, 3, 3, 3));
+        pic.setMargin(new Insets(SC, SC, SC, SC));
         
         pWestInternal.add(pic, cnst);
         cnst.gridy ++; 
@@ -92,7 +96,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         final JPanel pEastInternal = new JPanel ( new GridBagLayout ());
         final GridBagConstraints cnt = new GridBagConstraints ();
         cnt.gridy = 0;
-        cnt.insets = new Insets (90 ,90 ,90 ,90);
+        cnt.insets = new Insets (SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
         cnt.gridy ++;
