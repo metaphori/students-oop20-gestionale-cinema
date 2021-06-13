@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -14,13 +15,18 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+
+import controller.ManageAccounts.AccountsController;
+
 import controller.CinemaController;
 import controller.Booking.BookingController;
+
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.CinemaControllerImpl;
 import controllerImpl.Booking.BookingControllerImpl;
 import controllerImpl.InputOutput.RWobject;
+import controllerImpl.ManageAccounts.AccountsControllerImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import exceptions.ProgrammationNotAvailableException;
@@ -36,12 +42,21 @@ import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
 import utilities.Film;
 
 import utilities.Factory.FilmFactory;
+
+import utilities.ManageAccounts.Account;
+import utilities.ManageAccounts.SeatTypeAccount;
+import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.FactoryImpl.FilmBasicImpl;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
+import utilitiesImpl.ManageAccounts.AccountImpl;
+
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
+
 
 
 public class Cinema {
@@ -51,6 +66,8 @@ public class Cinema {
     public static void main(final String[] args){
 
 
+        
+        
         //ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         
        // ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
@@ -61,6 +78,8 @@ public class Cinema {
         final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         final ProgrammedFilmFactory factory = new ProgrammedFilmFactoryImpl();
         
+
+       
         final LocalDate ld1 = LocalDate.of(2021, 6, 3);    
         final LocalDate ld2 = LocalDate.of(2021, 6, 3); 
         final LocalDate ld3 = LocalDate.of(2021, 6, 4); 
@@ -152,7 +171,19 @@ public class Cinema {
         ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
         programmingFilmsController.showProgrammedFilmView();*/
 
-        CinemaController cinemaController = new CinemaControllerImpl();
+
+      //  CinemaController cinemaController = new CinemaControllerImpl();
+        
+        Set<Account> setAccount = new HashSet<>();
+        Account a1 = new AccountImpl("Rossi","Gianni","Ross","qwerty",SeatTypeAccount.OPERATOR);
+        Account a2 = new AccountImpl("Giacomo","Pippo","Giac","qwerty1",SeatTypeAccount.ADMINISTRATOR);
+        Account a3 = new AccountImpl("Piero","Suli","Pier","qwerty123",SeatTypeAccount.OPERATOR);
+        setAccount.add(a3);
+        setAccount.add(a1);
+        setAccount.add(a2);
+        
+        AccountsController controller = new AccountsControllerImpl();
+        controller.showLoginAccounView();
         
     }
     
