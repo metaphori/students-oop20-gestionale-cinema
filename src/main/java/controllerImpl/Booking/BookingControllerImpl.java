@@ -47,6 +47,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private BookingView viewBooking;
     private Set<Film> setFilm;
     private Set<ProgrammedFilm> setProgrammedFilm;
+    
     private ProgrammingFilmsController controllerProgrammingFilms;
     private FilmsController controllerFilms;
     public BookingControllerImpl() {
@@ -63,6 +64,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         setFilm = controllerFilms.getFilms();
     }
     /**
+     * 
      * 
      */
     @Override
@@ -160,6 +162,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         listFilm = handler.sortBy(listFilm, sorter);
         return listFilm;
     }
+    
     @Override
     public Set<Ticket> getTicket(){
         return modelBooking.getSeats();
