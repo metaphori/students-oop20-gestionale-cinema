@@ -54,13 +54,6 @@ public class AccountsControllerImpl implements AccountsController{
       
     }
 
-    /*
-    @Override
-    public Account login(String username, String password) {
-        return (Account) LoggedAccount.getLoggedAccount();
-    }
-    */
-    
     @Override
     public void addAccount(Account newAccount) {
         this.model.addAccount(newAccount);

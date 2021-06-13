@@ -79,14 +79,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     
     public static final int SPACE = 5;
-    /*
-    //real dimension of the screen
-    private final int screenWidth = (int) screen.getWidth();
-    private final int screenHeight = (int) screen.getHeight();
-    //real dimension of my frame
-    private final int frameWidth = (int) (screenWidth / PROPORTION);
-    private final int frameHeight = (int) (screenHeight / PROPORTION);
-    */
     
     public RegistrationAccountImplGUI () {
         
@@ -248,22 +240,17 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         
         */
         
-        //frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
-        //frame.validate();
         
     }
     
-    @Override
-    public void setDimensions (int x, int y) {
-        this.frame.setSize(x,y);
-    }
+    
     
     @Override
     public void show () {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        setDimensions(500, 400);
+        frame.setSize(500, 400);
         
      }
       

@@ -58,9 +58,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     private AccountsController observer;
     public static final int SPACE = 5;
 
-    final ActionListener al;
     private Map<JButton, Account> map = new HashMap<>();
-    final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
     
     public ManagementAccountImplGUI () {
         
@@ -76,10 +74,6 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         pNorth.add(title);
         cnst.gridy ++;
         
-        
-        
-        
-        
         DefaultTableModel dm = new DefaultTableModel(new Object[][] {},new Object[] {"Username", "Name", "Surname"});
         table = new JTable(dm) {
             private static final long serialVersionUID = 1L;
@@ -90,17 +84,12 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         final JScrollPane scroll = new JScrollPane (table); //visione scorrevole del componente
-
-       // getContentPane().add(scroll);
-        
-        
-        //final JScrollPane scroll = new JScrollPane ( ); // Pannello con barra
-        scroll . setVerticalScrollBarPolicy ( ScrollPaneConstants .   VERTICAL_SCROLLBAR_AS_NEEDED );
+        scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants .   VERTICAL_SCROLLBAR_AS_NEEDED );
+        final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         pWestInternal.add(scroll);
         
         final JPanel pEst = new JPanel();
         pEst.add(home);
-        
         
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         pSouth.add(add);
@@ -111,22 +100,9 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.add(pSouth, BorderLayout.SOUTH);
         frame.add(pEst, BorderLayout.EAST);
         
-        
-        
-        al = (e) -> { 
-            //users click on specific account
-            final JButton selected = (JButton) e.getSource(); 
-            System.out.println("key" + map.containsKey(selected));
-            final Account a = map.get(selected);
-            frame.setVisible(false);
-            System.out.println("ActionListener:" + map + " ");
-            observer.showInfoAccountView(a); //mostro le info del account
-        };
-        
        
         //method to registration view 
-        add.addActionListener(event -> { 
-            //frame.dispose();
+        add.addActionListener(event -> {
             observer.showRegistrationAccountView(); 
             frame.setVisible(false);
         });
@@ -136,7 +112,6 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             observer.showMenu();
             frame.setVisible(false);
         });
-        
         
         delete.addActionListener(event -> {
             final int row = table.getSelectedRow();
@@ -150,12 +125,8 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             this.update();
             } else {
                 JOptionPane.showMessageDialog(frame, "Nessuna riga selezionata" );
-                
             }
         });
-        
-        
-        
         
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
@@ -195,21 +166,12 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
          final DefaultTableModel model = (DefaultTableModel) table.getModel();
          table.setModel(new  DefaultTableModel(data, columnNames));
          model.fireTableDataChanged();
-   
-       
-        frame.validate();
-        
+         
+         frame.validate();
     }
     
     private void showDialog() {
         JOptionPane.showMessageDialog(frame, "Please add your personal information so as to avoid using default username and password." );
     }
     
-    /*
-    public static void main(String[] args) {
-        ManagementAccountImplGUI view = new ManagementAccountImplGUI();
-        view.show();
-   
-    }
-    */
 }

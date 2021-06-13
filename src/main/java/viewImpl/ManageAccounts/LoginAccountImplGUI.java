@@ -68,6 +68,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     
     Map<String,String> logininfo = new HashMap<String,String>();
     Set<Account> setAccount = new HashSet<>();
+    
     public static final int SPACE = 5;
    
     public LoginAccountImplGUI() {
@@ -131,7 +132,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
             }
         });
         
-        
        //method to remove writing
         reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
@@ -150,41 +150,24 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                 String password = String.valueOf(TextPassword.getPassword());
                 if(logininfo.containsKey(userID)) {
                     if(logininfo.get(userID).equals(password)) {
-                            LoggedAccount log = LoggedAccount.getIstance();
-                            Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
-                            log.setAccount(acc);
-                            
-                            frame.dispose();
-                            //observer.showManagementAccountView();
-                            observer.showMenu();
-                            frame.setVisible(false);
+                        LoggedAccount log = LoggedAccount.getIstance();
+                        Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
+                        log.setAccount(acc);
+                        frame.dispose();
+                        observer.showMenu();
+                        frame.setVisible(false);
                     }
                     else {
                         JOptionPane.showMessageDialog(pWestInternal, "Password wrong", "", JOptionPane.ERROR_MESSAGE);
-                            
                     }
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(pWestInternal, "Username not found", "", JOptionPane.ERROR_MESSAGE);
-                
             }
                 
             }
         });
         
     }
-    
-    /*
-     //method to show the pwd or not
-    private void showPwdActionPerformed (ActionEvent evt) {
-        if (showPwd.isSelected()) {
-            TextPassword.setEchoChar((char)0);
-        } else {
-            TextPassword.setEchoChar((char)'*');
-        }
-       }
-    */
-    
     
     @Override
     public void setObserver(final AccountsController observer) {
@@ -197,13 +180,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        setDimensions(400, 200);
+        frame.setSize(400, 200);
      }
-    
-    @Override
-    public void setDimensions (int x, int y) {
-        this.frame.setSize(x,y);
-    }
     
     public void updateSetAccount (Set<Account> setAccount) {
         this.setAccount =  setAccount;
