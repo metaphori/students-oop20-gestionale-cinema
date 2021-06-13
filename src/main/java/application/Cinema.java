@@ -164,8 +164,7 @@ public class Cinema {
         
         //programmingFilmsController.showScheduleFilmView();
         /*
-        FilmsController filmsController = new FilmsControllerImpl();
-        filmsController.showContainerFilmsView();*/
+       
         
        /*
         ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
@@ -173,7 +172,12 @@ public class Cinema {
 
 
       //  CinemaController cinemaController = new CinemaControllerImpl();
-        
+       //  FilmsController filmsController = new FilmsControllerImpl();
+     //   filmsController.showContainerFilmsView();
+        ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
+        programmingFilmsController.showProgrammedFilmView();
+
+
         Set<Account> setAccount = new HashSet<>();
         Account a1 = new AccountImpl("Rossi","Gianni","Ross","qwerty",SeatTypeAccount.OPERATOR);
         Account a2 = new AccountImpl("Giacomo","Pippo","Giac","qwerty1",SeatTypeAccount.ADMINISTRATOR);
@@ -182,8 +186,8 @@ public class Cinema {
         setAccount.add(a1);
         setAccount.add(a2);
         
-        AccountsController controller = new AccountsControllerImpl();
-        controller.showLoginAccounView();
+      //  AccountsController controller = new AccountsControllerImpl();
+      //  controller.showLoginAccounView();
         
     }
     

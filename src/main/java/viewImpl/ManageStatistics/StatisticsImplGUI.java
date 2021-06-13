@@ -13,6 +13,7 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.io.FileUtils;
 
 import controller.ManageStatistics.StatisticsController;
+import utilities.Film;
 import view.ManageStatistics.StatisticsGUI;
 
 
@@ -42,6 +44,11 @@ public class StatisticsImplGUI implements StatisticsGUI{
     final JLabel movie = new JLabel ("Most watched movie :");
     final JLabel money = new JLabel ("Weekly money collection : ");
     final JLabel people = new JLabel ("Day with the most people of the week : ");
+    
+    //img
+    final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
+    ImageIcon icon = new ImageIcon(imgURL);
+    final JButton pic = new JButton(icon);
     
     final JButton back = new JButton("Back");
     
@@ -80,12 +87,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         pWestInternal.add(movie, cnst); 
         cnst.gridy ++; 
         
-        //img
-        final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
-        ImageIcon icon = new ImageIcon(imgURL);
-        final JButton pic = new JButton(icon);
         pic.setMargin(new Insets(SC, SC, SC, SC));
-        
         pWestInternal.add(pic, cnst);
         cnst.gridy ++; 
         
@@ -108,7 +110,6 @@ public class StatisticsImplGUI implements StatisticsGUI{
         pEast.add( pEastInternal, cnst );
         cnst.gridy ++; 
       
-        
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.LEFT)); 
         pSouth.add(back, cnst);
         cnst.gridy ++; 
@@ -118,25 +119,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         frame.add (pSouth, BorderLayout.SOUTH);
         frame.add (pWest, BorderLayout.WEST);
         frame.add (pEast, BorderLayout.CENTER);
-        
-        pic.addActionListener(e -> {
-            final JFileChooser chooser = new JFileChooser();
-            final FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG  & PNG Images", "jpg", "png", "jpeg");
-            chooser.setFileFilter(filter);
-            final int returnVal = chooser.showOpenDialog(frame);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-               final File selectedFile = chooser.getSelectedFile();
-               final File destFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "test");
-               try {
-                   FileUtils.copyFile(selectedFile, destFile);
-               } catch (IOException exception) {
-                   exception.printStackTrace();
-               }
-            }
-        }
-        );
-        
-        
+       
         
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
@@ -148,9 +131,8 @@ public class StatisticsImplGUI implements StatisticsGUI{
             frame.pack();
             frame.setLocationByPlatform(true);
             frame.setVisible(true);
-        
-     }
-       
+      }
+     
     public static void main(String[] args) {
         StatisticsImplGUI view = new StatisticsImplGUI();
         view.show();
@@ -161,5 +143,12 @@ public class StatisticsImplGUI implements StatisticsGUI{
         
     }
     
+    @Override
+    public void update () {
+        Optional<Film> filmOptional = observer.getMostedWatchedFilm();
+        if(filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
+            pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
+        }
+    }
     
 }
