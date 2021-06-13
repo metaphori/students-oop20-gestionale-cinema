@@ -183,8 +183,7 @@ public class Cinema {
         setAccount.add(a2);
         
         AccountsController controller = new AccountsControllerImpl();
-        controller.showManagementAccountView();
-        
+        controller.showLoginAccounView();
         
     }
     

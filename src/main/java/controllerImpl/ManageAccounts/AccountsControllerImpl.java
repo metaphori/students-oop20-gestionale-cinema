@@ -64,7 +64,6 @@ public class AccountsControllerImpl implements AccountsController{
         
     @Override
     public void showMenu() {
-      
     }
 
     @Override
