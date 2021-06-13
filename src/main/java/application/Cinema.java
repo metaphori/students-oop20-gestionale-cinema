@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -102,14 +103,15 @@ public class Cinema {
         setP.add(p8);
         setP.add(p9);
         System.out.println(setP);
-      
+        
+       
      //   BookingController b = new BookingControllerImpl(set,setP);
-        BookingController b = new BookingControllerImpl();
-        b.start();
-       FilmsController controllerFilm = new FilmsControllerImpl();
-        controllerFilm.showContainerFilmsView();
-      // ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
-       //controllerProgrammedFilm.showProgrammedFilmView();
+      // BookingController b = new BookingControllerImpl();
+     //   b.start();
+      // FilmsController controllerFilm = new FilmsControllerImpl();
+      //  controllerFilm.showContainerFilmsView();
+      ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
+       controllerProgrammedFilm.showProgrammedFilmView();
     }
     
 }
