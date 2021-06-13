@@ -1,45 +1,35 @@
 package controllerImpl.ManageFilms;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
-import javax.swing.SwingUtilities;
-
 import com.google.gson.reflect.TypeToken;
-
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
-import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;
-import modelImpl.ManageFilms.IdsGeneratorImpl;
-import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.ManagerWorkingDIR;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.ManagerWorkingDIRimpl;
-import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.InfoFilmsGUI;
 import viewImpl.ManageFilms.ContainerFilmsGUIimpl;
 import viewImpl.ManageFilms.InfoFilmsGUIimpl;
 
-public class FilmsControllerImpl implements FilmsController {
+public final class FilmsControllerImpl implements FilmsController {
 
     private final ContainerFilmsModel model;
     private ContainerFilmsGUI viewFilms;
     private final InfoFilmsGUI infoFilms;
     private final ManagerWorkingDIR managerWorkingDIR;
-    private final ProgrammingFilmsController programmingFilmsController;
-    
+    private ProgrammingFilmsController programmingFilmsController;
 
+/*
     public FilmsControllerImpl() { // must be invoked on the first use of application 
-        
+
         Optional<Set<Film>> films = this.readFilmsFromFile();
         Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
         
@@ -58,45 +48,56 @@ public class FilmsControllerImpl implements FilmsController {
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
     }  
-    
-  public FilmsControllerImpl( ProgrammingFilmsController programmingFilmsController) { // must be invoked on the first use of application 
-        
-        Optional<Set<Film>> films = this.readFilmsFromFile();
-        Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
-        
-        
-        if(films.isEmpty()|| managerIdsFilm.isEmpty() ) {
-            model = new ContainerFilmsModelImpl();  
-        }else {
-            model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
+    */
+
+    public FilmsControllerImpl() { // must be invoked on the first use of application 
+
+        final Optional<Set<Film>> films = this.readFilmsFromFile();
+        final Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
+
+        if (films.isEmpty() || managerIdsFilm.isEmpty()) {
+            model = new ContainerFilmsModelImpl();
+        } else {
+            model =  new ContainerFilmsModelImpl(films.get(), managerIdsFilm.get());
         }
 
-        viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
+        viewFilms = new ContainerFilmsGUIimpl();
+        infoFilms = new InfoFilmsGUIimpl();
+        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        this.viewFilms.setObserver(this);
+        this.infoFilms.setObserver(this);
+    }
+
+  public FilmsControllerImpl(final ProgrammingFilmsController programmingFilmsController) { // must be invoked on the first use of application 
+
+        final Optional<Set<Film>> films = this.readFilmsFromFile();
+        final Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
+
+        if (films.isEmpty() || managerIdsFilm.isEmpty()) {
+            model = new ContainerFilmsModelImpl();
+        } else {
+            model = new ContainerFilmsModelImpl(films.get(), managerIdsFilm.get());
+        }
+
+        viewFilms = new ContainerFilmsGUIimpl(); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
         managerWorkingDIR = new ManagerWorkingDIRimpl();
         this.programmingFilmsController = programmingFilmsController;
-        
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
     } 
-    
-    
-    
-    
- 
     @Override
     public void addFilm(final Film f) {
         this.model.addFilm(f);
         this.writeFilmsOnFile();
         this.writeManagerIdsFilmsOnFile();
-        //System.out.println("Add new film:"+ f);
     }
 
     @Override
     public void deleteFilm(final Film f) {
         this.model.removeFilm(f);
         this.writeFilmsOnFile();
-        this.writeManagerIdsFilmsOnFile();   
+        this.writeManagerIdsFilmsOnFile();
     }
 
     @Override
@@ -106,7 +107,6 @@ public class FilmsControllerImpl implements FilmsController {
 
     @Override
     public void showMenu() { //TODO 
-        
     }
 
     @Override
@@ -127,10 +127,6 @@ public class FilmsControllerImpl implements FilmsController {
         infoFilms.start();
     }
 
-    @Override
-    public void loadFilm(final Set<Film> loadedFilms) {
-
-    }
 
     @Override
     public ManagerWorkingDIR getManagerWorkingDIR() {
@@ -176,6 +172,10 @@ public class FilmsControllerImpl implements FilmsController {
         this.programmingFilmsController.deleteAllFilmProgrammation(f);
         
     }
-    
-    
+
+    @Override
+    public void setProgrammingFilmsController(final ProgrammingFilmsController programmingFilmsController) {
+        this.programmingFilmsController = programmingFilmsController;
+    }
+
 }

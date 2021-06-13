@@ -29,12 +29,12 @@ import viewImpl.ManageProgrammingFilms.ScheduleFilmGUIimpl;
 
 public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsController{
     
-    final private ProgrammingFilmsGUI filmsProgrammationView;
-    final private ScheduleFilmsGUI scheduleFilmView;
-    final private ProgrammedFilmsModel programmedFilmsModel;
-    final private FilmsController filmsController;
+    private final ProgrammingFilmsGUI filmsProgrammationView;
+    private ScheduleFilmsGUI scheduleFilmView;
+    private final ProgrammedFilmsModel programmedFilmsModel;
+    private FilmsController filmsController;
     
-    
+    /*
     public ProgrammingFilmsControllerImpl() {
         
         filmsController = new FilmsControllerImpl(this);
@@ -53,8 +53,28 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
         
         scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         scheduleFilmView.setObserver(this);
-    }
+    }*/
     
+    
+public ProgrammingFilmsControllerImpl() {
+        
+        //filmsController = new FilmsControllerImpl(this);
+        final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
+
+        if(programmedFilms.isEmpty()) {
+            programmedFilmsModel = new ProgrammedFilmsModelImpl();
+            
+        }else {
+            programmedFilmsModel = new ProgrammedFilmsModelImpl(programmedFilms.get());
+        }
+        
+        filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
+        //filmsProgrammationView.setFilmsController(filmsController);
+        filmsProgrammationView.setObserver(this);
+        
+        //scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
+        //scheduleFilmView.setObserver(this);
+    }
     
     public ProgrammingFilmsControllerImpl(final FilmsController filmsController) {
         
@@ -146,5 +166,18 @@ public class ProgrammingFilmsControllerImpl implements ProgrammingFilmsControlle
     public void updateGUI() {
         filmsProgrammationView.update();
     }
+
+
+    @Override
+    public void setFilmsController(final FilmsController filmsController) {
+        this.filmsController = filmsController;
+        filmsProgrammationView.setFilmsController(filmsController);
+        this.initScheduleGUI();
+    }
+    private void initScheduleGUI() {
+        scheduleFilmView = new ScheduleFilmGUIimpl(this.filmsController);
+        scheduleFilmView.setObserver(this);
+    }
+
 
 }

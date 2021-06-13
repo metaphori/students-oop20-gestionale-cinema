@@ -1,7 +1,7 @@
 package viewImpl.ManageAccounts;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 
@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,25 +35,28 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import view.ManageAccounts.LoginAccountGUI;
+import controller.ManageAccounts.AccountsController;
+import utilities.ManageAccounts.Account;
+import utilities.ManageAccounts.SeatTypeAccount;
+import utilitiesImpl.ManageAccounts.AccountImpl;
 import view.ManageAccounts.RegistrationAccountGUI;
 
-import java.awt.event.*
-;
+import java.awt.event.*;
 
 public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
     
-    private static final String FRAME_NAME = "Registrazione";
+    private static final String FRAME_NAME = "Registration";
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
-    final JLabel title = new JLabel("Add account"); 
+    
+    //components
+    final JLabel title = new JLabel("Add, modify or delete account"); 
     final JLabel username = new JLabel ("Username:");
     final TextField TextUsername = new TextField ("Username", 12);
     final JLabel name = new JLabel ("Name:");
@@ -65,16 +69,18 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     final TextField TextSecondPwd = new TextField ("Repeat Password", 12);
     final JLabel isAdmin = new JLabel ("Type:");
     
-    final JButton add = new JButton("Add");
-    final JButton close = new JButton("Close");
+    final String [] s = new String [] {"Administrator", "Operator"};
+    final JComboBox type = new JComboBox < String >(s);
     
-    //real dimension of the screen
-    private final int screenWidth = (int) screen.getWidth();
-    private final int screenHeight = (int) screen.getHeight();
-    //real dimension of my frame
-    private final int frameWidth = (int) (screenWidth / PROPORTION);
-    private final int frameHeight = (int) (screenHeight / PROPORTION);
-       
+    final JButton save = new JButton("Save");
+    final JButton close = new JButton("Close"); 
+    final JButton reset = new JButton("Reset");
+    
+    private AccountsController observer;
+    private Optional<Account> focusAccount;
+
+    
+    public static final int SPACE = 5;
     
     public RegistrationAccountImplGUI () {
         
@@ -86,12 +92,13 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
-        cnst.insets = new Insets (5 ,5 ,5 , 5);
+        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE);
         cnst.fill = GridBagConstraints.HORIZONTAL;
         
         //I create the secondary panels for the various parts and add the components
         final JPanel pNorth = new JPanel (new FlowLayout ());
         pNorth.add(title, cnst);
+        
         cnst.gridy ++; //next line
         
         pWestInternal.add(username, cnst);
@@ -110,69 +117,105 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add(TextSecondPwd, cnst);
         cnst.gridy ++;
         
-        final String [] s = new String [] {"Administrator", "Operator"};
-        
         pWestInternal.add(isAdmin, cnst);
-        final JComboBox type = new JComboBox < String >(s);
         pWestInternal.add (type, cnst);
         cnst.gridy ++; 
-        
-        
+        pWestInternal.add(save, cnst);
+        cnst.gridy ++; 
+                                  
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal );
         
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
-        pSouth.add(add);
+        
+        pSouth.add(reset);
+        
         pSouth.add(close);
+        
+        
+        
+        focusAccount = Optional.ofNullable(null); // focusFilm empty
+        
         
         frame.add (pWest , BorderLayout . CENTER );
         frame.add (pNorth , BorderLayout . NORTH);
         frame.add (pSouth , BorderLayout . SOUTH);
         
-        //method to remove descriptive writing
+        
+       //method to remove descriptive writing
         TextUsername.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Username".equals(TextUsername.getText())) { 
+                        TextUsername.setText("");
+                }
+            }
+            public void focusLost(final FocusEvent e) {
+            }
+        });
+
+       //method to remove descriptive writing
+        TextPassword.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Password".equals(TextPassword.getText())) { 
+                    TextPassword.setText("");
+                }
+            }
+
+            public void focusLost(final FocusEvent e) {
+            }
+        });
+        
+       
+       //method to remove descriptive writing
+        TextName.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Name".equals(TextName.getText())) { 
+                    TextName.setText("");
+                }
+            }
+            public void focusLost(final FocusEvent e) {
+            }
+        });
+        
+       //method to remove descriptive writing
+        TextSurname.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Surname".equals(TextSurname.getText())) { 
+                    TextSurname.setText("");
+                }
+            }
+            public void focusLost(final FocusEvent e) {
+            }
+        });
+        
+      //method to remove descriptive writing
+        TextSecondPwd.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Repeat Password".equals(TextSecondPwd.getText())) { 
+                    TextSecondPwd.setText("");
+                }
+            }
+            public void focusLost(final FocusEvent e) {
+            }
+        });
+        
+        //method for returning to the previous page
+        close.addActionListener(event -> {
+            frame.setVisible(false);
+            focusAccount = Optional.ofNullable(null);
+            observer.showManagementAccountView();
+             
+         });
+        
+        
+        //method to remove writing
+        reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
                         TextUsername.setText("");
-            }
-
-            public void focusLost(final FocusEvent e) {
-            }
-        });
-
-        //method to remove descriptive writing
-        TextPassword.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
+                        TextName.setText("");
+                        TextSurname.setText("");
                         TextPassword.setText("");
-            }
-
-            public void focusLost(final FocusEvent e) {
-            }
-        });
-       
-        //method to remove descriptive writing
-        TextName.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                TextName.setText("");
-            }
-
-            public void focusLost(final FocusEvent e) {
-            }
-        });
-        
-        //method to remove descriptive writing
-        TextSurname.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                TextSurname.setText("");
-            }
-
-            public void focusLost(final FocusEvent e) {
-            }
-        });
-        
-        //method to remove descriptive writing
-        TextSecondPwd.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                TextSecondPwd.setText("");
+                        TextSecondPwd.setText("");   
             }
 
             public void focusLost(final FocusEvent e) {
@@ -180,24 +223,70 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         });
         
         
-        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
-        frame.validate();
+        
+        
+      //method to add new account
+        save.addActionListener(event -> {
+            if(this.checkAccount()) {
+                SeatTypeAccount typeAccount;
+                if(type.getSelectedItem().equals("Administrator")) {
+                    typeAccount = SeatTypeAccount.ADMINISTRATOR;
+                } else {
+                    typeAccount = SeatTypeAccount.OPERATOR;   
+                }
+                Account account = new AccountImpl(TextName.getText() , TextSurname.getText(), TextUsername.getText(), TextPassword.getText(), typeAccount);
+                this.observer.addAccount(account);
+            }
+           
+        });
         
     }
-        @Override
-        public void show () {
-        //ridimensiona la finestra e rendo visibile il Frame 
+    
+    
+    
+    @Override
+    public void show () {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        frame.setSize(500, 400);
         
      }
-       
-
-    public static void main(String[] args) {
-        RegistrationAccountImplGUI view = new RegistrationAccountImplGUI();
-        view.show();
+      
+    @Override
+    public void setObserver(AccountsController observer) {
+        this.observer = observer;
+    }
+    
+    
+    
+    @Override
+    public void loadAccount(Account account) { //carico account
+        focusAccount = Optional.of(account); //mette focus su un determinato account
+        TextName.setText(account.getName());
+        TextSurname.setText(account.getSurname());
+        TextUsername.setText(account.getUsername());
+        TextPassword.setText(account.getPassword());
         
+        if(type.getSelectedItem().equals("Administrator")) {
+            account.isAdmin().equals(SeatTypeAccount.ADMINISTRATOR);
+        } else if(type.getSelectedItem().equals("Operator")) {
+            account.isAdmin().equals(SeatTypeAccount.OPERATOR);   
+        }
+
+    }
+    
+    private boolean checkAccount () {
+        Set<Account> setAccount = observer.getAccounts();
+        if(!(TextPassword.getText()).equals(TextSecondPwd.getText())) {
+            JOptionPane.showMessageDialog(frame, "Password non corrisponde" );
+            return false;
+        }
+        if(setAccount.stream().filter(a -> a.getUsername().equals(TextUsername.getText())).findAny().isPresent() ) {
+            JOptionPane.showMessageDialog(frame, "Username già presente" );
+            return false;
+        }
+        return true;
     }
     
 }

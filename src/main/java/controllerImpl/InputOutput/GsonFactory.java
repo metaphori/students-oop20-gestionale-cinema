@@ -19,11 +19,13 @@ import utilities.Ticket;
 import utilities.TimeSlot;
 
 import utilities.Factory.ProgrammedFilm;
+import utilities.ManageAccounts.Account;
 import utilitiesImpl.TicketImpl;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmImpl;
 
 import utilitiesImpl.FactoryImpl.TimeSlotImpl;
+import utilitiesImpl.ManageAccounts.AccountImpl;
 
 
 public final class GsonFactory {
@@ -57,6 +59,10 @@ public final class GsonFactory {
                 .of(TimeSlot.class, "Type")
                 .registerSubtype(TimeSlotImpl.class, TimeSlotImpl.class.getName());
                 
+        final RuntimeTypeAdapterFactory<Account> adapterAccount= RuntimeTypeAdapterFactory
+                .of(Account.class, "Type")
+                .registerSubtype(AccountImpl.class, AccountImpl.class.getName());
+                
 
     /*    final RuntimeTypeAdapterFactory<LocalTime> adapterLocalTime = RuntimeTypeAdapterFactory
                 .of(LocalTime.class, "Type");
@@ -74,6 +80,7 @@ public final class GsonFactory {
                 .registerTypeAdapterFactory(adapterFilm)
                 .registerTypeAdapterFactory(adapterProgrammedFilm)
                 .registerTypeAdapterFactory(adapterTicket)
+                .registerTypeAdapterFactory(adapterAccount)
                 .create();
     }
 }

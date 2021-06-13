@@ -58,7 +58,7 @@ public class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 	
 	private final ScheduleFilmsFactory factory = new ScheduleFilmsFactoryImpl();
 	
-	protected ProgrammingFilmsController observer ;
+	private ProgrammingFilmsController observer ;
 	private FilmsController filmsController ;
 
 	public ScheduleFilmGUIimpl(final FilmsController filmsController) {
