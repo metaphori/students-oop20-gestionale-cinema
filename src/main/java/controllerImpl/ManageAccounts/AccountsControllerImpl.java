@@ -1,8 +1,15 @@
 package controllerImpl.ManageAccounts;
 
+import java.io.File;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import com.google.gson.reflect.TypeToken;
+
 import controller.ManageAccounts.AccountsController;
+import controllerImpl.InputOutput.RWobject;
+import controllerImpl.InputOutput.RWobjectImpl;
 import model.ManageAccounts.AccountModel;
 import modelImpl.ManageAccounts.AccountModelImpl;
 import utilities.ManageAccounts.Account;
@@ -25,7 +32,13 @@ public class AccountsControllerImpl implements AccountsController{
     
     private Set<Account> setAccount;
     public AccountsControllerImpl () {
-       // model = new AccountModelImpl ();
+        Optional <Set<Account>> optionalRead = this.readAccount();
+        if(optionalRead.isPresent()) {
+            model = new AccountModelImpl (optionalRead.get());
+        } else {
+            model = new AccountModelImpl (new HashSet<>());
+        }
+        
         loginView = new LoginAccountImplGUI();
         managementView = new ManagementAccountImplGUI();
         registrationView = new RegistrationAccountImplGUI();
@@ -57,6 +70,7 @@ public class AccountsControllerImpl implements AccountsController{
     @Override
     public void addAccount(Account newAccount) {
         this.model.addAccount(newAccount);
+        this.writeAccount(this.getAccounts());
         System.out.println("Add new account:"+ newAccount);  
         //this.write
     }
@@ -65,6 +79,7 @@ public class AccountsControllerImpl implements AccountsController{
     public void deleteAccount(Account oldAccount) {
         this.model.removeAccount(oldAccount);
        // this.setAccount.remove(oldAccount);
+        this.writeAccount(this.getAccounts());
         System.out.println("Remove old account:" + oldAccount);
     }
 
@@ -102,6 +117,22 @@ public class AccountsControllerImpl implements AccountsController{
         loginView.show();
         
     }
-
-    //write account on files
+    
+    private Optional<Set<Account>> readAccount () {
+        String FS = File.separator; 
+        String path = System.getProperty("user.home") + FS + "fileAccount.json";
+        final RWobject<Set<Account>> rw = new RWobjectImpl<>(path);
+        final var type = new TypeToken<Set<Account>>() { }.getType();
+        return rw.readObj(type);
+    }
+    
+    private void writeAccount (Set<Account> writeAccount) {
+        String FS = File.separator; 
+        String path = System.getProperty("user.home") + FS + "fileAccount.json";
+        
+        final Set<Account> setToWrite = this.getAccounts();
+        final var type = new TypeToken<Set<Account>>() { }.getType();
+        final RWobject<Set<Account>> rw = new RWobjectImpl<>(path);
+        rw.writeObj(setToWrite, type);
+    }
 }

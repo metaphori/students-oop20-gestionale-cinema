@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +42,7 @@ import org.apache.commons.io.FileUtils;
 import controller.ManageAccounts.AccountsController;
 import utilities.ManageAccounts.Account;
 import utilities.ManageAccounts.SeatTypeAccount;
+import utilitiesImpl.ManageAccounts.AccountImpl;
 import view.ManageAccounts.RegistrationAccountGUI;
 
 import java.awt.event.*;
@@ -222,24 +224,21 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         
         
         
-        /*
+        
       //method to add new account
         save.addActionListener(event -> {
-            
-           // Account account;
-            if (focusAccount.isEmpty()) { // If users clicks on add new account
-              //  account = new Account(TextName.getText());
-                    //observer.addAccount(account);
-            
-            if(!(TextPassword.getText()).equals(TextSecondPwd)) {
-                JLabel wrong = new JLabel("wrong password");
-                wrong.setForeground(Color.RED);      
+            if(this.checkAccount()) {
+                SeatTypeAccount typeAccount;
+                if(type.getSelectedItem().equals("Administrator")) {
+                    typeAccount = SeatTypeAccount.ADMINISTRATOR;
+                } else {
+                    typeAccount = SeatTypeAccount.OPERATOR;   
+                }
+                Account account = new AccountImpl(TextName.getText() , TextSurname.getText(), TextUsername.getText(), TextPassword.getText(), typeAccount);
+                this.observer.addAccount(account);
             }
-            }
+           
         });
-        
-        */
-        
         
     }
     
@@ -277,5 +276,17 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     }
     
+    private boolean checkAccount () {
+        Set<Account> setAccount = observer.getAccounts();
+        if(!(TextPassword.getText()).equals(TextSecondPwd.getText())) {
+            JOptionPane.showMessageDialog(frame, "Password non corrisponde" );
+            return false;
+        }
+        if(setAccount.stream().filter(a -> a.getUsername().equals(TextUsername.getText())).findAny().isPresent() ) {
+            JOptionPane.showMessageDialog(frame, "Username già presente" );
+            return false;
+        }
+        return true;
+    }
     
 }
