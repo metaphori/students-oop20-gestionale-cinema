@@ -3,11 +3,11 @@ package controllerImpl.ManageStatistics;
 import java.time.LocalDate;
 
 import controller.ManageStatistics.StatisticsController;
-import model.ManageAccounts.AccountModel;
+import model.Booking.BookingModel;
 import utilities.Film;
 
 public class StatisticsControllerImpl implements StatisticsController{
-    private AccountModel model;
+    private BookingModel model;
     
     @Override
     public Film getMostedWatchedFilm() {

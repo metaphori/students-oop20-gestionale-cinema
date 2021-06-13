@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;
-import view.Settings.InfoFilmSettingsDefault;
+
 
 public class InfoFilmsGUIfactoryImpl implements InfoFilmsGUIfactory {
 
