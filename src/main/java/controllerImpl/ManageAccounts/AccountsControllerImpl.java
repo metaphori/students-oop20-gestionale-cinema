@@ -71,7 +71,6 @@ public class AccountsControllerImpl implements AccountsController{
         this.model.addAccount(newAccount);
         this.writeAccount(this.getAccounts());
         System.out.println("Add new account:"+ newAccount);  
-        //this.write
     }
 
     @Override

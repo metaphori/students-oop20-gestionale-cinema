@@ -58,9 +58,9 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     //components
     final JLabel title = new JLabel("Login Account");
     final JLabel username = new JLabel ("Username:");
-    final TextField TextUsername = new TextField ("Username", 12); //written that will be removed when clicked
+    final TextField textUsername = new TextField ("Username", 12); //written that will be removed when clicked
     final JLabel password = new JLabel ("Password:");
-    final JPasswordField TextPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
+    final JPasswordField textPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
     final JButton login = new JButton("Login");
     final JButton reset = new JButton("Reset");
     
@@ -90,11 +90,11 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         cnst.gridy ++; // prossima riga
         
         pWestInternal.add(username, cnst); 
-        pWestInternal.add(TextUsername, cnst);
+        pWestInternal.add(textUsername, cnst);
         cnst.gridy ++; 
         
         pWestInternal.add(password, cnst);
-        pWestInternal.add(TextPassword, cnst);
+        pWestInternal.add(textPassword, cnst);
         cnst.gridy ++; 
                       
         final JPanel pWest = new JPanel (new FlowLayout ());
@@ -110,10 +110,10 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         
         
         //method to remove descriptive writing
-        TextUsername.addFocusListener(new FocusListener() {
+        textUsername.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Username".equals(TextUsername.getText())) { 
-                        TextUsername.setText("");
+                if ("Username".equals(textUsername.getText())) { 
+                        textUsername.setText("");
                 }
             }
             public void focusLost(final FocusEvent e) {
@@ -121,10 +121,10 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         });
 
         //method to remove descriptive writing
-        TextPassword.addFocusListener(new FocusListener() {
+        textPassword.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Password".equals(TextPassword.getText())) { 
-                    TextPassword.setText("");
+                if ("Password".equals(textPassword.getText())) { 
+                    textPassword.setText("");
                 }
             }
 
@@ -135,8 +135,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
        //method to remove writing
         reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
-                        TextUsername.setText("");
-                        TextPassword.setText("");
+                        textUsername.setText("");
+                        textPassword.setText("");
             }
 
             public void focusLost(final FocusEvent e) {
@@ -146,8 +146,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         
         login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String userID = TextUsername.getText();
-                String password = String.valueOf(TextPassword.getPassword());
+                String userID = textUsername.getText();
+                String password = String.valueOf(textPassword.getPassword());
                 if(logininfo.containsKey(userID)) {
                     if(logininfo.get(userID).equals(password)) {
                         LoggedAccount log = LoggedAccount.getIstance();
@@ -158,7 +158,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                         frame.setVisible(false);
                     }
                     else {
-                        JOptionPane.showMessageDialog(pWestInternal, "Password wrong", "", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(pWestInternal, "Wrong password", "", JOptionPane.ERROR_MESSAGE);
                     }
             } else {
                 JOptionPane.showMessageDialog(pWestInternal, "Username not found", "", JOptionPane.ERROR_MESSAGE);

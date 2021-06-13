@@ -1,7 +1,7 @@
 package utilitiesImpl.ManageAccounts;
 
 import utilities.ManageAccounts.Account;
-import utilities.ManageAccounts.SeatTypeAccount;
+import utilities.ManageAccounts.TypeAccount;
 
 public class LoggedAccount {
     private Account account;

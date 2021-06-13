@@ -44,7 +44,7 @@ import utilities.Film;
 import utilities.Factory.FilmFactory;
 
 import utilities.ManageAccounts.Account;
-import utilities.ManageAccounts.SeatTypeAccount;
+import utilities.ManageAccounts.TypeAccount;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
@@ -175,15 +175,15 @@ public class Cinema {
       //  CinemaController cinemaController = new CinemaControllerImpl();
         
         Set<Account> setAccount = new HashSet<>();
-        Account a1 = new AccountImpl("Rossi","Gianni","Ross","qwerty",SeatTypeAccount.OPERATOR);
-        Account a2 = new AccountImpl("Giacomo","Pippo","Giac","qwerty1",SeatTypeAccount.ADMINISTRATOR);
-        Account a3 = new AccountImpl("Piero","Suli","Pier","qwerty123",SeatTypeAccount.OPERATOR);
+        Account a1 = new AccountImpl("Rossi","Gianni","Ross","qwerty",TypeAccount.OPERATOR);
+        Account a2 = new AccountImpl("Giacomo","Pippo","Giac","qwerty1",TypeAccount.ADMINISTRATOR);
+        Account a3 = new AccountImpl("Piero","Suli","Pier","qwerty123",TypeAccount.OPERATOR);
         setAccount.add(a3);
         setAccount.add(a1);
         setAccount.add(a2);
         
         AccountsController controller = new AccountsControllerImpl();
-        controller.showLoginAccounView();
+        controller.showManagementAccountView();
         
     }
     

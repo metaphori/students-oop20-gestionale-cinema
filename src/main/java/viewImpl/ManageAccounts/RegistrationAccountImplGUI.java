@@ -41,7 +41,7 @@ import org.apache.commons.io.FileUtils;
 
 import controller.ManageAccounts.AccountsController;
 import utilities.ManageAccounts.Account;
-import utilities.ManageAccounts.SeatTypeAccount;
+import utilities.ManageAccounts.TypeAccount;
 import utilitiesImpl.ManageAccounts.AccountImpl;
 import view.ManageAccounts.RegistrationAccountGUI;
 
@@ -58,19 +58,19 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     //components
     final JLabel title = new JLabel("Add, modify or delete account"); 
     final JLabel username = new JLabel ("Username:");
-    final TextField TextUsername = new TextField ("Username", 12);
+    final TextField textUsername = new TextField ("Username", 12);
     final JLabel name = new JLabel ("Name:");
-    final TextField TextName = new TextField ("Name", 12);
+    final TextField textName = new TextField ("Name", 12);
     final JLabel surname = new JLabel ("Surname:");
-    final TextField TextSurname = new TextField ("Surname", 12);
+    final TextField textSurname = new TextField ("Surname", 12);
     final JLabel password = new JLabel ("Password:");
-    final TextField TextPassword = new TextField ("Password", 12);
+    final TextField textPassword = new TextField ("Password", 12);
     final JLabel secondPwd = new JLabel ("Repeat Password:");
-    final TextField TextSecondPwd = new TextField ("Repeat Password", 12);
+    final TextField textSecondPwd = new TextField ("Repeat Password", 12);
     final JLabel isAdmin = new JLabel ("Type:");
     
-    final String [] s = new String [] {"Administrator", "Operator"};
-    final JComboBox type = new JComboBox < String >(s);
+    final String [] stringType = new String [] {"Administrator", "Operator"};
+    final JComboBox type = new JComboBox < String >(stringType);
     
     final JButton save = new JButton("Save");
     final JButton close = new JButton("Close"); 
@@ -102,19 +102,19 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         cnst.gridy ++; //next line
         
         pWestInternal.add(username, cnst);
-        pWestInternal.add(TextUsername, cnst);
+        pWestInternal.add(textUsername, cnst);
         cnst.gridy ++; 
         pWestInternal.add(name, cnst);
-        pWestInternal.add(TextName, cnst);
+        pWestInternal.add(textName, cnst);
         cnst.gridy ++; 
         pWestInternal.add(surname, cnst);
-        pWestInternal.add(TextSurname, cnst);
+        pWestInternal.add(textSurname, cnst);
         cnst.gridy ++; 
         pWestInternal.add(password, cnst);
-        pWestInternal.add(TextPassword, cnst);
+        pWestInternal.add(textPassword, cnst);
         cnst.gridy ++; 
         pWestInternal.add(secondPwd, cnst);
-        pWestInternal.add(TextSecondPwd, cnst);
+        pWestInternal.add(textSecondPwd, cnst);
         cnst.gridy ++;
         
         pWestInternal.add(isAdmin, cnst);
@@ -143,10 +143,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         
         
        //method to remove descriptive writing
-        TextUsername.addFocusListener(new FocusListener() {
+        textUsername.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Username".equals(TextUsername.getText())) { 
-                        TextUsername.setText("");
+                if ("Username".equals(textUsername.getText())) { 
+                        textUsername.setText("");
                 }
             }
             public void focusLost(final FocusEvent e) {
@@ -154,10 +154,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         });
 
        //method to remove descriptive writing
-        TextPassword.addFocusListener(new FocusListener() {
+        textPassword.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Password".equals(TextPassword.getText())) { 
-                    TextPassword.setText("");
+                if ("Password".equals(textPassword.getText())) { 
+                    textPassword.setText("");
                 }
             }
 
@@ -167,10 +167,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         
        
        //method to remove descriptive writing
-        TextName.addFocusListener(new FocusListener() {
+        textName.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Name".equals(TextName.getText())) { 
-                    TextName.setText("");
+                if ("Name".equals(textName.getText())) { 
+                    textName.setText("");
                 }
             }
             public void focusLost(final FocusEvent e) {
@@ -178,10 +178,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         });
         
        //method to remove descriptive writing
-        TextSurname.addFocusListener(new FocusListener() {
+        textSurname.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Surname".equals(TextSurname.getText())) { 
-                    TextSurname.setText("");
+                if ("Surname".equals(textSurname.getText())) { 
+                    textSurname.setText("");
                 }
             }
             public void focusLost(final FocusEvent e) {
@@ -189,10 +189,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         });
         
       //method to remove descriptive writing
-        TextSecondPwd.addFocusListener(new FocusListener() {
+        textSecondPwd.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
-                if ("Repeat Password".equals(TextSecondPwd.getText())) { 
-                    TextSecondPwd.setText("");
+                if ("Repeat Password".equals(textSecondPwd.getText())) { 
+                    textSecondPwd.setText("");
                 }
             }
             public void focusLost(final FocusEvent e) {
@@ -211,11 +211,11 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         //method to remove writing
         reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
-                        TextUsername.setText("");
-                        TextName.setText("");
-                        TextSurname.setText("");
-                        TextPassword.setText("");
-                        TextSecondPwd.setText("");   
+                        textUsername.setText("");
+                        textName.setText("");
+                        textSurname.setText("");
+                        textPassword.setText("");
+                        textSecondPwd.setText("");   
             }
 
             public void focusLost(final FocusEvent e) {
@@ -228,13 +228,13 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
       //method to add new account
         save.addActionListener(event -> {
             if(this.checkAccount()) {
-                SeatTypeAccount typeAccount;
+                TypeAccount typeAccount;
                 if(type.getSelectedItem().equals("Administrator")) {
-                    typeAccount = SeatTypeAccount.ADMINISTRATOR;
+                    typeAccount = TypeAccount.ADMINISTRATOR;
                 } else {
-                    typeAccount = SeatTypeAccount.OPERATOR;   
+                    typeAccount = TypeAccount.OPERATOR;   
                 }
-                Account account = new AccountImpl(TextName.getText() , TextSurname.getText(), TextUsername.getText(), TextPassword.getText(), typeAccount);
+                Account account = new AccountImpl(textName.getText() , textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
                 this.observer.addAccount(account);
             }
            
@@ -263,26 +263,26 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     @Override
     public void loadAccount(Account account) { //carico account
         focusAccount = Optional.of(account); //mette focus su un determinato account
-        TextName.setText(account.getName());
-        TextSurname.setText(account.getSurname());
-        TextUsername.setText(account.getUsername());
-        TextPassword.setText(account.getPassword());
+        textName.setText(account.getName());
+        textSurname.setText(account.getSurname());
+        textUsername.setText(account.getUsername());
+        textPassword.setText(account.getPassword());
         
         if(type.getSelectedItem().equals("Administrator")) {
-            account.isAdmin().equals(SeatTypeAccount.ADMINISTRATOR);
+            account.isAdmin().equals(TypeAccount.ADMINISTRATOR);
         } else if(type.getSelectedItem().equals("Operator")) {
-            account.isAdmin().equals(SeatTypeAccount.OPERATOR);   
+            account.isAdmin().equals(TypeAccount.OPERATOR);   
         }
 
     }
     
     private boolean checkAccount () {
         Set<Account> setAccount = observer.getAccounts();
-        if(!(TextPassword.getText()).equals(TextSecondPwd.getText())) {
+        if(!(textPassword.getText()).equals(textSecondPwd.getText())) {
             JOptionPane.showMessageDialog(frame, "Password non corrisponde" );
             return false;
         }
-        if(setAccount.stream().filter(a -> a.getUsername().equals(TextUsername.getText())).findAny().isPresent() ) {
+        if(setAccount.stream().filter(a -> a.getUsername().equals(textUsername.getText())).findAny().isPresent() ) {
             JOptionPane.showMessageDialog(frame, "Username già presente" );
             return false;
         }

@@ -1,11 +1,11 @@
 package utilitiesImpl.ManageAccounts;
 
 import utilities.ManageAccounts.Account;
-import utilities.ManageAccounts.SeatTypeAccount;
+import utilities.ManageAccounts.TypeAccount;
 
 public class AccountImpl implements Account {
     private String name, surname, username, pass;
-    private SeatTypeAccount type;
+    private TypeAccount type;
     
     /**
      * Constructor for the class Account.
@@ -15,7 +15,7 @@ public class AccountImpl implements Account {
      * @param pass 
      * @param type
      */
-    public AccountImpl(String name, String surname, String username, String pass, SeatTypeAccount type) {
+    public AccountImpl(String name, String surname, String username, String pass, TypeAccount type) {
         this.name = name; //Unique name
         this.surname = surname;
         this.username = username;
@@ -105,7 +105,7 @@ public class AccountImpl implements Account {
      * @return type
      */
     @Override
-    public SeatTypeAccount isAdmin() {
+    public TypeAccount isAdmin() {
         return this.type;
     }
     
