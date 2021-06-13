@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.swing.JLabel;
+
 import org.apache.commons.lang3.RandomStringUtils;
 
 import controller.Booking.BookingController;
@@ -67,7 +69,7 @@ public class Cinema {
         LocalTime time7s = LocalTime.of(16, 5, 1);
         LocalTime time8s = LocalTime.of(17, 5, 1);
         LocalTime time9s = LocalTime.of(18, 5, 1);
-
+       
 
         LocalTime time1f = LocalTime.of(10, 55, 1);
         LocalTime time2f = LocalTime.of(11, 55, 1);
@@ -100,12 +102,12 @@ public class Cinema {
         setP.add(p8);
         setP.add(p9);
         System.out.println(setP);
-        
+      
      //   BookingController b = new BookingControllerImpl(set,setP);
         BookingController b = new BookingControllerImpl();
         b.start();
-       //FilmsController controllerFilm = new FilmsControllerImpl();
-       // controllerFilm.showContainerFilmsView();
+       FilmsController controllerFilm = new FilmsControllerImpl();
+        controllerFilm.showContainerFilmsView();
       // ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
        //controllerProgrammedFilm.showProgrammedFilmView();
     }
