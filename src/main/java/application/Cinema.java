@@ -58,16 +58,16 @@ public class Cinema {
         System.out.println(managerIdsFilm.getUsedIDs());
         
        // final FilmsController filmsController = new FilmsControllerImpl(set, managerIdsFilm);*/
-        final FilmsController filmsController = new FilmsControllerImpl();
-        filmsController.showContainerFilmsView();
+        //final FilmsController filmsController = new FilmsControllerImpl();
+        //filmsController.showContainerFilmsView();
         
         //HashMap <String, String> logininfo = new HashMap <String,String> (); //hashset
-        //Account e = new AccountImpl("ari", "pag", "gg", "pass", SeatTypeAccount.ADMINISTRATOR);
+        Account e = new AccountImpl("ari", "pag", "gg", "pass", SeatTypeAccount.ADMINISTRATOR);
         //logininfo.put(e.getUsername(), e.getPassword());
         
-        //final AccountsController a = new AccountsControllerImpl();
+        final AccountsController a = new AccountsControllerImpl();
         //a.showLoginAccounView();
-
+        a.showManagementAccountView();
         //a.showRegistrationAccountView(new Account acc);
 
     }

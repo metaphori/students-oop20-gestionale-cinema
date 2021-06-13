@@ -69,11 +69,16 @@ public class AccountsControllerImpl implements AccountsController{
     }
 
     @Override
-    public void showRegistrationAccountView(Account acc) {
+    public void showInfoAccountView(Account acc) { //for click on specific account
         registrationView.show();
         registrationView.loadAccount(acc);
     }
 
+    @Override
+    public void showRegistrationAccountView() { //for add account
+        registrationView.show();
+    }
+    
     @Override
     public void showManagementAccountView() {
         managementView.show();

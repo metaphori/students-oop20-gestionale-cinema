@@ -17,8 +17,8 @@ public interface AccountsController {
 	public LoggedAccount loadAccount(Set <Account> loadedAccounts); //returns logged-in account
 
 	public void showMenu();
-	public void showRegistrationAccountView(Account acc);
+	public void showRegistrationAccountView();
         public void showManagementAccountView();
         public void showLoginAccounView();
-	
+        public void showInfoAccountView(Account acc);
 }

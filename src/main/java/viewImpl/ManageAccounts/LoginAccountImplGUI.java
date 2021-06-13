@@ -141,13 +141,13 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         });
         
         
-        login.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        login.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
                 String userID = TextUsername.getText();
                 String password = String.valueOf(TextPassword.getPassword());
                 if(logininfo.containsKey(userID)) {
                     if(logininfo.get(userID).equals(password)) {
-                        System.out.println("ciao");
+                        
                             JLabel successful = new JLabel("Login successful");
                             successful.setForeground(Color.GREEN);
                             frame.dispose();
@@ -165,7 +165,10 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                 JLabel notFound = new JLabel("username not found");
                 notFound.setForeground(Color.RED);
             }
-  
+            }
+
+            public void focusLost(FocusEvent e) {
+                
             }
         });
         
@@ -195,7 +198,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         setDimensions(400, 200);
-        //frame.setBorder(Border border);
      }
     
     @Override

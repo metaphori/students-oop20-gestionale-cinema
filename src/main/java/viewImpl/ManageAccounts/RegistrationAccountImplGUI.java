@@ -54,7 +54,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     final JFrame frame;
     
     //components
-    final JLabel title = new JLabel("Add account"); 
+    final JLabel title = new JLabel("Add, modify or delete account"); 
     final JLabel username = new JLabel ("Username:");
     final TextField TextUsername = new TextField ("Username", 12);
     final JLabel name = new JLabel ("Name:");
@@ -70,22 +70,24 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     final String [] s = new String [] {"Administrator", "Operator"};
     final JComboBox type = new JComboBox < String >(s);
     
-    final JButton add = new JButton("Add");
+    final JButton save = new JButton("Save");
     final JButton close = new JButton("Close");
-
+    final JButton delete = new JButton ("Delete Account"); 
     final JButton reset = new JButton("Reset");
     
     private AccountsController observer;
+    private Optional<Account> focusAccount;
+
     
     public static final int SPACE = 5;
-    
+    /*
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
     private final int screenHeight = (int) screen.getHeight();
     //real dimension of my frame
     private final int frameWidth = (int) (screenWidth / PROPORTION);
     private final int frameHeight = (int) (screenHeight / PROPORTION);
-       
+    */
     
     public RegistrationAccountImplGUI () {
         
@@ -103,6 +105,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         //I create the secondary panels for the various parts and add the components
         final JPanel pNorth = new JPanel (new FlowLayout ());
         pNorth.add(title, cnst);
+        
         cnst.gridy ++; //next line
         
         pWestInternal.add(username, cnst);
@@ -124,14 +127,23 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add(isAdmin, cnst);
         pWestInternal.add (type, cnst);
         cnst.gridy ++; 
+        pWestInternal.add(save, cnst);
+        pWestInternal.add(delete, cnst);
+        cnst.gridy ++; 
                                   
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal );
         
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
-        pSouth.add(add);
-        pSouth.add(close);
+        
         pSouth.add(reset);
+        
+        pSouth.add(close);
+        
+        
+        
+        focusAccount = Optional.ofNullable(null); // focusFilm empty
+        
         
         frame.add (pWest , BorderLayout . CENTER );
         frame.add (pNorth , BorderLayout . NORTH);
@@ -197,8 +209,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         
         //method for returning to the previous page
         close.addActionListener(event -> {
+            frame.setVisible(false);
+            focusAccount = Optional.ofNullable(null);
             observer.showManagementAccountView();
-            frame.setVisible(false); 
+             
          });
         
         
@@ -216,28 +230,48 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             }
         });
         
+        //method to delete account
+        delete.addActionListener(event -> {
+            observer.deleteAccount(focusAccount.get());
+            frame.setVisible(false);
+            observer.showManagementAccountView();
+        });
+        
+        
+        /*
       //method to add new account
-        add.addActionListener(event -> {
+        save.addActionListener(event -> {
             
-            Account account;
-
+           // Account account;
+            if (focusAccount.isEmpty()) { // If users clicks on add new account
+              //  account = new Account(TextName.getText());
+                    //observer.addAccount(account);
+            
             if(!(TextPassword.getText()).equals(TextSecondPwd)) {
                 JLabel wrong = new JLabel("wrong password");
                 wrong.setForeground(Color.RED);      
             }
-
+            }
         });
         
+        */
         
-        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
-        frame.validate();
+        //frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
+        //frame.validate();
         
     }
-        @Override
-        public void show () {
+    
+    @Override
+    public void setDimensions (int x, int y) {
+        this.frame.setSize(x,y);
+    }
+    
+    @Override
+    public void show () {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        setDimensions(500, 400);
         
      }
       
@@ -246,8 +280,11 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         this.observer = observer;
     }
     
+    
+    
     @Override
-    public void loadAccount(Account account) {
+    public void loadAccount(Account account) { //carico account
+        focusAccount = Optional.of(account); //mette focus su un determinato account
         TextName.setText(account.getName());
         TextSurname.setText(account.getSurname());
         TextUsername.setText(account.getUsername());
@@ -255,10 +292,11 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         
         if(type.getSelectedItem().equals("Administrator")) {
             account.isAdmin().equals(SeatTypeAccount.ADMINISTRATOR);
-        } else if(type.getSelectedItem().equals("operator")) {
+        } else if(type.getSelectedItem().equals("Operator")) {
             account.isAdmin().equals(SeatTypeAccount.OPERATOR);   
         }
-        
+
+        delete.setEnabled(false);
     }
     
     
