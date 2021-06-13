@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
@@ -40,6 +42,7 @@ import org.apache.commons.io.FileUtils;
 
 import controller.ManageAccounts.AccountsController;
 import utilities.ManageAccounts.Account;
+import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.LoginAccountGUI;
 
 import java.awt.event.*
@@ -63,12 +66,12 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     
     private AccountsController observer;
     
-    HashMap<String,String> logininfo = new HashMap<String,String>();
-    
+    Map<String,String> logininfo = new HashMap<String,String>();
+    Set<Account> setAccount = new HashSet<>();
     public static final int SPACE = 5;
    
     public LoginAccountImplGUI() {
-        
+      
         //I create the frame and set the title and other properties
         this.frame = new JFrame();
         frame.setTitle(FRAME_NAME);
@@ -141,33 +144,30 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         });
         
         
-        login.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
+        login.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 String userID = TextUsername.getText();
                 String password = String.valueOf(TextPassword.getPassword());
                 if(logininfo.containsKey(userID)) {
                     if(logininfo.get(userID).equals(password)) {
-                        
-                            JLabel successful = new JLabel("Login successful");
-                            successful.setForeground(Color.GREEN);
+                            LoggedAccount log = LoggedAccount.getIstance();
+                            Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
+                            log.setAccount(acc);
+                            
                             frame.dispose();
                             //observer.showManagementAccountView();
                             observer.showMenu();
                             frame.setVisible(false);
                     }
                     else {
-                        JOptionPane.showMessageDialog(pWestInternal, "LOgin erroe", "", JOptionPane.ERROR_MESSAGE);
-                        JLabel wrong = new JLabel("wrong password");
-                        wrong.setForeground(Color.RED);     
+                        JOptionPane.showMessageDialog(pWestInternal, "Password wrong", "", JOptionPane.ERROR_MESSAGE);
+                            
                     }
             }
             else {
-                JLabel notFound = new JLabel("username not found");
-                notFound.setForeground(Color.RED);
+                JOptionPane.showMessageDialog(pWestInternal, "Username not found", "", JOptionPane.ERROR_MESSAGE);
+                
             }
-            }
-
-            public void focusLost(FocusEvent e) {
                 
             }
         });
@@ -205,5 +205,12 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         this.frame.setSize(x,y);
     }
     
+    public void updateSetAccount (Set<Account> setAccount) {
+        this.setAccount =  setAccount;
+        for(var account : setAccount) {
+            logininfo.put(account.getUsername(), account.getPassword());
+        }
+        System.out.print(logininfo);
+    }
     
 }

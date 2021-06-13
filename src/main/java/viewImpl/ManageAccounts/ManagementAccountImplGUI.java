@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -44,6 +45,8 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     final JLabel title = new JLabel("List account"); 
     final JButton add = new JButton("Add");
     final JButton home = new JButton("Home");
+    final JButton delete = new JButton("Delete");
+    private JTable table = new JTable();
     
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
@@ -74,10 +77,17 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         cnst.gridy ++;
         
         
-        DefaultTableModel dm = new DefaultTableModel();
-        dm.setDataVector(new Object[][] {}, new Object[] {"Username", "Name", "Surname"});
-        JTable table = new JTable (dm);
         
+        
+        
+        DefaultTableModel dm = new DefaultTableModel(new Object[][] {},new Object[] {"Username", "Name", "Surname"});
+        table = new JTable(dm) {
+            private static final long serialVersionUID = 1L;
+                public boolean isCellEditable(final int row, final int column) {
+                    return false;
+                }
+            };
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         final JScrollPane scroll = new JScrollPane (table); //visione scorrevole del componente
 
@@ -91,9 +101,11 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         final JPanel pEst = new JPanel();
         pEst.add(home);
         
+        
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         pSouth.add(add);
-       
+        pSouth.add(delete);
+        
         frame.add (pNorth, BorderLayout.NORTH);
         frame.add (pWestInternal, BorderLayout.CENTER);
         frame.add(pSouth, BorderLayout.SOUTH);
@@ -112,10 +124,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         };
         
        //add action listener to every buttons
-        for (final var button: map.keySet()) {
-            button.addActionListener(al);
-        }
-        
+       
         
         //method to registration view 
         add.addActionListener(event -> { 
@@ -131,7 +140,23 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         });
         
         
-        
+        delete.addActionListener(event -> {
+            final int row = table.getSelectedRow();
+            if (row != -1) {
+            final String username = (String) table.getModel().getValueAt(row, 0);
+            final String name = (String) table.getModel().getValueAt(row, 1);
+            final String surname = (String) table.getModel().getValueAt(row, 2);
+
+            Account account = observer.getAccounts().stream()
+            .filter(a -> a.getUsername().equals(username))
+            .findFirst().get();
+            observer.deleteAccount (account);
+            this.update();
+            } else {
+                JOptionPane.showMessageDialog(frame, "Nessuna riga selezionata" );
+                
+            }
+        });
         
         
         
@@ -141,10 +166,6 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
      
     }
      
-    
-    
-    
-    
     @Override
     public void show () {
         frame.pack();
@@ -163,15 +184,23 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     //update table of list account
     @Override
     public void update() {
-        map.clear();
-        
-        Set<Account> a = new HashSet<>(observer.getAccounts());
-        pWestInternal.add((Component) map,a);
-        frame.add (pWestInternal, BorderLayout.CENTER);
-        
-        for (final var button: map.keySet()) {
-            button.addActionListener(al);
+        Set<Account> setAccount = observer.getAccounts();
+        final int row = setAccount.size();
+        final String[] columnNames = {"Username", "Name", "Surname" };
+        Object[][] data = new Object[row][columnNames.length];
+        int i = 0;
+        for (final var acc : setAccount) {
+        data[i][0] = acc.getUsername();
+        data[i][1] = acc.getName();
+        data[i][2] = acc.getSurname();
+        i++;
         }
+         
+         final DefaultTableModel model = (DefaultTableModel) table.getModel();
+         table.setModel(new  DefaultTableModel(data, columnNames));
+         model.fireTableDataChanged();
+   
+       
         frame.validate();
         
     }

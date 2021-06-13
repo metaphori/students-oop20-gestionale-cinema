@@ -66,6 +66,8 @@ public class Cinema {
     public static void main(final String[] args){
 
 
+        
+        
         //ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         
        // ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
@@ -76,7 +78,7 @@ public class Cinema {
         final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         final ProgrammedFilmFactory factory = new ProgrammedFilmFactoryImpl();
         
-<<<<<<< HEAD
+
        
         final LocalDate ld1 = LocalDate.of(2021, 6, 3);    
         final LocalDate ld2 = LocalDate.of(2021, 6, 3); 
@@ -170,7 +172,18 @@ public class Cinema {
         programmingFilmsController.showProgrammedFilmView();*/
 
 
-        CinemaController cinemaController = new CinemaControllerImpl();
+      //  CinemaController cinemaController = new CinemaControllerImpl();
+        
+        Set<Account> setAccount = new HashSet<>();
+        Account a1 = new AccountImpl("Rossi","Gianni","Ross","qwerty",SeatTypeAccount.OPERATOR);
+        Account a2 = new AccountImpl("Giacomo","Pippo","Giac","qwerty1",SeatTypeAccount.ADMINISTRATOR);
+        Account a3 = new AccountImpl("Piero","Suli","Pier","qwerty123",SeatTypeAccount.OPERATOR);
+        setAccount.add(a3);
+        setAccount.add(a1);
+        setAccount.add(a2);
+        
+        AccountsController controller = new AccountsControllerImpl(setAccount);
+        controller.showManagementAccountView();
         
     }
     

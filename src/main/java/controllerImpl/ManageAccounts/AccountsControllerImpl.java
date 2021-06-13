@@ -22,6 +22,8 @@ public class AccountsControllerImpl implements AccountsController{
     private ManagementAccountGUI managementView;
     private RegistrationAccountGUI registrationView;
     
+    
+    private Set<Account> setAccount;
     public AccountsControllerImpl () {
         model = new AccountModelImpl ();
         loginView = new LoginAccountImplGUI();
@@ -32,10 +34,24 @@ public class AccountsControllerImpl implements AccountsController{
         this.managementView.setObserver(this);
         this.registrationView.setObserver(this);
     }
+    
+    
+    public AccountsControllerImpl (Set<Account> setAccount) {
+        model = new AccountModelImpl ();
+        loginView = new LoginAccountImplGUI();
+        managementView = new ManagementAccountImplGUI();
+        registrationView = new RegistrationAccountImplGUI();
+        
+        this.loginView.setObserver(this);
+        this.managementView.setObserver(this);
+        this.registrationView.setObserver(this);
+        
+        this.setAccount = setAccount;
+    }
         
     @Override
     public void showMenu() {
-        // TODO Auto-generated method stub
+      
     }
 
     /*
@@ -55,17 +71,19 @@ public class AccountsControllerImpl implements AccountsController{
     @Override
     public void deleteAccount(Account oldAccount) {
         this.model.removeAccount(oldAccount);
+        this.setAccount.remove(oldAccount);
         System.out.println("Remove old account:" + oldAccount);
     }
 
     @Override
     public Set <Account> getAccounts() {
-        return this.model.getAccounts();
+        return this.setAccount;
+       // return this.model.getAccounts();
     }
 
     @Override
     public LoggedAccount loadAccount(Set<Account> loadedAccounts) {
-        return LoggedAccount.getLoggedAccount();  
+        return LoggedAccount.getIstance();  
     }
 
     @Override
@@ -87,7 +105,9 @@ public class AccountsControllerImpl implements AccountsController{
 
     @Override
     public void showLoginAccounView() {
+        loginView.updateSetAccount(this.getAccounts());
         loginView.show();
+        
     }
 
     //write account on files
