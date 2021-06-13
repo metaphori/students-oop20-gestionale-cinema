@@ -25,7 +25,7 @@ public class AccountsControllerImpl implements AccountsController{
     
     private Set<Account> setAccount;
     public AccountsControllerImpl () {
-        model = new AccountModelImpl ();
+       // model = new AccountModelImpl ();
         loginView = new LoginAccountImplGUI();
         managementView = new ManagementAccountImplGUI();
         registrationView = new RegistrationAccountImplGUI();
@@ -37,7 +37,7 @@ public class AccountsControllerImpl implements AccountsController{
     
     
     public AccountsControllerImpl (Set<Account> setAccount) {
-        model = new AccountModelImpl ();
+        model = new AccountModelImpl (setAccount);
         loginView = new LoginAccountImplGUI();
         managementView = new ManagementAccountImplGUI();
         registrationView = new RegistrationAccountImplGUI();
@@ -71,14 +71,14 @@ public class AccountsControllerImpl implements AccountsController{
     @Override
     public void deleteAccount(Account oldAccount) {
         this.model.removeAccount(oldAccount);
-        this.setAccount.remove(oldAccount);
+       // this.setAccount.remove(oldAccount);
         System.out.println("Remove old account:" + oldAccount);
     }
 
     @Override
     public Set <Account> getAccounts() {
-        return this.setAccount;
-       // return this.model.getAccounts();
+       // return this.setAccount;
+        return this.model.getAccounts();
     }
 
     @Override

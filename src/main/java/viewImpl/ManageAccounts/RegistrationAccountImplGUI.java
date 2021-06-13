@@ -71,8 +71,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     final JComboBox type = new JComboBox < String >(s);
     
     final JButton save = new JButton("Save");
-    final JButton close = new JButton("Close");
-    final JButton delete = new JButton ("Delete Account"); 
+    final JButton close = new JButton("Close"); 
     final JButton reset = new JButton("Reset");
     
     private AccountsController observer;
@@ -128,7 +127,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add (type, cnst);
         cnst.gridy ++; 
         pWestInternal.add(save, cnst);
-        pWestInternal.add(delete, cnst);
         cnst.gridy ++; 
                                   
         final JPanel pWest = new JPanel (new FlowLayout ());
@@ -230,12 +228,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             }
         });
         
-        //method to delete account
-        delete.addActionListener(event -> {
-            observer.deleteAccount(focusAccount.get());
-            frame.setVisible(false);
-            observer.showManagementAccountView();
-        });
         
         
         /*
@@ -296,7 +288,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             account.isAdmin().equals(SeatTypeAccount.OPERATOR);   
         }
 
-        delete.setEnabled(false);
     }
     
     

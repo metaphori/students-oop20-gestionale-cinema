@@ -123,9 +123,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             observer.showInfoAccountView(a); //mostro le info del account
         };
         
-       //add action listener to every buttons
        
-        
         //method to registration view 
         add.addActionListener(event -> { 
             //frame.dispose();
@@ -144,9 +142,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             final int row = table.getSelectedRow();
             if (row != -1) {
             final String username = (String) table.getModel().getValueAt(row, 0);
-            final String name = (String) table.getModel().getValueAt(row, 1);
-            final String surname = (String) table.getModel().getValueAt(row, 2);
-
+            
             Account account = observer.getAccounts().stream()
             .filter(a -> a.getUsername().equals(username))
             .findFirst().get();

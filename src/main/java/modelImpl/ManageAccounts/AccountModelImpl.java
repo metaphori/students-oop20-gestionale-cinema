@@ -10,8 +10,8 @@ import utilities.ManageAccounts.Account;
 public class AccountModelImpl implements AccountModel{
     private final Set<Account> collect;
     
-    public AccountModelImpl() {
-        collect = new HashSet<>(); //collezioni senza duplicati
+    public AccountModelImpl(Set<Account> setAccount) {
+        this.collect = setAccount; //collezioni senza duplicati
     }
     
     @Override
