@@ -10,7 +10,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public interface InfoFilmsGUIfactory {
-
+    /**
+     * 
+     * @param layout
+     * @return
+     */
     JPanel  createPanel(LayoutManager layout);
     JButton createButtonWithText(String text);
     JButton createButtonWithIcon(Icon icon);
