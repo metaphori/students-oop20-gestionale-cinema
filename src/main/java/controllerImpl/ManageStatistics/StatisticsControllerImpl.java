@@ -44,12 +44,14 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
+
         Set <Ticket> set = controllerBooking.getTicket();
         
         Set<LocalDate> dates = set.stream().map(t -> t.getDate()).collect(Collectors.toSet());
         LocalDate mostAffluentDate = null;
         
         int val = 0;
+
         
         for(var date: dates) {
             int temp = set.stream().filter(t -> t.getDate().equals(date)).reduce(0, (partialRes,t) -> partialRes+t.getSetSeat().size() , (res1,res2) -> res1+res2);

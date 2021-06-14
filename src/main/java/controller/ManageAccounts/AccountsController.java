@@ -2,6 +2,7 @@ package controller.ManageAccounts;
 
 import java.util.Set;
 
+import controller.CinemaController;
 import utilities.ManageAccounts.Account;
 import utilitiesImpl.ManageAccounts.LoggedAccount;
 
@@ -9,16 +10,16 @@ public interface AccountsController {
 	
 	//public Account login(String username, String password); 
 	
-	public void addAccount(Account newAccount);
-	public void deleteAccount(Account oldAccount);
+	void addAccount(Account newAccount);
+	void deleteAccount(Account oldAccount);
 	
-	public Set <Account> getAccounts();
+	Set <Account> getAccounts();
 	
-	public LoggedAccount loadAccount(Set <Account> loadedAccounts); //returns logged-in account
+	LoggedAccount loadAccount(Set <Account> loadedAccounts); //returns logged-in account
 
-	public void showMenu();
-	public void showRegistrationAccountView();
-        public void showManagementAccountView();
-        public void showLoginAccounView();
-        public void showInfoAccountView(Account acc);
+	void showMenu();
+	void showRegistrationAccountView();
+        void showManagementAccountView();
+        void showLoginAccounView();
+        void setCinemaController(CinemaController cinemaController);
 }
