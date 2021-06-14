@@ -57,7 +57,7 @@ public class StatisticsControllerImpl implements StatisticsController{
 
         Set <Ticket> set = controllerBooking.getTicket();
         
-        Set<LocalDate> dates = set.stream().map(t -> t.getDate()).collect(Collectors.toSet());
+        Set<LocalDate> dates = set.stream().map(t -> t.getDate()).distinct().collect(Collectors.toSet());
         Optional<LocalDate> mostAffluentDate = Optional.empty();
         
         int val = 0;
@@ -68,6 +68,7 @@ public class StatisticsControllerImpl implements StatisticsController{
             
             if(val<temp) {
                 mostAffluentDate = Optional.of(date);   
+                val= temp;
             }
         } 
         return mostAffluentDate;
@@ -75,10 +76,12 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Double getRecessed() {
-        System.out.println();
-        System.out.println(controllerBooking.getTicket());
-        System.out.println(this.controllerBooking.getTicket().stream().mapToDouble(f -> f.getPrice()).sum());
-        return this.controllerBooking.getTicket().stream().mapToDouble(f -> f.getPrice()).sum();
+        double tot = 0;
+        for (var ticket : this.controllerBooking.getTicket()) {
+           tot = tot + ticket.getSetSeat().size() * ticket.getPrice();
+        }
+        
+        return tot;
 
     }
     

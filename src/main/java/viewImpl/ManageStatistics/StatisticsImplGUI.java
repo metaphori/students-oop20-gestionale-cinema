@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -30,6 +31,7 @@ import org.apache.commons.io.FileUtils;
 
 import controller.ManageStatistics.StatisticsController;
 import utilities.Film;
+import utilitiesImpl.ViewSettings;
 import view.ManageStatistics.StatisticsGUI;
 
 
@@ -45,6 +47,8 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private static final String PEOPLE_STRING = "Day with the most people :";
     private static final String TITLE_STRING = "Weekly Statistics";
     
+    private static final double IMAGE_WIDTH = 0.4;
+    private static final double IMAGE_HEIGTH = 0.6;
     final JLabel title = new JLabel(TITLE_STRING); 
     final JLabel movie = new JLabel (MOVIE_STRING);
     final JLabel money = new JLabel (MONEY_STRING);
@@ -153,6 +157,12 @@ public class StatisticsImplGUI implements StatisticsGUI{
         Optional<Film> filmOptional = observer.getMostedWatchedFilm();
         if (filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
             pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
+          
+            ImageIcon imageIcon = new ImageIcon(filmOptional.get().getCoverPath().get());
+            final Image image = imageIcon.getImage(); // transform it 
+            final Image newimg = image.getScaledInstance((int) (ViewSettings.DIMENSION_WIDTH_SCREEN * IMAGE_WIDTH), (int) (ViewSettings.DIMENSION_HEIGTH_SCREEN  * IMAGE_HEIGTH),  java.awt.Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            pic.setIcon(imageIcon);
             movie.setText(MOVIE_STRING + filmOptional.get().getName());
         }
         Optional<LocalDate> dateOptional = observer.getMostAffluentDays();
