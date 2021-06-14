@@ -7,4 +7,5 @@ public interface RegistrationAccountGUI {
     void show();
     void setObserver(AccountsController observer);
     void loadAccount(Account account);
+    void reset();
 }

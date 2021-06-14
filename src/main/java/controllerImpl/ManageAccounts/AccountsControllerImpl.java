@@ -84,6 +84,7 @@ public class AccountsControllerImpl implements AccountsController{
 
     @Override
     public void showRegistrationAccountView() { //for add account
+        registrationView.reset();
         registrationView.show();
     }
     

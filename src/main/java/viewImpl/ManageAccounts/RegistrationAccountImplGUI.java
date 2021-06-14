@@ -56,7 +56,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     final JFrame frame;
     
     //components
-    final JLabel title = new JLabel("Add, modify or delete account"); 
+    final JLabel title = new JLabel("Add account"); 
     final JLabel username = new JLabel ("Username:");
     final TextField textUsername = new TextField ("Username", 12);
     final JLabel name = new JLabel ("Name:");
@@ -120,16 +120,14 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add(isAdmin, cnst);
         pWestInternal.add (type, cnst);
         cnst.gridy ++; 
-        pWestInternal.add(save, cnst);
-        cnst.gridy ++; 
                                   
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal );
         
         final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         
+        pSouth.add(save);
         pSouth.add(reset);
-        
         pSouth.add(close);
         
         
@@ -274,6 +272,15 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             account.isAdmin().equals(TypeAccount.OPERATOR);   
         }
 
+    }
+    
+    @Override
+    public void reset() {
+        textUsername.setText("Username");
+        textName.setText("Name");
+        textSurname.setText("Surname");
+        textPassword.setText("Password");
+        textSecondPwd.setText("Repeat Password"); 
     }
     
     private boolean checkAccount () {
