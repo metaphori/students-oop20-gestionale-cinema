@@ -11,6 +11,8 @@ import controller.CinemaController;
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageStatistics.StatisticsController;
+import controllerImpl.Booking.BookingControllerImpl;
+import controllerImpl.ManageFilms.FilmsControllerImpl;
 import model.Booking.BookingModel;
 import modelImpl.Booking.BookingModelImpl;
 import utilities.Film;
@@ -21,6 +23,7 @@ import viewImpl.ManageStatistics.StatisticsImplGUI;
 
 public class StatisticsControllerImpl implements StatisticsController{
     private BookingModel modelBooking;
+    
     private BookingController controllerBooking;
     private FilmsController controllerFilm;
     private CinemaController controllerCinema;
@@ -30,6 +33,9 @@ public class StatisticsControllerImpl implements StatisticsController{
     public StatisticsControllerImpl() {
         statisticsView = new StatisticsImplGUI();
         this.statisticsView.setObserver(this);
+        
+        controllerBooking = new BookingControllerImpl();
+        controllerFilm = new FilmsControllerImpl();
     }
     
     @Override
@@ -69,15 +75,6 @@ public class StatisticsControllerImpl implements StatisticsController{
     public Double getRecessed() {
         return this.controllerBooking.getTicket().stream().mapToDouble(f -> f.getPrice()).sum();
 
-    }
-    
-    public void setControllerBooking(BookingController controllerBooking) {
-        this.controllerBooking = controllerBooking;
-    }
-
-    @Override
-    public void setControllerFilms(FilmsController controllerFilm) {
-        this.controllerFilm = controllerFilm;
     }
     
     @Override
