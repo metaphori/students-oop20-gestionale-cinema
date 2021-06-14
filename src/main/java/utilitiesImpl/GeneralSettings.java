@@ -65,7 +65,8 @@ public final class GeneralSettings {
     public static final String IMAGE_SEAT_SELECTED = "images/imageSeatSelected.png";
     public static final String IMAGE_SEAT_TAKEN = "images/imageSeatTaken.png";
     public static final String IMAGE_LEGEND = "images/legend.png";
-
+    public static final String ACCOUNT_FILE = "Account.json";
+    public static final String ACCOUNT_FILE_PATH = DATADIR + FS + ACCOUNT_FILE;
 
     /**Private constructor. This class can't be instantiated. It's used to access paths where application will work.*/
     private GeneralSettings() { }; 
