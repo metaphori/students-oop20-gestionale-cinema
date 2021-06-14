@@ -10,13 +10,22 @@ import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageStatistics.StatisticsController;
 import model.Booking.BookingModel;
+import modelImpl.Booking.BookingModelImpl;
 import utilities.Film;
 import utilities.Ticket;
+import view.ManageStatistics.StatisticsGUI;
+import viewImpl.ManageStatistics.StatisticsImplGUI;
 
 public class StatisticsControllerImpl implements StatisticsController{
+    private BookingModel modelBooking;
     private BookingController controllerBooking;
     private FilmsController controllerFilm;
+    
+    private StatisticsGUI statisticsView;
+    
     public StatisticsControllerImpl() {
+        statisticsView = new StatisticsImplGUI();
+        this.statisticsView.setObserver(this);
     }
     
     @Override
@@ -33,11 +42,14 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
+        
         Set<Ticket> ticketDay = this.controllerBooking.getTicket();
-        for(var ticket : ticketDay) {
-            
-        }
-        return null;
+        
+        
+        
+        
+        
+        return Optional.empty();
     }
 
     @Override
@@ -52,5 +64,17 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     public void setControllerFilms(FilmsController controllerFilm) {
         this.controllerFilm = controllerFilm;
+    }
+    
+    @Override
+    public void showStatisticsView() {
+        statisticsView.update();
+        statisticsView.show();
+        
+    }
+    
+    @Override
+    public void showMenu() {
+        
     }
 }
