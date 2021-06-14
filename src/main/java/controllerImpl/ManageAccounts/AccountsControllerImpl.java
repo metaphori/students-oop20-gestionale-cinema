@@ -47,21 +47,8 @@ public class AccountsControllerImpl implements AccountsController{
         this.managementView.setObserver(this);
         this.registrationView.setObserver(this);
     }
-    
-    
-    public AccountsControllerImpl (Set<Account> setAccount) {
-        model = new AccountModelImpl (setAccount);
-        loginView = new LoginAccountImplGUI();
-        managementView = new ManagementAccountImplGUI();
-        registrationView = new RegistrationAccountImplGUI();
-        
-        this.loginView.setObserver(this);
-        this.managementView.setObserver(this);
-        this.registrationView.setObserver(this);
-        
-        this.setAccount = setAccount;
-    }
-        
+
+
     @Override
     public void showMenu() {
     }

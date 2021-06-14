@@ -42,11 +42,17 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
-        Set<Ticket> ticketDay = this.controllerBooking.getTicket();
-        for(var ticket : ticketDay) {
-            
-        }
-        return null;
+        
+        // localdate
+        // prendo tutti i film , li raggruppo per ticket che si riferisce alla stessa
+        Op
+        
+        
+        
+        
+        
+        
+        return Optional.empty();
     }
 
     @Override
