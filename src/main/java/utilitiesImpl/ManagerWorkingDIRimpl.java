@@ -122,7 +122,9 @@ public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         final URL url = ClassLoader.getSystemResource(GeneralSettings.DATASTANDARD);
         final File file = new File(GeneralSettings.ACCOUNT_FILE_PATH);
         try {
-            FileUtils.copyURLToFile(url, file);
+            if (!file.exists()) {
+                FileUtils.copyURLToFile(url, file);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

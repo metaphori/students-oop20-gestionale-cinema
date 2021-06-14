@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -30,6 +31,7 @@ import org.apache.commons.io.FileUtils;
 
 import controller.ManageStatistics.StatisticsController;
 import utilities.Film;
+import utilitiesImpl.ViewSettings;
 import view.ManageStatistics.StatisticsGUI;
 
 
@@ -40,11 +42,17 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
+    private static final String MONEY_STRING = "Money collection:";
+    private static final String MOVIE_STRING = "Most watched movie :";
+    private static final String PEOPLE_STRING = "Day with the most people :";
+    private static final String TITLE_STRING = "Weekly Statistics";
     
-    final JLabel title = new JLabel("Weekly Statistics"); 
-    final JLabel movie = new JLabel ("Most watched movie :");
-    final JLabel money = new JLabel ("Weekly money collection : ");
-    final JLabel people = new JLabel ("Day with the most people of the week : ");
+    private static final double IMAGE_WIDTH = 0.4;
+    private static final double IMAGE_HEIGTH = 0.6;
+    final JLabel title = new JLabel(TITLE_STRING); 
+    final JLabel movie = new JLabel (MOVIE_STRING);
+    final JLabel money = new JLabel (MONEY_STRING);
+    final JLabel people = new JLabel (PEOPLE_STRING);
     
     //img
     final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
@@ -92,11 +100,11 @@ public class StatisticsImplGUI implements StatisticsGUI{
         
         pic.setMargin(new Insets(SC, SC, SC, SC));
         pWestInternal.add(pic, cnst);
-        cnst.gridy ++; 
+        cnst.gridy++; 
         
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal, cnst );
-        cnst.gridy ++; 
+        cnst.gridy++; 
         
         final JPanel pEastInternal = new JPanel ( new GridBagLayout ());
         final GridBagConstraints cnt = new GridBagConstraints ();
@@ -104,19 +112,15 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnt.insets = new Insets (SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
-        cnt.gridy ++;
+        cnt.gridy++;
         pEastInternal.add(people, cnt);
-        cnst.gridy ++;
+        cnst.gridy++;
         
         final JPanel pEast = new JPanel (new FlowLayout (FlowLayout.LEFT));
         pEast.add( pEastInternal, cnst );
         cnst.gridy ++; 
         
-        /*
-        final JPanel pSouth = new JPanel();
-        pSouth.add(update,cnst);
-        cnst.gridy ++;
-        */
+       
                
         frame.add (pNorth, BorderLayout.NORTH);
         frame.add (pWest, BorderLayout.WEST);
@@ -133,12 +137,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
             observer.showMenu();
             frame.setVisible(false);
         });
-        
-        /*
-        update.addActionListener(event -> {
-            update();
-        });
-        */
+
     }
     
     @Override
@@ -147,28 +146,31 @@ public class StatisticsImplGUI implements StatisticsGUI{
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
       }
-     
-    /*
-    public static void main(String[] args) {
-        StatisticsImplGUI view = new StatisticsImplGUI();
-        view.show();
-    }
-    */
     
     @Override
-    public void setObserver(StatisticsController observer) {
+    public void setObserver(final StatisticsController observer) {
         this.observer = observer;
-        
     }
-    
+
     @Override
-    public void update () {
+    public void update() {
         Optional<Film> filmOptional = observer.getMostedWatchedFilm();
-        if(filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
+        if (filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
             pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
+          
+            ImageIcon imageIcon = new ImageIcon(filmOptional.get().getCoverPath().get());
+            final Image image = imageIcon.getImage(); // transform it 
+            final Image newimg = image.getScaledInstance((int) (ViewSettings.DIMENSION_WIDTH_SCREEN * IMAGE_WIDTH), (int) (ViewSettings.DIMENSION_HEIGTH_SCREEN  * IMAGE_HEIGTH),  java.awt.Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(newimg);  // transform it back
+            pic.setIcon(imageIcon);
+            movie.setText(MOVIE_STRING + filmOptional.get().getName());
         }
         Optional<LocalDate> dateOptional = observer.getMostAffluentDays();
+        if (dateOptional.isPresent()) {
+            people.setText(PEOPLE_STRING + dateOptional.get().toString());
+        }
         Double moneyTotal = observer.getRecessed();
-;    }
-    
+        money.setText(MONEY_STRING + moneyTotal.toString());
+
+    }
 }
