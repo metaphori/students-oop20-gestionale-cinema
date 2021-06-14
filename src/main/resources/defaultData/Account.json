@@ -1,0 +1,10 @@
+[
+  {
+    "Type": "utilitiesImpl.ManageAccounts.AccountImpl",
+    "name": "Mario",
+    "surname": "Rossi",
+    "username": "admin",
+    "pass": "123",
+    "type": "ADMINISTRATOR"
+  }
+]
