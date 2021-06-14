@@ -26,6 +26,8 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
 
     public CinemaControllerImpl() {
         super();
+        manager = new ManagerWorkingDIRimpl();
+        this.initApplication(System.getProperty("user.home"));
         final AccountsController controller = new AccountsControllerImpl();
         controller.setCinemaController(this);
         controller.showLoginAccounView();
@@ -78,7 +80,6 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
     @Override
     public void initApplication(String path) {
         manager.initWorkingDir(path);
-        
     }
 
 
