@@ -234,8 +234,10 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
                 }
                 Account account = new AccountImpl(textName.getText() , textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
                 this.observer.addAccount(account);
+                
             }
-           
+           frame.setVisible(false);
+           this.observer.showManagementAccountView();
         });
         
     }
