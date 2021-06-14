@@ -13,6 +13,7 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javax.swing.ImageIcon;
@@ -50,7 +51,8 @@ public class StatisticsImplGUI implements StatisticsGUI{
     ImageIcon icon = new ImageIcon(imgURL);
     final JButton pic = new JButton(icon);
     
-    final JButton back = new JButton("Back");
+    final JButton home = new JButton("Home");
+    //final JButton update = new JButton("Update Statistics");
     
     public static final int SPACE = 5;
     public static final int SP = 90;
@@ -79,9 +81,10 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
         //I create the secondary panels for the various parts and add the components
-        final JPanel pNorth = new JPanel (new FlowLayout ());
+        final JPanel pNorthInternal = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        pNorthInternal.add(home, cnst);
+        final JPanel pNorth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         pNorth.add(title, cnst);
-        pNorth.add(back, FlowLayout.LEFT);
         cnst.gridy ++; // next line
         
         pWestInternal.add(movie, cnst); 
@@ -102,41 +105,56 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
         cnt.gridy ++;
-        
         pEastInternal.add(people, cnt);
         cnst.gridy ++;
         
         final JPanel pEast = new JPanel (new FlowLayout (FlowLayout.LEFT));
         pEast.add( pEastInternal, cnst );
         cnst.gridy ++; 
-      
-        final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.LEFT)); 
-        pSouth.add(back, cnst);
-        cnst.gridy ++; 
         
-        
+        /*
+        final JPanel pSouth = new JPanel();
+        pSouth.add(update,cnst);
+        cnst.gridy ++;
+        */
+               
         frame.add (pNorth, BorderLayout.NORTH);
-        frame.add (pSouth, BorderLayout.SOUTH);
         frame.add (pWest, BorderLayout.WEST);
         frame.add (pEast, BorderLayout.CENTER);
+        frame.add (pNorthInternal, BorderLayout.EAST);
+        //frame.add(pSouth, BorderLayout.SOUTH);
        
         
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
      
         
+        home.addActionListener(event -> {
+            observer.showMenu();
+            frame.setVisible(false);
+        });
+        
+        /*
+        update.addActionListener(event -> {
+            update();
+        });
+        */
     }
-        @Override
-        public void show () {
-            frame.pack();
-            frame.setLocationByPlatform(true);
-            frame.setVisible(true);
+    
+    @Override
+    public void show () {
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
       }
      
+    /*
     public static void main(String[] args) {
         StatisticsImplGUI view = new StatisticsImplGUI();
         view.show();
     }
+    */
+    
     @Override
     public void setObserver(StatisticsController observer) {
         this.observer = observer;
@@ -149,6 +167,8 @@ public class StatisticsImplGUI implements StatisticsGUI{
         if(filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
             pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
         }
-    }
+        Optional<LocalDate> dateOptional = observer.getMostAffluentDays();
+        Double moneyTotal = observer.getRecessed();
+;    }
     
 }
