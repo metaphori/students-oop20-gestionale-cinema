@@ -9,6 +9,7 @@ import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
+import controllerImpl.ManageFilms.FilmsControllerImpl;
 import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import model.ManageProgrammingFilms.ProgrammedFilmsModel;
@@ -30,7 +31,7 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     private final ProgrammedFilmsModel programmedFilmsModel;
     private FilmsController filmsController;
 
-    /*
+    
     public ProgrammingFilmsControllerImpl() {
         
         filmsController = new FilmsControllerImpl(this);
@@ -49,11 +50,13 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
         
         scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         scheduleFilmView.setObserver(this);
-    }*/
-
+    }
+/*
 /**
  * Initialize programming films controller  and all components.
  * */
+    
+    /*
     public ProgrammingFilmsControllerImpl() {
 
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
@@ -65,7 +68,7 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
         filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
         filmsProgrammationView.setObserver(this);
     }
-
+*/
     public ProgrammingFilmsControllerImpl(final FilmsController filmsController) {
         this.filmsController = filmsController;
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();

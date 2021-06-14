@@ -125,20 +125,18 @@ public class Cinema {
         /*
         final ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
         final FilmsController filmsController = programmingFilmsController.getFilmsController();
-        
+
         FilmFactory filmFactory = new FilmFactoryImpl(filmsController.getManagerIdsFilms());
-        
+
         ProgrammedFilmFactory programmedFilmFactory = new ProgrammedFilmFactoryImpl();
         Film f1 = filmFactory.createBasicFilm("Spiderman", "", "", Optional.ofNullable(null), 50);
         filmsController.addFilm(f1);
         programmingFilmsController.showProgrammedFilmView();
-        
         */
         //programmingFilmsController.showScheduleFilmView();
         /*
         FilmsController filmsController = new FilmsControllerImpl();
         filmsController.showContainerFilmsView();*/
-        
        /*
         ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
         programmingFilmsController.showProgrammedFilmView();*/

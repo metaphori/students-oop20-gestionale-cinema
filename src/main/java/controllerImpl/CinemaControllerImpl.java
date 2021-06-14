@@ -21,22 +21,14 @@ public class CinemaControllerImpl implements CinemaController{
 
     public CinemaControllerImpl() {
         super();
-        manager = new ManagerWorkingDIRimpl();
-        this.initController();
+       //filmsController = new FilmsControllerImpl();
+      // filmsController.showContainerFilmsView();
         //manager.initWorkingDir();
+        programmingFilmsController = new ProgrammingFilmsControllerImpl();
+        programmingFilmsController.showProgrammedFilmView();
         
     }
 
-    @Override
-    public void initController() {
-        
-        filmsController = new FilmsControllerImpl();
-        programmingFilmsController = new ProgrammingFilmsControllerImpl();
-        filmsController.setProgrammingFilmsController(programmingFilmsController);
-        programmingFilmsController.setFilmsController(filmsController);
-        filmsController.getFilms();
-        //filmsController.showContainerFilmsView();
-        //programmingFilmsController.showProgrammedFilmView();
-    }
+
 
 }

@@ -1,12 +1,15 @@
 package controllerImpl.ManageFilms;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import com.google.gson.reflect.TypeToken;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import controllerImpl.Booking.BookingControllerImpl;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
+import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;
@@ -27,7 +30,7 @@ public final class FilmsControllerImpl implements FilmsController {
     private final ManagerWorkingDIR managerWorkingDIR;
     private ProgrammingFilmsController programmingFilmsController;
 
-/*
+
     public FilmsControllerImpl() { // must be invoked on the first use of application 
 
         Optional<Set<Film>> films = this.readFilmsFromFile();
@@ -40,7 +43,7 @@ public final class FilmsControllerImpl implements FilmsController {
             model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
         }
 
-        viewFilms = new ContainerFilmsGUIimpl(new HashSet<>()); // Empty set, there aren't films
+        viewFilms = new ContainerFilmsGUIimpl(); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
         managerWorkingDIR = new ManagerWorkingDIRimpl();
         programmingFilmsController = new ProgrammingFilmsControllerImpl(this);
@@ -48,9 +51,9 @@ public final class FilmsControllerImpl implements FilmsController {
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
     }  
-    */
 
-    public FilmsControllerImpl() { // must be invoked on the first use of application 
+
+  /*  public FilmsControllerImpl() { // must be invoked on the first use of application 
 
         final Optional<Set<Film>> films = this.readFilmsFromFile();
         final Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
@@ -67,7 +70,7 @@ public final class FilmsControllerImpl implements FilmsController {
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
     }
-
+*/
   public FilmsControllerImpl(final ProgrammingFilmsController programmingFilmsController) { // must be invoked on the first use of application 
 
         final Optional<Set<Film>> films = this.readFilmsFromFile();
@@ -97,6 +100,7 @@ public final class FilmsControllerImpl implements FilmsController {
     public void deleteFilm(final Film f) {
         this.model.removeFilm(f);
         this.writeFilmsOnFile();
+        //new BookingControllerImpl();
         this.writeManagerIdsFilmsOnFile();
     }
 
