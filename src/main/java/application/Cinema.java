@@ -45,7 +45,6 @@ import utilities.Film;
 import utilities.Factory.FilmFactory;
 
 import utilities.ManageAccounts.Account;
-import utilities.ManageAccounts.SeatTypeAccount;
 import utilities.ManageAccounts.TypeAccount;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
