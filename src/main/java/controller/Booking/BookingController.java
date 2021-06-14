@@ -15,5 +15,5 @@ public interface BookingController {
         Set<Ticket> getTicket();
         void deleteTicket(Film film);
         void deleteTicket(ProgrammedFilm programmedFilm);
-        void setControllerCinema(CinemaController observer);
+        void setCinemaController(CinemaController observer);
 }
