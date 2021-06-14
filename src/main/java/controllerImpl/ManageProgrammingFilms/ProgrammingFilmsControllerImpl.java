@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.google.gson.reflect.TypeToken;
 
+import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.InputOutput.RWobject;
@@ -30,24 +31,20 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     private ScheduleFilmsGUI scheduleFilmView;
     private final ProgrammedFilmsModel programmedFilmsModel;
     private FilmsController filmsController;
+    private CinemaController cinemaController;
 
-    
     public ProgrammingFilmsControllerImpl() {
-        
         filmsController = new FilmsControllerImpl(this);
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
 
-        if(programmedFilms.isEmpty()) {
+        if (programmedFilms.isEmpty()) {
             programmedFilmsModel = new ProgrammedFilmsModelImpl();
-            
-        }else {
+        } else {
             programmedFilmsModel = new ProgrammedFilmsModelImpl(programmedFilms.get());
         }
-        
         filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
         filmsProgrammationView.setFilmsController(filmsController);
         filmsProgrammationView.setObserver(this);
-        
         scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         scheduleFilmView.setObserver(this);
     }
@@ -55,7 +52,6 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
 /**
  * Initialize programming films controller  and all components.
  * */
-    
     /*
     public ProgrammingFilmsControllerImpl() {
 
@@ -125,6 +121,7 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
      */
     @Override
     public void showMenu() {
+        cinemaController.showMenu();
     }
     /**
      * Show schedule film view to schedule a new film.
@@ -197,6 +194,11 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     private void initScheduleGUI() {
         scheduleFilmView = new ScheduleFilmGUIimpl(this.filmsController);
         scheduleFilmView.setObserver(this);
+    }
+
+    @Override
+    public void setCinemaController(final CinemaController cinemaController) {
+        this.cinemaController = cinemaController;
     }
 
 

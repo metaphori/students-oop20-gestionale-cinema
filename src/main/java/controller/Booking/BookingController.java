@@ -2,6 +2,7 @@ package controller.Booking;
 
 import java.util.Set;
 
+import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import utilities.Film;
@@ -14,4 +15,5 @@ public interface BookingController {
         Set<Ticket> getTicket();
         void deleteTicket(Film film);
         void deleteTicket(ProgrammedFilm programmedFilm);
+        void setCinemaController(CinemaController observer);
 }
