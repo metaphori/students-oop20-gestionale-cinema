@@ -8,9 +8,9 @@ import utilitiesImpl.SeatImpl;
 
 public interface BookingViewObserver {
     void showBackFromBooking(ProgrammedFilm film);
-    Set<SeatImpl<Row,Integer>> getSeatsFromFilm(ProgrammedFilm film);
+    Set<SeatImpl> getSeatsFromFilm(ProgrammedFilm film);
     void bookSeat(ProgrammedFilm film);
-    void buttonSelected(SeatImpl<Row,Integer> seat, ProgrammedFilm film);
+    void buttonSelected(SeatImpl seat, ProgrammedFilm film);
     void newBooking();
-    Set<SeatImpl<Row,Integer>> getSeatsSelected();
+    Set<SeatImpl> getSeatsSelected();
 }

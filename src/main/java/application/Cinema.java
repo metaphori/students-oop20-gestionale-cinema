@@ -6,6 +6,9 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collection;
+
+import java.util.Comparator;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +16,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import javax.swing.JLabel;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -67,44 +72,9 @@ public class Cinema {
     public static void main(final String[] args){
 
 
-        
-        
-        //ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
-        
-       // ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
-        
-        //controller.addProgrammedFilm(null);
-        
-       /*
-        final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
-        final ProgrammedFilmFactory factory = new ProgrammedFilmFactoryImpl();
-        
-       
-        final LocalDate ld1 = LocalDate.of(2021, 6, 3);    
-        final LocalDate ld2 = LocalDate.of(2021, 6, 3); 
-        final LocalDate ld3 = LocalDate.of(2021, 6, 4); 
-        
-        final LocalTime st1 = LocalTime.of(8, 30);
-        final LocalTime st2 = LocalTime.of(6, 50);
-        final LocalTime st3 = LocalTime.of(8, 27);
-        
-        final LocalTime et1 = LocalTime.of(8, 45);
-        final LocalTime et2 = LocalTime.of(7, 22);
-        final LocalTime et3 = LocalTime.of(8, 29);
-        final ProgrammedFilm pf1 = factory.createProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        final ProgrammedFilm pf2 = factory.createProgrammedFilm(13, 9, 56, ld2, st2, et2);
-        final ProgrammedFilm pf3 = factory.createProgrammedFilm(14, 1, 56, ld3, st3, et3);
-        final ProgrammedFilm pf4 = factory.createProgrammedFilm(15, 9, 56, ld2, st3, et3);
-       
-       controller.addProgrammedFilm(pf1);
-       controller.addProgrammedFilm(pf2);
-       controller.addProgrammedFilm(pf3);
-       controller.addProgrammedFilm(pf4);
-       
-       System.out.println(controller.getAllProgrammedFilms());
-       controller.showProgrammedFilmView();*/
-       
-       
+
+      
+
         /*
         Film f1 = filmFactory.createBasicFilm("Spiderman", "", "", Optional.ofNullable(null), 50);
         Film f2 = filmFactory.createBasicFilm("Batman", "", "", Optional.ofNullable(null), 200);
@@ -188,7 +158,9 @@ public class Cinema {
         
       //  AccountsController controller = new AccountsControllerImpl();
       //  controller.showLoginAccounView();
+
         
+
     }
     
 }
