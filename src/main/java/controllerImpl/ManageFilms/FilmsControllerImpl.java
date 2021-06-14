@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import com.google.gson.reflect.TypeToken;
+
+import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.Booking.BookingControllerImpl;
@@ -29,28 +31,27 @@ public final class FilmsControllerImpl implements FilmsController {
     private final InfoFilmsGUI infoFilms;
     private final ManagerWorkingDIR managerWorkingDIR;
     private ProgrammingFilmsController programmingFilmsController;
+    private CinemaController cinemaController;
 
 
     public FilmsControllerImpl() { // must be invoked on the first use of application 
 
         Optional<Set<Film>> films = this.readFilmsFromFile();
         Optional<ManagerIdsFilms> managerIdsFilm = this.readManagerIdsFilmsFromFile();
-        
-        
-        if(films.isEmpty()|| managerIdsFilm.isEmpty() ) {
-            model = new ContainerFilmsModelImpl();  
-        }else {
-            model =  new ContainerFilmsModelImpl(films.get(),managerIdsFilm.get()) ;
+        if (films.isEmpty() || managerIdsFilm.isEmpty()) {
+            model = new ContainerFilmsModelImpl();
+        } else {
+            model =  new ContainerFilmsModelImpl(films.get(), managerIdsFilm.get());
         }
 
         viewFilms = new ContainerFilmsGUIimpl(); // Empty set, there aren't films
         infoFilms = new InfoFilmsGUIimpl();
         managerWorkingDIR = new ManagerWorkingDIRimpl();
         programmingFilmsController = new ProgrammingFilmsControllerImpl(this);
-        
+
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
-    }  
+    }
 
 
   /*  public FilmsControllerImpl() { // must be invoked on the first use of application 
@@ -110,7 +111,8 @@ public final class FilmsControllerImpl implements FilmsController {
     }
 
     @Override
-    public void showMenu() { //TODO 
+    public void showMenu() { 
+        cinemaController.showMenu();
     }
 
     @Override
@@ -141,32 +143,28 @@ public final class FilmsControllerImpl implements FilmsController {
     public ManagerIdsFilms getManagerIdsFilms() {
         return model.getManagerIdsFilms();
     }
-    
+
     private void writeFilmsOnFile() {
-         final RWobject<Set<Film>> rw = new RWobjectImpl<>(GeneralSettings.FILMSPATH) ;
-         final var type = new TypeToken<Set<Film>>() {}.getType();
+         final RWobject<Set<Film>> rw = new RWobjectImpl<>(GeneralSettings.FILMSPATH);
+         final var type = new TypeToken<Set<Film>>() { }.getType();
          rw.writeObj(model.getFilms(), type);
     }
 
     private void writeManagerIdsFilmsOnFile() {
-        final RWobject<ManagerIdsFilms> rw = new RWobjectImpl<>(GeneralSettings.MANAGERIDSFILMSPATH) ;
-        final var type = new TypeToken<ManagerIdsFilms>() {}.getType();
+        final RWobject<ManagerIdsFilms> rw = new RWobjectImpl<>(GeneralSettings.MANAGERIDSFILMSPATH);
+        final var type = new TypeToken<ManagerIdsFilms>() { }.getType();
         rw.writeObj(model.getManagerIdsFilms(), type);
     }
-    
-    private Optional<Set<Film>> readFilmsFromFile() {
-        final RWobject<Set<Film>> rw = new RWobjectImpl<>(GeneralSettings.FILMSPATH) ;
-        final var type = new TypeToken<Set<Film>>() {}.getType();
+        private Optional<Set<Film>> readFilmsFromFile() {
+        final RWobject<Set<Film>> rw = new RWobjectImpl<>(GeneralSettings.FILMSPATH);
+        final var type = new TypeToken<Set<Film>>() { }.getType();
         return rw.readObj(type);
-        
    }
-    
 
     private Optional<ManagerIdsFilms> readManagerIdsFilmsFromFile() {
         final RWobject<ManagerIdsFilms> rw = new RWobjectImpl<>(GeneralSettings.MANAGERIDSFILMSPATH) ;
-        final var type = new TypeToken<ManagerIdsFilms>() {}.getType();
+        final var type = new TypeToken<ManagerIdsFilms>() { }.getType();
         return rw.readObj(type);
-    
     }
 
 
@@ -174,12 +172,17 @@ public final class FilmsControllerImpl implements FilmsController {
     public void deleteFilmAndProgrammation(final Film f) {
         this.deleteFilm(f);
         this.programmingFilmsController.deleteAllFilmProgrammation(f);
-        
     }
 
     @Override
     public void setProgrammingFilmsController(final ProgrammingFilmsController programmingFilmsController) {
         this.programmingFilmsController = programmingFilmsController;
+    }
+
+
+    @Override
+    public void setCinemaController(final CinemaController cinemaController) {
+        this.cinemaController = cinemaController;
     }
 
 }

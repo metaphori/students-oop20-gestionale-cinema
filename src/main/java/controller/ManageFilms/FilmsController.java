@@ -3,6 +3,7 @@ package controller.ManageFilms;
 
 import java.util.Set;
 
+import controller.CinemaController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import model.ManageFilms.ManagerIdsFilms;
 import utilities.Film;
@@ -61,4 +62,9 @@ public interface FilmsController {
      * @return managerIdsFilms
      */
     ManagerIdsFilms getManagerIdsFilms();
+    /**
+     * Return managerIdsFilms.
+     * @return managerIdsFilms
+     */
+    void setCinemaController(CinemaController cinemaController);
 }
