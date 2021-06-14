@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.google.gson.reflect.TypeToken;
 
+import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.InputOutput.RWobject;
@@ -30,6 +31,7 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     private ScheduleFilmsGUI scheduleFilmView;
     private final ProgrammedFilmsModel programmedFilmsModel;
     private FilmsController filmsController;
+    private CinemaController cinemaController;
 
     
     public ProgrammingFilmsControllerImpl() {
@@ -125,6 +127,7 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
      */
     @Override
     public void showMenu() {
+        cinemaController.showMenu();
     }
     /**
      * Show schedule film view to schedule a new film.
@@ -197,6 +200,11 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     private void initScheduleGUI() {
         scheduleFilmView = new ScheduleFilmGUIimpl(this.filmsController);
         scheduleFilmView.setObserver(this);
+    }
+
+    @Override
+    public void setCinemaController(final CinemaController cinemaController) {
+        this.cinemaController = cinemaController;
     }
 
 

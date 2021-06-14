@@ -2,6 +2,7 @@ package controller.ManageProgrammingFilms;
 
 import java.util.List;
 
+import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
@@ -61,4 +62,9 @@ public interface ProgrammingFilmsController {
      * Set films controller.
      */
     void setFilmsController(FilmsController filmsController);
+    /**
+     * Set films controller.
+     */
+    void setCinemaController(CinemaController cinemaController);
+
 }
