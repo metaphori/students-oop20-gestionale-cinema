@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.border.TitledBorder;
 
+import controller.CinemaController;
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageStatistics.StatisticsController;
@@ -22,6 +23,7 @@ public class StatisticsControllerImpl implements StatisticsController{
     private BookingModel modelBooking;
     private BookingController controllerBooking;
     private FilmsController controllerFilm;
+    private CinemaController controllerCinema;
     
     private StatisticsGUI statisticsView;
     
@@ -73,6 +75,7 @@ public class StatisticsControllerImpl implements StatisticsController{
         this.controllerBooking = controllerBooking;
     }
 
+    @Override
     public void setControllerFilms(FilmsController controllerFilm) {
         this.controllerFilm = controllerFilm;
     }
@@ -85,6 +88,12 @@ public class StatisticsControllerImpl implements StatisticsController{
     
     @Override
     public void showMenu() {
-        
+        controllerCinema.showMenu();
     }
+    
+    @Override
+    public void setCinemaController(CinemaController cinemaController) {
+        this.controllerCinema = cinemaController;
+    }
+
 }
