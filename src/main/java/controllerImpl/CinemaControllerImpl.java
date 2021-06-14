@@ -22,20 +22,12 @@ import viewImpl.ManageMenu.MenuViewImpl;
 
 public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver{
     private ManagerWorkingDIR manager;
-    private FilmsController filmsController; 
-    ProgrammingFilmsController programmingFilmsController;
     private MenuView menu;
 
     public CinemaControllerImpl() {
         super();
         menu = new MenuViewImpl();
         menu.setObserver(this);
-       //filmsController = new FilmsControllerImpl();
-      // filmsController.showContainerFilmsView();
-        //manager.initWorkingDir();
-        //programmingFilmsController = new ProgrammingFilmsControllerImpl();
-       // programmingFilmsController.showProgrammedFilmView();
-        
     }
 
     @Override
