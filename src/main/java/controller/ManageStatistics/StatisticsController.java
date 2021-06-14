@@ -3,6 +3,8 @@ package controller.ManageStatistics;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import controller.CinemaController;
+import controller.ManageFilms.FilmsController;
 import utilities.Film;
 
 public interface StatisticsController {
@@ -12,5 +14,7 @@ public interface StatisticsController {
     
     void showStatisticsView();
     void showMenu();
+    void setControllerFilms(FilmsController controllerFilm);
+    void setCinemaController(CinemaController cinemaController);
 	
 }
