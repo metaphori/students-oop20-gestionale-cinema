@@ -73,7 +73,7 @@ public final class GsonFactory {
 
         
         return new GsonBuilder()
-             
+                .setPrettyPrinting()
                 .registerTypeAdapterFactory(adapterTimeSlot)
                 .registerTypeAdapterFactory(adapterIdsGenerator)
                 .registerTypeAdapterFactory(adapterManagerIdsFilms)
