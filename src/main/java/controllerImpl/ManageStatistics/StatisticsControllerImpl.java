@@ -3,9 +3,11 @@ package controllerImpl.ManageStatistics;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.border.TitledBorder;
 
+import controller.CinemaController;
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageStatistics.StatisticsController;
@@ -13,6 +15,7 @@ import model.Booking.BookingModel;
 import modelImpl.Booking.BookingModelImpl;
 import utilities.Film;
 import utilities.Ticket;
+import utilitiesImpl.TicketImpl;
 import view.ManageStatistics.StatisticsGUI;
 import viewImpl.ManageStatistics.StatisticsImplGUI;
 
@@ -20,6 +23,7 @@ public class StatisticsControllerImpl implements StatisticsController{
     private BookingModel modelBooking;
     private BookingController controllerBooking;
     private FilmsController controllerFilm;
+    private CinemaController controllerCinema;
     
     private StatisticsGUI statisticsView;
     
@@ -43,11 +47,22 @@ public class StatisticsControllerImpl implements StatisticsController{
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
 
+        Set <Ticket> set = controllerBooking.getTicket();
         
+        Set<LocalDate> dates = set.stream().map(t -> t.getDate()).collect(Collectors.toSet());
+        LocalDate mostAffluentDate = null;
         
+        int val = 0;
+
         
-        
-        return Optional.empty();
+        for(var date: dates) {
+            int temp = set.stream().filter(t -> t.getDate().equals(date)).reduce(0, (partialRes,t) -> partialRes+t.getSetSeat().size() , (res1,res2) -> res1+res2);
+            
+            if(val<temp) {
+                mostAffluentDate = date;   
+            }
+        } 
+        return Optional.of(mostAffluentDate);
     }
 
     @Override
@@ -60,6 +75,7 @@ public class StatisticsControllerImpl implements StatisticsController{
         this.controllerBooking = controllerBooking;
     }
 
+    @Override
     public void setControllerFilms(FilmsController controllerFilm) {
         this.controllerFilm = controllerFilm;
     }
@@ -72,6 +88,12 @@ public class StatisticsControllerImpl implements StatisticsController{
     
     @Override
     public void showMenu() {
-        
+        controllerCinema.showMenu();
     }
+    
+    @Override
+    public void setCinemaController(CinemaController cinemaController) {
+        this.controllerCinema = cinemaController;
+    }
+
 }
