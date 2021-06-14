@@ -42,8 +42,10 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
+        // deve restituire un localdate
+        // prendo tutti i film , li raggruppo per ticket che si riferisce alla setssa
         
-        Set<Ticket> ticketDay = this.controllerBooking.getTicket();
+        //controllerBooking.getTicket().stream().
         
         
         
@@ -70,7 +72,6 @@ public class StatisticsControllerImpl implements StatisticsController{
     public void showStatisticsView() {
         statisticsView.update();
         statisticsView.show();
-        
     }
     
     @Override
