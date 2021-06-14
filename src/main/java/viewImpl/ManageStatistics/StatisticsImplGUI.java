@@ -40,10 +40,12 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
-    private final String MONEY_STRING = "Money collection:";
-    private final String MOVIE_STRING = "Most watched movie :";
-    private final String PEOPLE_STRING = "Day with the most people :";
-    final JLabel title = new JLabel("Weekly Statistics"); 
+    private static final String MONEY_STRING = "Money collection:";
+    private static final String MOVIE_STRING = "Most watched movie :";
+    private static final String PEOPLE_STRING = "Day with the most people :";
+    private static final String TITLE_STRING = "Weekly Statistics";
+    
+    final JLabel title = new JLabel(TITLE_STRING); 
     final JLabel movie = new JLabel (MOVIE_STRING);
     final JLabel money = new JLabel (MONEY_STRING);
     final JLabel people = new JLabel (PEOPLE_STRING);
@@ -94,11 +96,11 @@ public class StatisticsImplGUI implements StatisticsGUI{
         
         pic.setMargin(new Insets(SC, SC, SC, SC));
         pWestInternal.add(pic, cnst);
-        cnst.gridy ++; 
+        cnst.gridy++; 
         
         final JPanel pWest = new JPanel (new FlowLayout ());
         pWest.add( pWestInternal, cnst );
-        cnst.gridy ++; 
+        cnst.gridy++; 
         
         final JPanel pEastInternal = new JPanel ( new GridBagLayout ());
         final GridBagConstraints cnt = new GridBagConstraints ();
@@ -106,19 +108,15 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnt.insets = new Insets (SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
-        cnt.gridy ++;
+        cnt.gridy++;
         pEastInternal.add(people, cnt);
-        cnst.gridy ++;
+        cnst.gridy++;
         
         final JPanel pEast = new JPanel (new FlowLayout (FlowLayout.LEFT));
         pEast.add( pEastInternal, cnst );
         cnst.gridy ++; 
         
-        /*
-        final JPanel pSouth = new JPanel();
-        pSouth.add(update,cnst);
-        cnst.gridy ++;
-        */
+       
                
         frame.add (pNorth, BorderLayout.NORTH);
         frame.add (pWest, BorderLayout.WEST);
@@ -135,12 +133,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
             observer.showMenu();
             frame.setVisible(false);
         });
-        
-        /*
-        update.addActionListener(event -> {
-            update();
-        });
-        */
+
     }
     
     @Override
@@ -149,13 +142,6 @@ public class StatisticsImplGUI implements StatisticsGUI{
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
       }
-     
-    /*
-    public static void main(String[] args) {
-        StatisticsImplGUI view = new StatisticsImplGUI();
-        view.show();
-    }
-    */
     
     @Override
     public void setObserver(final StatisticsController observer) {
