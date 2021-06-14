@@ -72,9 +72,9 @@ import view.ManageProgrammingFilms.Factory.ProgrammingFilmsGUIfactory;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
-        
+
         private static final long serialVersionUID = 7114066347061701832L;
-        
+
         private static final String firstColumnName = "Film";
         private static final String secondColumnName = "Hall";
         private static final String thirdColumnName = "Start time";
@@ -165,24 +165,26 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
 	
 	
 	table.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                final JTable table =(JTable) mouseEvent.getSource();
+            public void mousePressed(final MouseEvent mouseEvent) {
+                final JTable table = (JTable) mouseEvent.getSource();
                 final int clickCount = mouseEvent.getClickCount() ;
                 final int selectedRow = table.getSelectedRow();
                 if (clickCount == 2 && selectedRow != -1) {
-                   
-                    final int option = JOptionPane.showConfirmDialog(frame,"Do you want delete this selected programmation?","Deleting",JOptionPane.YES_NO_OPTION);
-                    if(option == 0) { // yes 0 option , no 1 option 
+                    final int option = JOptionPane.showConfirmDialog(frame, "Do you want delete this selected programmation?","Deleting",JOptionPane.YES_NO_OPTION);
+                    if (option == 0) { // yes 0 option , no 1 option 
                        observer.deleteProgrammedFilm(map.get(selectedRow)); 
                        onSelectionChanged();
                     } 
                 }
-            }   
+            }
         });
-        	
-		
+	
+	home.addActionListener(e -> observer.showMenu()
+	);
+	
+
         frame.pack();
-        frame.setMinimumSize(new Dimension(screenWidth/2,screenHeight/2));
+        frame.setMinimumSize(new Dimension(screenWidth / 2, screenHeight / 2));
         frame.setSize(700, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
@@ -197,7 +199,6 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         
 
         private void onSelectionChanged() { // when user clicks on specific date, table must be updated
-              
             final LocalDate selectedDate = this.getCalendarSelectionDate();
             final List<ProgrammedFilm> list = observer.getAllProgrammedFilms();
             final HandlerList<ProgrammedFilm> handler = observer.getManagerProgrammingFilms().getHandlerList();
