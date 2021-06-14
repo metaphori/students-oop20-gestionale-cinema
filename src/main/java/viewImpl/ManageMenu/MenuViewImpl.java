@@ -21,8 +21,8 @@ public class MenuViewImpl implements MenuView {
     JFrame frame = new JFrame();
     
     private static final String BTN_CONTROLLER_ACCOUNT_TITLE = "MANAGE ACCOUNT";
-    private static final String BTN_CONTROLLER_PROGRAMMED_FILM_TITLE = "MANAGE FILM";
-    private static final String BTN_CONTROLLER_FILM_TITLE = "MANAGE PROGRAMMED FILM";
+    private static final String BTN_CONTROLLER_PROGRAMMED_FILM_TITLE = "MANAGE PROGRAMMED FILM";
+    private static final String BTN_CONTROLLER_FILM_TITLE = "MANAGE FILM";
     private static final String BTN_CONTROLLER_TICKET_TITLE  = "MANAGE TICKET";
     private static final String BTN_CONTROLLER_STATISTICS_TITLE = "MANAGE STATISTICS";
     

@@ -2,6 +2,7 @@ package controller.ManageAccounts;
 
 import java.util.Set;
 
+import controller.CinemaController;
 import utilities.ManageAccounts.Account;
 import utilitiesImpl.ManageAccounts.LoggedAccount;
 
@@ -20,4 +21,5 @@ public interface AccountsController {
 	void showRegistrationAccountView();
         void showManagementAccountView();
         void showLoginAccounView();
+        void setCinemaController(CinemaController cinemaController);
 }

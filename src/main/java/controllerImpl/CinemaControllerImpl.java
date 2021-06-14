@@ -26,18 +26,22 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
 
     public CinemaControllerImpl() {
         super();
-        menu = new MenuViewImpl();
-        menu.setObserver(this);
+        final AccountsController controller = new AccountsControllerImpl();
+        controller.setCinemaController(this);
+        controller.showLoginAccounView();
     }
 
     @Override
     public void showMenu() {
+        menu = new MenuViewImpl();
+        menu.setObserver(this);
         menu.show();
     }
 
     @Override
     public void showControllerAccount() {
         final AccountsController controller = new AccountsControllerImpl();
+        controller.setCinemaController(this);
         controller.showManagementAccountView();
         
     }
@@ -51,6 +55,7 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
     @Override
     public void showControllerFilm() {
         final FilmsController controller = new FilmsControllerImpl();
+        controller.setCinemaController(this);
         controller.showContainerFilmsView();
         
     }
