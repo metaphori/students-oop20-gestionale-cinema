@@ -33,23 +33,18 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     private FilmsController filmsController;
     private CinemaController cinemaController;
 
-    
     public ProgrammingFilmsControllerImpl() {
-        
         filmsController = new FilmsControllerImpl(this);
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
 
-        if(programmedFilms.isEmpty()) {
+        if (programmedFilms.isEmpty()) {
             programmedFilmsModel = new ProgrammedFilmsModelImpl();
-            
-        }else {
+        } else {
             programmedFilmsModel = new ProgrammedFilmsModelImpl(programmedFilms.get());
         }
-        
         filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
         filmsProgrammationView.setFilmsController(filmsController);
         filmsProgrammationView.setObserver(this);
-        
         scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         scheduleFilmView.setObserver(this);
     }
@@ -57,7 +52,6 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
 /**
  * Initialize programming films controller  and all components.
  * */
-    
     /*
     public ProgrammingFilmsControllerImpl() {
 
