@@ -285,8 +285,14 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
 
             try {
               durationTime = Integer.parseInt(duration.getText());
+              if (durationTime <= 0) {
+                  throw new IllegalArgumentException();
+              }
             } catch (NumberFormatException exception) {
               JOptionPane.showMessageDialog(frame, "Please enter duration in minutes");
+              return;
+            } catch (IllegalArgumentException ie) {
+              JOptionPane.showMessageDialog(frame, "Please insert duration in minutes as number  > 0");
               return;
             }
             String pathWhereStored = "";
