@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -98,9 +99,13 @@ public class BookingViewImpl implements BookingView {
         });
         final JButton bookBt = new JButton(STRING_BTN_BOOK);
         bookBt.addActionListener(e -> {
-            observer.bookSeat(film);
-            this.refresh();
-            observer.newBooking();
+            if (observer.getSeatsSelected().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "No selected seaet");
+            } else {
+                observer.bookSeat(film);
+                this.refresh();
+                observer.newBooking();
+            }
         });
         final JLabel label = new JLabel(STRING_SCREEN_LABEL);
         label.setHorizontalAlignment(SwingConstants.CENTER);
