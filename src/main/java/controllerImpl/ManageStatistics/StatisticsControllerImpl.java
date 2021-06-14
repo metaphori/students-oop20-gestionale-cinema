@@ -31,11 +31,13 @@ public class StatisticsControllerImpl implements StatisticsController{
     private StatisticsGUI statisticsView;
     
     public StatisticsControllerImpl() {
-        statisticsView = new StatisticsImplGUI();
+        this.statisticsView = new StatisticsImplGUI();
         this.statisticsView.setObserver(this);
         
-        controllerBooking = new BookingControllerImpl();
-        controllerFilm = new FilmsControllerImpl();
+        this.controllerBooking = new BookingControllerImpl();
+        this.controllerFilm = new FilmsControllerImpl();
+        System.out.println();
+        System.out.println("Film" + controllerFilm.getFilms());
     }
     
     @Override
@@ -43,7 +45,7 @@ public class StatisticsControllerImpl implements StatisticsController{
         Optional<Ticket> ticketOptional = this.controllerBooking.getTicket().stream().max( (t1, t2) -> {
             return t1.getSetSeat().size() - t2.getSetSeat().size();
         });
-        if(ticketOptional.isPresent()) {
+        if (ticketOptional.isPresent()) {
             return controllerFilm.getFilms().stream().filter(f -> f.getID() == ticketOptional.get().getId()).findFirst();
         }
         
@@ -73,14 +75,18 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Double getRecessed() {
+        System.out.println();
+        System.out.println(controllerBooking.getTicket());
+        System.out.println(this.controllerBooking.getTicket().stream().mapToDouble(f -> f.getPrice()).sum());
         return this.controllerBooking.getTicket().stream().mapToDouble(f -> f.getPrice()).sum();
 
     }
     
     @Override
     public void showStatisticsView() {
-        statisticsView.update();
+      //  statisticsView.update();
         statisticsView.show();
+        statisticsView.update();
     }
     
     @Override

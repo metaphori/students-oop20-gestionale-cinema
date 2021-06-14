@@ -40,11 +40,13 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
-    
+    private final String MONEY_STRING = "Money collection:";
+    private final String MOVIE_STRING = "Most watched movie :";
+    private final String PEOPLE_STRING = "Day with the most people :";
     final JLabel title = new JLabel("Weekly Statistics"); 
-    final JLabel movie = new JLabel ("Most watched movie :");
-    final JLabel money = new JLabel ("Weekly money collection : ");
-    final JLabel people = new JLabel ("Day with the most people of the week : ");
+    final JLabel movie = new JLabel (MOVIE_STRING);
+    final JLabel money = new JLabel (MONEY_STRING);
+    final JLabel people = new JLabel (PEOPLE_STRING);
     
     //img
     final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
@@ -156,20 +158,23 @@ public class StatisticsImplGUI implements StatisticsGUI{
     */
     
     @Override
-    public void setObserver(StatisticsController observer) {
+    public void setObserver(final StatisticsController observer) {
         this.observer = observer;
-        
     }
-    
+
     @Override
-    public void update () {
+    public void update() {
         Optional<Film> filmOptional = observer.getMostedWatchedFilm();
-        System.out.println("filmOptional" + filmOptional);
-        if(filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
+        if (filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
             pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
+            movie.setText(MOVIE_STRING + filmOptional.get().getName());
         }
         Optional<LocalDate> dateOptional = observer.getMostAffluentDays();
+        if (dateOptional.isPresent()) {
+            people.setText(PEOPLE_STRING + dateOptional.get().toString());
+        }
         Double moneyTotal = observer.getRecessed();
-;    }
-    
+        money.setText(MONEY_STRING + moneyTotal.toString());
+
+    }
 }
