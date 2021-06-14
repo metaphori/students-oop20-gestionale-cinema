@@ -40,7 +40,7 @@ public class BookingViewImpl implements BookingView {
     private static final String STRING_BTN_BOOK = "Book"; 
     private static final String STRING_SCREEN_LABEL = "SCREEN"; 
     private final ProgrammedFilm film; 
-    private final Map<JButton, SeatImpl<Row, Integer>> grid = new HashMap<>();
+    private final Map<JButton, SeatImpl> grid = new HashMap<>();
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGTH_PERC_FRAME = 0.5;
 
@@ -71,7 +71,7 @@ public class BookingViewImpl implements BookingView {
             observer.showBackFromBooking(film);
             frame.dispose();
         });
-        final Set<SeatImpl<Row, Integer>> setSeats = observer.getSeatsFromFilm(film);
+        final Set<SeatImpl> setSeats = observer.getSeatsFromFilm(film);
         row = Row.Z;
         col = 10;
         final JPanel center = new JPanel(new BorderLayout());
@@ -79,13 +79,13 @@ public class BookingViewImpl implements BookingView {
         for (int i = 0; i < row.ordinal() + 1; i++) {
             for (int j = 0; j < col; j++) {
                 SeatState state;
-                if (setSeats.contains(new SeatImpl<Row, Integer>(Row.values()[i], j))) {
+                if (setSeats.contains(new SeatImpl(Row.values()[i], j))) {
                     state  = SeatState.TAKEN;
                 } else {
                     state = SeatState.FREE;
                 }
                 final JButton button = factory.getButtonSeat(state, i, j);
-                grid.put(button, new SeatImpl<Row, Integer>(Row.values()[i], j));
+                grid.put(button, new SeatImpl(Row.values()[i], j));
                 gridPanel.add(button);
             }
         }
@@ -122,11 +122,12 @@ public class BookingViewImpl implements BookingView {
     public void show() {
         frame.setVisible(true);
     }
+    
     @Override
     public void refresh() {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        final Set<SeatImpl<Row, Integer>> setSeatsTaken = observer.getSeatsFromFilm(film);
-        final Set<SeatImpl<Row, Integer>> setSeatsSelected = observer.getSeatsSelected();
+        final Set<SeatImpl> setSeatsTaken = observer.getSeatsFromFilm(film);
+        final Set<SeatImpl> setSeatsSelected = observer.getSeatsSelected();
         for (final var bt : grid.keySet()) {
             ImageIcon imageIcon;
             if (setSeatsTaken.contains(grid.get(bt))) {

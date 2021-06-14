@@ -69,13 +69,8 @@ public class TimeTableViewImpl implements TimeTableView {
     private TimeTableViewObserver observer;
     private JFrame frame;
     private Set<ProgrammedFilm> setProgrammedFilm;
+    
     public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilmOriginal, final Film film) {
-     /*   setProgrammedFilm = setProgrammedFilmOriginal.stream()
-                .filter(f -> f.getDate().isAfter(LocalDate.now()) 
-                        || f.getDate().equals(LocalDate.now()) 
-                        && f.getStartTime().isAfter(LocalTime.now())
-                        )
-                .collect(Collectors.toSet());*/
         setProgrammedFilm = new HashSet<>(observer.handlerProgrammedFilm(setProgrammedFilmOriginal, new FilterOldDateImpl()));
         
         final String nameFilm = film.getName();
@@ -144,7 +139,7 @@ public class TimeTableViewImpl implements TimeTableView {
         final JLabel labelCalendar = new JLabel(CALENDAR_STRING);
         labelCalendar.setForeground(COLOR_STRING);
         panelCalendar.add(labelCalendar, BorderLayout.NORTH);
-        
+
         final JButton resetBtn = new JButton(TEXT_BUTTON_RESET);
         resetBtn.addActionListener(e -> {
            this.refresh(table, setProgrammedFilm);

@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -20,10 +19,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
@@ -38,14 +37,13 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import utilities.Film;
+import controller.ManageAccounts.AccountsController;
 import utilities.ManageAccounts.Account;
+import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.LoginAccountGUI;
-import view.ManageAccounts.LoginAccountGUIObserver;
 
 import java.awt.event.*
 ;
@@ -56,22 +54,25 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     private static final String FRAME_NAME = "Login";
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
-    final JLabel title = new JLabel("Login utente");
+    
+    //components
+    final JLabel title = new JLabel("Login Account");
     final JLabel username = new JLabel ("Username:");
-    final TextField TextUsername = new TextField ("Username", 12); //written that will be removed when clicked
+    final TextField textUsername = new TextField ("Username", 12); //written that will be removed when clicked
     final JLabel password = new JLabel ("Password:");
-    final JPasswordField TextPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
+    final JPasswordField textPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
     final JButton login = new JButton("Login");
     final JButton reset = new JButton("Reset");
     
-    HashMap<String,String> logininfo = new HashMap<String,String>();
-    //final JCheckBox showPwd = new JCheckBox();
+    private AccountsController observer;
     
-    private LoginAccountGUIObserver observer;
-    //private Account user;
+    Map<String,String> logininfo = new HashMap<String,String>();
+    Set<Account> setAccount = new HashSet<>();
     
+    public static final int SPACE = 5;
+   
     public LoginAccountImplGUI() {
-        
+      
         //I create the frame and set the title and other properties
         this.frame = new JFrame();
         frame.setTitle(FRAME_NAME);
@@ -80,11 +81,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
-        cnst.insets = new Insets (5 ,5 ,5 , 5);
+        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE);
         cnst.fill = GridBagConstraints.HORIZONTAL;
-        
-        //final Collection<Account> collectAccount = observer.getAccount();
-        
         
         //I create the secondary panels for the various parts and add the components
         final JPanel pNorth = new JPanel (new FlowLayout ());
@@ -92,14 +90,11 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         cnst.gridy ++; // prossima riga
         
         pWestInternal.add(username, cnst); 
-        pWestInternal.add(TextUsername, cnst);
+        pWestInternal.add(textUsername, cnst);
         cnst.gridy ++; 
         
-        
-        //TextPassword.setEchoChar('*'); // nascondo pwd con *
         pWestInternal.add(password, cnst);
-        pWestInternal.add(TextPassword, cnst);
-        //pWestInternal.add(showPwd, cnst);
+        pWestInternal.add(textPassword, cnst);
         cnst.gridy ++; 
                       
         final JPanel pWest = new JPanel (new FlowLayout ());
@@ -115,87 +110,69 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         
         
         //method to remove descriptive writing
-        TextUsername.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                        TextUsername.setText("");
+        textUsername.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Username".equals(textUsername.getText())) { 
+                        textUsername.setText("");
+                }
             }
-
             public void focusLost(final FocusEvent e) {
             }
         });
 
         //method to remove descriptive writing
-        TextPassword.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                        TextPassword.setText("");
-            }
-
-            public void focusLost(final FocusEvent e) {
-            }
-        });
-       
-        //cancella le scritte al cliccare di reset
-        reset.addFocusListener(new FocusListener() {
-            public void focusGained(final FocusEvent e) { 
-                        TextUsername.setText("");
-                        TextPassword.setText("");
+        textPassword.addFocusListener(new FocusListener() {
+            public void focusGained(final FocusEvent e) {
+                if ("Password".equals(textPassword.getText())) { 
+                    textPassword.setText("");
+                }
             }
 
             public void focusLost(final FocusEvent e) {
             }
         });
         
-        login.addFocusListener(new FocusListener() {
+       //method to remove writing
+        reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
-                String userID = TextUsername.getText();
-                String password = String.valueOf(TextPassword.getPassword());
-                //final Collection<Account> getAccount = observer.getAccount();
+                        textUsername.setText("");
+                        textPassword.setText("");
+            }
+
+            public void focusLost(final FocusEvent e) {
+            }
+        });
+        
+        
+        login.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String userID = textUsername.getText();
+                String password = String.valueOf(textPassword.getPassword());
                 if(logininfo.containsKey(userID)) {
                     if(logininfo.get(userID).equals(password)) {
-                            JLabel successful = new JLabel("Login successful");
-                            successful.setForeground(Color.GREEN);
-                            frame.dispose();
-                            //page home
-                            observer.showMenu();
-                            //HomePage menu = new HomePage(userID);
+                        LoggedAccount log = LoggedAccount.getIstance();
+                        Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
+                        log.setAccount(acc);
+                        frame.dispose();
+                        observer.showMenu();
+                        frame.setVisible(false);
                     }
                     else {
-                        JLabel wrong = new JLabel("wrong password");
-                        wrong.setForeground(Color.RED);
-                            
+                        JOptionPane.showMessageDialog(pWestInternal, "Wrong password", "", JOptionPane.ERROR_MESSAGE);
                     }
-
-            }
-            else {
-                JLabel notFound = new JLabel("username not found");
-                notFound.setForeground(Color.RED);
+            } else {
+                JOptionPane.showMessageDialog(pWestInternal, "Username not found", "", JOptionPane.ERROR_MESSAGE);
             }
                 
             }
-
-            public void focusLost(final FocusEvent e) {
-            }
         });
         
-        
     }
-    
-    /*
-     //method to show the pwd or not
-    private void showPwdActionPerformed (ActionEvent evt) {
-        if (showPwd.isSelected()) {
-            TextPassword.setEchoChar((char)0);
-        } else {
-            TextPassword.setEchoChar((char)'*');
-        }
-       }
-    */
     
     @Override
-    public void setObserver (LoginAccountGUIObserver observer) {
-        this . observer = observer ;
+    public void setObserver(final AccountsController observer) {
+        this.observer = observer;
     }
-    
     
     @Override
     public void show () {
@@ -203,17 +180,15 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        frame.setSize(400, 200);
      }
     
-    @Override
-    public void setDimensions (int x, int y) {
-        this.frame.setSize(x,y);
-    }
-  
-    public static void main(String[] args) {
-        LoginAccountImplGUI view = new LoginAccountImplGUI();
-        view.show();
-        view.setDimensions(400,200);
+    public void updateSetAccount (Set<Account> setAccount) {
+        this.setAccount =  setAccount;
+        for(var account : setAccount) {
+            logininfo.put(account.getUsername(), account.getPassword());
+        }
+        System.out.print(logininfo);
     }
     
 }
