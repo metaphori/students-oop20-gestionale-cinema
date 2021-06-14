@@ -5,11 +5,10 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collection;
-<<<<<<< HEAD
+
 import java.util.Comparator;
-=======
+
 import java.util.HashMap;
->>>>>>> master
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -71,8 +70,9 @@ public class Cinema {
 
     public static void main(final String[] args){
 
-<<<<<<< HEAD
+
         Set<Film> set = new HashSet<>();
+     
         final FilmFactory filmFactory = new FilmFactoryImpl(new ManagerIdsFilmImpl(new IdsGeneratorImpl()));
         final Film f1 = filmFactory.createBasicFilm("Spiderman", "Action", "Nice film", Optional.ofNullable(null),120);
         final Film f2 = filmFactory.createBasicFilm("Batman", "Action", "Nice film", Optional.ofNullable(null),140);
@@ -127,134 +127,17 @@ public class Cinema {
         
        
      //   BookingController b = new BookingControllerImpl(set,setP);
-      // BookingController b = new BookingControllerImpl();
-     //   b.start();
+     //  BookingController b = new BookingControllerImpl();
+    //   b.start();
       // FilmsController controllerFilm = new FilmsControllerImpl();
       //  controllerFilm.showContainerFilmsView();
-      ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
-       controllerProgrammedFilm.showProgrammedFilmView();
-=======
+    //  ProgrammingFilmsController controllerProgrammedFilm = new ProgrammingFilmsControllerImpl();
+    //   controllerProgrammedFilm.showProgrammedFilmView();
 
+ //      CinemaController controller = new CinemaControllerImpl();
         
-        
-        //ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
-        
-       // ProgrammingFilmsGUI gui = new ProgrammingFilmsGUIimpl();
-        
-        //controller.addProgrammedFilm(null);
-        
-       /*
-        final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
-        final ProgrammedFilmFactory factory = new ProgrammedFilmFactoryImpl();
         
 
-       
-        final LocalDate ld1 = LocalDate.of(2021, 6, 3);    
-        final LocalDate ld2 = LocalDate.of(2021, 6, 3); 
-        final LocalDate ld3 = LocalDate.of(2021, 6, 4); 
-        
-        final LocalTime st1 = LocalTime.of(8, 30);
-        final LocalTime st2 = LocalTime.of(6, 50);
-        final LocalTime st3 = LocalTime.of(8, 27);
-        
-        final LocalTime et1 = LocalTime.of(8, 45);
-        final LocalTime et2 = LocalTime.of(7, 22);
-        final LocalTime et3 = LocalTime.of(8, 29);
-        final ProgrammedFilm pf1 = factory.createProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        final ProgrammedFilm pf2 = factory.createProgrammedFilm(13, 9, 56, ld2, st2, et2);
-        final ProgrammedFilm pf3 = factory.createProgrammedFilm(14, 1, 56, ld3, st3, et3);
-        final ProgrammedFilm pf4 = factory.createProgrammedFilm(15, 9, 56, ld2, st3, et3);
-       
-       controller.addProgrammedFilm(pf1);
-       controller.addProgrammedFilm(pf2);
-       controller.addProgrammedFilm(pf3);
-       controller.addProgrammedFilm(pf4);
-       
-       System.out.println(controller.getAllProgrammedFilms());
-       controller.showProgrammedFilmView();*/
-       
-       
-        /*
-        Film f1 = filmFactory.createBasicFilm("Spiderman", "", "", Optional.ofNullable(null), 50);
-        Film f2 = filmFactory.createBasicFilm("Batman", "", "", Optional.ofNullable(null), 200);
-        Film f3 = filmFactory.createBasicFilm("Thor", "", "", Optional.ofNullable(null), 180);
-        
-        
-        final LocalDate ld1 = LocalDate.of(2021, 6, 4);    
-        final LocalDate ld2 = LocalDate.of(2021, 6, 4); 
-        final LocalDate ld3 = LocalDate.of(2021, 6, 4); 
-        
-        final LocalTime st1 = LocalTime.of(8, 30);
-        final LocalTime st2 = LocalTime.of(6, 50);
-        final LocalTime st3 = LocalTime.of(8, 27);
-        
-        final LocalTime et1 = LocalTime.of(8, 45);
-        final LocalTime et2 = LocalTime.of(7, 22);
-        final LocalTime et3 = LocalTime.of(8, 29);
-        final ProgrammedFilm pf1 = programmedFilmFactory.createProgrammedFilm(2, 8, 56, ld1, st1, et1);
-        final ProgrammedFilm pf2 = programmedFilmFactory.createProgrammedFilm(1, 9, 56, ld2, st2, et2);
-        final ProgrammedFilm pf3 = programmedFilmFactory.createProgrammedFilm(3, 1, 56, ld3, st3, et3);
-        
-        
-        filmsController.addFilm(f1);
-        filmsController.addFilm(f2);
-        filmsController.addFilm(f3);
-        
-        try {
-            programmingFilmsController.addProgrammedFilm(pf1);
-            programmingFilmsController.addProgrammedFilm(pf2);
-            programmingFilmsController.addProgrammedFilm(pf3);
-  
-        }catch(Exception e) {
-            System.out.println("eccezione");
-        };
-        
-        
-        
-        
-        System.out.println(filmsController.getFilms());
-        */
-        /*
-        final ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
-        final FilmsController filmsController = programmingFilmsController.getFilmsController();
-        
-        FilmFactory filmFactory = new FilmFactoryImpl(filmsController.getManagerIdsFilms());
-        
-        ProgrammedFilmFactory programmedFilmFactory = new ProgrammedFilmFactoryImpl();
-        Film f1 = filmFactory.createBasicFilm("Spiderman", "", "", Optional.ofNullable(null), 50);
-        filmsController.addFilm(f1);
-        programmingFilmsController.showProgrammedFilmView();
-        
-        */
-        
-        
-        
-        
-        
-        //programmingFilmsController.showScheduleFilmView();
-        /*
-        FilmsController filmsController = new FilmsControllerImpl();
-        filmsController.showContainerFilmsView();*/
-        
-       /*
-        ProgrammingFilmsController programmingFilmsController = new ProgrammingFilmsControllerImpl();
-        programmingFilmsController.showProgrammedFilmView();*/
-
-
-      //  CinemaController cinemaController = new CinemaControllerImpl();
-        
-        Set<Account> setAccount = new HashSet<>();
-        Account a1 = new AccountImpl("Rossi","Gianni","Ross","qwerty",SeatTypeAccount.OPERATOR);
-        Account a2 = new AccountImpl("Giacomo","Pippo","Giac","qwerty1",SeatTypeAccount.ADMINISTRATOR);
-        Account a3 = new AccountImpl("Piero","Suli","Pier","qwerty123",SeatTypeAccount.OPERATOR);
-        setAccount.add(a3);
-        setAccount.add(a1);
-        setAccount.add(a2);
-        
-        AccountsController controller = new AccountsControllerImpl();
-        controller.showLoginAccounView();
-        
->>>>>>> master
     }
     
 }

@@ -59,19 +59,20 @@ public class BookingModelImpl implements BookingModel {
     }
     @Override
     public void deleteTicket(final Film film) {
-        for(var ticket : setTicket) {
-      /*      if(film.getID() ==  ticket.getId()
-               && ticket.getDate().isAfter(LocalDate.now()) 
-               || f.getDate().equals(LocalDate.now()) 
-               && ticket.getTime().isAfter(LocalTime.now()
-                    ) {
+        for (final var ticket : setTicket) {
+            if (film.getID() ==  ticket.getId()) {
                 setTicket.remove(ticket);
-            }*/
+            }
         }
     }
     @Override
     public void deleteTicket(final ProgrammedFilm programmedFilm) {
-        
+        for (final var ticket : setTicket) {
+            if (programmedFilm.getDate().isEqual(ticket.getDate()) 
+                    && programmedFilm.getStartTime().equals(ticket.getTime())) {
+                setTicket.remove(ticket);
+            }
+        }
     }
     @Override
     public void bookSeat(final ProgrammedFilm film) {

@@ -51,7 +51,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private ProgrammingFilmsController controllerProgrammingFilms;
     private FilmsController controllerFilms;
     public BookingControllerImpl() {
-        final Optional<Set<Ticket>> opSetTicket = this.readTicketOnFile();
+  
+        final Optional<Set<Ticket>> opSetTicket = this.readTicketOnFile();       
         final FilmsController controllerFilms = new FilmsControllerImpl();
         final ProgrammingFilmsController controllerFilmProgrammed = new ProgrammingFilmsControllerImpl();
 
@@ -187,20 +188,5 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         return rw.readObj(type);
     }
     
-    @Override
-    public void setControllerFilms(final FilmsController controllerFilms) {
-        this.controllerFilms = controllerFilms;
-        this.updateFilmsController();
-    }
-    private void updateFilmsController() {
-        this.setFilm = controllerFilms.getFilms();
-    }
-    @Override
-    public void setControllerProgrammingFilms(final ProgrammingFilmsController controllerProgrammingFilms) {
-        this.controllerProgrammingFilms = controllerProgrammingFilms;
-        this.updateControllerProgrammingFilms();
-    }
-    private void updateControllerProgrammingFilms() {
-        this.setProgrammedFilm = new HashSet<>(controllerProgrammingFilms.getAllProgrammedFilms());
-    }
+  
 }
