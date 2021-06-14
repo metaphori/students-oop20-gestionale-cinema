@@ -78,7 +78,7 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
     private final JTextArea description = factory.createTextArea("Description");
     private final JButton save = factory.createButtonWithText("Save");
     private final JButton delete = factory.createButtonWithText("Delete");
-    private final JButton home = factory.createButtonWithText("Home");
+
     private final JButton back = factory.createButtonWithText("Back");
     private final JButton pic = factory.createButtonWithText("");
     private final JTextField title = factory.createTextField("Title");
@@ -120,8 +120,6 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
         mainPanel.add(westPanel, BorderLayout.WEST); 
         northPanel.add(back, BorderLayout.WEST);
         back.setPreferredSize(new Dimension(frameHeight / BUTTON_HEIGHT_PROPORTION, frameWidth / BUTTON_WIDTH_PROPORTION));
-        northPanel.add(home, BorderLayout.EAST);
-        home.setPreferredSize(new Dimension(frameHeight / BUTTON_HEIGHT_PROPORTION, frameWidth / BUTTON_WIDTH_PROPORTION));
         southPanel.add(actionPanel, BorderLayout.SOUTH);
         actionPanel.add(save);
         actionPanel.add(delete);
@@ -295,17 +293,29 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
               JOptionPane.showMessageDialog(frame, "Please insert duration in minutes as number  > 0");
               return;
             }
+
+            String name = "";
+            try {
+                name = title.getText();
+                if (name.isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
+              } catch (IllegalArgumentException ie) {
+                JOptionPane.showMessageDialog(frame, "Please insert a title");
+                return;
+              }
+
             String pathWhereStored = "";
             Film film;
             final FilmFactory filmFactory = new FilmFactoryImpl(observer.getManagerIdsFilms());
             if (focusFilm.isEmpty()) { // If users clicks on add new film
                 if (selectedImagePath.isEmpty()) { // If users has not selected any image
-                    film = filmFactory.createBasicFilm(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(null), durationTime);
+                    film = filmFactory.createBasicFilm(name, genre.getText(), description.getText(), Optional.ofNullable(null), durationTime);
                     observer.addFilm(film);
                 } else {
                     try {
                         pathWhereStored = observer.getManagerWorkingDIR().copyFile(new File(selectedImagePath.get()), GeneralSettings.IMAGESSELECTEDDIR);
-                        film = filmFactory.createBasicFilm(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime);
+                        film = filmFactory.createBasicFilm(name, genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime);
                         observer.addFilm(film);
                     } catch (IOException exception) {
                         JOptionPane.showMessageDialog(frame, "Error during film creation");
@@ -316,7 +326,7 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
                 final int oldIdFilm = focusFilm.get().getID();
                 if (selectedImagePath.isEmpty()) {
                     final Optional<String> equalPath = focusFilm.get().getCoverPath();
-                    film = filmFactory.createBasicFilmById(title.getText(), genre.getText(), description.getText(), equalPath, durationTime, oldIdFilm);
+                    film = filmFactory.createBasicFilmById(name, genre.getText(), description.getText(), equalPath, durationTime, oldIdFilm);
                     observer.deleteFilm(focusFilm.get());
                     observer.addFilm(film);
                 } else { // If users wants edit an existing film and he has selected specific image
@@ -329,7 +339,7 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }
-                    film = filmFactory.createBasicFilmById(title.getText(), genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime, oldIdFilm);
+                    film = filmFactory.createBasicFilmById(name, genre.getText(), description.getText(), Optional.ofNullable(pathWhereStored), durationTime, oldIdFilm);
                     observer.deleteFilm(focusFilm.get());
                     observer.addFilm(film);
                 }
