@@ -1,6 +1,7 @@
-package viewImpl.ManageProgrammingFilms;
+package viewImpl.ManageProgrammingFilms.factory;
 
 import java.awt.GridLayout;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
@@ -8,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TimePanelImpl extends JPanel {
+public class TimePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static final int topEmptyBorder = 10;
@@ -27,7 +28,7 @@ public class TimePanelImpl extends JPanel {
 	private final JLabel hourLabel;
 	private final JLabel minLabel;
 	
-	public TimePanelImpl() {
+	TimePanel() {
 		
 		final LocalTime localTime = LocalTime.now();
 		
@@ -49,7 +50,7 @@ public class TimePanelImpl extends JPanel {
 		add(minTextField);
 	}
 
-	public int getHourOfDay() throws IllegalArgumentException {
+	private int getHour() throws IllegalArgumentException {
 		int hour;
 		try {
 			hour = Integer.parseInt(hourTextField.getText());
@@ -57,13 +58,13 @@ public class TimePanelImpl extends JPanel {
 			throw new NumberFormatException("Hour must be number!");
 		}
 
-		if (hour < 0 || hour > 23)
-			throw new IllegalArgumentException
-				("Hours must be between 0 to 23!");
+		if (hour < 0 || hour > 23) {
+			throw new IllegalArgumentException("Hours must be between 0 to 23!");
+		}
 		return hour;
 	}
 
-	public int getMinutes() throws IllegalArgumentException {
+	private int getMinutes() throws IllegalArgumentException {
 		int min = 0;
 		try {
 			min = Integer.parseInt(minTextField.getText());
@@ -74,11 +75,11 @@ public class TimePanelImpl extends JPanel {
 		if (min < 0 || min > 59) {
 			throw new IllegalArgumentException(
 					"Minutes must be between 0 and 59!");
-		}
+		}		
 		return min;
 	}
 
-	public void setHourTextField(int hour) throws IllegalArgumentException {
+	private void setHourTextField(final int hour) throws IllegalArgumentException {
 		if (hour < 0 || hour > 23)
 			throw new IllegalArgumentException	
 				("Hours must be between 0 to 23!");
@@ -86,7 +87,7 @@ public class TimePanelImpl extends JPanel {
 		hourTextField.setText("" + hour);
 	}
 
-	public void setMinTextField(int min) throws IllegalArgumentException {
+	private void setMinTextField(final int min) throws IllegalArgumentException {
 		if (min < 0 || min > 59) {
 			throw new IllegalArgumentException(
 					"Minutes must be between 0 and 59!");
@@ -94,8 +95,17 @@ public class TimePanelImpl extends JPanel {
 		minTextField.setText("" + min);
 	}
 
-	public void setTime(int hour, int min) {
-		setHourTextField(hour);
-		setMinTextField(min);
+	public void setTime(final LocalTime time) {
+		setHourTextField(time.getHour());
+		setMinTextField(time.getMinute());
+	}
+	
+	
+	public LocalTime getTime(final LocalDate date) throws IllegalArgumentException  {    
+	    return LocalTime.of(this.getHour(), this.getMinutes());
+	}
+	
+	public void reset() {
+	    this.setTime(LocalTime.now());
 	}
 }

@@ -1,5 +1,5 @@
 #SpotBugs User Preferences
-#Sat May 22 11:40:09 CEST 2021
+#Tue Jun 01 21:37:10 CEST 2021
 detectorExplicitSerialization=ExplicitSerialization|true
 detectorMultithreadedInstanceAccess=MultithreadedInstanceAccess|true
 detectorConfusionBetweenInheritedAndOuterMethod=ConfusionBetweenInheritedAndOuterMethod|true

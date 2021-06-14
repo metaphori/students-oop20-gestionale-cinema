@@ -1,17 +1,17 @@
 package modelImpl.ManageAccounts;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import model.ManageAccounts.AccountModel;
 import utilities.ManageAccounts.Account;
 
 
 public class AccountModelImpl implements AccountModel{
-    private final Collection<Account> collect;
+    private final Set<Account> collect;
     
-    public AccountModelImpl() {
-        collect = new HashSet<>(); //collezioni senza duplicati
+    public AccountModelImpl(Set<Account> setAccount) {
+        this.collect = setAccount; //collezioni senza duplicati
     }
     
     @Override
@@ -25,8 +25,13 @@ public class AccountModelImpl implements AccountModel{
     }
 
     @Override
-    public Collection<Account> getAccounts() {
+    public Set<Account> getAccounts() {
         return this.collect;
+    }
+    
+    @Override
+    public String toString() {
+        return "Account " + collect ;
     }
 
 }

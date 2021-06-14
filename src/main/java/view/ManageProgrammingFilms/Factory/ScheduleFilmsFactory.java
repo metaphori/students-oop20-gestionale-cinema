@@ -1,10 +1,19 @@
 package view.ManageProgrammingFilms.Factory;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JPanel;
+
+import controller.ManageFilms.FilmsController;
+import viewImpl.ManageProgrammingFilms.factory.DatePanel;
+import viewImpl.ManageProgrammingFilms.factory.InfoProgrammationPanel;
+import viewImpl.ManageProgrammingFilms.factory.TimePanel;
 
 public interface ScheduleFilmsFactory {
 	
-	JPanel getTimePanel();
-	JPanel getDatePanel();
-	JPanel getBottomPanel();
+	TimePanel getTimePanel();
+	DatePanel getDatePanel();
+	JPanel getBottomPanel(ActionListener al);
+	InfoProgrammationPanel getInfoProgrammationPanel(FilmsController filmsController);
 
 }

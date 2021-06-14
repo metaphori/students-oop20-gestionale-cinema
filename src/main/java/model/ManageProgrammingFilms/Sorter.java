@@ -1,8 +1,16 @@
 package model.ManageProgrammingFilms;
 
 import java.util.Comparator;
-
-public interface Sorter <X> {
+/** 
+ * Describe a parameterized sorter.
+ * @param <X> type to sorter.
+ * */
+public interface Sorter<X> {
+    /** 
+     * Get used comparator.
+     * @param <X> tyoe used in comparator.
+     * @return Comparator<X>
+     * */ 
     Comparator<X> getComparator();
 
 }

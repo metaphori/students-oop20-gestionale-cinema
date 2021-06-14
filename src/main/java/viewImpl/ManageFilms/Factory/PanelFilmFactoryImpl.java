@@ -20,21 +20,26 @@ import utilities.Film;
 import view.ManageFilms.Factory.PanelFilmFactory;
 
 
-public class PanelFilmFactoryImpl implements PanelFilmFactory {
+public final  class PanelFilmFactoryImpl implements PanelFilmFactory {
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGHT_PERC_FRAME = 0.5;
 
     private static final double WIDTH_IMAGE = WIDTH_PERC_FRAME / 5;
     private static final double HEIGHT_IMAGE = HEIGHT_PERC_FRAME / 2;
-
+    /**
+     * Get a film panel, fill the map to associates each film with specific button.
+     * @param mapFilm
+     * @param setFilm
+     * @return centralPanel
+     */
     @Override
     public JPanel getFilmPanel(final Map<JButton, Film> mapFilm, final Set<Film> setFilm) {
         final JPanel centralPanel = new JPanel(new WrapLayout());
-        for (var film : setFilm) { 
+        for (final var film : setFilm) { 
            //if film has set a coverPath loads this, otherwise loads defaultImage
             if (film.getCoverPath().isPresent()) {
                 final ImageIcon img = new ImageIcon(film.getCoverPath().get());
-                mapFilm.put(this.getButtonImage(film.getName(), img), film);
+                mapFilm.put(this.getButtonImage(film.getName(), img), film); 
             }
             else {
                 final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
@@ -42,19 +47,22 @@ public class PanelFilmFactoryImpl implements PanelFilmFactory {
                 mapFilm.put(this.getButtonImage(film.getName(), img), film);
             }
         }
-        for (var bt : mapFilm.keySet()) {
+        for (final var bt : mapFilm.keySet()) {
             centralPanel.add(bt);
-            
         }
         return centralPanel;
     }
-
+    /**
+     * It's used to get a button with specific image.
+     *  @param title
+     *  @param icon
+     *  @return button
+     */
     private JButton getButtonImage(final String title, final ImageIcon icon) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-   
         // load the image to a imageIcon
         final Image image = icon.getImage(); // transform it 
-        final Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE), (int) (screenSize.getHeight() * HEIGHT_IMAGE),  java.awt.Image.SCALE_SMOOTH);// scale it the smooth way  
+        final Image newimg = image.getScaledInstance((int) (screenSize.getWidth() * WIDTH_IMAGE), (int) (screenSize.getHeight() * HEIGHT_IMAGE),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         final ImageIcon newImgIcon = new ImageIcon(newimg);  // transform it back
         final JButton button = new JButton("Title:" + title, newImgIcon);
         button.setHorizontalTextPosition(JButton.CENTER);

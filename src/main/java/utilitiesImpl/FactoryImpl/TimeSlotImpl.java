@@ -3,26 +3,37 @@ package utilitiesImpl.FactoryImpl;
 import java.time.LocalTime;
 
 import utilities.TimeSlot;
-
-public class TimeSlotImpl implements TimeSlot {
-    
+/** 
+ *  Time slot indicates a start-end time.
+ *   * */
+public final class TimeSlotImpl implements TimeSlot {
     private final LocalTime startTime;
     private final LocalTime endTime;
-    
-    
+/**
+ * Initialize time slot with start-end time.
+ * @param startTime start time
+ * @param endTime end time
+ *  */
     TimeSlotImpl(final LocalTime startTime, final LocalTime endTime) {
         super();
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * Get start time.
+     * @return startTime
+     *  */
 
     @Override
     public LocalTime getStartTime() {
         return startTime;
     }
 
-
+    /**
+     * Get end time.
+     * @return endTime
+     *  */
     @Override
     public LocalTime getEndTime() {
         return endTime;
@@ -40,13 +51,13 @@ public class TimeSlotImpl implements TimeSlot {
 
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
         if (obj == null) {
             return false; 
-        }    
+        }
         if (getClass() != obj.getClass()) {
             return false;
         }
@@ -67,7 +78,10 @@ public class TimeSlotImpl implements TimeSlot {
         }
         return true;
     }
-    
-    
 
+
+    @Override
+    public String toString() {
+        return "TimeSlotImpl [startTime=" + startTime + ", endTime=" + endTime + "]";
+    }
 }

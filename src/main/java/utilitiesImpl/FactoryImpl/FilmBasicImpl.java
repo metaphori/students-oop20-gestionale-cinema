@@ -5,13 +5,12 @@ import java.util.Optional;
 import utilities.Film;
 
 public final class FilmBasicImpl implements Film {
-    protected final String type = getClass().getName();
-    private final String name; //unique name
-    private final String genre;
-    private final String description;
-    private final Optional<String> coverImagePath;
-    private final int duration; //minutes
-    private final int id;
+    private final String name; /** Film name. More films can has the same name. */
+    private final String genre; /** Film genre. */
+    private final String description; /** Film description. */
+    private final Optional<String> coverImagePath; /** If it's empty, user hasn't chosen any cover image path for the current film. */
+    private final int duration; /** Film duration in minutes. This value will be used during film programmation to calculate end film time */
+    private final int id; /** Film id. This value is unique. /*
     /**
      * @param name
      * @param genre
@@ -79,23 +78,30 @@ public final class FilmBasicImpl implements Film {
     /**
      * {@inheritDoc}
      */
-   
+
     @Override
     public String toString() {
         return "FilmBasicImpl [name=" + name + ", genre=" + genre + ", description=" + description + ", coverImagePath="
                 + coverImagePath + ", duration=" + duration + ", id=" + id + "]";
     }
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+
+        if (getClass() != obj.getClass()) {
             return false;
-        FilmBasicImpl other = (FilmBasicImpl) obj;
-        if (id != other.id)
+        }
+
+        final FilmBasicImpl other = (FilmBasicImpl) obj;
+        if (id != other.id) {
             return false;
+        }
         return true;
     }
 

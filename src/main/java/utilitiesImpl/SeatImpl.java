@@ -2,60 +2,54 @@ package utilitiesImpl;
 
 import utilities.Seat;
 
-public class SeatImpl<X,Y> implements Seat<X,Y> {
-	private final X x;
-	private final Y y;
-	
-	public SeatImpl(X x, Y y) {
-		super();
-		this.x=x;
-		this.y=y;
-	}
-
-	public X getX() {
-		return x;
-	}
-
-	public Y getY() {
-		return y;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((x == null) ? 0 : x.hashCode());
-		result = prime * result + ((y == null) ? 0 : y.hashCode());
-		return result;
-	}
-	
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SeatImpl other = (SeatImpl) obj;
-		if (x == null) {
-			if (other.x != null)
-				return false;
-		} else if (!x.equals(other.x))
-			return false;
-		if (y == null) {
-			if (other.y != null)
-				return false;
-		} else if (!y.equals(other.y))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Seat [x=" + x + ", y=" + y + "]";
-	}
+public class SeatImpl implements Seat<Row, Integer> {
+    private final Row row;
+    private final Integer column;
+    
+    public SeatImpl(Row row, Integer column) {
+        this.row = row;
+        this.column = column;
+    }
+    @Override
+    public Row getRow() {
+ 
+        return this.row;
+    }
+    @Override
+    public Integer getColumn() {
+  
+        return this.column;
+    }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((column == null) ? 0 : column.hashCode());
+        result = prime * result + ((row == null) ? 0 : row.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SeatImpl other = (SeatImpl) obj;
+        if (column == null) {
+            if (other.column != null)
+                return false;
+        } else if (!column.equals(other.column))
+            return false;
+        if (row != other.row)
+            return false;
+        return true;
+    }
+    @Override
+    public String toString() {
+        return "SeatImpl [row=" + row + ", column=" + column + "]";
+    }
 	
 	
 	

@@ -1,14 +1,20 @@
 package controller.ManageStatistics;
 
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.util.Optional;
 
+import controller.CinemaController;
+import controller.ManageFilms.FilmsController;
 import utilities.Film;
 
 public interface StatisticsController {
-	
-	public Film getMostedWatchedFilm(); // in a week
-	public LocalDate getMostAffluentDays(); // in  a week
-	public Double getRecessed(); // in a week
+    Optional<Film> getMostedWatchedFilm(); 
+    Optional<LocalDate> getMostAffluentDays(); 
+    Double getRecessed(); 
+    
+    void showStatisticsView();
+    void showMenu();
+    void setControllerFilms(FilmsController controllerFilm);
+    void setCinemaController(CinemaController cinemaController);
 	
 }

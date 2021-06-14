@@ -1,22 +1,25 @@
 package controller.ManageAccounts;
-import java.util.Collection;
 
+import java.util.Set;
+
+import controller.CinemaController;
 import utilities.ManageAccounts.Account;
-import utilitiesImpl.FactoryImpl.FilmBasicImpl;
+import utilitiesImpl.ManageAccounts.LoggedAccount;
 
 public interface AccountsController {
 	
-	public Account login(String username, String password); //returns logged-in account
+	//public Account login(String username, String password); 
 	
-	public void addAccount(Account newAccount);
-	public void deleteAccount(Account oldAccount);
+	void addAccount(Account newAccount);
+	void deleteAccount(Account oldAccount);
 	
-	public Collection <Account> getAccounts();
+	Set <Account> getAccounts();
 	
-	public void loadAccount(Collection <Account> loadedAccounts);
+	LoggedAccount loadAccount(Set <Account> loadedAccounts); //returns logged-in account
 
-	public void showManageAccountsView();
-	
-	public void showMenu();
-	
+	void showMenu();
+	void showRegistrationAccountView();
+        void showManagementAccountView();
+        void showLoginAccounView();
+        void setCinemaController(CinemaController cinemaController);
 }

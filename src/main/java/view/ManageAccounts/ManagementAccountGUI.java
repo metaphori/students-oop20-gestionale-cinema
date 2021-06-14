@@ -1,6 +1,9 @@
 package view.ManageAccounts;
 
+import controller.ManageAccounts.AccountsController;
+
 public interface ManagementAccountGUI {
     void show();
-    //void setObserver(ManagementAccountGUIObserver observer ); //metodi addAccount + deleteAccount
+    void setObserver(AccountsController observer);
+    void update();
 }

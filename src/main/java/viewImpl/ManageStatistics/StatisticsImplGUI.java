@@ -13,6 +13,8 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +28,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
+import controller.ManageStatistics.StatisticsController;
+import utilities.Film;
 import view.ManageStatistics.StatisticsGUI;
 
 
@@ -37,12 +41,22 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
     
-    final JLabel title = new JLabel("Statistiche settimanali"); 
+    final JLabel title = new JLabel("Weekly Statistics"); 
     final JLabel movie = new JLabel ("Most watched movie :");
     final JLabel money = new JLabel ("Weekly money collection : ");
     final JLabel people = new JLabel ("Day with the most people of the week : ");
     
-    final JButton back = new JButton("Back");
+    //img
+    final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
+    ImageIcon icon = new ImageIcon(imgURL);
+    final JButton pic = new JButton(icon);
+    
+    final JButton home = new JButton("Home");
+    //final JButton update = new JButton("Update Statistics");
+    
+    public static final int SPACE = 5;
+    public static final int SP = 90;
+    public static final int SC = 3;
     
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
@@ -51,6 +65,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private final int frameWidth = (int) (screenWidth / PROPORTION);
     private final int frameHeight = (int) (screenHeight / PROPORTION);
         
+    private StatisticsController observer;
     
     public StatisticsImplGUI () {
         
@@ -62,24 +77,20 @@ public class StatisticsImplGUI implements StatisticsGUI{
         final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
         final GridBagConstraints cnst = new GridBagConstraints ();
         cnst.gridy = 0;
-        cnst.insets = new Insets (5 ,5 ,5 , 5);
+        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE);
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
         //I create the secondary panels for the various parts and add the components
-        final JPanel pNorth = new JPanel (new FlowLayout ());
+        final JPanel pNorthInternal = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        pNorthInternal.add(home, cnst);
+        final JPanel pNorth = new JPanel (new FlowLayout (FlowLayout.CENTER));
         pNorth.add(title, cnst);
-        pNorth.add(back, FlowLayout.LEFT);
         cnst.gridy ++; // next line
         
         pWestInternal.add(movie, cnst); 
         cnst.gridy ++; 
         
-        //img
-        final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
-        ImageIcon icon = new ImageIcon(imgURL);
-        final JButton pic = new JButton(icon);
-        pic.setMargin(new Insets(3, 3, 3, 3));
-        
+        pic.setMargin(new Insets(SC, SC, SC, SC));
         pWestInternal.add(pic, cnst);
         cnst.gridy ++; 
         
@@ -90,64 +101,74 @@ public class StatisticsImplGUI implements StatisticsGUI{
         final JPanel pEastInternal = new JPanel ( new GridBagLayout ());
         final GridBagConstraints cnt = new GridBagConstraints ();
         cnt.gridy = 0;
-        cnt.insets = new Insets (90 ,90 ,90 ,90);
+        cnt.insets = new Insets (SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
         cnt.gridy ++;
-        
         pEastInternal.add(people, cnt);
         cnst.gridy ++;
         
         final JPanel pEast = new JPanel (new FlowLayout (FlowLayout.LEFT));
         pEast.add( pEastInternal, cnst );
         cnst.gridy ++; 
-      
         
-        final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.LEFT)); 
-        pSouth.add(back, cnst);
-        cnst.gridy ++; 
-        
-        
+        /*
+        final JPanel pSouth = new JPanel();
+        pSouth.add(update,cnst);
+        cnst.gridy ++;
+        */
+               
         frame.add (pNorth, BorderLayout.NORTH);
-        frame.add (pSouth, BorderLayout.SOUTH);
         frame.add (pWest, BorderLayout.WEST);
         frame.add (pEast, BorderLayout.CENTER);
-        
-        pic.addActionListener(e -> {
-            final JFileChooser chooser = new JFileChooser();
-            final FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG  & PNG Images", "jpg", "png", "jpeg");
-            chooser.setFileFilter(filter);
-            final int returnVal = chooser.showOpenDialog(frame);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-               final File selectedFile = chooser.getSelectedFile();
-               final File destFile = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "test");
-               try {
-                   FileUtils.copyFile(selectedFile, destFile);
-               } catch (IOException exception) {
-                   exception.printStackTrace();
-               }
-            }
-        }
-        );
-        
-        
+        frame.add (pNorthInternal, BorderLayout.EAST);
+        //frame.add(pSouth, BorderLayout.SOUTH);
+       
         
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
      
         
-    }
-        @Override
-        public void show () {
-            frame.pack();
-            frame.setLocationByPlatform(true);
-            frame.setVisible(true);
+        home.addActionListener(event -> {
+            observer.showMenu();
+            frame.setVisible(false);
+        });
         
-     }
-       
+        /*
+        update.addActionListener(event -> {
+            update();
+        });
+        */
+    }
+    
+    @Override
+    public void show () {
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+      }
+     
+    /*
     public static void main(String[] args) {
         StatisticsImplGUI view = new StatisticsImplGUI();
         view.show();
     }
+    */
+    
+    @Override
+    public void setObserver(StatisticsController observer) {
+        this.observer = observer;
+        
+    }
+    
+    @Override
+    public void update () {
+        Optional<Film> filmOptional = observer.getMostedWatchedFilm();
+        if(filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
+            pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
+        }
+        Optional<LocalDate> dateOptional = observer.getMostAffluentDays();
+        Double moneyTotal = observer.getRecessed();
+;    }
     
 }

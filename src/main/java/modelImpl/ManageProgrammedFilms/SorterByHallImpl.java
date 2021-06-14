@@ -4,12 +4,14 @@ import java.util.Comparator;
 
 import model.ManageProgrammingFilms.Sorter;
 import utilities.Factory.ProgrammedFilm;
-
-public class SorterListByHallImpl implements Sorter<ProgrammedFilm> {
+/** 
+ * Describe a sorter by hall on programmed film.
+ * */
+public final class SorterByHallImpl implements Sorter<ProgrammedFilm> {
 
     @Override
     public Comparator<ProgrammedFilm> getComparator() {
-        return (fp1, fp2) -> fp1.getHall()-fp2.getHall();
+        return (fp1, fp2) -> fp1.getHall() - fp2.getHall();
     }
 
 }

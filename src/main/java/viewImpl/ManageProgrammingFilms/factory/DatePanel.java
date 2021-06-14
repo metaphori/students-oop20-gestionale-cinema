@@ -1,4 +1,4 @@
-package viewImpl.ManageProgrammingFilms;
+package viewImpl.ManageProgrammingFilms.factory;
 
 import static javax.swing.BorderFactory.*;
 
@@ -10,10 +10,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 
-public class DatePanelImpl extends JPanel {
+public class DatePanel extends JPanel  {
 	private static final long serialVersionUID = 1L;
 	private final JComboBox monthNamesComboBox;
 	private final JTextField dayTextField;
@@ -32,12 +34,12 @@ public class DatePanelImpl extends JPanel {
 	private static final int hGapGrid = 5;
 	private static final int vGapGrid = 5;
 	
-	public DatePanelImpl(final LocalDate selectedDate)
+	
+	DatePanel()
 	{
-			
-		setLayout(new BorderLayout());
-		setBorder(createCompoundBorder
-					(createTitledBorder("Enter Date"),
+	    setLayout(new BorderLayout());
+	    setBorder(createCompoundBorder
+	            (createTitledBorder("Enter Date"),
 						createEmptyBorder(topEmptyBorder,leftEmptyBorder,bottomEmptyBorder,rightEmptyBorder)));
 												
 		final JPanel monthPanel = new JPanel(new GridLayout(rowsGrid,colsGrid,hGapGrid,vGapGrid));
@@ -56,9 +58,11 @@ public class DatePanelImpl extends JPanel {
 		yearTextField.setHorizontalAlignment(JTextField.RIGHT);
 		
 		//set date values
-		monthNamesComboBox.setSelectedIndex(selectedDate.getMonthValue()-1);
-		dayTextField.setText(Integer.toString(selectedDate.getDayOfMonth()));
-		yearTextField.setText(Integer.toString(selectedDate.getYear()));
+		LocalDate todayDate = LocalDate.now();
+		
+		monthNamesComboBox.setSelectedIndex(todayDate.getMonthValue()-1);
+		dayTextField.setText(Integer.toString(todayDate.getDayOfMonth()));
+		yearTextField.setText(Integer.toString(todayDate.getYear()));
 		
 		dayYearPanel.add(new JLabel("Day",JLabel.RIGHT));
 		dayYearPanel.add(new JLabel("Year",JLabel.RIGHT));
@@ -70,8 +74,8 @@ public class DatePanelImpl extends JPanel {
 		
 	}
 	
-	 
-	public Calendar getDate() throws NumberFormatException
+	
+	public LocalDate getDate() throws NumberFormatException, IllegalArgumentException
 	{
 		if (yearTextField.getText().length() != 4)
 		{
@@ -83,29 +87,43 @@ public class DatePanelImpl extends JPanel {
 		int year = Integer.parseInt(yearTextField.getText());
 		int day = Integer.parseInt(dayTextField.getText());
 				
-		int month = monthNamesComboBox.getSelectedIndex();
-		Calendar requestedDate = Calendar.getInstance();
-		requestedDate.set(year,month,1,0,0,0);
-		requestedDate.set(Calendar.MILLISECOND,0);
+		int month = monthNamesComboBox.getSelectedIndex()+1;
+		LocalDate requestedDate = LocalDate.of(year, month, day);
+		/*requestedDate.set(year,month,1,0,0,0);
+		requestedDate.set(Calendar.MILLISECOND,0);*/
 		//validate date
-		int max = requestedDate.getActualMaximum(Calendar.DAY_OF_MONTH); // get day of this specific month and year
-		if (day < 1 || day > max)
-		{
+		
+		final LocalDate start = requestedDate.withDayOfMonth(1);
+		final LocalDate lastDayOfMonth = start.withDayOfMonth(start.lengthOfMonth());
+		
+		final int max = lastDayOfMonth.getDayOfMonth(); // get day of this specific month and year
+		if (day < 1 || day > max){
 			throw new NumberFormatException
 				("Day must be between 1 and " + max +"!");
 		}
 		
-		requestedDate.set(Calendar.DATE,day);
+		if (requestedDate.isBefore(LocalDate.now())) {
+		    throw new IllegalArgumentException("You cannot schedule in the past. Please change date");
+		}
+
 		return requestedDate;
 	}
 	
-	public void setDate(Calendar date)
+	public void setDate(LocalDate date)
 	{
-		monthNamesComboBox.setSelectedIndex(date.get(Calendar.MONTH));
+		/*monthNamesComboBox.setSelectedIndex(date.get(Calendar.MONTH));
 		dayTextField.setText("" + date.get(Calendar.DAY_OF_MONTH));
 		yearTextField.setText("" + date.get(Calendar.YEAR));
-		
+		*/
+	    monthNamesComboBox.setSelectedIndex(date.getMonthValue()-1);
+	    dayTextField.setText(""+date.getDayOfMonth());
+	    yearTextField.setText(""+date.getYear());
 	}
+	
+	public void reset() {
+	    this.setDate(LocalDate.now());
+	}
+	
 
 }
 
