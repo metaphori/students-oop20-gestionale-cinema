@@ -72,11 +72,13 @@ public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         Initialize working directory where application will run .
      */
     @Override // TODO
-    public void initWorkingDir() {
+    public void initWorkingDir(final String workingDir) {
             try {
-                this.createDIR(GeneralSettings.WORKINGDIR);
+                GeneralSettings.setStartPath(workingDir);
+                this.createDIR(GeneralSettings.getWorkingDIR());
                 this.createDIR(GeneralSettings.DATADIR);
                 this.createDIR(GeneralSettings.IMAGESDIR);
+                this.createDIR(GeneralSettings.IMAGESSELECTEDDIR);
             } catch (Exception e) { // TODO must be handled
                 e.printStackTrace();
             }
@@ -86,13 +88,12 @@ public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         Creates directory with specific name.
         @throws Exception 
      */
-    private void createDIR(final String pathWithDIRname) throws Exception  {
+    private void createDIR(final String pathWithDIRname) throws SecurityException  {
         final File rootDIR = new File(pathWithDIRname);
-        /*if (!rootDIR.exists()) {
-            rootDIR.mkdirs();
-        }*/
-        if (rootDIR.exists() || rootDIR.mkdirs()) {
-            throw new IOException("Errore during creation of root direcotry");
+        try {
+            rootDIR.mkdir();
+        } catch (final SecurityException se) {
+            ;
         }
     }
 

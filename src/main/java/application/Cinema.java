@@ -68,7 +68,8 @@ import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 public class Cinema {
     public static void main(final String[] args){
         
-
+        CinemaController cinemaController = new CinemaControllerImpl();
+        cinemaController.initApplication();
     }
     
 }
