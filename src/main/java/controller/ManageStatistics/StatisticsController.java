@@ -14,7 +14,6 @@ public interface StatisticsController {
     
     void showStatisticsView();
     void showMenu();
-    void setControllerFilms(FilmsController controllerFilm);
     void setCinemaController(CinemaController cinemaController);
 	
 }
