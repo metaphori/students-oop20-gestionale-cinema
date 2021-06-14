@@ -164,6 +164,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
     @Override
     public void update () {
         Optional<Film> filmOptional = observer.getMostedWatchedFilm();
+        System.out.println("filmOptional" + filmOptional);
         if(filmOptional.isPresent() && filmOptional.get().getCoverPath().isPresent()) {
             pic.setIcon(new ImageIcon(filmOptional.get().getCoverPath().get()));
         }
