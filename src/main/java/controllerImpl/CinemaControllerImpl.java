@@ -45,34 +45,34 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
 
     @Override
     public void showControllerAccount() {
-        AccountsController controller = new AccountsControllerImpl();
+        final AccountsController controller = new AccountsControllerImpl();
         controller.showManagementAccountView();
         
     }
 
     @Override
     public void showControllerTicket() {
-        BookingController controller = new BookingControllerImpl();
+        final BookingController controller = new BookingControllerImpl();
         controller.start();
     }
 
     @Override
     public void showControllerFilm() {
-        FilmsController controller = new FilmsControllerImpl();
+        final FilmsController controller = new FilmsControllerImpl();
         controller.showContainerFilmsView();
         
     }
 
     @Override
     public void showControllerProgrammingFilms() {
-        ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
+        final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         controller.showProgrammedFilmView();
         
     }
 
     @Override
     public void showControllerStatistics() {
-        StatisticsController controller = new StatisticsControllerImpl();
+        final StatisticsController controller = new StatisticsControllerImpl();
       //  controller.
     }
     @Override

@@ -1,7 +1,9 @@
 package viewImpl.ManageMenu;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,9 @@ import javax.swing.JPanel;
 
 import controller.CinemaController;
 import controller.CinemaControllerObserver;
+import utilities.ManageAccounts.Account;
+import utilities.ManageAccounts.TypeAccount;
+import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageMenu.MenuView;
 
 public class MenuViewImpl implements MenuView {
@@ -21,7 +26,11 @@ public class MenuViewImpl implements MenuView {
     private static final String BTN_CONTROLLER_TICKET_TITLE  = "MANAGE TICKET";
     private static final String BTN_CONTROLLER_STATISTICS_TITLE = "MANAGE STATISTICS";
     
-    
+    private static final double WIDTH_PERC_FRAME = 0.5;
+    private static final double HEIGTH_PERC_FRAME = 0.5;
+    private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME / 0.7;
+    private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 0.7;
+
     public MenuViewImpl() {
         final JButton btnControllerAccount = new JButton(BTN_CONTROLLER_ACCOUNT_TITLE);
         final JButton btnControllerFilm = new JButton(BTN_CONTROLLER_FILM_TITLE);
@@ -57,8 +66,26 @@ public class MenuViewImpl implements MenuView {
             this.observer.showControllerStatistics();
             frame.dispose();
         });
+        LoggedAccount log = LoggedAccount.getIstance();
+        Account accountLogged = log.getAccount();
+        if(accountLogged.isAdmin().equals(TypeAccount.OPERATOR)) {
+            btnControllerAccount.setEnabled(false);
+        }
+        if(accountLogged.isAdmin().equals(TypeAccount.OPERATOR)) {
+            btnControllerProgrammingFilms.setEnabled(false);
+        }
+        if(accountLogged.isAdmin().equals(TypeAccount.OPERATOR)) {
+            btnControllerFilm.setEnabled(false);
+        }
+        if(accountLogged.isAdmin().equals(TypeAccount.OPERATOR)) {
+            btnControllerStatistics.setEnabled(false);
+        }
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         
+        
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
+
        frame.getContentPane().add(mainPanel);
         
     }
