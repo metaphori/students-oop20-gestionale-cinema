@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.google.gson.reflect.TypeToken;
 
+import controller.CinemaController;
 import controller.ManageAccounts.AccountsController;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
@@ -28,6 +29,7 @@ public class AccountsControllerImpl implements AccountsController{
     private LoginAccountGUI loginView;
     private ManagementAccountGUI managementView;
     private RegistrationAccountGUI registrationView;
+    private CinemaController controllerCinema;
     
     
     private Set<Account> setAccount;
@@ -47,23 +49,11 @@ public class AccountsControllerImpl implements AccountsController{
         this.managementView.setObserver(this);
         this.registrationView.setObserver(this);
     }
-    
-    
-    public AccountsControllerImpl (Set<Account> setAccount) {
-        model = new AccountModelImpl (setAccount);
-        loginView = new LoginAccountImplGUI();
-        managementView = new ManagementAccountImplGUI();
-        registrationView = new RegistrationAccountImplGUI();
-        
-        this.loginView.setObserver(this);
-        this.managementView.setObserver(this);
-        this.registrationView.setObserver(this);
-        
-        this.setAccount = setAccount;
-    }
-        
+
+
     @Override
     public void showMenu() {
+        controllerCinema.showMenu();
     }
 
     @Override
@@ -93,12 +83,6 @@ public class AccountsControllerImpl implements AccountsController{
     }
 
     @Override
-    public void showInfoAccountView(Account acc) { //for click on specific account
-        registrationView.show();
-        registrationView.loadAccount(acc);
-    }
-
-    @Override
     public void showRegistrationAccountView() { //for add account
         registrationView.show();
     }
@@ -114,6 +98,10 @@ public class AccountsControllerImpl implements AccountsController{
         loginView.updateSetAccount(this.getAccounts());
         loginView.show();
         
+    }
+    
+    public void setCinemaController(CinemaController cinemaController) {
+        this.controllerCinema = cinemaController;
     }
     
     private Optional<Set<Account>> readAccount () {
