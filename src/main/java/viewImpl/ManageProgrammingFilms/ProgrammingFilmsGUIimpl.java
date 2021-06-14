@@ -179,7 +179,10 @@ public class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
             }
         });
 	
-	home.addActionListener(e -> observer.showMenu()
+	home.addActionListener(e -> {
+	    observer.showMenu();
+	    frame.setVisible(false);
+	    }
 	);
 	
 
