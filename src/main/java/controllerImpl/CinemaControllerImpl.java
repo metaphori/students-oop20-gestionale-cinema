@@ -49,6 +49,7 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
     @Override
     public void showControllerTicket() {
         final BookingController controller = new BookingControllerImpl();
+        controller.setCinemaController(this);
         controller.start();
     }
 
@@ -63,6 +64,7 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
     @Override
     public void showControllerProgrammingFilms() {
         final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
+        controller.setCinemaController(this);
         controller.showProgrammedFilmView();
         
     }
@@ -70,7 +72,8 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
     @Override
     public void showControllerStatistics() {
         final StatisticsController controller = new StatisticsControllerImpl();
-      //  controller.
+       controller.setCinemaController(this);
+       controller.showStatisticsView();
     }
     @Override
     public void initApplication(String path) {
