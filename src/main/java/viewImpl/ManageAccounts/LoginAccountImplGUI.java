@@ -168,7 +168,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                 
             }
         });
-        
     }
     
     @Override
@@ -180,7 +179,8 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     public void show () {
         //resize the window and make the Frame visible
         frame.pack();
-        frame.setLocationByPlatform(true);
+        //frame.setLocationByPlatform(true);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setSize(400, 200);
      }

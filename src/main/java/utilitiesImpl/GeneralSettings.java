@@ -58,6 +58,7 @@ public final class GeneralSettings {
     /**Describes standard cover image name for film if user doesn't choose any images. */
     //Res options
     public static final String IMAGEFILMSTANDARD = "images/filmStandardIco.png";
+    public static final String DATASTANDARD = "defaultData/Account.json";
 
     public static final String TICKET_FILE = "Ticket.json";
     public static final String TICKET_FILE_PATH = DATADIR + FS + TICKET_FILE;
