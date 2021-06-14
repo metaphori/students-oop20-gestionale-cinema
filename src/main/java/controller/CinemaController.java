@@ -2,5 +2,5 @@ package controller;
 
 public interface CinemaController {
     void showMenu();
-    void initApplication();
+    void initApplication(String path);
 }

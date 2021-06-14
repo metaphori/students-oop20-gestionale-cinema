@@ -15,8 +15,8 @@ public final class CinemaControllerImpl implements CinemaController {
     }
 
     @Override
-    public void initApplication() {
-        manager.initWorkingDir("/home/ziro");
+    public void initApplication(final String path) {
+        manager.initWorkingDir(path);
 
     }
 
