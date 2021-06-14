@@ -1,7 +1,11 @@
 package utilitiesImpl;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
+
+import javax.swing.ImageIcon;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -79,6 +83,7 @@ public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
                 this.createDIR(GeneralSettings.DATADIR);
                 this.createDIR(GeneralSettings.IMAGESDIR);
                 this.createDIR(GeneralSettings.IMAGESSELECTEDDIR);
+                this.initData();
             } catch (Exception e) { // TODO must be handled
                 e.printStackTrace();
             }
@@ -113,4 +118,15 @@ public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
         }
     }
 
+    private void initData() {
+        final URL url = ClassLoader.getSystemResource(GeneralSettings.DATASTANDARD);
+        final File file = new File(GeneralSettings.ACCOUNT_FILE_PATH);
+        try {
+            if (!file.exists()) {
+                FileUtils.copyURLToFile(url, file);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
