@@ -20,5 +20,4 @@ public interface AccountsController {
 	void showRegistrationAccountView();
         void showManagementAccountView();
         void showLoginAccounView();
-        void showInfoAccountView(Account acc);
 }
