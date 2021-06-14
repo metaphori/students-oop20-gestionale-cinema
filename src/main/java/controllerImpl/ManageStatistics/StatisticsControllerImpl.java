@@ -56,7 +56,7 @@ public class StatisticsControllerImpl implements StatisticsController{
         Set <Ticket> set = controllerBooking.getTicket();
         
         Set<LocalDate> dates = set.stream().map(t -> t.getDate()).collect(Collectors.toSet());
-        LocalDate mostAffluentDate = null;
+        Optional<LocalDate> mostAffluentDate = Optional.empty();
         
         int val = 0;
 
@@ -65,10 +65,10 @@ public class StatisticsControllerImpl implements StatisticsController{
             int temp = set.stream().filter(t -> t.getDate().equals(date)).reduce(0, (partialRes,t) -> partialRes+t.getSetSeat().size() , (res1,res2) -> res1+res2);
             
             if(val<temp) {
-                mostAffluentDate = date;   
+                mostAffluentDate = Optional.of(date);   
             }
         } 
-        return Optional.of(mostAffluentDate);
+        return mostAffluentDate;
     }
 
     @Override
