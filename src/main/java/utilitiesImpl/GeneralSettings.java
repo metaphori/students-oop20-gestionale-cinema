@@ -1,8 +1,6 @@
 package utilitiesImpl;
 
 public final class GeneralSettings {
-
-    //Directory options
     /**Describes file separator depends on operative system where application will be run.*/
     public static final String FS = System.getProperty("file.separator"); 
 
@@ -21,8 +19,11 @@ public final class GeneralSettings {
     /**Describes temp directory for temporary operations.*/
     public static final String TEMPDIRNAME = "temp";
 
+    /**Describes start path where application will be initilize. */
+    private static  String STARTPATH =  System.getProperty("user.home");
+
     /**Describes working directory path  where application will run.*/
-    public static final String WORKINGDIR = System.getProperty("user.home") + FS + ROOTNAME; // Working directory where application store dates
+    private static  String WORKINGDIR = STARTPATH + FS + ROOTNAME; // Working directory where application store dates
 
     /**Describes images directory path.*/
     public static final String IMAGESDIR = WORKINGDIR +  FS + IMAGESDIRNAME;
@@ -65,6 +66,15 @@ public final class GeneralSettings {
     public static final String IMAGE_SEAT_TAKEN = "images/imageSeatTaken.png";
     public static final String IMAGE_LEGEND = "images/legend.png";
 
+
     /**Private constructor. This class can't be instantiated. It's used to access paths where application will work.*/
     private GeneralSettings() { }; 
+
+    public static void setStartPath(final String path) {
+        STARTPATH = path;
+    }
+
+    public static String getWorkingDIR() {
+        return WORKINGDIR;
+    }
 }

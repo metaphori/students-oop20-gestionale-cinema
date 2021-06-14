@@ -42,12 +42,7 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
-        
-        // localdate
-        // prendo tutti i film , li raggruppo per ticket che si riferisce alla stessa
-        Op
-        
-        
+
         
         
         

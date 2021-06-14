@@ -29,7 +29,7 @@ public interface ManagerWorkingDIR {
     /**
         Initialize working directory where application will run .
      */
-    void initWorkingDir();
+    void initWorkingDir(String workingDir);
     /**
         Check if input name is valid and available for specific path directory.
         @param dirPath path directory where check will be done
