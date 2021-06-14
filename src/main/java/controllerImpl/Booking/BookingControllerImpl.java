@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.reflect.TypeToken;
 
+import controller.CinemaController;
 import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
@@ -47,7 +48,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private BookingView viewBooking;
     private Set<Film> setFilm;
     private Set<ProgrammedFilm> setProgrammedFilm;
-    
+    private CinemaController observer;
     private ProgrammingFilmsController controllerProgrammingFilms;
     private FilmsController controllerFilms;
     public BookingControllerImpl() {
@@ -95,7 +96,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
 
     @Override
     public void showMenu() {
-
+        this.observer.showMenu();
     }
 
     @Override
@@ -187,6 +188,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         final var type = new TypeToken<Set<Ticket>>() { }.getType();
         return rw.readObj(type);
     }
-    
+    public void setCinemaController(CinemaController observer) {
+        this.observer = observer;
+    }
   
 }
