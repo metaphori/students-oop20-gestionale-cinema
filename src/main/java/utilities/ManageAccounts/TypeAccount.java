@@ -1,5 +1,5 @@
 package utilities.ManageAccounts;
 
-public enum SeatTypeAccount {
+public enum TypeAccount {
     ADMINISTRATOR, OPERATOR
 }

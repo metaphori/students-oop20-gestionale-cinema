@@ -74,7 +74,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         pNorth.add(title);
         cnst.gridy ++;
         
-        DefaultTableModel dm = new DefaultTableModel(new Object[][] {},new Object[] {"Username", "Name", "Surname"});
+        DefaultTableModel dm = new DefaultTableModel(new Object[][] {},new Object[] {"Username", "Name", "Surname", "Type"});
         table = new JTable(dm) {
             private static final long serialVersionUID = 1L;
                 public boolean isCellEditable(final int row, final int column) {
@@ -124,7 +124,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             observer.deleteAccount (account);
             this.update();
             } else {
-                JOptionPane.showMessageDialog(frame, "Nessuna riga selezionata" );
+                JOptionPane.showMessageDialog(frame, "No row selected" );
             }
         });
         
@@ -153,13 +153,14 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     public void update() {
         Set<Account> setAccount = observer.getAccounts();
         final int row = setAccount.size();
-        final String[] columnNames = {"Username", "Name", "Surname" };
+        final String[] columnNames = {"Username", "Name", "Surname", "Type" };
         Object[][] data = new Object[row][columnNames.length];
         int i = 0;
         for (final var acc : setAccount) {
         data[i][0] = acc.getUsername();
         data[i][1] = acc.getName();
         data[i][2] = acc.getSurname();
+        data[i][3] = acc.isAdmin();
         i++;
         }
          

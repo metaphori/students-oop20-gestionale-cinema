@@ -13,7 +13,7 @@ public interface Account {
     String getPassword();
     void setPassword(String pass);
     
-    SeatTypeAccount isAdmin();
+    TypeAccount isAdmin();
     
     String toString();
     
