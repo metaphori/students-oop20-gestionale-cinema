@@ -14,6 +14,7 @@ import controllerImpl.InputOutput.RWobjectImpl;
 import model.ManageAccounts.AccountModel;
 import modelImpl.ManageAccounts.AccountModelImpl;
 import utilities.ManageAccounts.Account;
+import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.LoginAccountGUI;
 import view.ManageAccounts.ManagementAccountGUI;
@@ -106,20 +107,16 @@ public class AccountsControllerImpl implements AccountsController{
     }
     
     private Optional<Set<Account>> readAccount () {
-        String FS = File.separator; 
-        String path = System.getProperty("user.home") + FS + "fileAccount.json";
-        final RWobject<Set<Account>> rw = new RWobjectImpl<>(path);
+        final RWobject<Set<Account>> rw = new RWobjectImpl<>(GeneralSettings.ACCOUNT_FILE_PATH);
         final var type = new TypeToken<Set<Account>>() { }.getType();
         return rw.readObj(type);
     }
     
     private void writeAccount (Set<Account> writeAccount) {
-        String FS = File.separator; 
-        String path = System.getProperty("user.home") + FS + "fileAccount.json";
         
         final Set<Account> setToWrite = this.getAccounts();
         final var type = new TypeToken<Set<Account>>() { }.getType();
-        final RWobject<Set<Account>> rw = new RWobjectImpl<>(path);
+        final RWobject<Set<Account>> rw = new RWobjectImpl<>(GeneralSettings.ACCOUNT_FILE_PATH);
         rw.writeObj(setToWrite, type);
     }
 }
