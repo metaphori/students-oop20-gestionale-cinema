@@ -55,6 +55,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     final JFrame frame;
     
+    
     //components
     final JLabel title = new JLabel("Login Account");
     final JLabel username = new JLabel ("Username:");
@@ -71,6 +72,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
     
     public static final int SPACE = 5;
    
+    
     public LoginAccountImplGUI() {
       
         //I create the frame and set the title and other properties

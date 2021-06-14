@@ -172,7 +172,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     }
     
     private void showDialog() {
-        JOptionPane.showMessageDialog(frame, "Please add your personal information like username and password." );
+        JOptionPane.showMessageDialog(frame, "Please add your personal information so as to avoid using default username and password." );
     }
     
 }
