@@ -1,6 +1,7 @@
 package controllerImpl;
 
 import controller.CinemaController;
+
 import controller.CinemaControllerObserver;
 import controller.Booking.BookingController;
 import controller.ManageAccounts.AccountsController;
@@ -12,10 +13,12 @@ import controllerImpl.ManageAccounts.AccountsControllerImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import controllerImpl.ManageStatistics.StatisticsControllerImpl;
+
 import utilities.ManagerWorkingDIR;
 import utilitiesImpl.ManagerWorkingDIRimpl;
 import view.ManageMenu.MenuView;
 import viewImpl.ManageMenu.MenuViewImpl;
+
 
 public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver{
     private ManagerWorkingDIR manager;
@@ -72,7 +75,13 @@ public class CinemaControllerImpl implements CinemaController, CinemaControllerO
         StatisticsController controller = new StatisticsControllerImpl();
       //  controller.
     }
+    @Override
+    public void initApplication(String path) {
+        manager.initWorkingDir(path);
+        
+    }
 
 
 
 }
+
