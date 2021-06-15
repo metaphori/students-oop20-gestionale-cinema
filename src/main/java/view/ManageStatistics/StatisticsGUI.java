@@ -4,6 +4,6 @@ import controller.ManageStatistics.StatisticsController;
 
 public interface StatisticsGUI {
     void show();
-    void setObserver(StatisticsController observer );
+    void setObserver(StatisticsController observer);
     void update();
 }

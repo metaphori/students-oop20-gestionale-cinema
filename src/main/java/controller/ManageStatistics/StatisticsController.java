@@ -11,7 +11,7 @@ public interface StatisticsController {
     Optional<Film> getMostedWatchedFilm(); 
     Optional<LocalDate> getMostAffluentDays(); 
     Double getRecessed(); 
-    
+
     void showStatisticsView();
     void showMenu();
     void setCinemaController(CinemaController cinemaController);
