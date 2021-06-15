@@ -64,8 +64,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     private final JLabel surname = new JLabel ("Surname:");
     private final TextField textSurname = new TextField ("Surname", 12);
     private final JLabel password = new JLabel ("Password:");
-    private final TextField textSurname = new TextField("Surname", 12);
-    private final JLabel password = new JLabel("Password:");
     private final JPasswordField textPassword = new JPasswordField ("Password", 12);
     private final JLabel secondPwd = new JLabel ("Repeat Password:");
     private final JPasswordField textSecondPwd = new JPasswordField ("Repeat Password", 12);
@@ -73,7 +71,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     private final String [] stringType = new String [] {"Administrator", "Operator"};
     private final JComboBox type = new JComboBox<String> (stringType);
-    final JComboBox type = new JComboBox<String>(stringType);
 
 
     private final JButton save = new JButton("Save");
@@ -102,8 +99,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         //I create the secondary panels for the various parts and add the components
 
         final JPanel pNorth = new JPanel(new FlowLayout());
-
-        final JPanel pNorth = new JPanel(new FlowLayout ());
 
         pNorth.add(title, cnst);
 
@@ -137,8 +132,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
         final JPanel pSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        final JPanel pSouth = new JPanel(new FlowLayout (FlowLayout.CENTER));
-
 
         pSouth.add(save);
         pSouth.add(reset);
@@ -151,12 +144,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         frame.add(pNorth, BorderLayout.NORTH);
         frame.add(pSouth, BorderLayout.SOUTH);
 
-        focusAccount = Optional.ofNullable(null); // focusFilm empty
-
-        frame.add(pWest,BorderLayout.CENTER);
-        frame.add(pNorth,BorderLayout.NORTH);
-        frame.add(pSouth,BorderLayout.SOUTH);
-
+        
 
        //method to remove descriptive writing
         textUsername.addFocusListener(new FocusListener() {
@@ -258,11 +246,8 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
 
 
-           frame.setVisible(false);
-           this.observer.showManagementAccountView();
-        });
 
-    }
+    
     
     
 
@@ -288,21 +273,14 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         textSurname.setText(account.getSurname());
         textUsername.setText(account.getUsername());
         textPassword.setText(account.getPassword());
-=======
-    @Override
-    public void loadAccount(final Account account) { //carico account
-        focusAccount = Optional.of(account); //mette focus su un determinato account
-        textName.setText(account.getName());
-        textSurname.setText(account.getSurname());
-        textUsername.setText(account.getUsername());
-        textPassword.setText(account.getPassword());
+
+    
 
         if (type.getSelectedItem().equals("Administrator")) {
             account.isAdmin().equals(TypeAccount.ADMINISTRATOR);
         } else if (type.getSelectedItem().equals("Operator")) {
             account.isAdmin().equals(TypeAccount.OPERATOR);
         }
->>>>>>> master
 
         if (type.getSelectedItem().equals("Administrator")) {
             account.type().equals(TypeAccount.ADMINISTRATOR);
