@@ -31,23 +31,25 @@ import javax.swing.table.DefaultTableModel;
 import controller.ManageAccounts.AccountsController;
 import utilities.Film;
 import utilities.ManageAccounts.Account;
+import utilities.ManageAccounts.TypeAccount;
+import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.ManagementAccountGUI;
 
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT 
-    
+
     private static final String FRAME_NAME = "Management account";
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame = new JFrame();
-    
+
     //components
     private final JLabel title = new JLabel("List account"); 
     private final JButton add = new JButton("Add");
     private final JButton home = new JButton("Home");
     private final JButton delete = new JButton("Delete");
     private JTable table = new JTable();
-    
+
     //real dimension of the screen
     private final int screenWidth = (int) screen.getWidth();
     private final int screenHeight = (int) screen.getHeight();
@@ -58,7 +60,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     private AccountsController observer;
     public static final int SPACE = 5;
 
-    private Map<JButton, Account> map = new HashMap<>();
+    //private Map<JButton, Account> map = new HashMap<>();
 
     public ManagementAccountImplGUI() {
 
@@ -70,11 +72,11 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         cnst.insets = new Insets(SPACE, SPACE, SPACE, SPACE); 
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
-        final JPanel pNorth = new JPanel(new FlowLayout ());
+        final JPanel pNorth = new JPanel(new FlowLayout());
         pNorth.add(title);
         cnst.gridy++;
 
-        DefaultTableModel dm = new DefaultTableModel(new Object[][] {},new Object[] {"Username", "Name", "Surname", "Type"});
+        DefaultTableModel dm = new DefaultTableModel(new Object[][] {}, new Object[] {"Username", "Name", "Surname", "Type"});
         table = new JTable(dm) {
             private static final long serialVersionUID = 1L;
                 public boolean isCellEditable(final int row, final int column) {
@@ -83,9 +85,9 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             };
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        final JScrollPane scroll = new JScrollPane(table); //visione scorrevole del componente
+        final JScrollPane scroll = new JScrollPane(table); 
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        final JPanel pWestInternal = new JPanel(new GridBagLayout()); // Griglia flessibile
+        final JPanel pWestInternal = new JPanel(new GridBagLayout()); 
         pWestInternal.add(scroll);
 
         final JPanel pEst = new JPanel();
@@ -106,6 +108,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             frame.setVisible(false);
         });
 
+        //method to show menu
         home.addActionListener(event -> {
             observer.showMenu();
             frame.setVisible(false);
@@ -114,16 +117,41 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         delete.addActionListener(event -> {
             final int row = table.getSelectedRow();
             if (row != -1) {
-            final String username = (String) table.getModel().getValueAt(row, 0);
+                Set<Account> setAccount = observer.getAccounts();
+                final int row1 = setAccount.size();
+                if (row1 <= 1) {
+                    final TypeAccount type = (TypeAccount) table.getModel().getValueAt(row, 3);
+                    type.equals("AMMINISTRATOR");
+                    Account account2 = observer.getAccounts().stream().filter(a -> a.type().equals(type)).findFirst().get();
+                    JOptionPane.showMessageDialog(frame, "It isn't possible to delete the last administrator account");
+                    this.update();
+                 } else {
 
-            Account account = observer.getAccounts().stream()
-            .filter(a -> a.getUsername().equals(username))
-            .findFirst().get();
-            observer.deleteAccount(account);
-            this.update();
+                    final String username = (String) table.getModel().getValueAt(row, 0);
+
+                    Account account = observer.getAccounts().stream()
+                    .filter(a -> a.getUsername().equals(username))
+                    .findFirst().get();
+
+                    /*
+                    final LoggedAccount ar = LoggedAccount.getIstance();
+                    
+                    if (account.equals(ar)) {
+                        JOptionPane.showMessageDialog(frame, "or account");
+                        this.update();
+                    } else {
+                    */
+                    
+                    
+                    
+                    observer.deleteAccount(account);
+                    this.update();
+                    //}
+                 } 
             } else {
                 JOptionPane.showMessageDialog(frame, "No row selected");
             }
+
         });
 
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
@@ -134,6 +162,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     public void show() {
         frame.pack();
         frame.setLocationByPlatform(true);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         if (observer.getAccounts().isEmpty()) {
             this.showDialog();
@@ -157,7 +186,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             data[i][0] = acc.getUsername();
             data[i][1] = acc.getName();
             data[i][2] = acc.getSurname();
-            data[i][3] = acc.isAdmin();
+            data[i][3] = acc.type();
             i++;
         }
 
@@ -167,6 +196,8 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.validate();
     }
 
+    
+    //da togliere
     private void showDialog() {
         JOptionPane.showMessageDialog(frame, "Please add your personal information so as to avoid using default username and password." );
     }

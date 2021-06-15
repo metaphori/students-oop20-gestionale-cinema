@@ -50,67 +50,65 @@ import java.awt.event.*
 
 public class LoginAccountImplGUI implements LoginAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
-    
+
     private static final String FRAME_NAME = "Login";
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    final JFrame frame;
-    
-    
+    private final JFrame frame;
+
     //components
-    final JLabel title = new JLabel("Login Account");
-    final JLabel username = new JLabel ("Username:");
-    final TextField textUsername = new TextField ("Username", 12); //written that will be removed when clicked
-    final JLabel password = new JLabel ("Password:");
-    final JPasswordField textPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
-    final JButton login = new JButton("Login");
-    final JButton reset = new JButton("Reset");
-    
+    private final JLabel title = new JLabel("Login Account");
+    private final JLabel username = new JLabel("Username:");
+    private final TextField textUsername = new TextField("Username", 12); //written that will be removed when clicked
+    private final JLabel password = new JLabel("Password:");
+    private final JPasswordField textPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
+    private final JButton login = new JButton("Login");
+    private final JButton reset = new JButton("Reset");
+
     private AccountsController observer;
-    
-    Map<String,String> logininfo = new HashMap<String,String>();
-    Set<Account> setAccount = new HashSet<>();
-    
+
+    private Map<String, String> logininfo = new HashMap<String,String>();
+    private Set<Account> setAccount = new HashSet<>();
+
     public static final int SPACE = 5;
-   
-    
+
     public LoginAccountImplGUI() {
-      
+
         //I create the frame and set the title and other properties
         this.frame = new JFrame();
         frame.setTitle(FRAME_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        final JPanel pWestInternal = new JPanel ( new GridBagLayout ()); // Griglia flessibile
-        final GridBagConstraints cnst = new GridBagConstraints ();
+
+        final JPanel pWestInternal = new JPanel(new GridBagLayout()); //flexible grid
+        final GridBagConstraints cnst = new GridBagConstraints();
         cnst.gridy = 0;
-        cnst.insets = new Insets (SPACE, SPACE, SPACE, SPACE);
+        cnst.insets = new Insets(SPACE, SPACE, SPACE, SPACE);
         cnst.fill = GridBagConstraints.HORIZONTAL;
-        
+
         //I create the secondary panels for the various parts and add the components
-        final JPanel pNorth = new JPanel (new FlowLayout ());
+        final JPanel pNorth = new JPanel(new FlowLayout ());
         pNorth.add(title, cnst);
-        cnst.gridy ++; // prossima riga
-        
+        cnst.gridy++;   //next line
+
         pWestInternal.add(username, cnst); 
         pWestInternal.add(textUsername, cnst);
-        cnst.gridy ++; 
-        
+        cnst.gridy++;
+
         pWestInternal.add(password, cnst);
         pWestInternal.add(textPassword, cnst);
-        cnst.gridy ++; 
-                      
-        final JPanel pWest = new JPanel (new FlowLayout ());
-        pWest.add( pWestInternal );
-        
-        final JPanel pSouth = new JPanel (new FlowLayout (FlowLayout.CENTER)); 
+        cnst.gridy++;
+
+        final JPanel pWest = new JPanel(new FlowLayout ());
+        pWest.add(pWestInternal);
+
+        final JPanel pSouth = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
         pSouth.add(login);
         pSouth.add(reset);
-        
-        frame.add (pWest, BorderLayout.CENTER );
-        frame.add (pNorth, BorderLayout.NORTH);
-        frame.add (pSouth, BorderLayout.SOUTH);
-        
-        
+
+        frame.add(pWest, BorderLayout.CENTER);
+        frame.add(pNorth, BorderLayout.NORTH);
+        frame.add(pSouth, BorderLayout.SOUTH);
+
+
         //method to remove descriptive writing
         textUsername.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) {
@@ -133,7 +131,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
             public void focusLost(final FocusEvent e) {
             }
         });
-        
+
        //method to remove writing
         reset.addFocusListener(new FocusListener() {
             public void focusGained(final FocusEvent e) { 
@@ -144,50 +142,48 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
             public void focusLost(final FocusEvent e) {
             }
         });
-        
-        
+
+
         login.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 String userID = textUsername.getText();
                 String password = String.valueOf(textPassword.getPassword());
-                if(logininfo.containsKey(userID)) {
-                    if(logininfo.get(userID).equals(password)) {
+                if (logininfo.containsKey(userID)) {
+                    if (logininfo.get(userID).equals(password)) {
                         LoggedAccount log = LoggedAccount.getIstance();
                         Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
                         log.setAccount(acc);
                         frame.dispose();
                         observer.showMenu();
                         frame.setVisible(false);
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(pWestInternal, "Wrong password", "", JOptionPane.ERROR_MESSAGE);
                     }
             } else {
                 JOptionPane.showMessageDialog(pWestInternal, "Username not found", "", JOptionPane.ERROR_MESSAGE);
             }
-                
+
             }
         });
     }
-    
+
     @Override
     public void setObserver(final AccountsController observer) {
         this.observer = observer;
     }
-    
+
     @Override
-    public void show () {
+    public void show() {
         //resize the window and make the Frame visible
         frame.pack();
-        //frame.setLocationByPlatform(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setSize(400, 200);
+        //frame.setSize(400, 200);
      }
-    
-    public void updateSetAccount (Set<Account> setAccount) {
+
+    public void updateSetAccount(final Set<Account> setAccount) {
         this.setAccount =  setAccount;
-        for(var account : setAccount) {
+        for (var account : setAccount) {
             logininfo.put(account.getUsername(), account.getPassword());
         }
         System.out.print(logininfo);

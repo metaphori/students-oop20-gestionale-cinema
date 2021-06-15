@@ -7,6 +7,6 @@ import utilities.ManageAccounts.Account;
 
 public interface LoginAccountGUI {
     void show();
-    void setObserver(AccountsController observer );
+    void setObserver(AccountsController observer);
     void updateSetAccount(Set<Account> setAccount);
 }

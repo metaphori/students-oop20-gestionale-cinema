@@ -68,7 +68,7 @@ public final class MenuViewImpl implements MenuView {
         });
         final LoggedAccount log = LoggedAccount.getIstance();
         final Account accountLogged = log.getAccount();
-        if (accountLogged.isAdmin().equals(TypeAccount.OPERATOR)) {
+        if (accountLogged.type().equals(TypeAccount.OPERATOR)) {
             btnControllerAccount.setEnabled(false);
             btnControllerProgrammingFilms.setEnabled(false);
             btnControllerFilm.setEnabled(false);
