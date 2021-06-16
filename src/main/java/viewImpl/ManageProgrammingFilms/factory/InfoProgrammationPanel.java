@@ -21,12 +21,13 @@ import javax.swing.JTextField;
 import controller.ManageFilms.FilmsController;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import utilities.Film;
+import utilitiesImpl.Hall;
 
 
 
-public class InfoProgrammationPanel extends JPanel {
-	private static final long serialVersionUID = 1L;
+public final class InfoProgrammationPanel extends JPanel {
 	
+        private static final long serialVersionUID = 1L;
 	private static final String defaultStringPrice = "3.4 e.g. (euro)";
 	private static final int topEmptyBorder = 10;
 	private static final int leftEmptyBorder = 10;
@@ -44,24 +45,17 @@ public class InfoProgrammationPanel extends JPanel {
 	private FilmsController filmsController;
 	//final private FilmsController hallsController;
 	
-	private Map<Integer,Film > map = new HashMap<>(); // map selectedIndexItem to filmId
+	private Map<Integer, Film> map = new HashMap<>(); // map selectedIndexItem to filmId
 
 	InfoProgrammationPanel(final FilmsController filmsController) {
 	    this.filmsController = filmsController;
 		//hallsController = new HallsControllerImpl();
-	        List<String> hallsNumber = new ArrayList<>();
-	        hallsNumber.add("1");
-	        hallsNumber.add("2");
-	        hallsNumber.add("3");
-	        hallsNumber.add("4");
-	        
-		halls = new JComboBox(hallsNumber.toArray());
+		halls = new JComboBox(Hall.values());
 		//halls = new JComboBox(hallsController.getHalls);
-		
+
 		this.filmsController = filmsController;
 		this.fillMap(); // association between indexSelectionComboBox and Film
 		this.fillComboBox();
-		
 		price = new JTextField(defaultStringPrice);
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createCompoundBorder(
@@ -70,24 +64,20 @@ public class InfoProgrammationPanel extends JPanel {
 		); 
 		add(getLabelsPanel(), BorderLayout.WEST);
 		add(getTextFieldPanel(), BorderLayout.CENTER);
-		
 		price.addFocusListener(new FocusListener() {
 
 			@Override
-			public void focusGained(FocusEvent e) {
+			public void focusGained(final FocusEvent e) {
 				if (defaultStringPrice.equals(price.getText())) { 
                     price.setText("");
                 }
-				
+
 			}
 
 			@Override
-			public void focusLost(FocusEvent e) {
-								
-			}		
-			
+			public void focusLost(final FocusEvent e) {
+			}
 		});
-		
 	}
 	
 	public String getPrice() throws IllegalArgumentException {
@@ -109,10 +99,10 @@ public class InfoProgrammationPanel extends JPanel {
 		price.selectAll();
 	}
 	
-	public String getHall() throws IllegalArgumentException {
-	    String selectedHall;
+	public Hall getHall() throws IllegalArgumentException {
+	    Hall selectedHall;
 	        try {
-	            selectedHall = halls.getSelectedItem().toString();
+	            selectedHall = (Hall) halls.getSelectedItem();
 	            return selectedHall;
 	        }
 	        catch(Exception e) {
