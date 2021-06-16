@@ -81,8 +81,8 @@ public class BookingModelImpl implements BookingModel {
            if (ticket.isPresent()) {
                ticket.get().getSetSeat().addAll(seatSelected);
            } else {
-               final Ticket newTicket = new TicketImpl(programmedFilm.getDate(), programmedFilm.getStartTime(), seatSelected, programmedFilm.getProgrammationPrice(), programmedFilm.getIdProgrammation(), programmedFilm.getHall());
-               setTicket.add(newTicket);
+               //final Ticket newTicket = new TicketImpl(programmedFilm.getDate(), programmedFilm.getStartTime(), seatSelected, programmedFilm.getProgrammationPrice(), programmedFilm.getIdProgrammation(), programmedFilm.getHall());
+           //    setTicket.add(newTicket);
            }
        }
 
