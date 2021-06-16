@@ -12,6 +12,7 @@ import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.TimeSlotFactory;
+import utilitiesImpl.Hall;
 import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
 /** 
  * Describe a model where all data about programmed films are stored.
@@ -61,7 +62,7 @@ public final class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel {
      * @return boolean 
      * */
     @Override
-    public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final int hall) {
+    public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final Hall hall) {
         return manager.isAvailableProgrammation(timeSlotToCheck, date, hall);
     }
     /** 

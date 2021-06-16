@@ -33,6 +33,7 @@ import utilities.Factory.FilmFactory;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
 import utilities.Factory.TimeSlotFactory;
+import utilitiesImpl.Hall;
 import utilitiesImpl.ViewSettings;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
@@ -143,13 +144,13 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
             Film selectedFilm;
             LocalDate selectedDate;
             LocalTime selectedTime;
-            int selectedHall;
+            Hall selectedHall;
             double selectedPrice;
             try {
                     selectedDate = dateSelector.getDate();
                     selectedTime = timeSelector.getTime(selectedDate);
                     checkDateTime(selectedTime, selectedDate);
-                    selectedHall =  Integer.parseInt(infoProgrammation.getHall());
+                    selectedHall =  infoProgrammation.getHall();
                     selectedPrice = Double.parseDouble(infoProgrammation.getPrice());
                     selectedFilm = infoProgrammation.getSelectedFilm();
                     try {

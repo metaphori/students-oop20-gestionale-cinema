@@ -5,17 +5,19 @@ import java.time.LocalTime;
 
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
+import utilitiesImpl.Hall;
+/**
+ * Describe programmed film with some information.
+ *  */
+public final class ProgrammedFilmImpl implements ProgrammedFilm {
 
-public class ProgrammedFilmImpl implements ProgrammedFilm {
-    
-    private final int id;// reference to idFilms
-    private final int hall;
+    private final int id; // reference to idFilms
+    private final Hall hall;
     private final double price;
-    private LocalDate date;
-    private TimeSlot timeSlot;
-    
-  
-    ProgrammedFilmImpl(final int id, final  int hall, final  double price, final  LocalDate date, final TimeSlot timeSlot) {
+    private final LocalDate date;
+    private final TimeSlot timeSlot;
+
+    ProgrammedFilmImpl(final int id, final  Hall hall, final  double price, final  LocalDate date, final TimeSlot timeSlot) {
         super();
         this.id = id;
         this.hall = hall;
@@ -30,7 +32,7 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
     }
 
     @Override
-    public int getHall() {
+    public Hall getHall() {
         return this.hall;
     }
 
@@ -59,7 +61,7 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + hall;
+        result = prime * result + ((hall == null) ? 0 : hall.hashCode());
         result = prime * result + id;
         long temp;
         temp = Double.doubleToLongBits(price);
@@ -69,30 +71,40 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        ProgrammedFilmImpl other = (ProgrammedFilmImpl) obj;
+        }
+        final ProgrammedFilmImpl other = (ProgrammedFilmImpl) obj;
         if (date == null) {
-            if (other.date != null)
+            if (other.date != null) {
                 return false;
-        } else if (!date.equals(other.date))
+            }
+        } else if (!date.equals(other.date)) {
             return false;
-        if (hall != other.hall)
+        }
+        if (hall != other.hall) {
             return false;
-        if (id != other.id)
+        }
+        if (id != other.id) {
             return false;
-        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+        }
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) {
             return false;
+        }
         if (timeSlot == null) {
-            if (other.timeSlot != null)
+            if (other.timeSlot != null) {
                 return false;
-        } else if (!timeSlot.equals(other.timeSlot))
+            }
+        } else if (!timeSlot.equals(other.timeSlot)) {
             return false;
+            }
         return true;
     }
 
@@ -101,14 +113,4 @@ public class ProgrammedFilmImpl implements ProgrammedFilm {
         return "ProgrammedFilmImpl [id=" + id + ", hall=" + hall + ", price=" + price + ", date=" + date + ", timeSlot="
                 + timeSlot + "]";
     }
-
-  
-
-  
-
-   
-    
-    
-    
-
 }
