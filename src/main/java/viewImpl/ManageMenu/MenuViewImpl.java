@@ -105,8 +105,8 @@ public final class MenuViewImpl implements MenuView {
             this.observer.showControllerStatistics();
             frame.dispose();
         });
-        
-        if (accountLogged.isAdmin().equals(TypeAccount.OPERATOR)) {
+
+        if (accountLogged.type().equals(TypeAccount.OPERATOR)) {
             btnControllerAccount.setEnabled(false);
             btnControllerProgrammingFilms.setEnabled(false);
             btnControllerFilm.setEnabled(false);
