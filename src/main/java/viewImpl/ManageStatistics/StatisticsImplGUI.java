@@ -3,6 +3,7 @@ package viewImpl.ManageStatistics;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -42,14 +43,17 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
-    private static final String MONEY_STRING = "Money collection:";
-    private static final String MOVIE_STRING = "Most watched movie :";
-    private static final String PEOPLE_STRING = "Day with the most people :";
-    private static final String TITLE_STRING = "Weekly Statistics";
+    private static final String MONEY_STRING = "Money collection: ";
+    private static final String MOVIE_STRING = "Most watched movie: ";
+    private static final String PEOPLE_STRING = "Day with the most people: ";
+    private static final String TITLE_STRING = "Cinema's Statistics";
 
     private static final double IMAGE_WIDTH = 0.4;
     private static final double IMAGE_HEIGTH = 0.6;
-    private final JLabel title = new JLabel(TITLE_STRING); 
+    JLabel title = new JLabel(TITLE_STRING, Font.PLAIN);
+    
+    
+    
     private final JLabel movie = new JLabel(MOVIE_STRING);
     private final JLabel money = new JLabel(MONEY_STRING);
     private final JLabel people = new JLabel(PEOPLE_STRING);
@@ -59,11 +63,17 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private ImageIcon icon = new ImageIcon(imgURL);
     private final JButton pic = new JButton(icon);
     
-    /*
+    
     //img Stat
     private final URL imgURLS = ClassLoader.getSystemResource("images/statistics.png");
     private ImageIcon iconS = new ImageIcon(imgURLS);
     private final JButton picS = new JButton(iconS);
+    
+    /*
+    //img watch
+    private final URL imgURLW = ClassLoader.getSystemResource("images/watch.png");
+    private ImageIcon iconW = new ImageIcon(imgURLW);
+    private final JButton picW = new JButton(iconW);
     */
     
     private final JButton home = new JButton("Home");
@@ -118,21 +128,24 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnt.insets = new Insets(SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
-        //pEastInternal.add(picS, cnst);
+        
         cnt.gridy++;
         pEastInternal.add(people, cnt);
-        cnst.gridy++;
+        //cnst.gridy++;
 
         final JPanel pEast = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pEast.add(pEastInternal, cnst);
-        cnst.gridy++;
+        //cnst.gridy++;
 
-
+        final JPanel pSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pEastInternal.add(picS, cnst);
+        //pEastInternal.add(picW, cnst);
+        
         frame.add(pNorth, BorderLayout.NORTH);
         frame.add(pWest, BorderLayout.WEST);
         frame.add(pEast, BorderLayout.CENTER);
         frame.add(pNorthInternal, BorderLayout.EAST);
-
+        frame.add(pSouth, BorderLayout.SOUTH);
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
 
@@ -173,8 +186,12 @@ public class StatisticsImplGUI implements StatisticsGUI{
         if (dateOptional.isPresent()) {
             people.setText(PEOPLE_STRING + dateOptional.get().toString());
         }
+        //picW.setIcon(iconW);
+        
         Double moneyTotal = observer.getRecessed();
         money.setText(MONEY_STRING + moneyTotal.toString());
+        picS.setIcon(iconS);
+        
 
     }
 }
