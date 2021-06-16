@@ -165,6 +165,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
     public void show() {
         frame.pack();
         frame.setLocationByPlatform(true);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
       }
 
