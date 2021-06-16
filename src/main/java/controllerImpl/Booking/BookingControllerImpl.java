@@ -160,11 +160,13 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     @Override
     public void deleteTicket(final Film film) {
         this.modelBooking.deleteTicket(film);
+        this.writeTicketOnFile(modelBooking.getSeats());
     }
 
     @Override
     public void deleteTicket(final ProgrammedFilm programmedFilm) {
         this.modelBooking.deleteTicket(programmedFilm);
+        this.writeTicketOnFile(modelBooking.getSeats());
     }
 
     @Override
