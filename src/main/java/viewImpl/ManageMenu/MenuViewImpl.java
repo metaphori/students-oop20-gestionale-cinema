@@ -35,7 +35,7 @@ public final class MenuViewImpl implements MenuView {
     
     private static final Color COLOR_BORDER_NORTH_PANEL = Color.BLACK;
     private static final String MENU_STRING = "MENU";
-    
+    private static final double PROPORTION_BUTTON = 2;
     
     private static final double WIDTH_PERC_FRAME = 0.5;
     private static final double HEIGTH_PERC_FRAME = 0.5;
@@ -129,6 +129,6 @@ public final class MenuViewImpl implements MenuView {
         frame.setVisible(true);
     }
     private Dimension increaseSize(Dimension dimension) {
-        return new Dimension((int)(dimension.getWidth()*1.5),(int)(dimension.getHeight()*1.5));
+        return new Dimension((int)(dimension.getWidth()* PROPORTION_BUTTON),(int)(dimension.getHeight()* PROPORTION_BUTTON));
     }
 }
