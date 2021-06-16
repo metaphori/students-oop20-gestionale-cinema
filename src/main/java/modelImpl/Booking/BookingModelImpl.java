@@ -74,10 +74,10 @@ public class BookingModelImpl implements BookingModel {
     public void bookSeat(final ProgrammedFilm programmedFilm) {
        if (!seatSelected.isEmpty()) { 
            Optional<Ticket> ticket = setTicket.stream()
-           .filter(f -> f.getId() == programmedFilm.getIdProgrammation())
-           .filter(f -> f.getDate().equals(programmedFilm.getDate()))
-           .filter(f -> f.getTime().equals(programmedFilm.getStartTime()))
-           .filter(f -> f.getHall() == programmedFilm.getHall()).findAny();
+           .filter(t -> t.getId() == programmedFilm.getIdProgrammation())
+           .filter(t -> t.getDate().equals(programmedFilm.getDate()))
+           .filter(t -> t.getTime().equals(programmedFilm.getStartTime()))
+           .filter(t -> t.getHall() == programmedFilm.getHall()).findAny();
            if (ticket.isPresent()) {
                ticket.get().getSetSeat().addAll(seatSelected);
            } else {
