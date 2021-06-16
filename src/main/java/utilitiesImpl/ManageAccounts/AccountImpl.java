@@ -104,7 +104,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * Returns true if the account is an administrator.
+     * Returns the account's type. Administrator or operator.
      * @return type
      */
     @Override

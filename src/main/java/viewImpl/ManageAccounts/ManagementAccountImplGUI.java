@@ -119,14 +119,14 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             if (row != -1) {
                 Set<Account> setAccount = observer.getAccounts();
                 final int row1 = setAccount.size();
-                
+
                 if (row1 <= 1) {
                     final TypeAccount type = (TypeAccount) table.getModel().getValueAt(row, 3);
                     type.equals("AMMINISTRATOR");
                     Account account2 = observer.getAccounts().stream().filter(a -> a.type().equals(type)).findFirst().get();
                     JOptionPane.showMessageDialog(frame, "It isn't possible to delete the last administrator account");
                     this.update();
-                    
+
                  } else {
 
                     final String username = (String) table.getModel().getValueAt(row, 0);
@@ -161,9 +161,6 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.setLocationByPlatform(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        /*if (observer.getAccounts().isEmpty()) {
-            this.showDialog();
-        }*/
     }
 
     @Override
@@ -193,9 +190,4 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.validate();
     }
 
-    
-    //da togliere
-    private void showDialog() {
-        JOptionPane.showMessageDialog(frame, "Please add your personal information so as to avoid using default username and password." );
-    }
 }

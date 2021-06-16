@@ -6,7 +6,21 @@ import utilities.ManageAccounts.Account;
 
 public interface AccountModel {
 
+    /**
+     * Add new Account 
+     * @param newAccount
+     */
     void addAccount(Account newAccount);
+    
+    /**
+     * Delete specific Account 
+     * @param oldAccount
+     */
     void removeAccount(Account oldAccount);
+    
+    /**
+     * Recover all account from account's set
+     * @return Set<Account> set of Accounts
+     */
     Set<Account> getAccounts();
 }

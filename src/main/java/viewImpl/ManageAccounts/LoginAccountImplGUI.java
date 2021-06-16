@@ -85,7 +85,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
         //I create the secondary panels for the various parts and add the components
-        final JPanel pNorth = new JPanel(new FlowLayout ());
+        final JPanel pNorth = new JPanel(new FlowLayout());
         pNorth.add(title, cnst);
         cnst.gridy++;   //next line
 
@@ -97,7 +97,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         pWestInternal.add(textPassword, cnst);
         cnst.gridy++;
 
-        final JPanel pWest = new JPanel(new FlowLayout ());
+        final JPanel pWest = new JPanel(new FlowLayout());
         pWest.add(pWestInternal);
 
         final JPanel pSouth = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
@@ -178,15 +178,16 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        //frame.setSize(400, 200);
+        frame.setSize(350, 200);
      }
 
+    @Override
     public void updateSetAccount(final Set<Account> setAccount) {
         this.setAccount =  setAccount;
         for (var account : setAccount) {
             logininfo.put(account.getUsername(), account.getPassword());
         }
-        System.out.print(logininfo);
+        System.out.print("Account: " + logininfo);
     }
     
 }
