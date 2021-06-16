@@ -34,7 +34,9 @@ import utilitiesImpl.ViewSettings;
 import view.ManageProgrammingFilms.ProgrammingFilmsGUI;
 import view.ManageProgrammingFilms.Factory.ProgrammingFilmsGUIfactory;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
-
+/** 
+ * Show view  with all programmed films.
+ * */
 public final class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
 
     private static final long serialVersionUID = 7114066347061701832L;
@@ -177,23 +179,31 @@ public final class ProgrammingFilmsGUIimpl implements ProgrammingFilmsGUI {
         final DefaultTableModel dfm = (DefaultTableModel) table.getModel();
         dfm.fireTableDataChanged();
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void start() {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void setObserver(final ProgrammingFilmsController observer) {
         this.observer = observer;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void update() {
         this.onSelectionChanged(); // update table
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void setFilmsController(final FilmsController filmsController) {
         this.filmsController = filmsController;

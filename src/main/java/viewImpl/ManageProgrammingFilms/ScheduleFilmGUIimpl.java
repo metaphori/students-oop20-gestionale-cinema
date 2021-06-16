@@ -6,17 +6,10 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,27 +17,23 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
-import controllerImpl.ManageFilms.FilmsControllerImpl;
+
 import exceptions.ProgrammationNotAvailableException;
-import modelImpl.ManageFilms.IdsGeneratorImpl;
-import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
-import utilities.Factory.FilmFactory;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
-import utilities.Factory.TimeSlotFactory;
 import utilitiesImpl.Hall;
 import utilitiesImpl.ViewSettings;
-import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
-import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
 import view.ManageProgrammingFilms.ScheduleFilmsGUI;
 import view.ManageProgrammingFilms.Factory.ScheduleFilmsFactory;
 import viewImpl.ManageProgrammingFilms.factory.DatePanel;
 import viewImpl.ManageProgrammingFilms.factory.InfoProgrammationPanel;
 import viewImpl.ManageProgrammingFilms.factory.ScheduleFilmsFactoryImpl;
 import viewImpl.ManageProgrammingFilms.factory.TimePanel;
-
+/** 
+ * View for schedule films.
+ * */
 public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +52,7 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
     private FilmsController filmsController;
 
     // real dimension of the screen
-    private static final  double PROPORTION_HEIGHT = 1.7;
+    private static final  double PROPORTION_HEIGHT = 2;
     private static final  double PROPORTION_WIDTH = 4.15;
     private final int screenWidth = (int) ViewSettings.DIMENSION_WIDTH_SCREEN;
     private final int screenHeight = (int) ViewSettings.DIMENSION_HEIGTH_SCREEN;
@@ -91,12 +80,15 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
         container.add(mainPanel);
         frame.setTitle("Schedule a film");
         frame.pack();
-        frame.setPreferredSize(new Dimension(frameWidth, frameHeight));
+        //frame.setSize(new Dimension(frameWidth, frameHeight));
+        //frame.setPreferredSize(new Dimension(frameWidth, frameHeight));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         }
 
+    /**
+     * {@inheritDoc}*/
     @Override
     public void start() {
         //frame.setLocationByPlatform(true);
@@ -104,12 +96,14 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
         this.reset();
         frame.setVisible(true);
     }
-
+    /**
+     * {@inheritDoc}*/
     @Override
     public void setObserver(final ProgrammingFilmsController observer) {
         this.observer = observer;
     }
-
+    /**
+     * {@inheritDoc}*/
     @Override
     public void update() {
         infoProgrammation.update();
@@ -123,19 +117,23 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
             throw new IllegalArgumentException("Cannot schedule in the past, please change time");
         } 
     }
-
+    /**
+     * {@inheritDoc}*/
     @Override
     public void setFilmsController(final FilmsController filmsController) {
         this.filmsController = filmsController;
     }
-
+    /**
+     * {@inheritDoc}*/
     @Override
     public void reset() {
         infoProgrammation.reset();
         dateSelector.reset();
         timeSelector.reset();
     }
-
+    /**
+     * Describes action listener when user click on schedule button.
+     *  */
     private class ScheduleButtonListener implements ActionListener {
 
         private final ProgrammedFilmFactory programmedFilmFactory = new ProgrammedFilmFactoryImpl();
