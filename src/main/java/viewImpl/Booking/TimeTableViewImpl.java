@@ -44,6 +44,7 @@ import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
 import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import utilities.Film;
 import utilities.Factory.*;
+import utilitiesImpl.Hall;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import view.Booking.GUIFactoryBooking;
 import view.Booking.TimeTableView;
@@ -93,11 +94,11 @@ public class TimeTableViewImpl implements TimeTableView {
             if (row != -1) {
                 final LocalDate date = (LocalDate) table.getModel().getValueAt(row, 0);
                 final LocalTime time = (LocalTime) table.getModel().getValueAt(row, 1);
-                final int hall =  (int) table.getModel().getValueAt(row, 2);
-                
+                final Hall hall =  (Hall) table.getModel().getValueAt(row, 2);
+
                 ProgrammedFilm programmedFilm = setProgrammedFilm.stream()
                         .filter(f -> f.getStartTime().equals(time))
-                        .filter(f -> f.getHall() == hall)
+                        .filter(f -> f.getHall().equals(hall))
                         .filter(f -> f.getDate().equals(date))
                         .findAny().get();
                 observer.bookTicketForFilm(programmedFilm);
@@ -132,7 +133,7 @@ public class TimeTableViewImpl implements TimeTableView {
         panelCheckBoxInternal.add(jcb1);
         panelCheckBoxInternal.add(jcb2);
         panelCheckBox.add(panelCheckBoxInternal, BorderLayout.CENTER);
-        
+
         final ProgrammingFilmsGUIfactoryImpl fctFilm = new ProgrammingFilmsGUIfactoryImpl();
         final Calendar calendar = fctFilm.createCalendar(); 
         panelCalendar.add(calendar, BorderLayout.CENTER);

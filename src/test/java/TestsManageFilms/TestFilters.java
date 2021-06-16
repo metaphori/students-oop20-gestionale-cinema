@@ -1,5 +1,5 @@
 package TestsManageFilms;
-
+/*
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
@@ -50,16 +50,16 @@ class TestFilters {
         final LocalTime et3 = LocalTime.of(8, 29);
         
         final ProgrammedFilmFactoryImpl factory = new ProgrammedFilmFactoryImpl();
-        final ProgrammedFilm pf1 = factory.createProgrammedFilm(12, 8, 56, ld1, st1, et1);
-        final ProgrammedFilm pf2 = factory.createProgrammedFilm(13, 9, 56, ld2, st2, et2);
-        final ProgrammedFilm pf3 = factory.createProgrammedFilm(14, 1, 56, ld3, st3, et3);
-        final ProgrammedFilm pf4 = factory.createProgrammedFilm(15, 9, 56, ld2, st3, et3);
+        //final ProgrammedFilm pf1 = factory.createProgrammedFilm(12, 8, 56, ld1, st1, et1);
+        //final ProgrammedFilm pf2 = factory.createProgrammedFilm(13, 9, 56, ld2, st2, et2);
+        //final ProgrammedFilm pf3 = factory.createProgrammedFilm(14, 1, 56, ld3, st3, et3);
+        //final ProgrammedFilm pf4 = factory.createProgrammedFilm(15, 9, 56, ld2, st3, et3);
         
         final List<ProgrammedFilm> list = new ArrayList<>();
-        list.add(pf1);
-        list.add(pf2);
-        list.add(pf3);
-        list.add(pf4);
+        //list.add(pf1);
+        //list.add(pf2);
+        //list.add(pf3);
+        //list.add(pf4);
         
         return list;
         
@@ -116,9 +116,7 @@ class TestFilters {
     //TODO
     private void checkHallOrder(final List<ProgrammedFilm> list ) {
       
-      /* list.stream()
-           .mapToInt(pf -> pf.getHall())
-           .anyMatch(pf);*/
+    
         
     }
     //TODO 
@@ -127,3 +125,4 @@ class TestFilters {
 
 
 }
+*/
