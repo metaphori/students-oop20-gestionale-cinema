@@ -99,14 +99,12 @@ public final class InfoProgrammationPanel extends JPanel {
 	}
 	
 	public Hall getHall() throws IllegalArgumentException {
-	    Hall selectedHall;
-	        try {
-	            selectedHall = (Hall) halls.getSelectedItem();
-	            return selectedHall;
-	        }
-	        catch(Exception e) {
-	            throw new IllegalArgumentException("Please select hall");
-	        }  
+	    final Hall selectedHall = (Hall) halls.getSelectedItem();
+	    if (selectedHall != null) {
+	        return selectedHall;
+	    }
+	    throw new IllegalArgumentException("Please select hall");
+
 	}
 	
 	public String getFilmName() throws IllegalArgumentException {

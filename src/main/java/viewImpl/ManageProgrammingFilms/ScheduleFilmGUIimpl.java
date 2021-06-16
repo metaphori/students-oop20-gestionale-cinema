@@ -91,7 +91,7 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
         container.add(mainPanel);
         frame.setTitle("Schedule a film");
         frame.pack();
-        frame.setSize(frameWidth, frameHeight);
+        frame.setPreferredSize(new Dimension(frameWidth, frameHeight));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));

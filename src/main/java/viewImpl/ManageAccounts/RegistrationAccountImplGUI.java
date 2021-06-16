@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,7 +50,7 @@ import java.awt.event.*;
 
 public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
-    
+
     private static final String FRAME_NAME = "Registration";
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -57,27 +58,27 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     //components
     private final JLabel title = new JLabel("Add account"); 
-    private final JLabel username = new JLabel ("Username:");
+    private final JLabel username = new JLabel("Username:");
     private final TextField textUsername = new TextField("Username", 12);
     private final JLabel name = new JLabel("Name:");
     private final TextField textName = new TextField("Name", 12);
-    private final JLabel surname = new JLabel ("Surname:");
+    private final JLabel surname = new JLabel("Surname:");
     private final TextField textSurname = new TextField("Surname", 12);
     private final JLabel password = new JLabel("Password:");
-    private final JPasswordField textPassword = new JPasswordField ("Password", 12);
-    private final JLabel secondPwd = new JLabel ("Repeat Password:");
-    private final JPasswordField textSecondPwd = new JPasswordField ("Repeat Password", 12);
+    private final JPasswordField textPassword = new JPasswordField("Password", 12);
+    private final JLabel secondPwd = new JLabel("Repeat Password:");
+    private final JPasswordField textSecondPwd = new JPasswordField("Repeat Password", 12);
     private final JLabel isAdmin = new JLabel("Type:");
 
     private final String [] stringType = new String [] {"Administrator", "Operator"};
-    final JComboBox type = new JComboBox<String>(stringType);
+    private final JComboBox type = new JComboBox<String>(stringType);
+
 
     private final JButton save = new JButton("Save");
     private final JButton cancel = new JButton("Cancel"); 
     private final JButton reset = new JButton("Reset");
 
     private AccountsController observer;
-    private Optional<Account> focusAccount;
 
 
     public static final int SPACE = 5;
@@ -96,7 +97,9 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
         //I create the secondary panels for the various parts and add the components
-        final JPanel pNorth = new JPanel(new FlowLayout ());
+
+        final JPanel pNorth = new JPanel(new FlowLayout());
+
         pNorth.add(title, cnst);
 
         cnst.gridy++; //next line
@@ -104,7 +107,8 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pWestInternal.add(username, cnst);
         pWestInternal.add(textUsername, cnst);
         cnst.gridy++;
-        
+
+
         pWestInternal.add(name, cnst);
         pWestInternal.add(textName, cnst);
         cnst.gridy++; 
@@ -125,17 +129,22 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         final JPanel pWest = new JPanel(new FlowLayout());
         pWest.add(pWestInternal);
 
-        final JPanel pSouth = new JPanel(new FlowLayout (FlowLayout.CENTER));
+
+        final JPanel pSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
 
         pSouth.add(save);
         pSouth.add(reset);
         pSouth.add(cancel);
 
-        focusAccount = Optional.ofNullable(null); // focusFilm empty
 
-        frame.add(pWest,BorderLayout.CENTER);
-        frame.add(pNorth,BorderLayout.NORTH);
-        frame.add(pSouth,BorderLayout.SOUTH);
+        //focusAccount = Optional.ofNullable(null); // focusFilm empty
+
+        frame.add(pWest, BorderLayout.CENTER);
+        frame.add(pNorth, BorderLayout.NORTH);
+        frame.add(pSouth, BorderLayout.SOUTH);
+
+        
 
        //method to remove descriptive writing
         textUsername.addFocusListener(new FocusListener() {
@@ -196,7 +205,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         //method for returning to the previous page
         cancel.addActionListener(event -> {
             frame.setVisible(false);
-            focusAccount = Optional.ofNullable(null);
             observer.showManagementAccountView();
          });
 
@@ -224,16 +232,30 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
                 } else {
                     typeAccount = TypeAccount.OPERATOR;
                 }
-                Account account = new AccountImpl(textName.getText(), textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
-                this.observer.addAccount(account);
+
+                String checkName = textName.getText();
+                if (Pattern.matches("[a-zA-Z]+", checkName)) {
+                    String checkSurname = textSurname.getText();
+                    if (Pattern.matches("[a-zA-Z]+", checkSurname)) {
+                        Account account = new AccountImpl(textName.getText(), textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
+                        this.observer.addAccount(account);
+                        frame.setVisible(false);
+                        this.observer.showManagementAccountView();
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Please insert a Surame without number");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
+                }
+
             }
-           frame.setVisible(false);
-           this.observer.showManagementAccountView();
+
+
         });
 
     }
-    
-    
+
+
     @Override
     public void show() {
         frame.pack();
@@ -245,22 +267,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     @Override
     public void setObserver(final AccountsController observer) {
         this.observer = observer;
-    }
-
-    @Override
-    public void loadAccount(final Account account) { //carico account
-        focusAccount = Optional.of(account); //mette focus su un determinato account
-        textName.setText(account.getName());
-        textSurname.setText(account.getSurname());
-        textUsername.setText(account.getUsername());
-        textPassword.setText(account.getPassword());
-
-        if (type.getSelectedItem().equals("Administrator")) {
-            account.isAdmin().equals(TypeAccount.ADMINISTRATOR);
-        } else if (type.getSelectedItem().equals("Operator")) {
-            account.isAdmin().equals(TypeAccount.OPERATOR);
-        }
-
     }
 
     @Override
@@ -282,6 +288,73 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             JOptionPane.showMessageDialog(frame, "Username already present");
             return false;
         }
+
+        String user = "";
+        try {
+            user = textUsername.getText();
+            if (user.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+          } catch (IllegalArgumentException ie) {
+            JOptionPane.showMessageDialog(frame, "Please insert a username");
+            return false;
+          }
+
+        String name = "";
+        try {
+            name = textName.getText();
+            if (name.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+          } catch (IllegalArgumentException ie) {
+            JOptionPane.showMessageDialog(frame, "Please insert a name");
+            return false;
+          }
+
+        String surname = "";
+        try {
+            surname = textSurname.getText();
+            if (surname.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+          } catch (IllegalArgumentException ie) {
+            JOptionPane.showMessageDialog(frame, "Please insert a surname");
+            return false;
+          }
+
+        String password = "";
+        try {
+            password = textPassword.getText();
+            if (password.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+          } catch (IllegalArgumentException ie) {
+            JOptionPane.showMessageDialog(frame, "Please insert a password");
+            return false;
+          }
+
+        /*
+        //no exception aka stringa numerica
+        String numberName = "";
+        try {
+            numberName = textName.getText();
+            final int number = Integer.parseInt(numberName);
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
+            return true;
+
+        }
+        */
+        
+        /*
+        String numberName = textName.getText();
+        int number = Integer.parseInt(numberName);
+        if (!(numberName.equals(number))) {
+            JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
+            return false;
+        }
+*/
+
         return true;
     }
 

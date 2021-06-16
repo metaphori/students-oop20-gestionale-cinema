@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 
 import utilities.Factory.*;
 import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.Hall;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
@@ -73,8 +74,8 @@ public class BookingViewImpl implements BookingView {
             frame.dispose();
         });
         final Set<SeatImpl> setSeats = observer.getSeatsFromFilm(film);
-        row = Row.Z;
-        col = 10;
+        row = Hall.NUM_ROWS;
+        col = Hall.NUM_COLUMNS;
         final JPanel center = new JPanel(new BorderLayout());
         final JPanel gridPanel = new JPanel(new GridLayout(row.ordinal() + 1, col));
         for (int i = 0; i < row.ordinal() + 1; i++) {
@@ -94,7 +95,6 @@ public class BookingViewImpl implements BookingView {
             btn.addActionListener(e -> {
                 final JButton button = (JButton) e.getSource();
                 observer.buttonSelected(grid.get(button), film);
-            //    this.refresh();
             });
         });
         final JButton bookBt = new JButton(STRING_BTN_BOOK);
@@ -103,7 +103,6 @@ public class BookingViewImpl implements BookingView {
                 JOptionPane.showMessageDialog(frame, "No selected seaet");
             } else {
                 observer.bookSeat(film);
-              //  this.refresh();
                 observer.newBooking();
             }
         });

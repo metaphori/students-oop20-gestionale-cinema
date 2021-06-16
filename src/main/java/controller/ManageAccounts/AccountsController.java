@@ -8,18 +8,54 @@ import utilitiesImpl.ManageAccounts.LoggedAccount;
 
 public interface AccountsController {
 	
-	//public Account login(String username, String password); 
-	
+        /**
+         * Add new Account 
+         * @param newAccount
+         */
 	void addAccount(Account newAccount);
+	
+	/**
+	 * Delete specific Account 
+	 * @param oldAccount
+	 */
 	void deleteAccount(Account oldAccount);
 	
-	Set <Account> getAccounts();
+	/**
+	 * Recover all account from account's set
+	 * @return Set<Account> set of Accounts
+	 */
+	Set<Account> getAccounts();
 	
-	LoggedAccount loadAccount(Set <Account> loadedAccounts); //returns logged-in account
+	/**
+	 * Retrieve the account logged in at that moment
+	 * @param loadedAccounts
+	 * @return account logged in at that time
+	 */
+	LoggedAccount loadAccount(Set<Account> loadedAccounts); 
 
+	/**
+	 * Show menu view
+	 */
 	void showMenu();
+	
+	/**
+	 * Show view to add a new account
+	 */
 	void showRegistrationAccountView();
+	
+	/**
+	 * Show view with all account 
+	 */
         void showManagementAccountView();
+        
+        /**
+         * Show login view
+         */
         void showLoginAccounView();
+
+        /**
+         * Set Cinema Controller
+         * @param cinemaController
+         */
         void setCinemaController(CinemaController cinemaController);
 }

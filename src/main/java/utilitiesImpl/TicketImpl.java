@@ -14,9 +14,9 @@ public class TicketImpl implements Ticket {
 	private final Set<SeatImpl> setSeat;
 	private final double price;
 	private final int id;
-	private final int hall;
+	private final Hall hall;
 	
-	public TicketImpl(final LocalDate data, final LocalTime time, final Set<SeatImpl> setSeat, final double price, final int id, final int hall) {
+	public TicketImpl(final LocalDate data, final LocalTime time, final Set<SeatImpl> setSeat, final double price, final int id, final Hall hall) {
 		this.data = data;
 		this.hall = hall;
 		this.setSeat = setSeat;
@@ -39,19 +39,25 @@ public class TicketImpl implements Ticket {
 	public int getId() {
 		return id;
 	}	
-	public int getHall() {
+	public Hall getHall() {
 		return hall;
 	}
 	
 
 	
 	
+  
+    @Override
+    public String toString() {
+        return "TicketImpl [data=" + data + ", time=" + time + ", setSeat=" + setSeat + ", price=" + price + ", id="
+                + id + ", hall=" + hall + "]";
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((data == null) ? 0 : data.hashCode());
-        result = prime * result + hall;
+        result = prime * result + ((hall == null) ? 0 : hall.hashCode());
         result = prime * result + id;
         result = prime * result + ((time == null) ? 0 : time.hashCode());
         return result;
@@ -81,13 +87,5 @@ public class TicketImpl implements Ticket {
             return false;
         return true;
     }
-    @Override
-    public String toString() {
-        return "TicketImpl [data=" + data + ", time=" + time + ", setSeat=" + setSeat + ", price=" + price + ", id="
-                + id + ", hall=" + hall + "]";
-    }
-    
-   
-	
-	
+
 }
