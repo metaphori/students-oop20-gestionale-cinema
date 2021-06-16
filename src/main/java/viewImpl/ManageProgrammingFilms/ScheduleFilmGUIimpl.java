@@ -63,8 +63,8 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
     private FilmsController filmsController;
 
     // real dimension of the screen
-    private static final  double PROPORTION_HEIGHT = 2.25;
-    private static final  double PROPORTION_WIDTH = 4.70;
+    private static final  double PROPORTION_HEIGHT = 1.7;
+    private static final  double PROPORTION_WIDTH = 4.15;
     private final int screenWidth = (int) ViewSettings.DIMENSION_WIDTH_SCREEN;
     private final int screenHeight = (int) ViewSettings.DIMENSION_HEIGTH_SCREEN;
     private final int frameWidth = (int) (screenWidth / PROPORTION_WIDTH);

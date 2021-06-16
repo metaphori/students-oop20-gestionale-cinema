@@ -81,7 +81,7 @@ public final class InfoProgrammationPanel extends JPanel {
 	}
 	
 	public String getPrice() throws IllegalArgumentException {
-	    
+
 	    try {
 	        Double.parseDouble(price.getText());
             } catch (NumberFormatException e) {
@@ -89,7 +89,6 @@ public final class InfoProgrammationPanel extends JPanel {
             }
 	
             return price.getText();
-		
 	}
 	
 	
