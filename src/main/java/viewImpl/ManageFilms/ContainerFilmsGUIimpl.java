@@ -6,7 +6,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import controller.ManageFilms.FilmsController;
 import utilities.Film;
+import utilitiesImpl.ViewSettings;
 import view.ManageFilms.ContainerFilmsGUI;
 import view.ManageFilms.Factory.ContainerFilmsGUIfactory;
 import view.ManageFilms.Factory.PanelFilmFactory;
@@ -32,8 +32,7 @@ public final class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private static final long serialVersionUID = 7114066347061701832L;
 
     private static final String FRAME_NAME = "Container Films";
-    private static final double PROPORTION = 1.15;
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final double PROPORTION_MIN_SIZE = 1.50;
     private final JFrame frame = new JFrame(FRAME_NAME);
     //Components
     private final PanelFilmFactory factoryFilmPanel = new PanelFilmFactoryImpl();
@@ -44,13 +43,6 @@ public final class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
     private final Container container = frame.getContentPane();
     private FilmsController observer;
     private final Map<JButton, Film> map = new HashMap<>();
-
-    //real dimension of the screen
-    private final int screenWidth = (int) screen.getWidth();
-    private final int screenHeight = (int) screen.getHeight();
-    //real dimension of my frame
-    private final int frameWidth = (int) (screenWidth / PROPORTION);
-    private final int frameHeight = (int) (screenHeight / PROPORTION);
 
     private final JPanel centerPanel;
     private final ActionListener al;
@@ -96,9 +88,11 @@ public final class ContainerFilmsGUIimpl implements ContainerFilmsGUI {
 
     container.add(mainPanel);
     frame.pack();
-    frame.setSize(frameWidth, frameHeight);
+    frame.setSize((int) ViewSettings.DIMENSION_WIDTH_VIEW, (int) ViewSettings.DIMENSION_HEIGTH_VIEW);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.validate();
+    final Dimension minDimension = new Dimension((int) (ViewSettings.DIMENSION_WIDTH_VIEW / PROPORTION_MIN_SIZE), (int) (ViewSettings.DIMENSION_HEIGTH_VIEW / PROPORTION_MIN_SIZE));
+    frame.setMinimumSize(minDimension);
     }
 
     /** 
