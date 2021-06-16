@@ -94,7 +94,7 @@ public class BookingViewImpl implements BookingView {
             btn.addActionListener(e -> {
                 final JButton button = (JButton) e.getSource();
                 observer.buttonSelected(grid.get(button), film);
-                this.refresh();
+            //    this.refresh();
             });
         });
         final JButton bookBt = new JButton(STRING_BTN_BOOK);
@@ -103,7 +103,7 @@ public class BookingViewImpl implements BookingView {
                 JOptionPane.showMessageDialog(frame, "No selected seaet");
             } else {
                 observer.bookSeat(film);
-                this.refresh();
+              //  this.refresh();
                 observer.newBooking();
             }
         });

@@ -12,11 +12,11 @@ import utilitiesImpl.SeatState;
 public interface BookingModel {
  
     Set<Ticket> getSeats();
-    Set<SeatImpl> getSeatsFromFilm(ProgrammedFilm film);
-    void buttonSelected(SeatImpl seat, ProgrammedFilm film);
+    Set<SeatImpl> getSeatsFromFilm(ProgrammedFilm programmedFilm);
+    void buttonSelected(SeatImpl seat, ProgrammedFilm programmedFilm);
     void newBooking();
     Set<SeatImpl> getSeatsSelected();
-    void bookSeat(ProgrammedFilm film);
+    void bookSeat(ProgrammedFilm programmedFilm);
     void deleteTicket(Film film);
     void deleteTicket(ProgrammedFilm programmedFilm);
 }

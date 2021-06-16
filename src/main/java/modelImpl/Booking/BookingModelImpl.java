@@ -28,18 +28,18 @@ public class BookingModelImpl implements BookingModel {
     public Set<Ticket> getSeats() {
         return setTicket;
     }
-    public Set<SeatImpl> getSeatsFromFilm(final ProgrammedFilm film){
+    public Set<SeatImpl> getSeatsFromFilm(final ProgrammedFilm programmedFilm){
         return setTicket.stream()
-                .filter(f -> f.getId() == film.getIdProgrammation())
-                .filter(f -> f.getDate().equals(film.getDate()))
-                .filter(f -> f.getTime().equals(film.getStartTime()))
-                .filter(f -> f.getHall() == film.getHall())
+                .filter(f -> f.getId() == programmedFilm.getIdProgrammation())
+                .filter(f -> f.getDate().equals(programmedFilm.getDate()))
+                .filter(f -> f.getTime().equals(programmedFilm.getStartTime()))
+                .filter(f -> f.getHall() == programmedFilm.getHall())
                 .flatMap(f -> f.getSetSeat().stream())
                 .collect(Collectors.toSet());
     }
     
-    public void buttonSelected(final SeatImpl seat, final ProgrammedFilm film) {
-        final Set<SeatImpl> set = this.getSeatsFromFilm(film);
+    public void buttonSelected(final SeatImpl seat, final ProgrammedFilm programmedFilm) {
+        final Set<SeatImpl> set = this.getSeatsFromFilm(programmedFilm);
         if (!set.contains(seat)) {
             if (seatSelected.contains(seat)) {
                 seatSelected.remove(seat);
@@ -59,33 +59,29 @@ public class BookingModelImpl implements BookingModel {
     }
     @Override
     public void deleteTicket(final Film film) {
-        for (final var ticket : setTicket) {
-            if (film.getID() ==  ticket.getId()) {
-                setTicket.remove(ticket);
-            }
-        }
+        setTicket.removeIf(t -> t.getId() == film.getID());
     }
     @Override
     public void deleteTicket(final ProgrammedFilm programmedFilm) {
-        for (final var ticket : setTicket) {
-            if (programmedFilm.getDate().isEqual(ticket.getDate()) 
-                    && programmedFilm.getStartTime().equals(ticket.getTime())) {
-                setTicket.remove(ticket);
-            }
-        }
+        setTicket.removeIf(t -> {
+            return t.getId() == programmedFilm.getIdProgrammation()
+                    && t.getDate().isEqual(programmedFilm.getDate())
+                    && t.getTime().equals(programmedFilm.getStartTime())
+                    && t.getHall() == t.getHall();
+        });
     }
     @Override
-    public void bookSeat(final ProgrammedFilm film) {
+    public void bookSeat(final ProgrammedFilm programmedFilm) {
        if (!seatSelected.isEmpty()) { 
            Optional<Ticket> ticket = setTicket.stream()
-           .filter(f -> f.getId() == film.getIdProgrammation())
-           .filter(f -> f.getDate().equals(film.getDate()))
-           .filter(f -> f.getTime().equals(film.getStartTime()))
-           .filter(f -> f.getHall() == film.getHall()).findAny();
+           .filter(f -> f.getId() == programmedFilm.getIdProgrammation())
+           .filter(f -> f.getDate().equals(programmedFilm.getDate()))
+           .filter(f -> f.getTime().equals(programmedFilm.getStartTime()))
+           .filter(f -> f.getHall() == programmedFilm.getHall()).findAny();
            if (ticket.isPresent()) {
                ticket.get().getSetSeat().addAll(seatSelected);
            } else {
-               final Ticket newTicket = new TicketImpl(film.getDate(), film.getStartTime(), seatSelected, film.getProgrammationPrice(), film.getIdProgrammation(), film.getHall());
+               final Ticket newTicket = new TicketImpl(programmedFilm.getDate(), programmedFilm.getStartTime(), seatSelected, programmedFilm.getProgrammationPrice(), programmedFilm.getIdProgrammation(), programmedFilm.getHall());
                setTicket.add(newTicket);
            }
        }

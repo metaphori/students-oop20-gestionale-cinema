@@ -26,6 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import utilities.Film;
 import utilities.Factory.FilmFactory;
 import utilitiesImpl.GeneralSettings;
+import utilitiesImpl.ViewSettings;
 import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import view.ManageFilms.InfoFilmsGUI;
 import view.ManageFilms.Factory.InfoFilmsGUIfactory;
@@ -83,11 +84,11 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
     private final JButton pic = factory.createButtonWithText("");
     private final JTextField title = factory.createTextField("Title");
     //real dimension of the screen
-    private final int screenWidth = (int) screen.getWidth();
-    private final int screenHeight = (int) screen.getHeight();
+    private final int screenWidth = (int) ViewSettings.DIMENSION_WIDTH_SCREEN;
+    private final int screenHeight = (int) ViewSettings.DIMENSION_HEIGTH_SCREEN;
     //real dimension of my frame
-    private final int frameWidth = (int) (screenWidth / PROPORTION);
-    private final int frameHeight = (int) (screenHeight / PROPORTION);
+    private final int frameWidth = (int) ViewSettings.DIMENSION_WIDTH_VIEW;
+    private final int frameHeight = (int) ViewSettings.DIMENSION_HEIGTH_VIEW;
 
 /**
  * Initialize info film view. Creates all components.
@@ -229,9 +230,6 @@ public final class InfoFilmsGUIimpl implements InfoFilmsGUI {
                 final ImageIcon icon = new ImageIcon(imgURL);
                 pic.setIcon(factory.getScaledIcon(icon, (int) (frameWidth / IMAGE_WIDTH_PROPORTION), (int) (frameHeight / IMAGE_HEIGTH_PROPORTION)));
             }
-
-
-            System.out.print("focusFilm:" + film);
             delete.setEnabled(true);
    }
     /**

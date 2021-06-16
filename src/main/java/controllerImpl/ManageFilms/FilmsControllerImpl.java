@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.gson.reflect.TypeToken;
 
 import controller.CinemaController;
+import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controllerImpl.Booking.BookingControllerImpl;
@@ -99,10 +100,11 @@ public final class FilmsControllerImpl implements FilmsController {
 
     @Override
     public void deleteFilm(final Film f) {
+        final BookingController bookignController = new BookingControllerImpl();
         this.model.removeFilm(f);
         this.writeFilmsOnFile();
-        //new BookingControllerImpl();
         this.writeManagerIdsFilmsOnFile();
+        bookignController.deleteTicket(f);
     }
 
     @Override
