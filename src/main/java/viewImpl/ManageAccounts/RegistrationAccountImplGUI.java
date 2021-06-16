@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -57,20 +58,20 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     //components
     private final JLabel title = new JLabel("Add account"); 
-    private final JLabel username = new JLabel ("Username:");
+    private final JLabel username = new JLabel("Username:");
     private final TextField textUsername = new TextField("Username", 12);
     private final JLabel name = new JLabel("Name:");
     private final TextField textName = new TextField("Name", 12);
-    private final JLabel surname = new JLabel ("Surname:");
-    private final TextField textSurname = new TextField ("Surname", 12);
-    private final JLabel password = new JLabel ("Password:");
-    private final JPasswordField textPassword = new JPasswordField ("Password", 12);
-    private final JLabel secondPwd = new JLabel ("Repeat Password:");
-    private final JPasswordField textSecondPwd = new JPasswordField ("Repeat Password", 12);
+    private final JLabel surname = new JLabel("Surname:");
+    private final TextField textSurname = new TextField("Surname", 12);
+    private final JLabel password = new JLabel("Password:");
+    private final JPasswordField textPassword = new JPasswordField("Password", 12);
+    private final JLabel secondPwd = new JLabel("Repeat Password:");
+    private final JPasswordField textSecondPwd = new JPasswordField("Repeat Password", 12);
     private final JLabel isAdmin = new JLabel("Type:");
 
     private final String [] stringType = new String [] {"Administrator", "Operator"};
-    private final JComboBox type = new JComboBox<String> (stringType);
+    private final JComboBox type = new JComboBox<String>(stringType);
 
 
     private final JButton save = new JButton("Save");
@@ -78,7 +79,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     private final JButton reset = new JButton("Reset");
 
     private AccountsController observer;
-    //private Optional<Account> focusAccount;
 
 
     public static final int SPACE = 5;
@@ -205,7 +205,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         //method for returning to the previous page
         cancel.addActionListener(event -> {
             frame.setVisible(false);
-            //focusAccount = Optional.ofNullable(null);
             observer.showManagementAccountView();
          });
 
@@ -233,10 +232,22 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
                 } else {
                     typeAccount = TypeAccount.OPERATOR;
                 }
-                Account account = new AccountImpl(textName.getText(), textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
-                this.observer.addAccount(account);
-                frame.setVisible(false);
-                this.observer.showManagementAccountView();
+
+                String checkName = textName.getText();
+                if (Pattern.matches("[a-zA-Z]+", checkName)) {
+                    String checkSurname = textSurname.getText();
+                    if (Pattern.matches("[a-zA-Z]+", checkSurname)) {
+                        Account account = new AccountImpl(textName.getText(), textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
+                        this.observer.addAccount(account);
+                        frame.setVisible(false);
+                        this.observer.showManagementAccountView();
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Please insert a Surame without number");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
+                }
+
             }
 
 
@@ -244,12 +255,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     }
 
-
-
-
-    
-    
-    
 
     @Override
     public void show() {
@@ -262,32 +267,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     @Override
     public void setObserver(final AccountsController observer) {
         this.observer = observer;
-    }
-
-
-
-    @Override
-    public void loadAccount(final Account account) { //carico account
-        //focusAccount = Optional.of(account); //mette focus su un determinato account
-        /*textName.setText(account.getName());
-        textSurname.setText(account.getSurname());
-        textUsername.setText(account.getUsername());
-        textPassword.setText(account.getPassword());
-
-    
-
-        if (type.getSelectedItem().equals("Administrator")) {
-            account.isAdmin().equals(TypeAccount.ADMINISTRATOR);
-        } else if (type.getSelectedItem().equals("Operator")) {
-            account.isAdmin().equals(TypeAccount.OPERATOR);
-        }
-
-        if (type.getSelectedItem().equals("Administrator")) {
-            account.type().equals(TypeAccount.ADMINISTRATOR);
-        } else if (type.getSelectedItem().equals("Operator")) {
-            account.type().equals(TypeAccount.OPERATOR);
-        }
-*/
     }
 
     @Override

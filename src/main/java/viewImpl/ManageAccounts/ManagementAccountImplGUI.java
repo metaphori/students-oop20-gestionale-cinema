@@ -119,34 +119,31 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
             if (row != -1) {
                 Set<Account> setAccount = observer.getAccounts();
                 final int row1 = setAccount.size();
+                
                 if (row1 <= 1) {
                     final TypeAccount type = (TypeAccount) table.getModel().getValueAt(row, 3);
                     type.equals("AMMINISTRATOR");
                     Account account2 = observer.getAccounts().stream().filter(a -> a.type().equals(type)).findFirst().get();
                     JOptionPane.showMessageDialog(frame, "It isn't possible to delete the last administrator account");
                     this.update();
+                    
                  } else {
 
                     final String username = (String) table.getModel().getValueAt(row, 0);
-
                     Account account = observer.getAccounts().stream()
                     .filter(a -> a.getUsername().equals(username))
                     .findFirst().get();
 
-                    /*
                     final LoggedAccount ar = LoggedAccount.getIstance();
+                    String personalAcc = ar.getIstance().getAccount().getUsername();
+                    String selectAccount = account.getUsername();
                     
-                    if (account.equals(ar)) {
-                        JOptionPane.showMessageDialog(frame, "or account");
-                        this.update();
+                    if (personalAcc.equals(selectAccount)) {
+                        JOptionPane.showMessageDialog(frame, "You cannot delete your own account");
                     } else {
-                    */
-                    
-                    
-                    
-                    observer.deleteAccount(account);
-                    this.update();
-                    //}
+                        observer.deleteAccount(account);
+                        this.update();
+                    }
                  } 
             } else {
                 JOptionPane.showMessageDialog(frame, "No row selected");
@@ -164,9 +161,9 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.setLocationByPlatform(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        if (observer.getAccounts().isEmpty()) {
+        /*if (observer.getAccounts().isEmpty()) {
             this.showDialog();
-        }
+        }*/
     }
 
     @Override
