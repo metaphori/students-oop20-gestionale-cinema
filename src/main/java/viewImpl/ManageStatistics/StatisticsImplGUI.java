@@ -50,7 +50,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
 
     private static final double IMAGE_WIDTH = 0.4;
     private static final double IMAGE_HEIGTH = 0.6;
-    JLabel title = new JLabel(TITLE_STRING, Font.PLAIN);
+    JLabel title = new JLabel(TITLE_STRING);
     
     
     
@@ -112,6 +112,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnst.gridy++; // next line
 
         pWestInternal.add(movie, cnst); 
+        movie.setFont(new Font("Serif", Font.BOLD, 22));
         cnst.gridy++;
 
         pic.setMargin(new Insets(SC, SC, SC, SC));
@@ -128,9 +129,13 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnt.insets = new Insets(SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
         pEastInternal.add(money, cnt);
+
+        money.setFont(new Font("Serif", Font.BOLD, 22));
         
         cnt.gridy++;
         pEastInternal.add(people, cnt);
+
+        people.setFont(new Font("Serif", Font.BOLD, 22));
         //cnst.gridy++;
 
         final JPanel pEast = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -189,7 +194,7 @@ public class StatisticsImplGUI implements StatisticsGUI{
         //picW.setIcon(iconW);
         
         Double moneyTotal = observer.getRecessed();
-        money.setText(MONEY_STRING + moneyTotal.toString());
+        money.setText(MONEY_STRING + moneyTotal.toString() +" euro");
         picS.setIcon(iconS);
         
 
