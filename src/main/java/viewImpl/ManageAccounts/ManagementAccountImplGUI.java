@@ -32,7 +32,6 @@ import controller.ManageAccounts.AccountsController;
 import utilities.Film;
 import utilities.ManageAccounts.Account;
 import utilities.ManageAccounts.TypeAccount;
-import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.ManagementAccountGUI;
 
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
@@ -134,8 +133,8 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
                     .filter(a -> a.getUsername().equals(username))
                     .findFirst().get();
 
-                    final LoggedAccount ar = LoggedAccount.getIstance();
-                    String personalAcc = ar.getIstance().getAccount().getUsername();
+                //    observer.
+                    String personalAcc = observer.getAccountLogged().getUsername();
                     String selectAccount = account.getUsername();
                     
                     if (personalAcc.equals(selectAccount)) {

@@ -13,7 +13,6 @@ import controller.CinemaController;
 import controller.CinemaControllerObserver;
 import utilities.ManageAccounts.Account;
 import utilities.ManageAccounts.TypeAccount;
-import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageMenu.MenuView;
 
 public final class MenuViewImpl implements MenuView {
@@ -30,14 +29,15 @@ public final class MenuViewImpl implements MenuView {
     private static final double HEIGTH_PERC_FRAME = 0.5;
     private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME / 0.7;
     private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 0.7;
+    
+    final JButton btnControllerAccount = new JButton(BTN_CONTROLLER_ACCOUNT_TITLE);
+    final JButton btnControllerFilm = new JButton(BTN_CONTROLLER_FILM_TITLE);
+    final JButton btnControllerProgrammingFilms = new JButton(BTN_CONTROLLER_PROGRAMMED_FILM_TITLE);
+    final JButton btnControllerStatistics = new JButton(BTN_CONTROLLER_STATISTICS_TITLE);
+    final JButton btnControllerTicket = new JButton(BTN_CONTROLLER_TICKET_TITLE);
 
     public MenuViewImpl() {
-        final JButton btnControllerAccount = new JButton(BTN_CONTROLLER_ACCOUNT_TITLE);
-        final JButton btnControllerFilm = new JButton(BTN_CONTROLLER_FILM_TITLE);
-        final JButton btnControllerProgrammingFilms = new JButton(BTN_CONTROLLER_PROGRAMMED_FILM_TITLE);
-        final JButton btnControllerStatistics = new JButton(BTN_CONTROLLER_STATISTICS_TITLE);
-        final JButton btnControllerTicket = new JButton(BTN_CONTROLLER_TICKET_TITLE);
-
+        
         final JPanel mainPanel = new JPanel(new BorderLayout());
         final JPanel centerPanel = new JPanel(new FlowLayout());
         centerPanel.add(btnControllerAccount);
@@ -48,32 +48,26 @@ public final class MenuViewImpl implements MenuView {
 
         btnControllerAccount.addActionListener(a -> {
             this.observer.showControllerAccount();
-            frame.dispose();
+            frame.setVisible(false);
         });
         btnControllerProgrammingFilms.addActionListener(a -> {
             this.observer.showControllerProgrammingFilms();
-            frame.dispose();
+            frame.setVisible(false);
         });
         btnControllerTicket.addActionListener(a -> {
             this.observer.showControllerTicket();
-            frame.dispose();
+            frame.setVisible(false);
         });
         btnControllerFilm.addActionListener(a -> {
             this.observer.showControllerFilm();
-            frame.dispose();
+            frame.setVisible(false);
         });
         btnControllerStatistics.addActionListener(a -> {
             this.observer.showControllerStatistics();
-            frame.dispose();
+            frame.setVisible(false);
         });
-        final LoggedAccount log = LoggedAccount.getIstance();
-        final Account accountLogged = log.getAccount();
-        if (accountLogged.type().equals(TypeAccount.OPERATOR)) {
-            btnControllerAccount.setEnabled(false);
-            btnControllerProgrammingFilms.setEnabled(false);
-            btnControllerFilm.setEnabled(false);
-            btnControllerStatistics.setEnabled(false);
-        }
+      
+       
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
@@ -87,4 +81,13 @@ public final class MenuViewImpl implements MenuView {
     public void show() {
         frame.setVisible(true);
     }
+    public void updateGUI(Account accountLogged) {
+        if (accountLogged.type().equals(TypeAccount.OPERATOR)) {
+            btnControllerAccount.setEnabled(false);
+            btnControllerProgrammingFilms.setEnabled(false);
+            btnControllerFilm.setEnabled(false);
+            btnControllerStatistics.setEnabled(false);
+        }
+    }
+    
 }

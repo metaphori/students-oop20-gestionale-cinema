@@ -4,7 +4,6 @@ import java.util.Set;
 
 import controller.CinemaController;
 import utilities.ManageAccounts.Account;
-import utilitiesImpl.ManageAccounts.LoggedAccount;
 
 public interface AccountsController {
 	
@@ -24,14 +23,7 @@ public interface AccountsController {
 	 * Recover all account from account's set
 	 * @return Set<Account> set of Accounts
 	 */
-	Set<Account> getAccounts();
-	
-	/**
-	 * Retrieve the account logged in at that moment
-	 * @param loadedAccounts
-	 * @return account logged in at that time
-	 */
-	LoggedAccount loadAccount(Set<Account> loadedAccounts); 
+	Set<Account> getAccounts(); 
 
 	/**
 	 * Show menu view
@@ -58,4 +50,8 @@ public interface AccountsController {
          * @param cinemaController
          */
         void setCinemaController(CinemaController cinemaController);
+        
+        void setAccountLogged(Account accountLogged);
+        
+        Account getAccountLogged();
 }

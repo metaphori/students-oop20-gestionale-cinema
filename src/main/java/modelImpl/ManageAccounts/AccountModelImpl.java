@@ -11,7 +11,7 @@ import utilities.ManageAccounts.Account;
 
 public class AccountModelImpl implements AccountModel {
     private final Set<Account> collect;
-
+    private Account accountLogged;
     /**
      * Construttor for the Account Model.
      */
@@ -37,6 +37,18 @@ public class AccountModelImpl implements AccountModel {
     @Override
     public String toString() {
         return "Account " + collect;
+    }
+
+    @Override
+    public Account getAccountLogged() {
+        // TODO Auto-generated method stub
+        return this.accountLogged;
+    }
+
+    @Override
+    public void setAccountLogged(Account accountLogged) {
+        this.accountLogged = accountLogged;
+        
     }
 
 }

@@ -5,6 +5,7 @@ import controller.CinemaController;
 import controller.CinemaControllerObserver;
 import controller.Booking.BookingController;
 import controller.ManageAccounts.AccountsController;
+import controller.ManageAccounts.LoggedAccount;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controller.ManageStatistics.StatisticsController;
@@ -23,29 +24,28 @@ import viewImpl.ManageMenu.MenuViewImpl;
 public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver{
     private ManagerWorkingDIR manager;
     private MenuView menu;
-
+    private AccountsController accountController;
     public CinemaControllerImpl() {
         super();
         manager = new ManagerWorkingDIRimpl();
+        this.menu = new MenuViewImpl();
+        this.menu.setObserver(this);
+        
         this.initApplication(System.getProperty("user.home"));
-        final AccountsController controller = new AccountsControllerImpl();
-        controller.setCinemaController(this);
-        controller.showLoginAccounView();
+        this.accountController = new AccountsControllerImpl();
+        this.accountController.setCinemaController(this);
+        this.accountController.showLoginAccounView();
     }
 
     @Override
     public void showMenu() {
-        menu = new MenuViewImpl();
-        menu.setObserver(this);
+        menu.updateGUI(accountController.getAccountLogged());
         menu.show();
     }
 
     @Override
     public void showControllerAccount() {
-        final AccountsController controller = new AccountsControllerImpl();
-        controller.setCinemaController(this);
-        controller.showManagementAccountView();
-        
+        accountController.showManagementAccountView();
     }
 
     @Override
