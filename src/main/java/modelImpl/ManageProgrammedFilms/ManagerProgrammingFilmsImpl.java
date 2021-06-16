@@ -8,9 +8,8 @@ import model.ManageProgrammingFilms.HandlerList;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
-import utilities.Factory.TimeSlotFactory;
 import utilitiesImpl.Hall;
-import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 /** 
  * Manager programming films. It has a reference of list to manage and he has a specific handler list.
  * */
@@ -31,11 +30,11 @@ public final class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilm
       * */
      @Override
      public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final Hall hall) { // check if timeslot is available for specific date and hall 
-            final TimeSlotFactory timeSlotFactory = new TimeSlotFactoryImpl();
+            //final TimeSlotFactory timeSlotFactory = new TimeSlotFactoryImpl();
             return !this.handlerList.filterBy(listToManage, new FilterByDateHallImpl(date, hall))
                     .stream()
                     .anyMatch(pf -> {
-                       if (this.isAvailableTimeSlot(timeSlotFactory.createTimeSlot(pf.getStartTime(), pf.getEndTime()), timeSlotToCheck)) { // if it's available it means that there isn't any match , so return false
+                       if (this.isAvailableTimeSlot(new TimeSlotImpl(pf.getStartTime(), pf.getEndTime()), timeSlotToCheck)) { // if it's available it means that there isn't any match , so return false
                            return false;
                        } 
                        return true;
