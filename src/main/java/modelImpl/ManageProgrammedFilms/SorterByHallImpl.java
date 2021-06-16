@@ -11,7 +11,8 @@ public final class SorterByHallImpl implements Sorter<ProgrammedFilm> {
 
     @Override
     public Comparator<ProgrammedFilm> getComparator() {
-        return (fp1, fp2) -> fp1.getHall() - fp2.getHall();
+        //return (fp1, fp2) -> fp1.getHall() - fp2.getHall();
+        return (fp1, fp2) -> fp1.getHall().compareTo(fp2.getHall());
     }
 
 }

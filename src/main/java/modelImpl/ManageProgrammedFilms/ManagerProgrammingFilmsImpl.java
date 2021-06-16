@@ -9,6 +9,7 @@ import model.ManageProgrammingFilms.ManagerProgrammingFilms;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.TimeSlotFactory;
+import utilitiesImpl.Hall;
 import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
 /** 
  * Manager programming films. It has a reference of list to manage and he has a specific handler list.
@@ -29,7 +30,7 @@ public final class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilm
       * @return boolean 
       * */
      @Override
-     public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final int hall) { // check if timeslot is available for specific date and hall 
+     public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final Hall hall) { // check if timeslot is available for specific date and hall 
             final TimeSlotFactory timeSlotFactory = new TimeSlotFactoryImpl();
             return !this.handlerList.filterBy(listToManage, new FilterByDateHallImpl(date, hall))
                     .stream()
