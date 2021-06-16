@@ -184,4 +184,3 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
 }
 
 
-
