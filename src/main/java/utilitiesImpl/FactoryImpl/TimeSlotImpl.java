@@ -14,7 +14,7 @@ public final class TimeSlotImpl implements TimeSlot {
  * @param startTime start time
  * @param endTime end time
  *  */
-    TimeSlotImpl(final LocalTime startTime, final LocalTime endTime) {
+    public TimeSlotImpl(final LocalTime startTime, final LocalTime endTime) {
         super();
         this.startTime = startTime;
         this.endTime = endTime;

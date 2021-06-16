@@ -11,9 +11,8 @@ import model.ManageProgrammingFilms.ProgrammedFilmsModel;
 import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
-import utilities.Factory.TimeSlotFactory;
 import utilitiesImpl.Hall;
-import utilitiesImpl.FactoryImpl.TimeSlotFactoryImpl;
+import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 /** 
  * Describe a model where all data about programmed films are stored.
  * */
@@ -38,8 +37,7 @@ public final class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel {
      */
     @Override
     public void addFilmProgrammation(final ProgrammedFilm programmedFilm) throws ProgrammationNotAvailableException {
-        final TimeSlotFactory timeSlotFactory = new TimeSlotFactoryImpl();
-        final TimeSlot timeSlot = timeSlotFactory.createTimeSlot(programmedFilm.getStartTime(), programmedFilm.getEndTime());
+        final TimeSlot timeSlot = new TimeSlotImpl(programmedFilm.getStartTime(), programmedFilm.getEndTime());
         if (!this.isAvailableProgrammation(timeSlot, programmedFilm.getDate(), programmedFilm.getHall())) {
            throw new ProgrammationNotAvailableException();
         } else {

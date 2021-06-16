@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import model.ManageFilms.IdsGenerator;
 import model.ManageFilms.ManagerIdsFilms;
-
+/** 
+ * Describes a manager for ids film.
+ * */
 public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     private  final Collection<Integer> containerFilmsIds;
     private  final IdsGenerator idsGenerator;
@@ -16,17 +18,17 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
         this.containerFilmsIds = containerFilmsIds;
         this.idsGenerator = idsGenerator;
     }
-    
+
     public ManagerIdsFilmImpl(final IdsGenerator idsGenerator) { 
         this.containerFilmsIds = new HashSet<>();
         this.idsGenerator = idsGenerator;
     }
-    
+
     public Collection<Integer> getUsedIDs(final IdsGenerator idsGenerator) {
         return containerFilmsIds;
     }
     public int getNewFilmID() {
-        int id = idsGenerator.getNewId();
+        final int id = idsGenerator.getNewId();
         containerFilmsIds.add(id);
         return id;
     }
