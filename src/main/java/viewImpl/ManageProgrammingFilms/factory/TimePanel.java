@@ -29,18 +29,16 @@ public class TimePanel extends JPanel {
 	private final JLabel minLabel;
 	
 	TimePanel() {
-		
 		final LocalTime localTime = LocalTime.now();
-		
 		setLayout(new GridLayout(rowsGrid, colsGrid, hGapGrid, vGapGrid));
 		setBorder(BorderFactory.createCompoundBorder(
 					BorderFactory.createTitledBorder("Enter Time"),
 						BorderFactory.createEmptyBorder(topEmptyBorder, leftEmptyBorder, bottomEmptyBorder, rightEmptyBorder)));
-		hourTextField = new JTextField("" + localTime.getHour());
+		hourTextField = new JTextField(String.valueOf(localTime.getHour()));
 		hourTextField.setHorizontalAlignment(JTextField.RIGHT);
-		minTextField = new JTextField("" + localTime.getMinute());
+		minTextField = new JTextField(String.valueOf(localTime.getMinute()));
 		minTextField.setHorizontalAlignment(JTextField.RIGHT);
-		
+
 		hourLabel = new JLabel("Hour", JLabel.RIGHT);
 		minLabel = new JLabel("MIN", JLabel.RIGHT);
 	
@@ -75,7 +73,7 @@ public class TimePanel extends JPanel {
 		if (min < 0 || min > 59) {
 			throw new IllegalArgumentException(
 					"Minutes must be between 0 and 59!");
-		}		
+		}
 		return min;
 	}
 

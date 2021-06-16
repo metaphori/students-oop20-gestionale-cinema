@@ -3,7 +3,8 @@ package view.ManageProgrammingFilms;
 
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
-
+/**
+ * View where you can programming films. */
 public interface ProgrammingFilmsGUI {
     /**
      * Show view where you can manage programming films.
