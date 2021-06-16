@@ -58,10 +58,6 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
         setFilm = controllerFilms.getFilms();
     }
 
-    /**
-     * 
-     * 
-     */
     @Override
     public void start() {
         this.showListFilmView();
