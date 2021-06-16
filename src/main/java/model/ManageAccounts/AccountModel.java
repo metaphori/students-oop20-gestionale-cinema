@@ -23,4 +23,8 @@ public interface AccountModel {
      * @return Set<Account> set of Accounts
      */
     Set<Account> getAccounts();
+    
+    Account getAccountLogged();
+    
+    void setAccountLogged(Account accountLogged);
 }

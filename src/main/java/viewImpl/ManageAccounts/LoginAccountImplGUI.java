@@ -42,7 +42,6 @@ import org.apache.commons.io.FileUtils;
 
 import controller.ManageAccounts.AccountsController;
 import utilities.ManageAccounts.Account;
-import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.LoginAccountGUI;
 
 import java.awt.event.*
@@ -71,6 +70,9 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
 
     public static final int SPACE = 5;
 
+    /**
+     * Construttor for the view Login.
+     */
     public LoginAccountImplGUI() {
 
         //I create the frame and set the title and other properties
@@ -150,9 +152,9 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                 String password = String.valueOf(textPassword.getPassword());
                 if (logininfo.containsKey(userID)) {
                     if (logininfo.get(userID).equals(password)) {
-                        LoggedAccount log = LoggedAccount.getIstance();
+                        
                         Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
-                        log.setAccount(acc);
+                        observer.setAccountLogged(acc);
                         frame.dispose();
                         observer.showMenu();
                         frame.setVisible(false);
@@ -179,6 +181,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setSize(350, 200);
+        frame.setMinimumSize(new Dimension(350, 200));
      }
 
     @Override

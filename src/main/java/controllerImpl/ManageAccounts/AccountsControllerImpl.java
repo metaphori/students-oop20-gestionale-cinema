@@ -8,13 +8,13 @@ import com.google.gson.reflect.TypeToken;
 
 import controller.CinemaController;
 import controller.ManageAccounts.AccountsController;
+import controller.ManageAccounts.LoggedAccount;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
 import model.ManageAccounts.AccountModel;
 import modelImpl.ManageAccounts.AccountModelImpl;
 import utilities.ManageAccounts.Account;
 import utilitiesImpl.GeneralSettings;
-import utilitiesImpl.ManageAccounts.LoggedAccount;
 import view.ManageAccounts.LoginAccountGUI;
 import view.ManageAccounts.ManagementAccountGUI;
 import view.ManageAccounts.RegistrationAccountGUI;
@@ -22,7 +22,11 @@ import viewImpl.ManageAccounts.LoginAccountImplGUI;
 import viewImpl.ManageAccounts.ManagementAccountImplGUI;
 import viewImpl.ManageAccounts.RegistrationAccountImplGUI;
 
-public class AccountsControllerImpl implements AccountsController{
+/**
+ * Implements Account Controller.
+ */
+
+public class AccountsControllerImpl implements AccountsController, LoggedAccount{
     private AccountModel model;
 
     //implementes viewObserver
@@ -33,6 +37,9 @@ public class AccountsControllerImpl implements AccountsController{
 
     private Set<Account> setAccount;
 
+    /**
+     * Construttor for the Account Controller.
+     */
     public AccountsControllerImpl() {
         Optional<Set<Account>> optionalRead = this.readAccount();
         if (optionalRead.isPresent()) {
@@ -75,10 +82,7 @@ public class AccountsControllerImpl implements AccountsController{
         return this.model.getAccounts();
     }
 
-    @Override
-    public LoggedAccount loadAccount(final Set<Account> loadedAccounts) {
-        return LoggedAccount.getIstance();
-    }
+    
 
     @Override
     public void showRegistrationAccountView() { //for add account
@@ -98,20 +102,43 @@ public class AccountsControllerImpl implements AccountsController{
         loginView.show();
     }
 
+    /**
+     * Set Cinema Controller.
+     */
     public void setCinemaController(CinemaController cinemaController) {
         this.controllerCinema = cinemaController;
     }
 
+    /**
+     * Read object in the Account file.
+     * @return readAccount
+     */
     private Optional<Set<Account>> readAccount() {
         final RWobject<Set<Account>> rw = new RWobjectImpl<>(GeneralSettings.ACCOUNT_FILE_PATH);
         final var type = new TypeToken<Set<Account>>() { }.getType();
         return rw.readObj(type);
     }
 
+    /**
+     * Write object in the Account file.
+     * @param writeAccount
+     */
     private void writeAccount(final Set<Account> writeAccount) {
         final Set<Account> setToWrite = this.getAccounts();
         final var type = new TypeToken<Set<Account>>() { }.getType();
         final RWobject<Set<Account>> rw = new RWobjectImpl<>(GeneralSettings.ACCOUNT_FILE_PATH);
         rw.writeObj(setToWrite, type);
+    }
+
+
+    @Override
+    public Account getAccountLogged() {
+       return this.model.getAccountLogged();
+    }
+
+
+    @Override
+    public void setAccountLogged(Account accountLogged) {
+        this.model.setAccountLogged(accountLogged);
     }
 }
