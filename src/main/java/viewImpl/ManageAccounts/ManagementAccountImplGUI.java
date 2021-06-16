@@ -151,7 +151,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
 
         });
 
-        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
+        
         frame.validate();
     }
 
@@ -161,6 +161,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.setLocationByPlatform(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
     }
 
     @Override

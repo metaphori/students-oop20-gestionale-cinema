@@ -22,6 +22,10 @@ import viewImpl.ManageAccounts.LoginAccountImplGUI;
 import viewImpl.ManageAccounts.ManagementAccountImplGUI;
 import viewImpl.ManageAccounts.RegistrationAccountImplGUI;
 
+/**
+ * Implements Account Controller.
+ */
+
 public class AccountsControllerImpl implements AccountsController{
     private AccountModel model;
 
@@ -33,6 +37,9 @@ public class AccountsControllerImpl implements AccountsController{
 
     private Set<Account> setAccount;
 
+    /**
+     * Construttor for the Account Controller.
+     */
     public AccountsControllerImpl() {
         Optional<Set<Account>> optionalRead = this.readAccount();
         if (optionalRead.isPresent()) {
@@ -98,16 +105,27 @@ public class AccountsControllerImpl implements AccountsController{
         loginView.show();
     }
 
+    /**
+     * Set Cinema Controller.
+     */
     public void setCinemaController(CinemaController cinemaController) {
         this.controllerCinema = cinemaController;
     }
 
+    /**
+     * Read object in the Account file.
+     * @return readAccount
+     */
     private Optional<Set<Account>> readAccount() {
         final RWobject<Set<Account>> rw = new RWobjectImpl<>(GeneralSettings.ACCOUNT_FILE_PATH);
         final var type = new TypeToken<Set<Account>>() { }.getType();
         return rw.readObj(type);
     }
 
+    /**
+     * Write object in the Account file.
+     * @param writeAccount
+     */
     private void writeAccount(final Set<Account> writeAccount) {
         final Set<Account> setToWrite = this.getAccounts();
         final var type = new TypeToken<Set<Account>>() { }.getType();

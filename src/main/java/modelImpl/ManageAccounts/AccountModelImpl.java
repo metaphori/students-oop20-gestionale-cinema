@@ -5,10 +5,16 @@ import java.util.Set;
 import model.ManageAccounts.AccountModel;
 import utilities.ManageAccounts.Account;
 
+/**
+ * Implements Account model.
+ */
 
 public class AccountModelImpl implements AccountModel {
     private final Set<Account> collect;
 
+    /**
+     * Construttor for the Account Model.
+     */
     public AccountModelImpl(final Set<Account> setAccount) {
         this.collect = setAccount; 
     }

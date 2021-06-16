@@ -71,6 +71,9 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
 
     public static final int SPACE = 5;
 
+    /**
+     * Construttor for the view Login.
+     */
     public LoginAccountImplGUI() {
 
         //I create the frame and set the title and other properties
@@ -179,6 +182,7 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setSize(350, 200);
+        frame.setMinimumSize(new Dimension(350, 200));
      }
 
     @Override
