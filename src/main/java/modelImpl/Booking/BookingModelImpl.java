@@ -33,7 +33,7 @@ public class BookingModelImpl implements BookingModel {
                 .filter(f -> f.getId() == programmedFilm.getIdProgrammation())
                 .filter(f -> f.getDate().equals(programmedFilm.getDate()))
                 .filter(f -> f.getTime().equals(programmedFilm.getStartTime()))
-                .filter(f -> f.getHall() == programmedFilm.getHall())
+                .filter(f -> f.getHall().equals(programmedFilm.getHall()))
                 .flatMap(f -> f.getSetSeat().stream())
                 .collect(Collectors.toSet());
     }
@@ -67,7 +67,7 @@ public class BookingModelImpl implements BookingModel {
             return t.getId() == programmedFilm.getIdProgrammation()
                     && t.getDate().isEqual(programmedFilm.getDate())
                     && t.getTime().equals(programmedFilm.getStartTime())
-                    && t.getHall() == t.getHall();
+                    && t.getHall().equals(programmedFilm.getHall());
         });
     }
     @Override
@@ -77,7 +77,7 @@ public class BookingModelImpl implements BookingModel {
            .filter(t -> t.getId() == programmedFilm.getIdProgrammation())
            .filter(t -> t.getDate().equals(programmedFilm.getDate()))
            .filter(t -> t.getTime().equals(programmedFilm.getStartTime()))
-           .filter(t -> t.getHall() == programmedFilm.getHall()).findAny();
+           .filter(t -> t.getHall().equals(programmedFilm.getHall())).findAny();
            if (ticket.isPresent()) {
                ticket.get().getSetSeat().addAll(seatSelected);
            } else {
