@@ -5,7 +5,6 @@ import controller.CinemaController;
 import controller.CinemaControllerObserver;
 import controller.Booking.BookingController;
 import controller.ManageAccounts.AccountsController;
-import controller.ManageAccounts.LoggedAccount;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controller.ManageStatistics.StatisticsController;

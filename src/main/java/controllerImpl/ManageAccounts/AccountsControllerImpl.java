@@ -8,7 +8,6 @@ import com.google.gson.reflect.TypeToken;
 
 import controller.CinemaController;
 import controller.ManageAccounts.AccountsController;
-import controller.ManageAccounts.LoggedAccount;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
 import model.ManageAccounts.AccountModel;
@@ -26,7 +25,7 @@ import viewImpl.ManageAccounts.RegistrationAccountImplGUI;
  * Implements Account Controller.
  */
 
-public class AccountsControllerImpl implements AccountsController, LoggedAccount{
+public class AccountsControllerImpl implements AccountsController {
     private AccountModel model;
 
     //implementes viewObserver
