@@ -41,7 +41,6 @@ public class AccountModelImpl implements AccountModel {
 
     @Override
     public Account getAccountLogged() {
-        // TODO Auto-generated method stub
         return this.accountLogged;
     }
 
