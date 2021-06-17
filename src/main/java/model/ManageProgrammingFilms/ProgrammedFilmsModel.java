@@ -6,6 +6,7 @@ import exceptions.ProgrammationNotAvailableException;
 import utilities.Film;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
+import utilitiesImpl.Hall;
 /** 
  * Describe a model where data about programmed films are stored .
  * */
@@ -28,7 +29,7 @@ public interface ProgrammedFilmsModel {
      * @param hall hall to check
      * @return boolean 
      * */
-    boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, int hall);
+    boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, Hall hall);
     /** 
      * Get all programmed films as list.
      * @return List<ProgrammedFilm>

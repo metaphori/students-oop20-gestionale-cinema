@@ -3,6 +3,8 @@ package utilities.Factory;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import utilitiesImpl.Hall;
+
 /**
  *  Describe a programmed film with some property to save.
  * */
@@ -16,7 +18,7 @@ public interface ProgrammedFilm {
      * Get hall number.
      * @return hall
      */
-    int getHall();
+    Hall getHall();
     /**
      * Get film programmation price.
      * @return price

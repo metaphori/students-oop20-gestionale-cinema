@@ -5,14 +5,14 @@ import java.time.LocalTime;
 
 import utilities.Factory.ProgrammedFilm;
 import utilities.Factory.ProgrammedFilmFactory;
+import utilitiesImpl.Hall;
 
-public class ProgrammedFilmFactoryImpl implements ProgrammedFilmFactory {
+public final class ProgrammedFilmFactoryImpl implements ProgrammedFilmFactory {
 
     @Override
-    public ProgrammedFilm createProgrammedFilm(final int idFilm, final int hall, final double price, final LocalDate date, final LocalTime startTime,final  LocalTime endTime) {
-        return new ProgrammedFilmImpl(idFilm,hall,price,date,new TimeSlotImpl(startTime,endTime));
+    public ProgrammedFilm createProgrammedFilm(final int idFilm, final Hall hall, final double price, final LocalDate date, final LocalTime startTime, final  LocalTime endTime) {
+        return new ProgrammedFilmImpl(idFilm, hall, price, date, new TimeSlotImpl(startTime, endTime));
     }
-
  
 
 }

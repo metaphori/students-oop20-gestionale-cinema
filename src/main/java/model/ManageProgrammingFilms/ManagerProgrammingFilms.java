@@ -3,6 +3,7 @@ package model.ManageProgrammingFilms;
 import java.time.LocalDate;
 import utilities.TimeSlot;
 import utilities.Factory.ProgrammedFilm;
+import utilitiesImpl.Hall;
 
 /** 
  * Describe a manager for programming films.
@@ -15,7 +16,7 @@ public interface ManagerProgrammingFilms {
      * @param hall hall to check
      * @return boolean 
      * */
-    boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, int hall);
+    boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, Hall hall);
     /** 
      * Get used handler list.
      * @return HandlerList<ProgrammedFilm> 

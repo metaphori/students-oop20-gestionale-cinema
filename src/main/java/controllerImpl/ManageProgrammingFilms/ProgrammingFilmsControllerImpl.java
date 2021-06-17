@@ -6,8 +6,10 @@ import java.util.Optional;
 import com.google.gson.reflect.TypeToken;
 
 import controller.CinemaController;
+import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
+import controllerImpl.Booking.BookingControllerImpl;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
@@ -105,8 +107,10 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
      */
     @Override
     public void deleteProgrammedFilm(final ProgrammedFilm oldProgrammedFilm) {
+        final BookingController bookingController = new BookingControllerImpl();
         programmedFilmsModel.deleteFilmProgrammation(oldProgrammedFilm);
         this.writeProgrammedFilmsOnFile();
+        bookingController.deleteTicket(oldProgrammedFilm);
     }
     /**
      * Update and show programmed film view with all programmation.

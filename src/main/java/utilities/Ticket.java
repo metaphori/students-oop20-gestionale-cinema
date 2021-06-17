@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
+import utilitiesImpl.Hall;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 
@@ -13,5 +14,5 @@ public interface Ticket {
     Set<SeatImpl> getSetSeat();
     double getPrice();
     int getId();
-    int getHall();
+    Hall getHall();
 }

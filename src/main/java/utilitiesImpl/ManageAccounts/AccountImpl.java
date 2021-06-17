@@ -6,7 +6,7 @@ import utilities.ManageAccounts.TypeAccount;
 public class AccountImpl implements Account {
     private String name, surname, username, pass;
     private TypeAccount type;
-    
+
     /**
      * Constructor for the class Account.
      * @param name
@@ -15,15 +15,14 @@ public class AccountImpl implements Account {
      * @param pass 
      * @param type
      */
-    public AccountImpl(String name, String surname, String username, String pass, TypeAccount type) {
+    public AccountImpl(final String name, final String surname, final String username, final String pass, final TypeAccount type) {
         this.name = name; //Unique name
         this.surname = surname;
         this.username = username;
         this.pass = pass;
         this.type = type;
     }
-     
-    
+
     /**
      * Returns the account's name.
      * @return name
@@ -32,17 +31,18 @@ public class AccountImpl implements Account {
     public String getName() {
         return name;
     }
-    
+
     /**
      * Sets the account's name.
      * @param name
      */
     @Override
-    public void setName(String name) {
-        if (!name.isEmpty())
+    public void setName(final String name) {
+        if (!name.isEmpty()) {
             this.name = name;
+        }
     }
-    
+
     /**
      * Returns the account's surname.
      * @return surname
@@ -51,17 +51,18 @@ public class AccountImpl implements Account {
     public String getSurname() {
         return surname;
     }
-    
+
     /**
      * Sets the account's surname.
      * @param surname
      */
     @Override
-    public void setSurname(String surname) {
-        if (!surname.isEmpty())
+    public void setSurname(final String surname) {
+        if (!surname.isEmpty()) {
             this.surname = surname;
+        }
     }
-    
+
     /**
      * Returns the account's username.
      * @return username
@@ -70,17 +71,18 @@ public class AccountImpl implements Account {
     public String getUsername() {
         return username;
     }
-    
+
     /**
      * Sets the account's username.
      * @param username 
      */
     @Override
-    public void setUsername(String username) {
-        if (!username.isEmpty())
+    public void setUsername(final String username) {
+        if (!username.isEmpty()) {
             this.username = username;
+        }
     }
-    
+
     /**
      * Returns the account's password.
      * @return pass
@@ -89,26 +91,27 @@ public class AccountImpl implements Account {
     public String getPassword() {
         return pass;
     }
-    
+
     /**
      * Sets the account's password.
      * @param pass 
      */
     @Override
-    public void setPassword(String pass) {
-        if (!pass.isEmpty() && !pass.equals(this.pass))
+    public void setPassword(final String pass) {
+        if (!pass.isEmpty() && !pass.equals(this.pass)) {
             this.pass = pass;
+        }
     }
-    
+
     /**
-     * Returns true if the account is an administrator.
+     * Returns the account's type. Administrator or operator.
      * @return type
      */
     @Override
-    public TypeAccount isAdmin() {
+    public TypeAccount type() {
         return this.type;
     }
-    
+
     @Override
     public String toString() {
         return "Account :"
