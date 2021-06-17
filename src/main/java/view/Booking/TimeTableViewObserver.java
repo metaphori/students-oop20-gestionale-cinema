@@ -11,8 +11,8 @@ import utilities.Factory.*;
 
 public interface TimeTableViewObserver {
     void bookTicketForFilm(ProgrammedFilm film);
-   void showBackFromTimeTable();
+    void showBackFromTimeTable();
     Film getFilmByProgrammedFilm(ProgrammedFilm film);
-    List<ProgrammedFilm> handlerProgrammedFilm( Collection<ProgrammedFilm> coll, Filter<ProgrammedFilm> filter);
-    List<ProgrammedFilm> handlerProgrammedFilm( Collection<ProgrammedFilm> coll, Sorter<ProgrammedFilm> sorter);
+    List<ProgrammedFilm> handlerProgrammedFilm(Collection<ProgrammedFilm> coll, Filter<ProgrammedFilm> filter);
+    List<ProgrammedFilm> handlerProgrammedFilm(Collection<ProgrammedFilm> coll, Sorter<ProgrammedFilm> sorter);
 }

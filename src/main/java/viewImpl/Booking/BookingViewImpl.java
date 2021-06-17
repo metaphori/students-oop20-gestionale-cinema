@@ -5,16 +5,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,7 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import utilities.Factory.*;
+import utilities.Seat;
+import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Hall;
 import utilitiesImpl.Row;
@@ -54,8 +49,7 @@ public class BookingViewImpl implements BookingView {
     private static final double WIDTH_MINIMUM_FRAME = WIDTH_PERC_FRAME / 0.7;
     private static final double HEIGTH_MINMUM_FRAME = HEIGTH_PERC_FRAME / 0.7;
 
-    private final int col;
-    private final Row row;
+
     public BookingViewImpl(final BookingViewObserver observer, final ProgrammedFilm film) {
 
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl();
@@ -73,9 +67,9 @@ public class BookingViewImpl implements BookingView {
             observer.showBackFromBooking(film);
             frame.dispose();
         });
-        final Set<SeatImpl> setSeats = observer.getSeatsFromFilm(film);
-        row = Hall.NUM_ROWS;
-        col = Hall.NUM_COLUMNS;
+        final Set<Seat> setSeats = observer.getSeatsFromProgrammedFilm(film);
+        final Row row = Hall.NUM_ROWS;
+        final int col = Hall.NUM_COLUMNS;
         final JPanel center = new JPanel(new BorderLayout());
         final JPanel gridPanel = new JPanel(new GridLayout(row.ordinal() + 1, col));
         for (int i = 0; i < row.ordinal() + 1; i++) {
@@ -87,7 +81,7 @@ public class BookingViewImpl implements BookingView {
                     state = SeatState.FREE;
                 }
                 final JButton button = factory.getButtonSeat(state, i, j);
-                grid.put(button, new SeatImpl(Row.values()[i], j));
+                this.grid.put(button, new SeatImpl(Row.values()[i], j));
                 gridPanel.add(button);
             }
         }
@@ -126,12 +120,11 @@ public class BookingViewImpl implements BookingView {
     public void show() {
         frame.setVisible(true);
     }
-    
     @Override
     public void refresh() {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        final Set<SeatImpl> setSeatsTaken = observer.getSeatsFromFilm(film);
-        final Set<SeatImpl> setSeatsSelected = observer.getSeatsSelected();
+        final Set<Seat> setSeatsTaken = observer.getSeatsFromProgrammedFilm(film);
+        final Set<Seat> setSeatsSelected = observer.getSeatsSelected();
         for (final var bt : grid.keySet()) {
             ImageIcon imageIcon;
             if (setSeatsTaken.contains(grid.get(bt))) {

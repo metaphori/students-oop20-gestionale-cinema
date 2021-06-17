@@ -1,6 +1,8 @@
 package utilities;
 
-public interface Seat<X,Y> {
-    X getRow();
-    Y getColumn();
+import utilitiesImpl.Row;
+
+public interface Seat {
+    Row getRow();
+    Integer getColumn();
 }

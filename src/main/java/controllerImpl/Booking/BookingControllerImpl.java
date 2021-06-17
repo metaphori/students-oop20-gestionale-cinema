@@ -23,6 +23,7 @@ import model.ManageProgrammingFilms.Sorter;
 import modelImpl.Booking.BookingModelImpl;
 import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import utilities.Film;
+import utilities.Seat;
 import utilities.Ticket;
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
@@ -109,8 +110,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public Set<SeatImpl> getSeatsFromFilm(final ProgrammedFilm film) {
-        return this.modelBooking.getSeatsFromFilm(film);
+    public Set<Seat> getSeatsFromProgrammedFilm(final ProgrammedFilm film) {
+        return this.modelBooking.getSeatsFromProgrammedFilm(film);
     }
 
     @Override
@@ -132,7 +133,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     }
 
     @Override
-    public Set<SeatImpl> getSeatsSelected() {
+    public Set<Seat> getSeatsSelected() {
         return modelBooking.getSeatsSelected();
     }
 

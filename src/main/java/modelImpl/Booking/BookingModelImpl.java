@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import model.Booking.BookingModel;
 import utilities.Factory.*;
 import utilities.Film;
+import utilities.Seat;
 import utilities.Ticket;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
@@ -17,10 +18,10 @@ import utilitiesImpl.TicketImpl;
 
 public class BookingModelImpl implements BookingModel {
     private final Set<Ticket> setTicket;
-    private Set<SeatImpl> seatSelected;
+    private Set<Seat> seatSelected;
 
     public BookingModelImpl(final Set<Ticket> setTicket) {
-        seatSelected = new HashSet<>();
+        this.seatSelected = new HashSet<>();
         this.setTicket = setTicket;
     }
 
@@ -28,7 +29,8 @@ public class BookingModelImpl implements BookingModel {
     public Set<Ticket> getSeats() {
         return setTicket;
     }
-    public Set<SeatImpl> getSeatsFromFilm(final ProgrammedFilm programmedFilm){
+    @Override
+    public Set<Seat> getSeatsFromProgrammedFilm(final ProgrammedFilm programmedFilm) {
         return setTicket.stream()
                 .filter(f -> f.getId() == programmedFilm.getIdProgrammation())
                 .filter(f -> f.getDate().equals(programmedFilm.getDate()))
@@ -37,9 +39,9 @@ public class BookingModelImpl implements BookingModel {
                 .flatMap(f -> f.getSetSeat().stream())
                 .collect(Collectors.toSet());
     }
-    
-    public void buttonSelected(final SeatImpl seat, final ProgrammedFilm programmedFilm) {
-        final Set<SeatImpl> set = this.getSeatsFromFilm(programmedFilm);
+    @Override
+    public void buttonSelected(final Seat seat, final ProgrammedFilm programmedFilm) {
+        final Set<Seat> set = this.getSeatsFromProgrammedFilm(programmedFilm);
         if (!set.contains(seat)) {
             if (seatSelected.contains(seat)) {
                 seatSelected.remove(seat);
@@ -54,7 +56,7 @@ public class BookingModelImpl implements BookingModel {
         seatSelected = new HashSet<>();
     }
     @Override
-    public Set<SeatImpl> getSeatsSelected() {
+    public Set<Seat> getSeatsSelected() {
         return seatSelected;
     }
     @Override
@@ -82,7 +84,7 @@ public class BookingModelImpl implements BookingModel {
                ticket.get().getSetSeat().addAll(seatSelected);
            } else {
               final Ticket newTicket = new TicketImpl(programmedFilm.getDate(), programmedFilm.getStartTime(), seatSelected, programmedFilm.getProgrammationPrice(), programmedFilm.getIdProgrammation(), programmedFilm.getHall());
-               setTicket.add(newTicket);
+              setTicket.add(newTicket);
            }
        }
 

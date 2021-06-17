@@ -2,51 +2,30 @@ package viewImpl.Booking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
-import com.mindfusion.common.DateTime;
-import com.mindfusion.scheduling.Calendar;
-
-import model.ManageProgrammingFilms.HandlerList;
-import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
-import modelImpl.ManageProgrammedFilms.HandlerListImpl;
 import utilities.Factory.*;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatState;
 import view.Booking.GUIFactoryBooking;
-import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final double WIDTH_PERC_FRAME = 0.5;
@@ -57,7 +36,7 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
     private static final double HEIGHT_IMAGE_SEAT = HEIGHT_PERC_FRAME / 15;
     private static final String STRING_BUTTON_BACK = "back";
-    
+
     @Override
     public JFrame getBaseFrame(final String title) {
         final JFrame frame = new JFrame();

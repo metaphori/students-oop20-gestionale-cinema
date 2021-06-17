@@ -68,8 +68,8 @@ public class TimeTableViewImpl implements TimeTableView {
     private static final String CALENDAR_STRING = "Filter by date: ";
     private static final Color COLOR_STRING = Color.BLACK;
     private TimeTableViewObserver observer;
-    private JFrame frame;
-    private Set<ProgrammedFilm> setProgrammedFilm;
+    private final JFrame frame;
+    private final Set<ProgrammedFilm> setProgrammedFilm;
     
     public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilmOriginal, final Film film) {
         setProgrammedFilm = new HashSet<>(observer.handlerProgrammedFilm(setProgrammedFilmOriginal, new FilterOldDateImpl()));
@@ -83,7 +83,7 @@ public class TimeTableViewImpl implements TimeTableView {
 
         final JPanel north = factory.getInfoPanel(INFO_STRING + nameFilm, e -> {
             observer.showBackFromTimeTable();
-            frame.dispose();
+            this.frame.dispose();
         });
         final JPanel mainPanel = new JPanel(new BorderLayout());
         final JButton bookBtn = new JButton(TEXT_BUTTON_SELECT);
@@ -102,7 +102,7 @@ public class TimeTableViewImpl implements TimeTableView {
                         .filter(f -> f.getDate().equals(date))
                         .findAny().get();
                 observer.bookTicketForFilm(programmedFilm);
-                frame.dispose();
+                this.frame.dispose();
             } else {
                 this.notSelectedRow();
             }
@@ -175,12 +175,12 @@ public class TimeTableViewImpl implements TimeTableView {
         mainPanel.add(north, BorderLayout.NORTH);
         mainPanel.add(scroll, BorderLayout.CENTER);
         mainPanel.add(bookBtn, BorderLayout.SOUTH);
-        frame.add(mainPanel);
+        this.frame.add(mainPanel);
     }
 
     @Override
     public void show() {
-       frame.setVisible(true);
+       this.frame.setVisible(true);
     }
 
     @Override
