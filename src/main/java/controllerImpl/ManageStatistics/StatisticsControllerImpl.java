@@ -1,6 +1,7 @@
 package controllerImpl.ManageStatistics;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ import view.ManageStatistics.StatisticsGUI;
 import viewImpl.ManageStatistics.StatisticsImplGUI;
 
 public class StatisticsControllerImpl implements StatisticsController{
-    private BookingModel modelBooking;
+    private BookingModel modelBooking; //??
 
     private BookingController controllerBooking;
     private FilmsController controllerFilm;
@@ -50,6 +51,28 @@ public class StatisticsControllerImpl implements StatisticsController{
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    //durata film? durata programmazione?? affluenza per orario //genere più visto?
+    public Optional<LocalTime> getMostAffluenceHours() {
+
+        Set<Ticket> set = controllerBooking.getTicket();
+        Set<LocalTime> hours = set.stream().map(t -> t.getTime()).distinct().collect(Collectors.toSet());
+        
+        Optional<LocalTime> mostAffluentHours = Optional.empty();
+
+        int val = 0;
+
+        for (var time: hours) {
+            int temp = set.stream().filter(t -> t.getTime().equals(time)).reduce(0, (partialRes,t) -> partialRes+t.getSetSeat().size() , (res1,res2) -> res1+res2);
+
+            if (val<temp) {
+                mostAffluentHours = Optional.of(time);
+                val = temp;
+            }
+        } 
+        return mostAffluentHours;
     }
 
     @Override
@@ -86,8 +109,8 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     @Override
     public void showStatisticsView() {
-        statisticsView.show();
         statisticsView.update();
+        statisticsView.show();
     }
 
     @Override

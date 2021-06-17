@@ -16,7 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,12 +28,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 import org.apache.commons.io.FileUtils;
 
 import controller.ManageStatistics.StatisticsController;
 import utilities.Film;
+import utilities.ManageAccounts.Account;
 import utilitiesImpl.ViewSettings;
 import view.ManageStatistics.StatisticsGUI;
 
@@ -43,26 +51,29 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
+    
     private static final String MONEY_STRING = "Money collection: ";
     private static final String MOVIE_STRING = "Most watched movie: ";
     private static final String PEOPLE_STRING = "Day with the most people: ";
     private static final String TITLE_STRING = "Cinema's Statistics";
-
+    private static final String TIME_STRING = "Most affluent time: ";
+    
     private static final double IMAGE_WIDTH = 0.4;
     private static final double IMAGE_HEIGTH = 0.6;
-    JLabel title = new JLabel(TITLE_STRING);
     
-    
-    
+    private final JLabel title = new JLabel(TITLE_STRING);
     private final JLabel movie = new JLabel(MOVIE_STRING);
     private final JLabel money = new JLabel(MONEY_STRING);
     private final JLabel people = new JLabel(PEOPLE_STRING);
-
+    private final JLabel time = new JLabel(TIME_STRING);
+    
+    private JTable table = new JTable();
+    private final JButton home = new JButton("Home");
+    
     //img film
     private final URL imgURL = ClassLoader.getSystemResource("images/filmStandardIco.png");
     private ImageIcon icon = new ImageIcon(imgURL);
     private final JButton pic = new JButton(icon);
-    
     
     //img Stat
     private final URL imgURLS = ClassLoader.getSystemResource("images/statistics.png");
@@ -76,7 +87,6 @@ public class StatisticsImplGUI implements StatisticsGUI{
     private final JButton picW = new JButton(iconW);
     */
     
-    private final JButton home = new JButton("Home");
 
     public static final int SPACE = 5;
     public static final int SP = 90;
@@ -128,32 +138,41 @@ public class StatisticsImplGUI implements StatisticsGUI{
         cnt.gridy = 0;
         cnt.insets = new Insets(SP, SP, SP, SP);
         cnt.fill = GridBagConstraints.HORIZONTAL;
-        pEastInternal.add(money, cnt);
-
-        money.setFont(new Font("Serif", Font.BOLD, 22));
         
-        cnt.gridy++;
-        pEastInternal.add(people, cnt);
+        
+        DefaultTableModel dm = new DefaultTableModel(new Object[][] {}, new Object[] {"Title of Cinema statistics", "Results"});
+        table = new JTable(dm) {
+            private static final long serialVersionUID = 1L;
+                public boolean isCellEditable(final int row, final int column) {
+                    return false;
+                }
+            };
 
-        people.setFont(new Font("Serif", Font.BOLD, 22));
-        //cnst.gridy++;
-
+        final JScrollPane scroll = new JScrollPane(table); 
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        pEastInternal.add(scroll);
+        
+        //this.update();
+        table.setFont(new Font("Serif", Font.BOLD, 18));
+        table.setRowHeight(20);
+        
         final JPanel pEast = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pEast.add(pEastInternal, cnst);
-        //cnst.gridy++;
+        cnst.gridy++;
 
         final JPanel pSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pEastInternal.add(picS, cnst);
-        //pEastInternal.add(picW, cnst);
         
         frame.add(pNorth, BorderLayout.NORTH);
         frame.add(pWest, BorderLayout.WEST);
         frame.add(pEast, BorderLayout.CENTER);
         frame.add(pNorthInternal, BorderLayout.EAST);
         frame.add(pSouth, BorderLayout.SOUTH);
+        
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
 
+        
         home.addActionListener(event -> {
             observer.showMenu();
             frame.setVisible(false);
@@ -192,12 +211,33 @@ public class StatisticsImplGUI implements StatisticsGUI{
         if (dateOptional.isPresent()) {
             people.setText(PEOPLE_STRING + dateOptional.get().toString());
         }
-        //picW.setIcon(iconW);
         
         Double moneyTotal = observer.getRecessed();
-        money.setText(MONEY_STRING + moneyTotal.toString() +" euro");
+        money.setText(MONEY_STRING + moneyTotal.toString() + " euro");
         picS.setIcon(iconS);
         
 
+        Optional<LocalTime> timeOptional = observer.getMostAffluenceHours();
+        if (timeOptional.isPresent()) {
+            time.setText(TIME_STRING + timeOptional.get().toString());
+        }
+        
+        final String[] columnNames = {"Title of Cinema statistics", "Type" };
+        Object[][] data = new Object[4][columnNames.length];
+        data[0][0] = PEOPLE_STRING;
+        data[0][1] = dateOptional.get().toString();
+        data[1][0] = MONEY_STRING;
+        data[1][1] = moneyTotal.toString() + " euro";
+        data[2][0] = TIME_STRING;
+        data[2][1] = timeOptional.get().toString();
+        
+        
+
+        
+        final DefaultTableModel model = (DefaultTableModel) table.getModel();
+        table.setModel(new  DefaultTableModel(data, columnNames));
+        model.fireTableDataChanged();
+        
+        frame.validate();
     }
 }
