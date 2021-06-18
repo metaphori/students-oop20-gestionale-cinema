@@ -13,20 +13,24 @@ import viewImpl.ManageProgrammingFilms.factory.TimePanel;
 public interface ScheduleFilmsFactory {
     /** 
      * Get time panel.
+     * @return time panel
      * */
     TimePanel getTimePanel();
     /** 
      * Get date panel.
+     * @return date panel
      * */
     DatePanel getDatePanel();
     /** 
      * Get bottom panel.
      * @param al action listener to add for button
+     * @return bottom panel
      * */
     JPanel getBottomPanel(ActionListener al);
     /** 
      * Get info programmation panel.
      * @param filmsController films controller
+     * @return panel with info programmation
      * */
     InfoProgrammationPanel getInfoProgrammationPanel(FilmsController filmsController);
 

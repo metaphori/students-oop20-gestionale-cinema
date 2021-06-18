@@ -6,6 +6,8 @@ import java.util.Optional;
 public interface ManagerIdsFilms {
     /** 
      * Get new film id.
+     * @return film id
+     * 
      * */
     int getNewFilmID();
     /** 
