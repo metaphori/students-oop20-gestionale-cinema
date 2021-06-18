@@ -38,6 +38,7 @@ import javax.swing.table.TableCellRenderer;
 import com.mindfusion.common.DateTime;
 import com.mindfusion.scheduling.Calendar;
 
+import controller.booking.TimeTableViewObserver;
 import model.ManageProgrammingFilms.HandlerList;
 import model.ManageProgrammingFilms.Sorter;
 import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
@@ -48,7 +49,6 @@ import utilitiesImpl.Hall;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import view.booking.GUIFactoryBooking;
 import view.booking.TimeTableView;
-import view.booking.TimeTableViewObserver;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 public class TimeTableViewImpl implements TimeTableView {
