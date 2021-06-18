@@ -16,6 +16,7 @@ public interface ProgrammedFilmFactory {
      * @param date  schedule date
      * @param startTime start film programmatiom
      * @param endTime end film programmatiom
+     * @return programmed film created
      * */
     ProgrammedFilm createProgrammedFilm(int idFilm, Hall hall, double price, LocalDate date, LocalTime startTime, LocalTime endTime);
 }
