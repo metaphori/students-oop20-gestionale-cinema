@@ -15,58 +15,44 @@ import view.ManageFilms.Factory.InfoFilmsGUIfactory;
 
 public final class InfoFilmsGUIfactoryImpl implements InfoFilmsGUIfactory {
 
-    /**
-     * Creates personalized basic panel.
-     * @param layout to use
-     * @return personalized panel.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JPanel createPanel(final LayoutManager layout) {
         return new JPanel(layout);
     }
-    /**
-     * Creates personalized button.
-     * @param text to insert
-     * @return personalized button.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JButton createButtonWithText(final String text) {
         return new JButton(text);
     }
-    /**
-     * Creates personalized button with icon.
-     * @param icon to add
-     * @return personalized button.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JButton createButtonWithIcon(final Icon icon) {
         return new JButton(icon);
     }
-    /**
-     * Creates personalized text field.
-     * @param text to insert
-     * @return personalized text field.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JTextField createTextField(final String text) {
         return new JTextField(text);
     }
-    /**
-     * Creates personalized text area.
-     * @param text to insert
-     * @return personalized text area.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JTextArea createTextArea(final String text) {
         return new JTextArea(text);
     }
-    /**
-     * Get scaled icon with specific width and height .
-     * @param icon 
-     * @param width
-     * @param height
-     * @return personalized ImageIcon.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public ImageIcon getScaledIcon(final ImageIcon icon, final int width, final int height) {
         final Image image = icon.getImage(); // transform it

@@ -9,11 +9,11 @@ public class AccountImpl implements Account {
 
     /**
      * Constructor for the class Account.
-     * @param name
-     * @param surname
-     * @param username
-     * @param pass 
-     * @param type
+     * @param name of the account
+     * @param surname of the account
+     * @param username of the account
+     * @param pass of the account
+     * @param type of the account
      */
     public AccountImpl(final String name, final String surname, final String username, final String pass, final TypeAccount type) {
         this.name = name; //Unique name
@@ -24,8 +24,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * Returns the account's name.
-     * @return name
+     * @return name of the account
      */
     @Override
     public String getName() {
@@ -34,7 +33,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's name.
-     * @param name
+     * @param name of the account
      */
     @Override
     public void setName(final String name) {
@@ -44,8 +43,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * Returns the account's surname.
-     * @return surname
+     * @return surname of the account
      */
     @Override
     public String getSurname() {
@@ -54,7 +52,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's surname.
-     * @param surname
+     * @param surname of the account
      */
     @Override
     public void setSurname(final String surname) {
@@ -64,8 +62,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * Returns the account's username.
-     * @return username
+     * @return username of the account
      */
     @Override
     public String getUsername() {
@@ -74,7 +71,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's username.
-     * @param username 
+     * @param username of the account 
      */
     @Override
     public void setUsername(final String username) {
@@ -84,8 +81,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * Returns the account's password.
-     * @return pass
+     * @return password of the account
      */
     @Override
     public String getPassword() {
@@ -94,7 +90,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's password.
-     * @param pass 
+     * @param pass of the account 
      */
     @Override
     public void setPassword(final String pass) {
@@ -104,8 +100,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * Returns the account's type. Administrator or operator.
-     * @return type
+     * @return type of the account. Administrator or operator.
      */
     @Override
     public TypeAccount type() {

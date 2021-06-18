@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import utilities.Factory.*;
+import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.SeatState;
 
 public interface GUIFactoryBooking {

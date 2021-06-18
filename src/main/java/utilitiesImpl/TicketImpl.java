@@ -5,18 +5,19 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Set;
 
+import utilities.Seat;
 import utilities.Ticket;
 
 public class TicketImpl implements Ticket {
 
         private final LocalDate data;
         private final LocalTime time;
-	private final Set<SeatImpl> setSeat;
+	private final Set<Seat> setSeat;
 	private final double price;
 	private final int id;
 	private final Hall hall;
 	
-	public TicketImpl(final LocalDate data, final LocalTime time, final Set<SeatImpl> setSeat, final double price, final int id, final Hall hall) {
+	public TicketImpl(final LocalDate data, final LocalTime time, final Set<Seat> setSeat, final double price, final int id, final Hall hall) {
 		this.data = data;
 		this.hall = hall;
 		this.setSeat = setSeat;
@@ -30,7 +31,7 @@ public class TicketImpl implements Ticket {
 	public LocalDate getDate() {
 		return data;
 	}
-	public Set<SeatImpl> getSetSeat() {
+	public Set<Seat> getSetSeat() {
 		return setSeat;
 	}
 	public double getPrice() {

@@ -2,11 +2,11 @@ package utilitiesImpl;
 
 import utilities.Seat;
 
-public class SeatImpl implements Seat<Row, Integer> {
+public class SeatImpl implements Seat {
     private final Row row;
     private final Integer column;
     
-    public SeatImpl(Row row, Integer column) {
+    public SeatImpl(final Row row, final Integer column) {
         this.row = row;
         this.column = column;
     }

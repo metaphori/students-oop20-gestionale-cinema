@@ -21,13 +21,9 @@ public final class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilm
             this.listToManage = listToManage;
             this.handlerList = new HandlerListImpl<>();
      }
-     /** 
-      * Check if a specific timeslot, date and hall are available.
-      * @param timeSlotToCheck time slot to check
-      * @param date date to check
-      * @param hall hall to check
-      * @return boolean 
-      * */
+   /** 
+    * {@inheritDoc}
+    * */
      @Override
      public boolean isAvailableProgrammation(final TimeSlot timeSlotToCheck, final LocalDate date, final Hall hall) { // check if timeslot is available for specific date and hall 
             //final TimeSlotFactory timeSlotFactory = new TimeSlotFactoryImpl();
@@ -69,8 +65,7 @@ public final class ManagerProgrammingFilmsImpl implements ManagerProgrammingFilm
      }
 
      /** 
-      * Get used handler list.
-      * @return HandlerList<ProgrammedFilm> 
+      * {@inheritDoc}
       * */
     @Override
     public HandlerList<ProgrammedFilm> getHandlerList() {

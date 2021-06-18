@@ -14,7 +14,7 @@ public interface ProgrammedFilmsModel {
     /** 
      * Add film programmation. If it's not available throws ProgrammationNotAvailableException.
      * @param programmedFilm to add.
-     * @throws ProgrammationNotAvailableException 
+     * @throws ProgrammationNotAvailableException  programmation not available
      */
     void addFilmProgrammation(ProgrammedFilm programmedFilm) throws ProgrammationNotAvailableException;
     /** 
@@ -32,7 +32,7 @@ public interface ProgrammedFilmsModel {
     boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, Hall hall);
     /** 
      * Get all programmed films as list.
-     * @return List<ProgrammedFilm>
+     * @return list of all programmed film 
      * */
     List<ProgrammedFilm> getAllProgrammedFilm();
     /**Get ManagerProgrammingFilms.

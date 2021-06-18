@@ -19,7 +19,7 @@ public interface ManagerProgrammingFilms {
     boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, Hall hall);
     /** 
      * Get used handler list.
-     * @return HandlerList<ProgrammedFilm> 
+     * @return get handler to manage list of programmed film
      * */
     HandlerList<ProgrammedFilm> getHandlerList();
 }

@@ -105,8 +105,7 @@ public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
     private void fillDIR(final File toCopy, final String pathDir) { // TODO
     }
     /**
-        Deletes specific file name.
-        @throws Exception 
+       {@inheritDoc}
      */
     @Override
     public void deleteFileWithSpecificName(final File toDelete) {

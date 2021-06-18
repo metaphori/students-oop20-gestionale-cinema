@@ -14,7 +14,7 @@ import utilities.Factory.ProgrammedFilm;
 public interface ProgrammingFilmsController {
     /**
      * Get all programmed films.
-     * @return List<ProgrammedFilm>
+     * @return list of all programmed films
      */
     List<ProgrammedFilm> getAllProgrammedFilms();
     /**
@@ -47,11 +47,12 @@ public interface ProgrammingFilmsController {
     void showMenu();
     /**
      * Get film controller.
+     * @return used films controller
      */
     FilmsController getFilmsController();
     /**
      * Delete all programmation of specific film.
-     * @param film
+     * @param film all programmation of this film will be deleted
      */
     void deleteAllFilmProgrammation(Film film);
     /**
@@ -60,10 +61,12 @@ public interface ProgrammingFilmsController {
     void updateGUI();
     /**
      * Set films controller.
+     * @param filmsController films controller to set
      */
     void setFilmsController(FilmsController filmsController);
     /**
-     * Set films controller.
+     * Set cinema controller.
+     * @param cinemaController cinema controller to set-
      */
     void setCinemaController(CinemaController cinemaController);
 
