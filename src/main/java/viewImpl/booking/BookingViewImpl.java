@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import controller.booking.BookingViewObserver;
 import utilities.Seat;
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
@@ -26,7 +27,10 @@ import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 import view.booking.BookingView;
-import view.booking.BookingViewObserver;
+
+
+
+
 import view.booking.GUIFactoryBooking;
 
 public class BookingViewImpl implements BookingView {

@@ -25,32 +25,44 @@ public final class ProgrammedFilmImpl implements ProgrammedFilm {
         this.date = date;
         this.timeSlot = timeSlot;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public int getIdProgrammation() {
         return this.id;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public Hall getHall() {
         return this.hall;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public double getProgrammationPrice() {
         return this.price;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public LocalDate getDate() {
         return this.date;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public LocalTime getStartTime() {
         return this.timeSlot.getStartTime();
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public LocalTime getEndTime() {
         return this.timeSlot.getEndTime();

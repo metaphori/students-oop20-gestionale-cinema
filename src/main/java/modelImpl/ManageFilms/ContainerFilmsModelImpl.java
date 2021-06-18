@@ -27,37 +27,36 @@ public final class ContainerFilmsModelImpl implements ContainerFilmsModel {
     }
 
     /** 
-     * Add film to the container.
-     * @param newFilm, film to add
+     * {@inheritDoc}
      * */
     @Override
     public void addFilm(final Film newFilm) {
         this.containerFilms.add(newFilm);
     }
     /** 
-     * Remove film from the container.
-     * @param oldFilm, film to delete
+     * {@inheritDoc}
      * */
     @Override
     public void removeFilm(final Film oldFilm) {
        this.containerFilms.remove(oldFilm);
     }
     /** 
-     * Get all films from the container.
-     * @return containerFilms
+     * {@inheritDoc}
      * */
     @Override
     public Set<Film> getFilms() {
         return this.containerFilms;
     }
     /** 
-     * Get manager ids films.
-     * @return manager
+     * {@inheritDoc}
      * */
     @Override
     public ManagerIdsFilms getManagerIdsFilms() {
         return this.manager;
     }
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public String toString() {
         return "" + containerFilms + "" + manager;

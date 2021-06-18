@@ -1,5 +1,5 @@
+package controller.booking;
 
-package view.booking;
 import java.util.Set;
 
 import utilities.Seat;
