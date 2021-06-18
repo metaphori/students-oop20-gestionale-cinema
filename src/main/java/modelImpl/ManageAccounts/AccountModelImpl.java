@@ -12,6 +12,7 @@ import utilities.ManageAccounts.Account;
 public class AccountModelImpl implements AccountModel {
     private final Set<Account> collect;
     private Account accountLogged;
+    
     /**
      * Construttor for the Account Model.
      */
@@ -19,26 +20,41 @@ public class AccountModelImpl implements AccountModel {
         this.collect = setAccount; 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addAccount(final Account newAccount) {
         this.collect.add(newAccount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeAccount(final Account oldAccount) {
         this.collect.remove(oldAccount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Account> getAccounts() {
         return this.collect;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Account " + collect;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Account getAccountLogged() {
         return this.accountLogged;
