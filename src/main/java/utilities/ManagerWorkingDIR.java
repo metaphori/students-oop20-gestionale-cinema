@@ -42,8 +42,7 @@ public interface ManagerWorkingDIR {
     boolean isValidName(String dirPath, String name);
     /**
         Deletes specific file name.
-        @param dirPath directory used to check names
-        @param name name to check
+        @param toDelete file to delete
      */
     void deleteFileWithSpecificName(File toDelete);
 
