@@ -6,13 +6,13 @@ import java.util.Set;
 import com.google.gson.reflect.TypeToken;
 
 import controller.CinemaController;
-import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
-import controllerImpl.Booking.BookingControllerImpl;
+import controller.booking.BookingController;
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
+import controllerImpl.booking.BookingControllerImpl;
 import model.ManageFilms.ContainerFilmsModel;
 import model.ManageFilms.ManagerIdsFilms;
 import modelImpl.ManageFilms.ContainerFilmsModelImpl;

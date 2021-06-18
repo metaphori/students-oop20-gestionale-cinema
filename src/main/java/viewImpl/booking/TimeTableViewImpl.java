@@ -1,4 +1,4 @@
-package viewImpl.Booking;
+package viewImpl.booking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,9 +46,9 @@ import utilities.Film;
 import utilities.Factory.*;
 import utilitiesImpl.Hall;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
-import view.Booking.GUIFactoryBooking;
-import view.Booking.TimeTableView;
-import view.Booking.TimeTableViewObserver;
+import view.booking.GUIFactoryBooking;
+import view.booking.TimeTableView;
+import view.booking.TimeTableViewObserver;
 import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
 
 public class TimeTableViewImpl implements TimeTableView {

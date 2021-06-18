@@ -1,4 +1,4 @@
-package TestBooking;
+package testbooking;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,11 +10,11 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import model.Booking.BookingModel;
 import model.ManageFilms.ManagerIdsFilms;
-import modelImpl.Booking.BookingModelImpl;
+import model.booking.BookingModel;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
+import modelImpl.booking.BookingModelImpl;
 import utilities.Film;
 import utilities.Seat;
 import utilities.Ticket;
