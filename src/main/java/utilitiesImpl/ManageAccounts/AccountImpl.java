@@ -24,7 +24,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * @return account's name 
+     * @return name of the account
      */
     @Override
     public String getName() {
@@ -33,7 +33,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's name.
-     * @param account's name
+     * @param name of the account
      */
     @Override
     public void setName(final String name) {
@@ -43,7 +43,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * @return account' surname
+     * @return surname of the account
      */
     @Override
     public String getSurname() {
@@ -52,7 +52,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's surname.
-     * @param account' surname
+     * @param surname of the account
      */
     @Override
     public void setSurname(final String surname) {
@@ -62,7 +62,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * @return account's username
+     * @return username of the account
      */
     @Override
     public String getUsername() {
@@ -71,7 +71,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's username.
-     * @param account's username 
+     * @param username of the account 
      */
     @Override
     public void setUsername(final String username) {
@@ -81,7 +81,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * @return account's password
+     * @return password of the account
      */
     @Override
     public String getPassword() {
@@ -90,7 +90,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's password.
-     * @param account's password 
+     * @param password of the account 
      */
     @Override
     public void setPassword(final String pass) {
@@ -100,7 +100,7 @@ public class AccountImpl implements Account {
     }
 
     /**
-     * @return the account's type. Administrator or operator.
+     * @return type of the account. Administrator or operator.
      */
     @Override
     public TypeAccount type() {

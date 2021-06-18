@@ -8,13 +8,13 @@ public interface AccountModel {
 
     /**
      * Add new Account.
-     * @param new Account to add
+     * @param newAccount to add
      */
     void addAccount(Account newAccount);
 
     /**
      * Delete specific Account. 
-     * @param old Account to remove
+     * @param oldAccount to remove
      */
     void removeAccount(Account oldAccount);
 
@@ -32,7 +32,7 @@ public interface AccountModel {
 
     /**
      * Set Account logged in that time.
-     * @return Account
+     * @return AccountLogged in that time
      */
     void setAccountLogged(Account accountLogged);
 }

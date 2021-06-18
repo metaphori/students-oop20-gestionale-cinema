@@ -9,13 +9,13 @@ public interface AccountsController {
 	
         /**
          * Add new Account.
-         * @param new Account to add
+         * @param newAccount to add
          */
 	void addAccount(Account newAccount);
 	
 	/**
 	 * Delete specific Account. 
-	 * @param old Account to remove
+	 * @param oldAccount to remove
 	 */
 	void deleteAccount(Account oldAccount);
 	
@@ -47,19 +47,18 @@ public interface AccountsController {
 
         /**
          * Set Cinema Controller.
-         * @param cinemaController
+         * @param cinemaController controller to set
          */
         void setCinemaController(CinemaController cinemaController);
 
         /**
          * Set Account logged in that time.
-         * @param accountLogged
+         * @param accountLogged in that time
          */
         void setAccountLogged(Account accountLogged);
 
         /**
          * Get Account logged in that time.
-         * @param account
          */
         Account getAccountLogged();
 }
