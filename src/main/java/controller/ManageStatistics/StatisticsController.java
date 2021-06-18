@@ -8,46 +8,46 @@ import controller.CinemaController;
 import utilities.Film;
 
 public interface StatisticsController {
-    
+
     /**
      * Film most watched.
      * @return Film
      */
     Optional<Film> getMostedWatchedFilm();
-    
+
     /**
      * Most affluent day.
-     * @return
+     * @return LocalDate
      */
     Optional<LocalDate> getMostAffluentDays(); 
-    
+
     /**
      * Most affluent time.
-     * @return
+     * @return LocalTime
      */
     Optional<LocalTime> getMostAffluenceHours();
-    
+
     /**
      * Total cinema gain.
-     * @return
+     * @return double recessed
      */
     Double getRecessed();
-    
+
     /**
-     * Show statistics view
+     * Show statistics view.
      */
     void showStatisticsView();
-    
+
     /**
      * Show menu view.
      */
     void showMenu();
-    
+
     /**
      * Set Cinema Controller.
-     * @param cinemaController
+     * @param cinemaController that is cinema controller
      */
     void setCinemaController(CinemaController cinemaController);
-    
+
 	
 }

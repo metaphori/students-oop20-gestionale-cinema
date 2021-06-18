@@ -1,6 +1,7 @@
 package controllerImpl.ManageStatistics;
 
 import java.time.LocalDate;
+
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.Set;
@@ -22,8 +23,10 @@ import utilitiesImpl.TicketImpl;
 import view.ManageStatistics.StatisticsGUI;
 import viewImpl.ManageStatistics.StatisticsImplGUI;
 
-public class StatisticsControllerImpl implements StatisticsController{
-    private BookingModel modelBooking; //??
+/**
+ * Implements Account Controller.
+ */
+public class StatisticsControllerImpl implements StatisticsController { 
 
     private BookingController controllerBooking;
     private FilmsController controllerFilm;
@@ -31,6 +34,9 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     private StatisticsGUI statisticsView;
 
+    /**
+     * Constructor for the Statistics Controller.
+     */
     public StatisticsControllerImpl() {
         this.statisticsView = new StatisticsImplGUI();
         this.statisticsView.setObserver(this);
@@ -41,9 +47,12 @@ public class StatisticsControllerImpl implements StatisticsController{
         System.out.println("Film" + controllerFilm.getFilms());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Film> getMostedWatchedFilm() {
-        Optional<Ticket> ticketOptional = this.controllerBooking.getTicket().stream().max((t1, t2) -> {
+        final Optional<Ticket> ticketOptional = this.controllerBooking.getTicket().stream().max((t1, t2) -> {
             return t1.getSetSeat().size() - t2.getSetSeat().size();
         });
         if (ticketOptional.isPresent()) {
@@ -53,21 +62,23 @@ public class StatisticsControllerImpl implements StatisticsController{
         return Optional.empty();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    //durata film? durata programmazione?? affluenza per orario //genere più visto?
     public Optional<LocalTime> getMostAffluenceHours() {
 
-        Set<Ticket> set = controllerBooking.getTicket();
-        Set<LocalTime> hours = set.stream().map(t -> t.getTime()).distinct().collect(Collectors.toSet());
-        
+        final Set<Ticket> set = controllerBooking.getTicket();
+        final Set<LocalTime> hours = set.stream().map(t -> t.getTime()).distinct().collect(Collectors.toSet());
+
         Optional<LocalTime> mostAffluentHours = Optional.empty();
 
         int val = 0;
 
-        for (var time: hours) {
-            int temp = set.stream().filter(t -> t.getTime().equals(time)).reduce(0, (partialRes,t) -> partialRes+t.getSetSeat().size() , (res1,res2) -> res1+res2);
+        for (final var time: hours) {
+            final int temp = set.stream().filter(t -> t.getTime().equals(time)).reduce(0, (partialRes, t) -> partialRes + t.getSetSeat().size(), (res1, res2) -> res1 + res2);
 
-            if (val<temp) {
+            if (val < temp) {
                 mostAffluentHours = Optional.of(time);
                 val = temp;
             }
@@ -75,20 +86,23 @@ public class StatisticsControllerImpl implements StatisticsController{
         return mostAffluentHours;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<LocalDate> getMostAffluentDays() {
 
-        Set<Ticket> set = controllerBooking.getTicket();
+        final Set<Ticket> set = controllerBooking.getTicket();
 
-        Set<LocalDate> dates = set.stream().map(t -> t.getDate()).distinct().collect(Collectors.toSet());
+        final Set<LocalDate> dates = set.stream().map(t -> t.getDate()).distinct().collect(Collectors.toSet());
         Optional<LocalDate> mostAffluentDate = Optional.empty();
 
         int val = 0;
 
-        for (var date: dates) {
-            int temp = set.stream().filter(t -> t.getDate().equals(date)).reduce(0, (partialRes,t) -> partialRes+t.getSetSeat().size() , (res1,res2) -> res1+res2);
+        for (final var date: dates) {
+            final int temp = set.stream().filter(t -> t.getDate().equals(date)).reduce(0, (partialRes, t) -> partialRes + t.getSetSeat().size(), (res1, res2) -> res1 + res2);
 
-            if (val<temp) {
+            if (val < temp) {
                 mostAffluentDate = Optional.of(date);
                 val = temp;
             }
@@ -96,10 +110,13 @@ public class StatisticsControllerImpl implements StatisticsController{
         return mostAffluentDate;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getRecessed() {
         double tot = 0;
-        for (var ticket : this.controllerBooking.getTicket()) {
+        for (final var ticket : this.controllerBooking.getTicket()) {
            tot = tot + ticket.getSetSeat().size() * ticket.getPrice();
         }
 
@@ -107,17 +124,26 @@ public class StatisticsControllerImpl implements StatisticsController{
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showStatisticsView() {
         statisticsView.update();
         statisticsView.show();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showMenu() {
         controllerCinema.showMenu();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCinemaController(CinemaController cinemaController) {
         this.controllerCinema = cinemaController;

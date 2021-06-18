@@ -8,18 +8,18 @@ import utilities.ManageAccounts.Account;
 public interface LoginAccountGUI {
 
     /**
-     * Show a login view
+     * Show a login view.
      */
     void show();
 
     /**
-     * Set Account controller observer
+     * Set Account controller observer.
      * @param observer that is Account controller
      */
     void setObserver(AccountsController observer);
 
     /**
-     * Update account
+     * Update account.
      * @param setAccount that is a set of accounts
      */
     void updateSetAccount(Set<Account> setAccount);

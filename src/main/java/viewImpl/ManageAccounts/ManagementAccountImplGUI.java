@@ -34,6 +34,9 @@ import utilities.ManageAccounts.Account;
 import utilities.ManageAccounts.TypeAccount;
 import view.ManageAccounts.ManagementAccountGUI;
 
+/**
+ * Implements login view.
+ */
 public class ManagementAccountImplGUI implements ManagementAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT 
 
@@ -59,8 +62,10 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
     private AccountsController observer;
     public static final int SPACE = 5;
 
-    //private Map<JButton, Account> map = new HashMap<>();
 
+    /**
+     * Constructor for the view Manage Account.
+     */
     public ManagementAccountImplGUI() {
 
         frame.setTitle(FRAME_NAME);
@@ -116,7 +121,7 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         delete.addActionListener(event -> {
             final int row = table.getSelectedRow();
             if (row != -1) {
-                Set<Account> setAccount = observer.getAccounts();
+                final Set<Account> setAccount = observer.getAccounts();
                 final int row1 = setAccount.size();
 
                 if (row1 <= 1) {
@@ -129,14 +134,13 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
                  } else {
 
                     final String username = (String) table.getModel().getValueAt(row, 0);
-                    Account account = observer.getAccounts().stream()
+                    final Account account = observer.getAccounts().stream()
                     .filter(a -> a.getUsername().equals(username))
                     .findFirst().get();
 
-                //    observer.
-                    String personalAcc = observer.getAccountLogged().getUsername();
-                    String selectAccount = account.getUsername();
-                    
+                    final String personalAcc = observer.getAccountLogged().getUsername();
+                    final String selectAccount = account.getUsername();
+
                     if (personalAcc.equals(selectAccount)) {
                         JOptionPane.showMessageDialog(frame, "You cannot delete your own account");
                     } else {
@@ -150,10 +154,13 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
 
         });
 
-        
+
         frame.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         frame.pack();
@@ -163,14 +170,19 @@ public class ManagementAccountImplGUI implements ManagementAccountGUI{
         frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setObserver(final AccountsController observer) {
         this.observer = observer;
     }
 
-    //update table of list account
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void update() {
+    public void update() {      //update table of list account
         Set<Account> setAccount = observer.getAccounts();
         final int row = setAccount.size();
         final String[] columnNames = {"Username", "Name", "Surname", "Type" };
