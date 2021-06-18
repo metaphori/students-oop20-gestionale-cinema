@@ -1,4 +1,4 @@
-package viewImpl.Booking;
+package viewImpl.booking;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

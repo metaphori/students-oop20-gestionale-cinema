@@ -1,4 +1,4 @@
-package model.Booking;
+package model.booking;
 
 import java.util.Set;
 import utilities.Film;

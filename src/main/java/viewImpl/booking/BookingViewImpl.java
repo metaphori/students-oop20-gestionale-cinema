@@ -1,4 +1,4 @@
-package viewImpl.Booking;
+package viewImpl.booking;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import controller.booking.BookingViewObserver;
 import utilities.Seat;
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
@@ -25,9 +26,8 @@ import utilitiesImpl.Hall;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
-import view.Booking.BookingView;
-import view.Booking.BookingViewObserver;
-import view.Booking.GUIFactoryBooking;
+import view.booking.BookingView;
+import view.booking.GUIFactoryBooking;
 
 public class BookingViewImpl implements BookingView {
     private final JFrame frame;

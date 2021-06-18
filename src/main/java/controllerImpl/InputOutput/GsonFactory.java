@@ -31,8 +31,7 @@ import utilitiesImpl.ManageAccounts.AccountImpl;
 
 
 public final class GsonFactory {
-    private static final String STRING_TYPE = "type";
-    
+
     private GsonFactory() { }
     /** 
      * @return a gson object that was built adding adaptation
@@ -40,35 +39,35 @@ public final class GsonFactory {
     
     public static Gson getMyGson() {
         final RuntimeTypeAdapterFactory<Film> adapterFilm = RuntimeTypeAdapterFactory
-                .of(Film.class, STRING_TYPE)
+                .of(Film.class, "type")
                 .registerSubtype(FilmBasicImpl.class, FilmBasicImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<ProgrammedFilm> adapterProgrammedFilm = RuntimeTypeAdapterFactory
-                .of(ProgrammedFilm.class, STRING_TYPE)
+                .of(ProgrammedFilm.class, "type")
                 .registerSubtype(ProgrammedFilmImpl.class, ProgrammedFilmImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<Ticket> adapterTicket = RuntimeTypeAdapterFactory
-                .of(Ticket.class, STRING_TYPE)
+                .of(Ticket.class, "Type")
                 .registerSubtype(TicketImpl.class, TicketImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<Seat> adapterSeat = RuntimeTypeAdapterFactory
-                .of(Seat.class, STRING_TYPE)
+                .of(Seat.class, "Type")
                 .registerSubtype(SeatImpl.class, SeatImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<ManagerIdsFilms> adapterManagerIdsFilms = RuntimeTypeAdapterFactory
-                .of(ManagerIdsFilms.class, STRING_TYPE)
+                .of(ManagerIdsFilms.class, "Type")
                 .registerSubtype(ManagerIdsFilmImpl.class, ManagerIdsFilmImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<IdsGenerator> adapterIdsGenerator = RuntimeTypeAdapterFactory
-                .of(IdsGenerator.class, STRING_TYPE)
+                .of(IdsGenerator.class, "Type")
                 .registerSubtype(IdsGeneratorImpl.class, IdsGeneratorImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<TimeSlot> adapterTimeSlot = RuntimeTypeAdapterFactory
-                .of(TimeSlot.class, STRING_TYPE)
+                .of(TimeSlot.class, "Type")
                 .registerSubtype(TimeSlotImpl.class, TimeSlotImpl.class.getName());
 
         final RuntimeTypeAdapterFactory<Account> adapterAccount = RuntimeTypeAdapterFactory
-                .of(Account.class, STRING_TYPE)
+                .of(Account.class, "Type")
                 .registerSubtype(AccountImpl.class, AccountImpl.class.getName());
 
         return new GsonBuilder()

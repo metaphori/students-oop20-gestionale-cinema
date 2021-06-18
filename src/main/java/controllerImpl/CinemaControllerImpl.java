@@ -3,17 +3,16 @@ package controllerImpl;
 import controller.CinemaController;
 
 import controller.CinemaControllerObserver;
-import controller.Booking.BookingController;
 import controller.ManageAccounts.AccountsController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controller.ManageStatistics.StatisticsController;
-import controllerImpl.Booking.BookingControllerImpl;
+import controller.booking.BookingController;
 import controllerImpl.ManageAccounts.AccountsControllerImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
 import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
 import controllerImpl.ManageStatistics.StatisticsControllerImpl;
-
+import controllerImpl.booking.BookingControllerImpl;
 import utilities.ManagerWorkingDIR;
 import utilitiesImpl.ManagerWorkingDIRimpl;
 import view.ManageMenu.MenuView;

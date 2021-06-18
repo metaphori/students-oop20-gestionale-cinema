@@ -260,6 +260,7 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     public void show() {
         frame.pack();
         frame.setLocationByPlatform(true);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setSize(500, 400);
      }
