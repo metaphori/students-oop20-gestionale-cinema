@@ -56,12 +56,17 @@ public class AccountsControllerImpl implements AccountsController {
         this.registrationView.setObserver(this);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showMenu() {
         controllerCinema.showMenu();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addAccount(final Account newAccount) {
         this.model.addAccount(newAccount);
@@ -69,6 +74,9 @@ public class AccountsControllerImpl implements AccountsController {
         System.out.println("Add new account:" + newAccount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteAccount(final Account oldAccount) {
         this.model.removeAccount(oldAccount);
@@ -76,25 +84,51 @@ public class AccountsControllerImpl implements AccountsController {
         System.out.println("Remove old account:" + oldAccount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Account> getAccounts() {
         return this.model.getAccounts();
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Account getAccountLogged() {
+       return this.model.getAccountLogged();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAccountLogged(Account accountLogged) {
+        this.model.setAccountLogged(accountLogged);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showRegistrationAccountView() { //for add account
         registrationView.reset();
         registrationView.show();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showManagementAccountView() {
         managementView.show();
         managementView.update();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showLoginAccounView() {
         loginView.updateSetAccount(this.getAccounts());
@@ -102,8 +136,9 @@ public class AccountsControllerImpl implements AccountsController {
     }
 
     /**
-     * Set Cinema Controller.
+     * {@inheritDoc}
      */
+    @Override
     public void setCinemaController(CinemaController cinemaController) {
         this.controllerCinema = cinemaController;
     }
@@ -129,15 +164,4 @@ public class AccountsControllerImpl implements AccountsController {
         rw.writeObj(setToWrite, type);
     }
 
-
-    @Override
-    public Account getAccountLogged() {
-       return this.model.getAccountLogged();
-    }
-
-
-    @Override
-    public void setAccountLogged(Account accountLogged) {
-        this.model.setAccountLogged(accountLogged);
-    }
 }
