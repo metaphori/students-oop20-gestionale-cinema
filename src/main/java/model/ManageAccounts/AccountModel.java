@@ -32,7 +32,7 @@ public interface AccountModel {
 
     /**
      * Set Account logged in that time.
-     * @return AccountLogged in that time
+     * @return accountLogged in that time
      */
     void setAccountLogged(Account accountLogged);
 }

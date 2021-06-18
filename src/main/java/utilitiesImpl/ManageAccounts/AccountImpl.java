@@ -9,11 +9,11 @@ public class AccountImpl implements Account {
 
     /**
      * Constructor for the class Account.
-     * @param account's name
-     * @param account's surname
-     * @param account's username
-     * @param account's password
-     * @param account's type
+     * @param name of the account
+     * @param surname of the account
+     * @param username of the account
+     * @param password of the account
+     * @param type of the account
      */
     public AccountImpl(final String name, final String surname, final String username, final String pass, final TypeAccount type) {
         this.name = name; //Unique name
@@ -90,7 +90,7 @@ public class AccountImpl implements Account {
 
     /**
      * Sets the account's password.
-     * @param password of the account 
+     * @param pass of the account 
      */
     @Override
     public void setPassword(final String pass) {

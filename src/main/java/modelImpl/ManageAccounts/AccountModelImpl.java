@@ -15,7 +15,7 @@ public class AccountModelImpl implements AccountModel {
 
     /**
      * Constructor for the Account Model.
-     * @param setAccount 
+     * @param setAccount that is set of account
      */
     public AccountModelImpl(final Set<Account> setAccount) {
         this.collect = setAccount; 

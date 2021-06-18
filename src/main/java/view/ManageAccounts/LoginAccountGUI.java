@@ -20,7 +20,7 @@ public interface LoginAccountGUI {
 
     /**
      * Update account
-     * @param setAccount
+     * @param setAccount that is a set of accounts
      */
     void updateSetAccount(Set<Account> setAccount);
 }

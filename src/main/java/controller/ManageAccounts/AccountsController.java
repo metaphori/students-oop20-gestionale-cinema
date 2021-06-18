@@ -59,6 +59,7 @@ public interface AccountsController {
 
         /**
          * Get Account logged in that time.
+         * @return account logged in that time
          */
         Account getAccountLogged();
 }
