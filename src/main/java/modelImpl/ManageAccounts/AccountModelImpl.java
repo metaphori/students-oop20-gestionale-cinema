@@ -12,9 +12,9 @@ import utilities.ManageAccounts.Account;
 public class AccountModelImpl implements AccountModel {
     private final Set<Account> collect;
     private Account accountLogged;
-    
+
     /**
-     * Construttor for the Account Model.
+     * Constructor for the Account Model.
      */
     public AccountModelImpl(final Set<Account> setAccount) {
         this.collect = setAccount; 
@@ -60,10 +60,12 @@ public class AccountModelImpl implements AccountModel {
         return this.accountLogged;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setAccountLogged(Account accountLogged) {
+    public void setAccountLogged(final Account accountLogged) {
         this.accountLogged = accountLogged;
-        
     }
 
 }

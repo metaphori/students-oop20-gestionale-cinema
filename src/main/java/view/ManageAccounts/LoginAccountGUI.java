@@ -14,13 +14,13 @@ public interface LoginAccountGUI {
 
     /**
      * Set Account controller observer
-     * @param observer
+     * @param Account controller
      */
     void setObserver(AccountsController observer);
 
     /**
      * Update account
-     * @param setAccount
+     * @param Account
      */
     void updateSetAccount(Set<Account> setAccount);
 }

@@ -10,7 +10,7 @@ public interface ManagementAccountGUI {
     
     /**
      * Set Account controller observer
-     * @param observer
+     * @param Account controller
      */
     void setObserver(AccountsController observer);
     

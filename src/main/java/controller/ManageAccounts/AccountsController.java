@@ -9,19 +9,19 @@ public interface AccountsController {
 	
         /**
          * Add new Account.
-         * @param newAccount
+         * @param new Account to add
          */
 	void addAccount(Account newAccount);
 	
 	/**
 	 * Delete specific Account. 
-	 * @param oldAccount
+	 * @param old Account to remove
 	 */
 	void deleteAccount(Account oldAccount);
 	
 	/**
 	 * Recover all account from account's set.
-	 * @return Set<Account> set of Accounts
+	 * @return set of Accounts
 	 */
 	Set<Account> getAccounts(); 
 
@@ -50,7 +50,7 @@ public interface AccountsController {
          * @param cinemaController
          */
         void setCinemaController(CinemaController cinemaController);
-        
+
         /**
          * Set Account logged in that time.
          * @param accountLogged
@@ -59,7 +59,7 @@ public interface AccountsController {
 
         /**
          * Get Account logged in that time.
-         * @param accountLogged
+         * @param account
          */
         Account getAccountLogged();
 }

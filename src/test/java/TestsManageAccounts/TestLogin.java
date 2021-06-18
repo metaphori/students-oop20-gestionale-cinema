@@ -1,5 +1,7 @@
 package TestsManageAccounts;
 
+import org.junit.jupiter.api.Test;
+
 public class TestLogin {
 
     /*
@@ -14,4 +16,9 @@ public class TestLogin {
     AccountsController controller = new AccountsControllerImpl();
     controller.showLoginAccounView();
     */
+    
+    @Test
+    public void testLogin () {
+        
+    }
 }
