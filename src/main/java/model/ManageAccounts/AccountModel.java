@@ -26,13 +26,13 @@ public interface AccountModel {
 
     /**
      * Get Account logged in that time.
-     * @return Account Logged
+     * @return
      */
     Account getAccountLogged();
 
     /**
      * Set Account logged in that time.
-     * @return accountLogged in that time
+     * @param accountLogged in that time
      */
     void setAccountLogged(Account accountLogged);
 }

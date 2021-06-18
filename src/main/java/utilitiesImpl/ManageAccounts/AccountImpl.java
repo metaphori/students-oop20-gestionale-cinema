@@ -12,7 +12,7 @@ public class AccountImpl implements Account {
      * @param name of the account
      * @param surname of the account
      * @param username of the account
-     * @param password of the account
+     * @param pass of the account
      * @param type of the account
      */
     public AccountImpl(final String name, final String surname, final String username, final String pass, final TypeAccount type) {
