@@ -13,5 +13,5 @@ public interface ProgrammingFilmsGUIfactory {
     JPanel createPanel(LayoutManager layout);
     JButton createButton(String text);
     Calendar createCalendar();
-    JTable createTable(String [] columnNames,Object[][] data);
+    JTable createTable(String [] columnNames, Object[][] data);
 }

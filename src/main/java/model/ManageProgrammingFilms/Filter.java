@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 public interface Filter<X> {
     /** 
      * Get used predicate.
-     * @return Predicate<X>
+     * @return predicate to filter
      * */
     Predicate<X> getPredicate();
 }

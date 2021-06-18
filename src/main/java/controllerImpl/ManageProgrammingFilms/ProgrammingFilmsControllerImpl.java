@@ -50,23 +50,6 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
         scheduleFilmView = new ScheduleFilmGUIimpl(filmsController);
         scheduleFilmView.setObserver(this);
     }
-/*
-/**
- * Initialize programming films controller  and all components.
- * */
-    /*
-    public ProgrammingFilmsControllerImpl() {
-
-        final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
-        if (programmedFilms.isEmpty()) {
-            programmedFilmsModel = new ProgrammedFilmsModelImpl();
-        } else {
-            programmedFilmsModel = new ProgrammedFilmsModelImpl(programmedFilms.get());
-        }
-        filmsProgrammationView = new ProgrammingFilmsGUIimpl(); 
-        filmsProgrammationView.setObserver(this);
-    }
-*/
     public ProgrammingFilmsControllerImpl(final FilmsController filmsController) {
         this.filmsController = filmsController;
         final Optional<List<ProgrammedFilm>> programmedFilms = this.readProgrammedFilmsFromFile();
@@ -83,28 +66,24 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
         scheduleFilmView.setObserver(this);
     }
 
-    /**
-     * Get all programmed films.
-     * @return List<ProgrammedFilm>
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public List<ProgrammedFilm> getAllProgrammedFilms() {
         return programmedFilmsModel.getAllProgrammedFilm();
     }
-    /**
-     * Add programmedFilm and write new update on file.
-     * @param newProgrammedFilm film programmation to add
-     * @throws ProgrammationNotAvailableException throws exception when specific date, time and hall by programmedFilm isn't available.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void addProgrammedFilm(final ProgrammedFilm newProgrammedFilm) throws ProgrammationNotAvailableException {
         programmedFilmsModel.addFilmProgrammation(newProgrammedFilm);
         this.writeProgrammedFilmsOnFile();
     }
-    /**
-     * Delete programmedFilm and write new update on file.
-     * @param oldProgrammedFilm film programmation to delete
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void deleteProgrammedFilm(final ProgrammedFilm oldProgrammedFilm) {
         final BookingController bookingController = new BookingControllerImpl();
@@ -112,37 +91,38 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
         this.writeProgrammedFilmsOnFile();
         bookingController.deleteTicket(oldProgrammedFilm);
     }
-    /**
-     * Update and show programmed film view with all programmation.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void showProgrammedFilmView() {
         filmsProgrammationView.update();
         filmsProgrammationView.start();
     }
-    /**
-     * Show menu.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void showMenu() {
         cinemaController.showMenu();
     }
-    /**
-     * Show schedule film view to schedule a new film.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void showScheduleFilmView() {
         scheduleFilmView.start();
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public ManagerProgrammingFilms getManagerProgrammingFilms() {
         return this.programmedFilmsModel.getManagerProgrammingFilms();
     }
-    /**
-     * Get film controller.
-     */
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public FilmsController getFilmsController() {
         return this.filmsController;
@@ -158,34 +138,32 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
     }
     /**
      * Read, if there's data, all programmed films from file. Otherwise return an empty optional.
-     * @return RWobject<List<ProgrammedFilm>>
+     * @return list of programmed films
      */
     private Optional<List<ProgrammedFilm>> readProgrammedFilmsFromFile() {
         final RWobject<List<ProgrammedFilm>> rw = new RWobjectImpl<>(GeneralSettings.PROGRAMMEDFILMSPATH);
         final var type = new TypeToken<List<ProgrammedFilm>>() { }.getType();
         return rw.readObj(type);
     }
-    /**
-     * Delete all programmation of specific film and write on file the changes.
-     * @param film
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void deleteAllFilmProgrammation(final Film film) {
         this.programmedFilmsModel.deleteAllFilmProgrammation(film);
         this.writeProgrammedFilmsOnFile();
     }
 
-    /**
-     * Update films programmation view.
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void updateGUI() {
         filmsProgrammationView.update();
     }
-    /**
-     * Set films controller.
-     * @param filmsController
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void setFilmsController(final FilmsController filmsController) {
         this.filmsController = filmsController;
@@ -199,7 +177,9 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
         scheduleFilmView = new ScheduleFilmGUIimpl(this.filmsController);
         scheduleFilmView.setObserver(this);
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void setCinemaController(final CinemaController cinemaController) {
         this.cinemaController = cinemaController;

@@ -12,7 +12,7 @@ public interface IdsGenerator {
     int getNewId();
     /** 
      * Get last generated id.
-     * @return Optional<Integer>
+     * @return optional integer with last generated id
      * */
     Optional<Integer> getLastGeneratedId();
 

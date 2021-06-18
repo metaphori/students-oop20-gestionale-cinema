@@ -12,27 +12,21 @@ import view.ManageFilms.Factory.ContainerFilmsGUIfactory;
  * */
 public final class ContainerFilmsGUIfactoryImpl implements ContainerFilmsGUIfactory {
     /** 
-     * Creates basic panel with specific layout.
-     * @param layout
-     * @return JPanel
+     * {@inheritDoc}
      * */
     @Override
     public JPanel createPanel(final LayoutManager layout) {
         return new JPanel(layout);
     }
     /** 
-     * Creates basic button with specific text.
-     * @param text
-     * @return JButton
+     * {@inheritDoc}
      * */
     @Override
     public JButton createButtonWithText(final String text) {
         return new JButton(text);
     }
     /** 
-     * Creates basic panel with specific icon.
-     * @param icon
-     * @return JButton
+     * {@inheritDoc}
      * */
     @Override
     public JButton createButtonWithIcon(final Icon icon) {

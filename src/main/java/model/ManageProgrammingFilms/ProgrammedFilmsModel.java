@@ -32,7 +32,7 @@ public interface ProgrammedFilmsModel {
     boolean isAvailableProgrammation(TimeSlot timeSlotToCheck, LocalDate date, Hall hall);
     /** 
      * Get all programmed films as list.
-     * @return List<ProgrammedFilm>
+     * @return list of all programmed film 
      * */
     List<ProgrammedFilm> getAllProgrammedFilm();
     /**Get ManagerProgrammingFilms.

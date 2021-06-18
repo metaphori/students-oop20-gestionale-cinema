@@ -8,8 +8,8 @@ import java.util.Comparator;
 public interface Sorter<X> {
     /** 
      * Get used comparator.
-     * @param <X> tyoe used in comparator.
-     * @return Comparator<X>
+     * @param X type used in comparator.
+     * @return comparator
      * */ 
     Comparator<X> getComparator();
 
