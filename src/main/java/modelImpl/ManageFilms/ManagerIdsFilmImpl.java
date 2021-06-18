@@ -32,20 +32,31 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
         containerFilmsIds.add(id);
         return id;
     }
+    /** 
+     * {@inheritDoc}
+     * */
 
     @Override
     public Optional<Integer> getLastGeneratedId() {
         return idsGenerator.getLastGeneratedId();
     }
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public Collection<Integer> getUsedIDs() {
              return containerFilmsIds;
     }
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public String toString() {
         return containerFilmsIds + "" + idsGenerator;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public void removeFilmId(final int idToDelete) {
        containerFilmsIds.remove(idToDelete);

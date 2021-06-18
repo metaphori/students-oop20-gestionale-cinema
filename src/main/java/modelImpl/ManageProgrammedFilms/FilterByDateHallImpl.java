@@ -19,7 +19,9 @@ public final class FilterByDateHallImpl implements Filter<ProgrammedFilm> {
         this.localDate = localDate;
         this.hall = hall;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public Predicate<ProgrammedFilm> getPredicate() {
         return pf ->  pf.getHall() == hall && pf.getDate().equals(localDate);

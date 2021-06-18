@@ -18,25 +18,30 @@ import com.mindfusion.scheduling.ThemeType;
 
 import view.ManageProgrammingFilms.Factory.ProgrammingFilmsGUIfactory;
 
-public class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUIfactory {
+public final class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUIfactory {
 
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JPanel createPanel(final LayoutManager layout) {
         return new JPanel(layout);
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JButton createButton(final String text) {
         return new JButton(text);
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public Calendar createCalendar() {
         final Calendar calendar = new Calendar();
         calendar.setCurrentTime(DateTime.now());
-        calendar.setDate(DateTime.today());//year ,month, day
-        
+        calendar.setDate(DateTime.today());
         // Calendar initialization start
         calendar.beginInit();
         calendar.setCurrentView(CalendarView.SingleMonth);
@@ -50,18 +55,18 @@ public class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUIfactor
         // Calendar initialization end
         return calendar;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JTable createTable(final String[] columnNames, final Object[][] data) {
-        
         final DefaultTableModel model = new DefaultTableModel(data, columnNames);
         final JTable table = new JTable(model) {
                 private static final long serialVersionUID = 1L;
-                public boolean isCellEditable(int row, int column) {
+                public boolean isCellEditable(final int row, final int column) {
                     return false;
                 }
         };
-        
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         return table;
     }

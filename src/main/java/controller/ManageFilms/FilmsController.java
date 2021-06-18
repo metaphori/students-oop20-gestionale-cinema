@@ -28,7 +28,6 @@ public interface FilmsController {
     /**
      * Delete specific film and all its programmation.
      * @param film film to delete
-     * @return set of films
      */
     void deleteFilmAndProgrammation(Film film);
     /**

@@ -27,44 +27,44 @@ public final class FilmBasicImpl implements Film {
         this.duration = duration;
         this.id = id;
     }
-    /**
-     * @return name
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public String getName() {
         return this.name;
     }
-    /**
-     * @return genre
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public String getGenre() {
         return this.genre;
     }
-    /**
-     * @return duration
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public int getDuration() {
         return this.duration;
     }
-    /**
-     * @return converPath
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public Optional<String> getCoverPath() {
         return this.coverImagePath;
     }
-    /**
-     * @return description
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public String getDescription() {
         return this.description;
     }
-    /**
-     * @return id
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     public int getID() {
         return this.id;
     }
