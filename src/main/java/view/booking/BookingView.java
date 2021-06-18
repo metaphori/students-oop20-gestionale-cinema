@@ -1,4 +1,4 @@
-package view.Booking;
+package view.booking;
 
 public interface BookingView {
     void show();

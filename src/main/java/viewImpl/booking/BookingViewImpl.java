@@ -1,4 +1,4 @@
-package viewImpl.Booking;
+package viewImpl.booking;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,9 +25,9 @@ import utilitiesImpl.Hall;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
-import view.Booking.BookingView;
-import view.Booking.BookingViewObserver;
-import view.Booking.GUIFactoryBooking;
+import view.booking.BookingView;
+import view.booking.BookingViewObserver;
+import view.booking.GUIFactoryBooking;
 
 public class BookingViewImpl implements BookingView {
     private final JFrame frame;

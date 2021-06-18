@@ -1,4 +1,4 @@
-package TestBooking;
+package testbooking;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,8 +7,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import model.Booking.BookingModel;
-import modelImpl.Booking.BookingModelImpl;
+import model.booking.BookingModel;
+import modelImpl.booking.BookingModelImpl;
 import utilities.Seat;
 import utilities.Ticket;
 import utilitiesImpl.Hall;
