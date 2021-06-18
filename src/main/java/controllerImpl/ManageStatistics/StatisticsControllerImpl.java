@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 import javax.swing.border.TitledBorder;
 
 import controller.CinemaController;
-import controller.Booking.BookingController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageStatistics.StatisticsController;
-import controllerImpl.Booking.BookingControllerImpl;
+import controller.booking.BookingController;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
-import model.Booking.BookingModel;
-import modelImpl.Booking.BookingModelImpl;
+import controllerImpl.booking.BookingControllerImpl;
+import model.booking.BookingModel;
+import modelImpl.booking.BookingModelImpl;
 import utilities.Film;
 import utilities.Ticket;
 import utilitiesImpl.TicketImpl;

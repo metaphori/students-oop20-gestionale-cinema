@@ -1,4 +1,4 @@
-package view.Booking;
+package controller.booking;
 
 import java.util.Set;
 

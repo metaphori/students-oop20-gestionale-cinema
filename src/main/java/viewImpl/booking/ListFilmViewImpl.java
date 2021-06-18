@@ -1,4 +1,4 @@
-package viewImpl.Booking;
+package viewImpl.booking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,12 +27,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
+import controller.booking.ListFilmViewObserver;
 import utilities.Film;
 import utilities.Factory.*;
-import view.Booking.GUIFactoryBooking;
-import view.Booking.ListFilmView;
-import view.Booking.ListFilmViewObserver;
 import view.ManageFilms.Factory.PanelFilmFactory;
+import view.booking.GUIFactoryBooking;
+import view.booking.ListFilmView;
 import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
 public class ListFilmViewImpl implements ListFilmView {

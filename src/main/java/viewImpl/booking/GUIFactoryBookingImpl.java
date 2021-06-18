@@ -1,4 +1,4 @@
-package viewImpl.Booking;
+package viewImpl.booking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +25,7 @@ import utilities.Factory.*;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatState;
-import view.Booking.GUIFactoryBooking;
+import view.booking.GUIFactoryBooking;
 
 public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final double WIDTH_PERC_FRAME = 0.5;

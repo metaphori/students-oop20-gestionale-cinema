@@ -1,4 +1,4 @@
-package view.Booking;
+package view.booking;
 
 import java.awt.event.ActionListener;
 import java.util.Collection;
