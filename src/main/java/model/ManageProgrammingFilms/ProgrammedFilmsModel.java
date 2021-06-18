@@ -14,7 +14,7 @@ public interface ProgrammedFilmsModel {
     /** 
      * Add film programmation. If it's not available throws ProgrammationNotAvailableException.
      * @param programmedFilm to add.
-     * @throws ProgrammationNotAvailableException 
+     * @throws ProgrammationNotAvailableException  programmation not available
      */
     void addFilmProgrammation(ProgrammedFilm programmedFilm) throws ProgrammationNotAvailableException;
     /** 
