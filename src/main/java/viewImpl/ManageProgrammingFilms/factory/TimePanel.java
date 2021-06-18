@@ -77,19 +77,19 @@ public class TimePanel extends JPanel {
         return min;
     }
 
-    private void setHourTextField(final int hour) throws IllegalArgumentException {
+    private void setHourTextField(final int hour) {
         final int maxHour = 23;
         if (hour < 0 || hour > maxHour) {
             throw new IllegalArgumentException("Hours must be between 0 to 23!");
         }
-        hourTextField.setText("" + hour);
+        hourTextField.setText(String.valueOf(hour));
     }
 
-    private void setMinTextField(final int min) throws IllegalArgumentException {
+    private void setMinTextField(final int min) {
         if (min < 0 || min > MAX_MIN) {
             throw new IllegalArgumentException("Minutes must be between 0 and 59!");
         }
-        minTextField.setText("" + min);
+        minTextField.setText(String.valueOf(min));
     }
     /** 
      * Set time.
@@ -104,7 +104,7 @@ public class TimePanel extends JPanel {
      * @param date date selected
      * @return  inserted time 
      * */
-    public LocalTime getTime(final LocalDate date) throws IllegalArgumentException {
+    public LocalTime getTime(final LocalDate date) {
         return LocalTime.of(this.getHour(), this.getMinutes());
     }
     /** 
