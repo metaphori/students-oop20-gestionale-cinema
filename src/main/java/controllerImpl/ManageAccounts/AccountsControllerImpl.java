@@ -24,7 +24,6 @@ import viewImpl.ManageAccounts.RegistrationAccountImplGUI;
 /**
  * Implements Account Controller.
  */
-
 public class AccountsControllerImpl implements AccountsController {
     private AccountModel model;
 
@@ -37,7 +36,7 @@ public class AccountsControllerImpl implements AccountsController {
     private Set<Account> setAccount;
 
     /**
-     * Construttor for the Account Controller.
+     * Constructor for the Account Controller.
      */
     public AccountsControllerImpl() {
         Optional<Set<Account>> optionalRead = this.readAccount();
@@ -104,10 +103,10 @@ public class AccountsControllerImpl implements AccountsController {
      * {@inheritDoc}
      */
     @Override
-    public void setAccountLogged(Account accountLogged) {
+    public void setAccountLogged(final Account accountLogged) {
         this.model.setAccountLogged(accountLogged);
     }
-    
+
     /**
      * {@inheritDoc}
      */
