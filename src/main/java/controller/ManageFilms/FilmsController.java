@@ -21,7 +21,7 @@ public interface FilmsController {
      */
     void deleteFilm(Film film);
     /**
-     * Recover all films from films container.
+     * Get all films from films container.
      * @return set of films
      */
     Set<Film> getFilms(); 
