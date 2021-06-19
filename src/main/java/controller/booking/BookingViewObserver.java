@@ -8,6 +8,7 @@ import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 
 public interface BookingViewObserver {
+    
     void showBackFromBooking(ProgrammedFilm film);
     Set<Seat> getSeatsFromProgrammedFilm(ProgrammedFilm film);
     void bookSeat(ProgrammedFilm film);
