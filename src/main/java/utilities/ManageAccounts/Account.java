@@ -1,13 +1,13 @@
 package utilities.ManageAccounts;
 
 public interface Account {
-    
+
     /**
      * Returns the account's name.
      * @return name of the account
      */
     String getName();
-    
+
     /**
      * Sets the account's name.
      * @param name of the account
@@ -19,7 +19,7 @@ public interface Account {
      * @return surname of the account
      */
     String getSurname();
-    
+
     /**
      * Sets the account's surname.
      * @param surname of the account
@@ -31,7 +31,7 @@ public interface Account {
      * @return username of the account
      */
     String getUsername();
-    
+
     /**
      * Sets the account's username.
      * @param username of the account 
@@ -43,7 +43,7 @@ public interface Account {
      * @return pass of the account
      */
     String getPassword();
-    
+
     /**
      * Sets the account's password.
      * @param pass of the account 

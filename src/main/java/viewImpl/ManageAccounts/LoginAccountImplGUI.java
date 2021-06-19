@@ -47,6 +47,9 @@ import view.ManageAccounts.LoginAccountGUI;
 import java.awt.event.*
 ;
 
+/**
+ * Implements login view.
+ */
 public class LoginAccountImplGUI implements LoginAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
 
@@ -65,13 +68,13 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
 
     private AccountsController observer;
 
-    private Map<String, String> logininfo = new HashMap<String,String>();
+    private Map<String, String> logininfo = new HashMap<String, String>();
     private Set<Account> setAccount = new HashSet<>();
 
     public static final int SPACE = 5;
 
     /**
-     * Construttor for the view Login.
+     * Constructor for the view Login.
      */
     public LoginAccountImplGUI() {
 
@@ -152,7 +155,6 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
                 String password = String.valueOf(textPassword.getPassword());
                 if (logininfo.containsKey(userID)) {
                     if (logininfo.get(userID).equals(password)) {
-                        
                         Account acc = setAccount.stream().filter(a -> a.getUsername().equals(userID)).findFirst().get();
                         observer.setAccountLogged(acc);
                         frame.dispose();
@@ -169,11 +171,17 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setObserver(final AccountsController observer) {
         this.observer = observer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         //resize the window and make the Frame visible
@@ -184,10 +192,13 @@ public class LoginAccountImplGUI implements LoginAccountGUI{
         frame.setMinimumSize(new Dimension(350, 200));
      }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateSetAccount(final Set<Account> setAccount) {
         this.setAccount =  setAccount;
-        for (var account : setAccount) {
+        for (final var account : setAccount) {
             logininfo.put(account.getUsername(), account.getPassword());
         }
         System.out.print("Account: " + logininfo);

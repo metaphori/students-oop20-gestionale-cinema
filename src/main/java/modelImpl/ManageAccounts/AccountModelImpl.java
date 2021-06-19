@@ -8,7 +8,6 @@ import utilities.ManageAccounts.Account;
 /**
  * Implements Account model.
  */
-
 public class AccountModelImpl implements AccountModel {
     private final Set<Account> collect;
     private Account accountLogged;
