@@ -47,7 +47,7 @@ dependencies {
    implementation("org.apache.commons:commons-lang3:3.11")
    implementation("org.danilopianini:gson-extras:0.2.2-dev1n+f8657bfc")
    implementation("net.sourceforge.jdatepicker:jdatepicker:1.3.2")
-   implementation(files("/libs/JPlanner.jar"))
+   implementation(files("$projectDir/libs/JPlanner.jar"))
    
  
     // JUnit API and testing engine
