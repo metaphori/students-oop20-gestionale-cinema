@@ -5,13 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import exceptions.ProgrammationNotAvailableException;
 import model.ManageProgrammingFilms.ManagerProgrammingFilms;
+import model.ManageProgrammingFilms.ProgrammedFilmsModel;
+import modelImpl.ManageFilms.IdsGeneratorImpl;
+import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import modelImpl.ManageProgrammedFilms.ManagerProgrammingFilmsImpl;
+import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
+import utilities.Film;
+import utilities.Factory.FilmFactory;
 import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.Hall;
+import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
 import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 
@@ -46,6 +55,33 @@ class TestFilmProgrammation {
         assertTrue(manager.isAvailableProgrammation(new TimeSlotImpl(LocalTime.of(8, 46), LocalTime.of(8,50)), ld1, Hall.HALL_1));
         assertTrue(manager.isAvailableProgrammation(new TimeSlotImpl(LocalTime.of(8, 44), LocalTime.of(8,50)), ld1, Hall.HALL_3));
     }
+    @Test
+    void testProgrammedFilmsModel() throws ProgrammationNotAvailableException  {
+        final FilmFactory filmFactory = new FilmFactoryImpl(new ManagerIdsFilmImpl(new IdsGeneratorImpl()));
+        final ProgrammedFilmsModel container = new ProgrammedFilmsModelImpl();
+        final ProgrammedFilm pf1 = factory.createProgrammedFilm(12, Hall.HALL_1, 20, ld1, st1, et1);
+        final ProgrammedFilm pf2 = factory.createProgrammedFilm(14, Hall.HALL_2, 10, ld2, st1, et1);
+        final ProgrammedFilm pf3 = factory.createProgrammedFilm(14, Hall.HALL_5, 15, ld2, st1, et1);
+        final ProgrammedFilm pf4 = factory.createProgrammedFilm(19, Hall.HALL_1, 5, ld1, st1, et1);
+
+        final Film f1 = filmFactory.createBasicFilmById("", "", "", Optional.empty(), 100, 14);
+        container.addFilmProgrammation(pf1);
+        container.addFilmProgrammation(pf2);
+        container.addFilmProgrammation(pf3);
+
+        assertTrue(container.getAllProgrammedFilm().containsAll(List.of(pf1, pf2, pf3)));
+        container.deleteFilmProgrammation(pf3);
+        assertTrue(container.getAllProgrammedFilm().containsAll(List.of(pf1, pf2)));
+
+        assertThrows(ProgrammationNotAvailableException.class, () -> container.addFilmProgrammation(pf4));
+
+        container.addFilmProgrammation(pf3);
+        assertTrue(container.getAllProgrammedFilm().containsAll(List.of(pf1, pf2, pf3)));
+
+        container.deleteAllFilmProgrammation(f1);
+        assertTrue(container.getAllProgrammedFilm().containsAll(List.of(pf1)));
+    }
+
 
 
 }
