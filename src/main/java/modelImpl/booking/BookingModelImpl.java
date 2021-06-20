@@ -5,10 +5,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import model.booking.BookingModel;
-import utilities.Film;
 import utilities.Seat;
 import utilities.Ticket;
-import utilities.Factory.ProgrammedFilm;
+import utilities.factory.Film;
+import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.TicketImpl;
 
 public class BookingModelImpl implements BookingModel {

@@ -3,9 +3,9 @@ package controller.booking;
 import java.util.Set;
 
 import controller.CinemaController;
-import utilities.Film;
 import utilities.Ticket;
-import utilities.Factory.ProgrammedFilm;
+import utilities.factory.Film;
+import utilities.factory.ProgrammedFilm;
 
 public interface BookingController {
     /**

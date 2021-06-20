@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.function.Predicate;
 
-import model.ManageProgrammingFilms.Filter;
-import utilities.Factory.ProgrammedFilm;
+import model.manageprogrammingfilms.Filter;
+import utilities.factory.ProgrammedFilm;
 
 public class FilterOldDateImpl implements Filter<ProgrammedFilm> {
 

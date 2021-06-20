@@ -2,8 +2,8 @@ package viewImpl.booking;
 
 import java.util.Comparator;
 
-import model.ManageProgrammingFilms.Sorter;
-import utilities.Factory.ProgrammedFilm;
+import model.manageprogrammingfilms.Sorter;
+import utilities.factory.ProgrammedFilm;
 
 public class SorterByLocalDate implements Sorter<ProgrammedFilm>{
     public SorterByLocalDate() {

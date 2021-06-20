@@ -8,14 +8,14 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import model.ManageFilms.ContainerFilmsModel;
-import model.ManageFilms.ManagerIdsFilms;
-import modelImpl.ManageFilms.ContainerFilmsModelImpl;
-import modelImpl.ManageFilms.IdsGeneratorImpl;
-import modelImpl.ManageFilms.ManagerIdsFilmImpl;
-import utilities.Film;
-import utilities.Factory.FilmFactory;
-import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
+import model.managefilms.ContainerFilmsModel;
+import model.managefilms.ManagerIdsFilms;
+import modelImpl.managefilms.ContainerFilmsModelImpl;
+import modelImpl.managefilms.IdsGeneratorImpl;
+import modelImpl.managefilms.ManagerIdsFilmImpl;
+import utilities.factory.Film;
+import utilities.factory.FilmFactory;
+import utilitiesImpl.factoryimpl.FilmFactoryImpl;
 
 
 

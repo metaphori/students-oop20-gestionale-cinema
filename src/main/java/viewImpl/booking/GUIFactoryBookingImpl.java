@@ -21,7 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import utilities.Factory.*;
+import utilities.factory.*;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatState;

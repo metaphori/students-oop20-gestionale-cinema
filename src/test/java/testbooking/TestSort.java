@@ -14,10 +14,10 @@ import controller.booking.BookingController;
 import controller.booking.BookingViewObserver;
 import controller.booking.TimeTableViewObserver;
 import controllerImpl.booking.BookingControllerImpl;
-import utilities.Factory.ProgrammedFilm;
-import utilities.Factory.ProgrammedFilmFactory;
+import utilities.factory.ProgrammedFilm;
+import utilities.factory.ProgrammedFilmFactory;
 import utilitiesImpl.Hall;
-import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.factoryimpl.ProgrammedFilmFactoryImpl;
 import viewImpl.booking.SorterByLocalDate;
 
 public class TestSort {

@@ -39,17 +39,16 @@ import com.mindfusion.common.DateTime;
 import com.mindfusion.scheduling.Calendar;
 
 import controller.booking.TimeTableViewObserver;
-import model.ManageProgrammingFilms.HandlerList;
-import model.ManageProgrammingFilms.Sorter;
-import modelImpl.ManageProgrammedFilms.FilterByDateImpl;
-import modelImpl.ManageProgrammedFilms.HandlerListImpl;
-import utilities.Film;
-import utilities.Factory.*;
+import model.manageprogrammingfilms.HandlerList;
+import model.manageprogrammingfilms.Sorter;
+import modelImpl.manageprogrammedfilms.FilterByDateImpl;
+import modelImpl.manageprogrammedfilms.HandlerListImpl;
+import utilities.factory.*;
 import utilitiesImpl.Hall;
-import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.factoryimpl.ProgrammedFilmFactoryImpl;
 import view.booking.GUIFactoryBooking;
 import view.booking.TimeTableView;
-import viewImpl.ManageProgrammingFilms.factory.ProgrammingFilmsGUIfactoryImpl;
+import viewImpl.manageprogrammingfilms.factory.ProgrammingFilmsViewFactoryImpl;
 
 public class TimeTableViewImpl implements TimeTableView {
     private static final double WIDTH_PERC_FRAME = 0.5;
@@ -134,7 +133,7 @@ public class TimeTableViewImpl implements TimeTableView {
         panelCheckBoxInternal.add(jcb2);
         panelCheckBox.add(panelCheckBoxInternal, BorderLayout.CENTER);
 
-        final ProgrammingFilmsGUIfactoryImpl fctFilm = new ProgrammingFilmsGUIfactoryImpl();
+        final ProgrammingFilmsViewFactoryImpl fctFilm = new ProgrammingFilmsViewFactoryImpl();
         final Calendar calendar = fctFilm.createCalendar(); 
         panelCalendar.add(calendar, BorderLayout.CENTER);
         final JLabel labelCalendar = new JLabel(CALENDAR_STRING);

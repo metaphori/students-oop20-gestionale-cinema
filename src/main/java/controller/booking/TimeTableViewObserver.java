@@ -2,10 +2,11 @@ package controller.booking;
 
 import java.util.Collection;
 import java.util.List;
-import model.ManageProgrammingFilms.Filter;
-import model.ManageProgrammingFilms.Sorter;
-import utilities.Film;
-import utilities.Factory.ProgrammedFilm;
+
+import model.manageprogrammingfilms.Filter;
+import model.manageprogrammingfilms.Sorter;
+import utilities.factory.Film;
+import utilities.factory.ProgrammedFilm;
 
 public interface TimeTableViewObserver {
     /**

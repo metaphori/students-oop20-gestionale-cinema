@@ -28,13 +28,11 @@ import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
 import controller.booking.ListFilmViewObserver;
-import utilities.Film;
-import utilities.Factory.*;
-import view.ManageFilms.Factory.PanelFilmFactory;
+import utilities.factory.*;
 import view.booking.GUIFactoryBooking;
 import view.booking.ListFilmView;
-
-import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
+import view.managefilms.factory.PanelFilmFactory;
+import viewImpl.managefilms.factory.PanelFilmFactoryImpl;
 
 public class ListFilmViewImpl implements ListFilmView {
 

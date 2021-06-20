@@ -2,7 +2,7 @@ package view.booking;
 
 import java.util.Collection;
 
-import utilities.Factory.ProgrammedFilm;
+import utilities.factory.ProgrammedFilm;
 
 public interface TimeTableView {
     void show();

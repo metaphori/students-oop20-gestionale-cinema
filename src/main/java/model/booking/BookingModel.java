@@ -1,10 +1,11 @@
 package model.booking;
 
 import java.util.Set;
-import utilities.Film;
+
 import utilities.Seat;
 import utilities.Ticket;
-import utilities.Factory.ProgrammedFilm;
+import utilities.factory.Film;
+import utilities.factory.ProgrammedFilm;
 
 public interface BookingModel {
     /**

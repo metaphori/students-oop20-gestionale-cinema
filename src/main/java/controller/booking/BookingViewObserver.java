@@ -3,7 +3,7 @@ package controller.booking;
 
 import java.util.Set;
 import utilities.Seat;
-import utilities.Factory.*;
+import utilities.factory.*;
 import utilitiesImpl.SeatImpl;
 
 public interface BookingViewObserver {

@@ -1,6 +1,6 @@
 [
   {
-    "Type": "utilitiesImpl.ManageAccounts.AccountImpl",
+    "Type": "utilitiesImpl.AccountImpl",
     "name": "Mario",
     "surname": "Rossi",
     "username": "admin",

@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 
 import controller.booking.BookingViewObserver;
 import utilities.Seat;
-import utilities.Factory.ProgrammedFilm;
+import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Hall;
 import utilitiesImpl.Row;

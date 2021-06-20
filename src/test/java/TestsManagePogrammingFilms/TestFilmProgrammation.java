@@ -10,19 +10,19 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import exceptions.ProgrammationNotAvailableException;
-import model.ManageProgrammingFilms.ManagerProgrammingFilms;
-import model.ManageProgrammingFilms.ProgrammedFilmsModel;
-import modelImpl.ManageFilms.IdsGeneratorImpl;
-import modelImpl.ManageFilms.ManagerIdsFilmImpl;
-import modelImpl.ManageProgrammedFilms.ManagerProgrammingFilmsImpl;
-import modelImpl.ManageProgrammedFilms.ProgrammedFilmsModelImpl;
-import utilities.Film;
-import utilities.Factory.FilmFactory;
-import utilities.Factory.ProgrammedFilm;
+import model.manageprogrammingfilms.ManagerProgrammingFilms;
+import model.manageprogrammingfilms.ProgrammedFilmsModel;
+import modelImpl.managefilms.IdsGeneratorImpl;
+import modelImpl.managefilms.ManagerIdsFilmImpl;
+import modelImpl.manageprogrammedfilms.ManagerProgrammingFilmsImpl;
+import modelImpl.manageprogrammedfilms.ProgrammedFilmsModelImpl;
+import utilities.factory.Film;
+import utilities.factory.FilmFactory;
+import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.Hall;
-import utilitiesImpl.FactoryImpl.FilmFactoryImpl;
-import utilitiesImpl.FactoryImpl.ProgrammedFilmFactoryImpl;
-import utilitiesImpl.FactoryImpl.TimeSlotImpl;
+import utilitiesImpl.factoryimpl.FilmFactoryImpl;
+import utilitiesImpl.factoryimpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.factoryimpl.TimeSlotImpl;
 
 
 class TestFilmProgrammation {

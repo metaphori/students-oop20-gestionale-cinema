@@ -3,20 +3,20 @@ package controllerImpl;
 import controller.CinemaController;
 
 import controller.CinemaControllerObserver;
-import controller.ManageAccounts.AccountsController;
-import controller.ManageFilms.FilmsController;
-import controller.ManageProgrammingFilms.ProgrammingFilmsController;
-import controller.ManageStatistics.StatisticsController;
 import controller.booking.BookingController;
-import controllerImpl.ManageAccounts.AccountsControllerImpl;
-import controllerImpl.ManageFilms.FilmsControllerImpl;
-import controllerImpl.ManageProgrammingFilms.ProgrammingFilmsControllerImpl;
-import controllerImpl.ManageStatistics.StatisticsControllerImpl;
+import controller.manageaccounts.AccountsController;
+import controller.managefilms.FilmsController;
+import controller.manageprogrammingfilms.ProgrammingFilmsController;
+import controller.managestatistics.StatisticsController;
 import controllerImpl.booking.BookingControllerImpl;
+import controllerImpl.manageaccounts.AccountsControllerImpl;
+import controllerImpl.managefilms.FilmsControllerImpl;
+import controllerImpl.manageprogrammingfilms.ProgrammingFilmsControllerImpl;
+import controllerImpl.managestatistics.StatisticsControllerImpl;
 import utilities.ManagerWorkingDIR;
 import utilitiesImpl.ManagerWorkingDIRimpl;
-import view.ManageMenu.MenuView;
-import viewImpl.ManageMenu.MenuViewImpl;
+import view.managemenu.MenuView;
+import viewImpl.managemenu.MenuViewImpl;
 
 
 public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver {

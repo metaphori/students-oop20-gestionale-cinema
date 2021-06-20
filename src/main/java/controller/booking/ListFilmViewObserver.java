@@ -2,7 +2,7 @@ package controller.booking;
 
 import java.util.Set;
 
-import utilities.Film;
+import utilities.factory.Film;
 
 
 public interface ListFilmViewObserver {
