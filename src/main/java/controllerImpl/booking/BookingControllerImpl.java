@@ -33,14 +33,8 @@ import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.SeatImpl;
 import view.booking.BookingView;
-
-import view.booking.ListFilmView;
-
-import view.booking.TimeTableView;
-
 import view.booking.ListFilmView;
 import view.booking.TimeTableView;
-
 import viewImpl.booking.BookingViewImpl;
 import viewImpl.booking.ListFilmViewImpl;
 import viewImpl.booking.TimeTableViewImpl;

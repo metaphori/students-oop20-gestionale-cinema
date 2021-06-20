@@ -21,7 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import utilities.factory.*;
+import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatState;
@@ -36,7 +36,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
     private static final double WIDTH_IMAGE_SEAT = WIDTH_PERC_FRAME / 15;
     private static final double HEIGHT_IMAGE_SEAT = HEIGHT_PERC_FRAME / 15;
     private static final String STRING_BUTTON_BACK = "back";
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JFrame getBaseFrame(final String title) {
         final JFrame frame = new JFrame();
@@ -47,6 +49,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return frame;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JPanel getInfoPanel(final String info, final ActionListener action) {
         final JPanel infoPanel = new JPanel(new BorderLayout());
@@ -60,6 +65,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         button.addActionListener(action);
         return infoPanel;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JLabel getLabelImage(final ImageIcon icon, final int width, final int height) {
         final JLabel labelIcon = new JLabel();
@@ -70,6 +78,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         labelIcon.setIcon(imageIcon);
         return labelIcon;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JButton getButtonImage(final ImageIcon icon) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -82,6 +93,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         button.setMargin(new Insets(0, 0, 0, 0));
         return button;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JTable getTable(final Set<ProgrammedFilm> programmedFilm) {
         final int row = programmedFilm.size();
@@ -95,7 +109,7 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
             i++;
         }
         final DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable(model) {
+        final JTable table = new JTable(model) {
             private static final long serialVersionUID = 1L;
             public boolean isCellEditable(final int row, final int column) {
                 return false;
@@ -104,6 +118,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         return table;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DefaultTableModel getModel(final Collection<ProgrammedFilm> programmedFilm) {
         final int row = programmedFilm.size();
@@ -118,6 +135,9 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         }
         return new DefaultTableModel(data, columnNames);
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JButton getButtonSeat(final SeatState state, final int i, final int j) {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

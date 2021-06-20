@@ -6,8 +6,10 @@ import model.manageprogrammingfilms.Sorter;
 import utilities.factory.ProgrammedFilm;
 
 public class SorterByLocalDate implements Sorter<ProgrammedFilm>{
-    public SorterByLocalDate() {
-    }
+    public SorterByLocalDate() {}
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Comparator<ProgrammedFilm> getComparator() {
        return (f1, f2) -> {

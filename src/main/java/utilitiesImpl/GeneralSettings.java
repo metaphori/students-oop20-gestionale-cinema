@@ -58,15 +58,41 @@ public final class GeneralSettings {
     /**Describes standard cover image name for film if user doesn't choose any images. */
     //Res options
     public static final String IMAGEFILMSTANDARD = "images/filmStandardIco.png";
+    /**
+     * Standard account.
+     */
     public static final String DATASTANDARD = "defaultData/Account.json";
-
+    /**
+     * Ticket file name.
+     */
     public static final String TICKET_FILE = "Ticket.json";
+    /**
+     * Ticket file path.
+     */
     public static final String TICKET_FILE_PATH = DATADIR + FS + TICKET_FILE;
+    /**
+     * Image seat free path.
+     */
     public static final String IMAGE_SEAT_FREE = "images/imageSeatFree.png";
+    /**
+     * Image seat selected path.
+     */
     public static final String IMAGE_SEAT_SELECTED = "images/imageSeatSelected.png";
+    /**
+     * Image seat taken path.
+     */
     public static final String IMAGE_SEAT_TAKEN = "images/imageSeatTaken.png";
+    /**
+     * Image legend path.
+     */
     public static final String IMAGE_LEGEND = "images/legend.png";
+    /**
+     * Account file name.
+     */
     public static final String ACCOUNT_FILE = "Account.json";
+    /**
+     * Account file path.
+     */
     public static final String ACCOUNT_FILE_PATH = DATADIR + FS + ACCOUNT_FILE;
 
     /**Private constructor. This class can't be instantiated. It's used to access paths where application will work.*/

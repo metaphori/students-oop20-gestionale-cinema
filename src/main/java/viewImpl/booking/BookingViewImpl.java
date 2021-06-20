@@ -26,6 +26,7 @@ import utilitiesImpl.Hall;
 import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
+import utilitiesImpl.ViewSettings;
 import view.booking.BookingView;
 
 
@@ -119,11 +120,19 @@ public class BookingViewImpl implements BookingView {
         final JLabel labelLegend = factory.getLabelImage(imageLegend, width, height);
         mainPanel.add(labelLegend, BorderLayout.EAST);
         frame.getContentPane().add(mainPanel);
+        frame.setSize((int) ViewSettings.DIMENSION_WIDTH_VIEW, (int) ViewSettings.DIMENSION_HEIGTH_VIEW);
+
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         frame.setVisible(true);
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void refresh() {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

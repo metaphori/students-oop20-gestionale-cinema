@@ -2,26 +2,18 @@ package viewImpl.booking;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Label;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultButtonModel;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -30,22 +22,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import com.mindfusion.common.DateTime;
 import com.mindfusion.scheduling.Calendar;
 
 import controller.booking.TimeTableViewObserver;
-import model.manageprogrammingfilms.HandlerList;
-import model.manageprogrammingfilms.Sorter;
 import modelImpl.manageprogrammedfilms.FilterByDateImpl;
-import modelImpl.manageprogrammedfilms.HandlerListImpl;
-import utilities.factory.*;
+import utilities.factory.Film;
+import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.Hall;
-import utilitiesImpl.factoryimpl.ProgrammedFilmFactoryImpl;
+import utilitiesImpl.ViewSettings;
 import view.booking.GUIFactoryBooking;
 import view.booking.TimeTableView;
 import viewImpl.manageprogrammingfilms.factory.ProgrammingFilmsViewFactoryImpl;
@@ -69,10 +56,9 @@ public class TimeTableViewImpl implements TimeTableView {
     private TimeTableViewObserver observer;
     private final JFrame frame;
     private final Set<ProgrammedFilm> setProgrammedFilm;
-    
+
     public TimeTableViewImpl(final TimeTableViewObserver observer, final Set<ProgrammedFilm> setProgrammedFilmOriginal, final Film film) {
         setProgrammedFilm = new HashSet<>(observer.handlerProgrammedFilm(setProgrammedFilmOriginal, new FilterOldDateImpl()));
-        
         final String nameFilm = film.getName();
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         this.observer = observer;
@@ -95,7 +81,7 @@ public class TimeTableViewImpl implements TimeTableView {
                 final LocalTime time = (LocalTime) table.getModel().getValueAt(row, 1);
                 final Hall hall =  (Hall) table.getModel().getValueAt(row, 2);
 
-                ProgrammedFilm programmedFilm = setProgrammedFilm.stream()
+                final ProgrammedFilm programmedFilm = setProgrammedFilm.stream()
                         .filter(f -> f.getStartTime().equals(time))
                         .filter(f -> f.getHall().equals(hall))
                         .filter(f -> f.getDate().equals(date))
@@ -175,13 +161,19 @@ public class TimeTableViewImpl implements TimeTableView {
         mainPanel.add(scroll, BorderLayout.CENTER);
         mainPanel.add(bookBtn, BorderLayout.SOUTH);
         this.frame.add(mainPanel);
-    }
+        this.frame.setSize((int) ViewSettings.DIMENSION_WIDTH_VIEW, (int) ViewSettings.DIMENSION_HEIGTH_VIEW);
 
+    }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
        this.frame.setVisible(true);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void checkEmptyProgrammation(final Collection<ProgrammedFilm> collProgrammedFilm) {
        if (collProgrammedFilm.isEmpty()) {
@@ -194,6 +186,9 @@ public class TimeTableViewImpl implements TimeTableView {
             });
         }
     }
+    /**
+     * Check if not selected row in table.
+     */
     private void notSelectedRow() {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -203,6 +198,11 @@ public class TimeTableViewImpl implements TimeTableView {
             }
         });
     }
+    /**
+     * Refresh table with list.
+     * @param table refreshed
+     * @param list used to fill table
+     */
     private void refresh(final JTable table, final Collection<ProgrammedFilm> list) {
         final GUIFactoryBooking factory = new GUIFactoryBookingImpl(); 
         final DefaultTableModel model = (DefaultTableModel) table.getModel();

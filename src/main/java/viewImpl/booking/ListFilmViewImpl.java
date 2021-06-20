@@ -1,34 +1,21 @@
 package viewImpl.booking;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Insets;
 import java.awt.Toolkit;
-import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SpringLayout;
 
 import controller.booking.ListFilmViewObserver;
-import utilities.factory.*;
+import utilities.factory.Film;
+import utilitiesImpl.ViewSettings;
 import view.booking.GUIFactoryBooking;
 import view.booking.ListFilmView;
 import view.managefilms.factory.PanelFilmFactory;
@@ -63,6 +50,8 @@ public class ListFilmViewImpl implements ListFilmView {
         final JScrollPane scroller = new JScrollPane(centralPanel);
         frame.getContentPane().add(mainPanel);
         frame.setMinimumSize(new Dimension((int) (screenSize.getWidth() * WIDTH_MINIMUM_FRAME), (int) (screenSize.getHeight() * HEIGTH_MINMUM_FRAME)));
+        frame.setSize((int) ViewSettings.DIMENSION_WIDTH_VIEW, (int) ViewSettings.DIMENSION_HEIGTH_VIEW);
+
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(scroller, BorderLayout.CENTER);
         for (final var bt : map.keySet()) {
@@ -73,11 +62,16 @@ public class ListFilmViewImpl implements ListFilmView {
             });
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         frame.setVisible(true);
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void checkEmptyFilm() {
         if (map.values().isEmpty()) {

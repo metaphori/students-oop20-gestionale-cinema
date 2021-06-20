@@ -3,7 +3,7 @@ package controller.booking;
 
 import java.util.Set;
 import utilities.Seat;
-import utilities.factory.*;
+import utilities.factory.ProgrammedFilm;
 import utilitiesImpl.SeatImpl;
 
 public interface BookingViewObserver {
@@ -30,10 +30,10 @@ public interface BookingViewObserver {
      */
     void buttonSelected(SeatImpl seat, ProgrammedFilm film);
     /**
-     * Reset booking model and seat selected are empty
+     * Reset booking model and seat selected are empty.
      */
     void newBooking();
-    
+
     /**
      * Get seat selected.
      * @return set of seat
