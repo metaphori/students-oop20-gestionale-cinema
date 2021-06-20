@@ -19,68 +19,78 @@ import view.ManageMenu.MenuView;
 import viewImpl.ManageMenu.MenuViewImpl;
 
 
-public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver{
-    private ManagerWorkingDIR manager;
-    private MenuView menu;
-    private AccountsController accountController;
+public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver {
+    private final ManagerWorkingDIR manager;
+    private final MenuView menu;
+    private final AccountsController accountController;
+
     public CinemaControllerImpl() {
         super();
         manager = new ManagerWorkingDIRimpl();
         this.menu = new MenuViewImpl();
         this.menu.setObserver(this);
-        
         this.initApplication(System.getProperty("user.home"));
         this.accountController = new AccountsControllerImpl();
         this.accountController.setCinemaController(this);
         this.accountController.showLoginAccounView();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showMenu() {
         menu.updateGUI(accountController.getAccountLogged());
         menu.show();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showControllerAccount() {
         accountController.showManagementAccountView();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showControllerTicket() {
         final BookingController controller = new BookingControllerImpl();
         controller.setCinemaController(this);
         controller.start();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showControllerFilm() {
         final FilmsController controller = new FilmsControllerImpl();
         controller.setCinemaController(this);
         controller.showContainerFilmsView();
-        
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showControllerProgrammingFilms() {
         final ProgrammingFilmsController controller = new ProgrammingFilmsControllerImpl();
         controller.setCinemaController(this);
         controller.showProgrammedFilmView();
-        
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showControllerStatistics() {
         final StatisticsController controller = new StatisticsControllerImpl();
        controller.setCinemaController(this);
        controller.showStatisticsView();
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initApplication(String path) {
+    public void initApplication(final String path) {
         manager.initWorkingDir(path);
     }
-
-
-
 }
 

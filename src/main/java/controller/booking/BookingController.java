@@ -12,7 +12,6 @@ public interface BookingController {
      * Start first view for booking.
      */
     void start();
-  
     /**
      * Show menu of application.
      */

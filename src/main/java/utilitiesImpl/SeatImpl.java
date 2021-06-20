@@ -5,19 +5,23 @@ import utilities.Seat;
 public class SeatImpl implements Seat {
     private final Row row;
     private final Integer column;
-    
+
     public SeatImpl(final Row row, final Integer column) {
         this.row = row;
         this.column = column;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Row getRow() {
- 
         return this.row;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer getColumn() {
-  
         return this.column;
     }
     @Override
@@ -29,29 +33,31 @@ public class SeatImpl implements Seat {
         return result;
     }
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        SeatImpl other = (SeatImpl) obj;
+        }
+        final SeatImpl other = (SeatImpl) obj;
         if (column == null) {
-            if (other.column != null)
+            if (other.column != null) {
                 return false;
-        } else if (!column.equals(other.column))
+            }
+        } else if (!column.equals(other.column)) {
             return false;
-        if (row != other.row)
+        }
+        if (row != other.row) {
             return false;
+        }
         return true;
     }
     @Override
     public String toString() {
         return "SeatImpl [row=" + row + ", column=" + column + "]";
-    }
-	
-	
-	
-	
+    }	
 }

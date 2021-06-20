@@ -1,31 +1,23 @@
 package controllerImpl.InputOutput;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
-import model.ManageFilms.ContainerFilmsModel;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import model.ManageFilms.IdsGenerator;
 import model.ManageFilms.ManagerIdsFilms;
-import modelImpl.ManageFilms.ContainerFilmsModelImpl;
 import modelImpl.ManageFilms.IdsGeneratorImpl;
 import modelImpl.ManageFilms.ManagerIdsFilmImpl;
 import utilities.Film;
 import utilities.Seat;
 import utilities.Ticket;
 import utilities.TimeSlot;
-
 import utilities.Factory.ProgrammedFilm;
 import utilities.ManageAccounts.Account;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.TicketImpl;
 import utilitiesImpl.FactoryImpl.FilmBasicImpl;
 import utilitiesImpl.FactoryImpl.ProgrammedFilmImpl;
-
 import utilitiesImpl.FactoryImpl.TimeSlotImpl;
 import utilitiesImpl.ManageAccounts.AccountImpl;
 
@@ -34,9 +26,9 @@ public final class GsonFactory {
 
     private GsonFactory() { }
     /** 
-     * @return a gson object that was built adding adaptation
+     * Return a gson object with specific adpater.
+     * @return a gson object 
      */
-    
     public static Gson getMyGson() {
         final RuntimeTypeAdapterFactory<Film> adapterFilm = RuntimeTypeAdapterFactory
                 .of(Film.class, "type")
