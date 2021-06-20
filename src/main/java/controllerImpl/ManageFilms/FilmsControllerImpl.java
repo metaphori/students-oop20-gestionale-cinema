@@ -25,7 +25,7 @@ import viewImpl.ManageFilms.ContainerFilmsGUIimpl;
 import viewImpl.ManageFilms.InfoFilmsGUIimpl;
 
 /**
- * Describe controller to manage films. Operation can be : delete, add, modify
+ * Describes controller to manage films. Operation can be : delete, add, modify
  */
 public final class FilmsControllerImpl implements FilmsController {
 

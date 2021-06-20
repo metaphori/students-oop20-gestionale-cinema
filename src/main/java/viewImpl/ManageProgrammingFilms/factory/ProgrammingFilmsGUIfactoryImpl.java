@@ -48,7 +48,6 @@ public final class ProgrammingFilmsGUIfactoryImpl implements ProgrammingFilmsGUI
         calendar.setTheme(ThemeType.Silver);
         calendar.getMonthRangeSettings().setMonthsPerRow(1);
         calendar.getMonthRangeSettings().setNumberOfMonths(1);
-        //calendar.getMonthRangeSettings().setScrollInterval(1);
         calendar.getSelection().setAllowMultiple(false);
         calendar.getMonthSettings().getDaySettings().setHeaderSize(0);
         calendar.endInit();

@@ -10,8 +10,5 @@ public final class ViewSettings {
     public static final double DIMENSION_HEIGTH_VIEW = DIMENSION_HEIGTH_SCREEN / PROPORTION ;
     public static final double DIMENSION_WIDTH_VIEW = DIMENSION_WIDTH_SCREEN / PROPORTION;
     private ViewSettings() {};
-    
-    
-    
-    
+
 }

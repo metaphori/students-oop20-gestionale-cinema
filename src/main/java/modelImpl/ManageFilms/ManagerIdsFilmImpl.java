@@ -13,7 +13,6 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
     private  final Collection<Integer> containerFilmsIds;
     private  final IdsGenerator idsGenerator;
 
-    //Passo al manager Ids films l' idsGenerator e il containerFilmsIds
     public ManagerIdsFilmImpl(final IdsGenerator idsGenerator, final Collection<Integer> containerFilmsIds) { 
         this.containerFilmsIds = containerFilmsIds;
         this.idsGenerator = idsGenerator;
@@ -52,7 +51,7 @@ public final class ManagerIdsFilmImpl implements ManagerIdsFilms {
      * */
     @Override
     public String toString() {
-        return containerFilmsIds + "" + idsGenerator;
+        return containerFilmsIds.toString() + idsGenerator.toString();
     }
     /** 
      * {@inheritDoc}
