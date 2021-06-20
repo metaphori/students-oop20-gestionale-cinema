@@ -12,9 +12,11 @@ import controller.CinemaController;
 import controller.ManageFilms.FilmsController;
 import controller.ManageProgrammingFilms.ProgrammingFilmsController;
 import controller.booking.BookingController;
+
 import controller.booking.BookingViewObserver;
 import controller.booking.ListFilmViewObserver;
 import controller.booking.TimeTableViewObserver;
+
 import controllerImpl.InputOutput.RWobject;
 import controllerImpl.InputOutput.RWobjectImpl;
 import controllerImpl.ManageFilms.FilmsControllerImpl;
@@ -32,8 +34,14 @@ import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.GeneralSettings;
 import utilitiesImpl.SeatImpl;
 import view.booking.BookingView;
+
+import view.booking.ListFilmView;
+
+import view.booking.TimeTableView;
+
 import view.booking.ListFilmView;
 import view.booking.TimeTableView;
+
 import viewImpl.booking.BookingViewImpl;
 import viewImpl.booking.ListFilmViewImpl;
 import viewImpl.booking.TimeTableViewImpl;

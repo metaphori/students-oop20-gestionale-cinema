@@ -27,6 +27,10 @@ import utilitiesImpl.Row;
 import utilitiesImpl.SeatImpl;
 import utilitiesImpl.SeatState;
 import view.booking.BookingView;
+
+
+
+
 import view.booking.GUIFactoryBooking;
 
 public class BookingViewImpl implements BookingView {

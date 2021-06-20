@@ -8,47 +8,64 @@ import utilities.ManageAccounts.Account;
 /**
  * Implements Account model.
  */
-
 public class AccountModelImpl implements AccountModel {
     private final Set<Account> collect;
     private Account accountLogged;
+
     /**
-     * Construttor for the Account Model.
+     * Constructor for the Account Model.
+     * @param setAccount that is set of account
      */
     public AccountModelImpl(final Set<Account> setAccount) {
         this.collect = setAccount; 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addAccount(final Account newAccount) {
         this.collect.add(newAccount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeAccount(final Account oldAccount) {
         this.collect.remove(oldAccount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Account> getAccounts() {
         return this.collect;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Account " + collect;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Account getAccountLogged() {
-        // TODO Auto-generated method stub
         return this.accountLogged;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setAccountLogged(Account accountLogged) {
+    public void setAccountLogged(final Account accountLogged) {
         this.accountLogged = accountLogged;
-        
     }
 
 }

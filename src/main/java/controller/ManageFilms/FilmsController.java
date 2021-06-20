@@ -17,18 +17,17 @@ public interface FilmsController {
     void addFilm(Film film);
     /**
      * Delete specific film from container.
-     * @param film Film to add
+     * @param film Film to delete
      */
     void deleteFilm(Film film);
     /**
      * Recover all films from films container.
-     * @return Set<Film> set of films
+     * @return set of films
      */
     Set<Film> getFilms(); 
     /**
      * Delete specific film and all its programmation.
-     * @param film to delete
-     * @return Set<Film> set of films
+     * @param film film to delete
      */
     void deleteFilmAndProgrammation(Film film);
     /**
@@ -50,6 +49,7 @@ public interface FilmsController {
     void showNewFilmView();
     /**
      * Set programming films controller.
+     * @param programmingFilmsController controller to set
      */
     void setProgrammingFilmsController(ProgrammingFilmsController programmingFilmsController);
     /**
@@ -63,8 +63,8 @@ public interface FilmsController {
      */
     ManagerIdsFilms getManagerIdsFilms();
     /**
-     * Return managerIdsFilms.
-     * @return managerIdsFilms
+     * Set cinema controller.
+     * @param cinemaController controller to set
      */
     void setCinemaController(CinemaController cinemaController);
 }

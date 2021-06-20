@@ -14,7 +14,7 @@ public final  class HandlerListImpl<X> implements HandlerList<X> {
      * Filter a specific list with a specific filter.
      * @param list list to filter
      * @param filter filter to use
-     * @return List<X> filtered list
+     * @return  filtered list
      * */
     @Override
     public List<X> filterBy(final List<X> list, final Filter<X> filter) {
@@ -26,7 +26,7 @@ public final  class HandlerListImpl<X> implements HandlerList<X> {
      * Sort a specific list with a specific sorter.
      * @param list list to sort
      * @param sorter sorter to use
-     * @return List<X> sorted list
+     * @return sorted list
      * */
     @Override
     public List<X> sortBy(final List<X> list, final Sorter<X> sorter) {

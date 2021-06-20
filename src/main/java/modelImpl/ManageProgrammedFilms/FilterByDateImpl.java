@@ -14,7 +14,9 @@ public final class FilterByDateImpl implements Filter<ProgrammedFilm> {
         super();
         this.localDate = localDate;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public Predicate<ProgrammedFilm> getPredicate() {
         return pf -> 

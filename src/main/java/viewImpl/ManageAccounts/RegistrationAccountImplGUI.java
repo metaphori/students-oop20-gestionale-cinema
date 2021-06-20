@@ -48,6 +48,9 @@ import view.ManageAccounts.RegistrationAccountGUI;
 
 import java.awt.event.*;
 
+/**
+ * Implements registration view.
+ */
 public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     //GRID BAG LAYOUT + FLOW LAYOUT
 
@@ -83,6 +86,9 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
 
     public static final int SPACE = 5;
 
+    /**
+     * Constructor for the view registration Account.
+     */
     public RegistrationAccountImplGUI() {
 
         //I create the frame and set the title and other properties
@@ -97,7 +103,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         cnst.fill = GridBagConstraints.HORIZONTAL;
 
         //I create the secondary panels for the various parts and add the components
-
         final JPanel pNorth = new JPanel(new FlowLayout());
 
         pNorth.add(title, cnst);
@@ -137,14 +142,11 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
         pSouth.add(reset);
         pSouth.add(cancel);
 
-
-        //focusAccount = Optional.ofNullable(null); // focusFilm empty
-
         frame.add(pWest, BorderLayout.CENTER);
         frame.add(pNorth, BorderLayout.NORTH);
         frame.add(pSouth, BorderLayout.SOUTH);
 
-        
+
 
        //method to remove descriptive writing
         textUsername.addFocusListener(new FocusListener() {
@@ -233,9 +235,9 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
                     typeAccount = TypeAccount.OPERATOR;
                 }
 
-                String checkName = textName.getText();
+                final String checkName = textName.getText();
                 if (Pattern.matches("[a-zA-Z]+", checkName)) {
-                    String checkSurname = textSurname.getText();
+                    final String checkSurname = textSurname.getText();
                     if (Pattern.matches("[a-zA-Z]+", checkSurname)) {
                         Account account = new AccountImpl(textName.getText(), textSurname.getText(), textUsername.getText(), textPassword.getText(), typeAccount);
                         this.observer.addAccount(account);
@@ -256,19 +258,29 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         frame.pack();
         frame.setLocationByPlatform(true);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setSize(500, 400);
      }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setObserver(final AccountsController observer) {
         this.observer = observer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
         textUsername.setText("Username");
@@ -332,28 +344,6 @@ public class RegistrationAccountImplGUI implements RegistrationAccountGUI{
             JOptionPane.showMessageDialog(frame, "Please insert a password");
             return false;
           }
-
-        /*
-        //no exception aka stringa numerica
-        String numberName = "";
-        try {
-            numberName = textName.getText();
-            final int number = Integer.parseInt(numberName);
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
-            return true;
-
-        }
-        */
-        
-        /*
-        String numberName = textName.getText();
-        int number = Integer.parseInt(numberName);
-        if (!(numberName.equals(number))) {
-            JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
-            return false;
-        }
-*/
 
         return true;
     }

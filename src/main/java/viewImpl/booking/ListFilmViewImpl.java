@@ -33,6 +33,7 @@ import utilities.Factory.*;
 import view.ManageFilms.Factory.PanelFilmFactory;
 import view.booking.GUIFactoryBooking;
 import view.booking.ListFilmView;
+
 import viewImpl.ManageFilms.Factory.PanelFilmFactoryImpl;
 
 public class ListFilmViewImpl implements ListFilmView {

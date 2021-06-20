@@ -18,7 +18,9 @@ import javax.swing.JTextField;
 import controller.ManageFilms.FilmsController;
 import utilities.Film;
 import utilitiesImpl.Hall;
-
+/**
+ * Describe a panel with info of programmation.
+ *  */
 public final class InfoProgrammationPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -68,7 +70,11 @@ public final class InfoProgrammationPanel extends JPanel {
             }
         });
     }
-
+    /** 
+     * Get inserted price.
+     * @throws NumberFormatException number format exception
+     * @return price 
+     * */
     public String getPrice() {
 
         try {
@@ -79,13 +85,20 @@ public final class InfoProgrammationPanel extends JPanel {
 
         return price.getText();
     }
-
+    /** 
+     * Set inserted price.
+     * @param priceValue price to set
+     * */
     public void setPrice(final String priceValue) {
         price.setText(priceValue);
         price.setFocusable(true);
         price.selectAll();
     }
-
+    /** 
+     * Get hall .
+     * @return selectedHall selected hall
+     * @throws IllegalArgumentException illegal argument exception
+     * */
     public Hall getHall()  {
         final Hall selectedHall = (Hall) halls.getSelectedItem();
         if (selectedHall != null) {
@@ -94,7 +107,11 @@ public final class InfoProgrammationPanel extends JPanel {
         throw new IllegalArgumentException("Please select hall");
 
     }
-
+    /** 
+     * Get film name .
+     * @return selectedFilm film name
+     * @throws IllegalArgumentException illegal argument exception
+     * */
     public String getFilmName()  {
         String selectedFilm;
         try {
@@ -105,21 +122,28 @@ public final class InfoProgrammationPanel extends JPanel {
         }
 
     }
-
+    /** 
+     * Get index selection .
+     * @return film selected index
+     * */
     public int getSelectedIndex() {
         return films.getSelectedIndex();
     }
-
+    /** 
+     * Get labels panel. 
+     * @return labelPanel 
+     * */
     private JPanel getLabelsPanel() {
-        final JPanel labelPanel = new JPanel(new GridLayout(ROWS_GRID, COLS_GRID, HGAP_GRID, VGAP_GRID)); // int rows,
-                                                                                                          // int cols,
-                                                                                                          // int hgap,
-                                                                                                          // int vgap)
+        final JPanel labelPanel = new JPanel(new GridLayout(ROWS_GRID, COLS_GRID, HGAP_GRID, VGAP_GRID)); 
         labelPanel.add(new JLabel("Price"));
         labelPanel.add(new JLabel("Hall"));
         labelPanel.add(new JLabel("Film"));
         return labelPanel;
     }
+    /** 
+     * Get panel with text field. 
+     * @return textFieldPanel 
+     * */
 
     private JPanel getTextFieldPanel() {
         final JPanel textFieldPanel = new JPanel(new GridLayout(ROWS_GRID, COLS_GRID, HGAP_GRID, VGAP_GRID));
@@ -128,7 +152,9 @@ public final class InfoProgrammationPanel extends JPanel {
         textFieldPanel.add(films);
         return textFieldPanel;
     }
-
+    /** 
+     * Fill map with films. 
+     * */
     private void fillMap() {
 
         final List<Film> films = new ArrayList<>();
@@ -140,9 +166,10 @@ public final class InfoProgrammationPanel extends JPanel {
             map.put(i, film);
             i++;
         }
-        System.out.print(map);
     }
-
+    /** 
+     * Fill combo box with films. 
+     * */
     private void fillComboBox() {
         final List<String> list = new ArrayList<>();
         for (final Film film : map.values()) {
@@ -150,8 +177,12 @@ public final class InfoProgrammationPanel extends JPanel {
         }
         films.setModel(new DefaultComboBoxModel(list.toArray()));
     }
-
-    public Film getSelectedFilm() throws IllegalArgumentException {
+    /** 
+     * Get selected film name .
+     * @return selectedFilm selected film name
+     * @throws IllegalArgumentException illegal argument exception
+     * */
+    public Film getSelectedFilm() {
         final Film selectedFilm = map.get(this.getSelectedIndex());
 
         if (selectedFilm != null) {
@@ -161,11 +192,17 @@ public final class InfoProgrammationPanel extends JPanel {
         }
     }
 
+    /** 
+     * Update map and combo box.
+     */
     public void update() {
         this.fillMap();
         this.fillComboBox();
     }
 
+    /** 
+     * Reset panel.
+     * */
     public void reset() {
         this.setPrice(DEFAULT_STRING_PRICE);
         this.halls.setSelectedItem(null);

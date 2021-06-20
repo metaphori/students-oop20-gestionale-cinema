@@ -16,8 +16,7 @@ public final class IdsGeneratorImpl implements IdsGenerator {
         this.lastGeneratedId = Optional.ofNullable(null);
     }
     /** 
-     * Get new id.
-     * @return id 
+     * {@inheritDoc}
      * */
     @Override
     public int getNewId() {
@@ -31,14 +30,15 @@ public final class IdsGeneratorImpl implements IdsGenerator {
         return lastGeneratedId.get();
     }
     /** 
-     * Get last generated id.
-     * @return lastGeneratedId.get();
+     * {@inheritDoc}
      * */
     @Override
     public Optional<Integer> getLastGeneratedId() {
         return lastGeneratedId;
     }
-
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public String toString() {
         return "IdsGeneratorImpl [lastGeneratedId=" + lastGeneratedId + "]";

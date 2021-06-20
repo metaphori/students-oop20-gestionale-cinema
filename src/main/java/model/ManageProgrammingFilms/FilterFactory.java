@@ -6,6 +6,7 @@ package model.ManageProgrammingFilms;
 public interface FilterFactory<X> {
     /** 
      * Get filter.
+     * @return return created filter
      * */
      Filter<X> createFilter();
 }

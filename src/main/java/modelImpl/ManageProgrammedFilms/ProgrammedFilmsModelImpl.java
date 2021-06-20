@@ -33,7 +33,7 @@ public final class ProgrammedFilmsModelImpl implements ProgrammedFilmsModel {
     /** 
      * Add film programmation. If it's not available throws ProgrammationNotAvailableException.
      * @param programmedFilm to add.
-     * @throws ProgrammationNotAvailableException 
+     * @throws ProgrammationNotAvailableException programmation not available
      */
     @Override
     public void addFilmProgrammation(final ProgrammedFilm programmedFilm) throws ProgrammationNotAvailableException {

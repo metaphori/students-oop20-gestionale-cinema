@@ -26,12 +26,9 @@ public final  class PanelFilmFactoryImpl implements PanelFilmFactory {
 
     private static final double WIDTH_IMAGE = WIDTH_PERC_FRAME / 5;
     private static final double HEIGHT_IMAGE = HEIGHT_PERC_FRAME / 2;
-    /**
-     * Get a film panel, fill the map to associates each film with specific button.
-     * @param mapFilm
-     * @param setFilm
-     * @return centralPanel
-     */
+    /** 
+     * {@inheritDoc}
+     * */
     @Override
     public JPanel getFilmPanel(final Map<JButton, Film> mapFilm, final Set<Film> setFilm) {
         final JPanel centralPanel = new JPanel(new WrapLayout());

@@ -42,9 +42,9 @@ public interface InfoFilmsGUIfactory {
     JTextArea createTextArea(String text);
     /**
      * Get scaled icon with specific width and height .
-     * @param icon
-     * @param width
-     * @param height
+     * @param icon image to scaled
+     * @param width width of scaled image
+     * @param height height of scaled image
      * @return personalized ImageIcon.
      */
     ImageIcon getScaledIcon(ImageIcon icon, int width, int height);
