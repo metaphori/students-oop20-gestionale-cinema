@@ -1,19 +1,14 @@
 package modelImpl.booking;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import model.booking.BookingModel;
-import utilities.Factory.*;
 import utilities.Film;
 import utilities.Seat;
 import utilities.Ticket;
-import utilitiesImpl.Row;
-import utilitiesImpl.SeatImpl;
-import utilitiesImpl.SeatState;
+import utilities.Factory.ProgrammedFilm;
 import utilitiesImpl.TicketImpl;
 
 public class BookingModelImpl implements BookingModel {
@@ -24,11 +19,16 @@ public class BookingModelImpl implements BookingModel {
         this.seatSelected = new HashSet<>();
         this.setTicket = setTicket;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Set<Ticket> getSeats() {
+    public Set<Ticket> getTicket() {
         return setTicket;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Seat> getSeatsFromProgrammedFilm(final ProgrammedFilm programmedFilm) {
         return setTicket.stream()
@@ -39,6 +39,9 @@ public class BookingModelImpl implements BookingModel {
                 .flatMap(f -> f.getSetSeat().stream())
                 .collect(Collectors.toSet());
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buttonSelected(final Seat seat, final ProgrammedFilm programmedFilm) {
         final Set<Seat> set = this.getSeatsFromProgrammedFilm(programmedFilm);
@@ -51,18 +54,30 @@ public class BookingModelImpl implements BookingModel {
         }
 
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void newBooking() {
         seatSelected = new HashSet<>();
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Seat> getSeatsSelected() {
         return seatSelected;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteTicket(final Film film) {
         setTicket.removeIf(t -> t.getId() == film.getID());
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteTicket(final ProgrammedFilm programmedFilm) {
         setTicket.removeIf(t -> {
@@ -72,10 +87,13 @@ public class BookingModelImpl implements BookingModel {
                     && t.getHall().equals(programmedFilm.getHall());
         });
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void bookSeat(final ProgrammedFilm programmedFilm) {
        if (!seatSelected.isEmpty()) { 
-           Optional<Ticket> ticket = setTicket.stream()
+           final Optional<Ticket> ticket = setTicket.stream()
            .filter(t -> t.getId() == programmedFilm.getIdProgrammation())
            .filter(t -> t.getDate().equals(programmedFilm.getDate()))
            .filter(t -> t.getTime().equals(programmedFilm.getStartTime()))

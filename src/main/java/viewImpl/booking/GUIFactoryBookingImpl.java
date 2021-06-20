@@ -83,12 +83,12 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         return button;
     }
     @Override
-    public JTable getTable(final Set<ProgrammedFilm> film) {
-        final int row = film.size();
+    public JTable getTable(final Set<ProgrammedFilm> programmedFilm) {
+        final int row = programmedFilm.size();
         final String[] columnNames = { "Date", "Time", "Hall" };
         Object[][] data = new Object[row][columnNames.length];
         int i = 0;
-        for (final var elem : film) {
+        for (final var elem : programmedFilm) {
             data[i][0] = elem.getDate();
             data[i][1] = elem.getStartTime();
             data[i][2] = elem.getHall();
@@ -105,12 +105,12 @@ public class GUIFactoryBookingImpl implements GUIFactoryBooking {
         return table;
     }
     @Override
-    public DefaultTableModel getModel(final Collection<ProgrammedFilm> film) {
-        final int row = film.size();
+    public DefaultTableModel getModel(final Collection<ProgrammedFilm> programmedFilm) {
+        final int row = programmedFilm.size();
         final String[] columnNames = {"Date", "Time", "Hall" };
         Object[][] data = new Object[row][columnNames.length];
         int i = 0;
-        for (final var elem : film) {
+        for (final var elem : programmedFilm) {
             data[i][0] = elem.getDate();
             data[i][1] = elem.getStartTime();
             data[i][2] = elem.getHall();
