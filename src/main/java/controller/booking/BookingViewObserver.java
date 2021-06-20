@@ -8,11 +8,7 @@ import utilitiesImpl.SeatImpl;
 
 public interface BookingViewObserver {
     /**
-<<<<<<< HEAD
-     * Method that show back frame from 
-=======
      * Show back frame from BookingView 
->>>>>>> master
      * @param film
      */
     void showBackFromBooking(ProgrammedFilm film);
