@@ -161,7 +161,7 @@ public final class ScheduleFilmGUIimpl implements ScheduleFilmsGUI {
                             }
                             });
                         frame.setVisible(false);
-                        observer.updateGUI();
+                        observer.update();
                     } catch (final ProgrammationNotAvailableException e) {
 
                         EventQueue.invokeLater(new Runnable() {

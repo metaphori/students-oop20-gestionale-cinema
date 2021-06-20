@@ -158,7 +158,7 @@ public final class ProgrammingFilmsControllerImpl implements ProgrammingFilmsCon
      * {@inheritDoc}
      * */
     @Override
-    public void updateGUI() {
+    public void update() {
         filmsProgrammationView.update();
     }
     /** 

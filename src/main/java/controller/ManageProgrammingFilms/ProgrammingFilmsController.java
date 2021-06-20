@@ -58,7 +58,7 @@ public interface ProgrammingFilmsController {
     /**
      * Update and refresh GUI when new data are added.
      */
-    void updateGUI();
+    void update();
     /**
      * Set films controller.
      * @param filmsController films controller to set
