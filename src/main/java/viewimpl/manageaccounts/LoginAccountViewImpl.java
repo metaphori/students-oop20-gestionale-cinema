@@ -191,7 +191,6 @@ public class LoginAccountViewImpl implements LoginAccountView{
         for (final var account : setAccount) {
             logininfo.put(account.getUsername(), account.getPassword());
         }
-        System.out.print("Account: " + logininfo);
     }
 
 }

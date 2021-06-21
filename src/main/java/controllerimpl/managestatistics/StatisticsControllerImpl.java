@@ -141,7 +141,7 @@ public class StatisticsControllerImpl implements StatisticsController {
      * {@inheritDoc}
      */
     @Override
-    public void setCinemaController(CinemaController cinemaController) {
+    public void setCinemaController(final CinemaController cinemaController) {
         this.controllerCinema = cinemaController;
     }
 

@@ -15,10 +15,10 @@ import controllerimpl.manageprogrammingfilms.ProgrammingFilmsControllerImpl;
 import model.managefilms.ContainerFilmsModel;
 import model.managefilms.ManagerIdsFilms;
 import modelimpl.managefilms.ContainerFilmsModelImpl;
-import utilities.ManagerWorkingDIR;
+import utilities.ManagerWorkingDir;
 import utilities.factory.Film;
 import utilitiesimpl.GeneralSettings;
-import utilitiesimpl.ManagerWorkingDIRimpl;
+import utilitiesimpl.ManagerWorkingDirImpl;
 import view.managefilms.ContainerFilmsView;
 import view.managefilms.InfoFilmsView;
 import viewimpl.managefilms.ContainerFilmsViewImpl;
@@ -32,7 +32,7 @@ public final class FilmsControllerImpl implements FilmsController {
     private final ContainerFilmsModel model;
     private final ContainerFilmsView viewFilms;
     private final InfoFilmsView infoFilms;
-    private final ManagerWorkingDIR managerWorkingDIR;
+    private final ManagerWorkingDir managerWorkingDIR;
     private ProgrammingFilmsController programmingFilmsController;
     private CinemaController cinemaController;
 
@@ -48,7 +48,7 @@ public final class FilmsControllerImpl implements FilmsController {
 
         viewFilms = new ContainerFilmsViewImpl(); // Empty set, there aren't films
         infoFilms = new InfoFilmsViewImpl();
-        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        managerWorkingDIR = new ManagerWorkingDirImpl();
         programmingFilmsController = new ProgrammingFilmsControllerImpl(this);
 
         this.viewFilms.setObserver(this);
@@ -70,7 +70,7 @@ public final class FilmsControllerImpl implements FilmsController {
 
         viewFilms = new ContainerFilmsViewImpl(); // Empty set, there aren't films
         infoFilms = new InfoFilmsViewImpl();
-        managerWorkingDIR = new ManagerWorkingDIRimpl();
+        managerWorkingDIR = new ManagerWorkingDirImpl();
         this.programmingFilmsController = programmingFilmsController;
         this.viewFilms.setObserver(this);
         this.infoFilms.setObserver(this);
@@ -137,7 +137,7 @@ public final class FilmsControllerImpl implements FilmsController {
      * {@inheritDoc}
      */
     @Override
-    public ManagerWorkingDIR getManagerWorkingDIR() {
+    public ManagerWorkingDir getManagerWorkingDIR() {
         return this.managerWorkingDIR;
     }
     /**

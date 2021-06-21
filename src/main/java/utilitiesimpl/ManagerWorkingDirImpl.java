@@ -10,11 +10,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import utilities.ManagerWorkingDIR;
+import utilities.ManagerWorkingDir;
 /**
  * Manager to create and initialize working directory and to prepare application for running.
  */
-public final class ManagerWorkingDIRimpl implements ManagerWorkingDIR {
+public final class ManagerWorkingDirImpl implements ManagerWorkingDir {
     private static final int LENGTHFILENAME = 15; /**It specify length of filename to create. For example to create new image file. */
 
     /**

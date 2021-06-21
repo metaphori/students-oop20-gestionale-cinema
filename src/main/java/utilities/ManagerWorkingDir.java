@@ -3,7 +3,7 @@ package utilities;
 import java.io.File;
 import java.io.IOException;
 
-public interface ManagerWorkingDIR {
+public interface ManagerWorkingDir {
     /**
         Generates a new filename based on LENGTHFILENAME and file format ext.
         @param ext This is the file format used to create new file.@param ext

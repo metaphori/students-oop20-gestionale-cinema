@@ -6,7 +6,7 @@ import java.util.Set;
 import controller.CinemaController;
 import controller.manageprogrammingfilms.ProgrammingFilmsController;
 import model.managefilms.ManagerIdsFilms;
-import utilities.ManagerWorkingDIR;
+import utilities.ManagerWorkingDir;
 import utilities.factory.Film;
 
 public interface FilmsController {
@@ -56,7 +56,7 @@ public interface FilmsController {
      * Return managerWorkingDIR.
      * @return managerWorkingDIR
      */
-    ManagerWorkingDIR getManagerWorkingDIR();
+    ManagerWorkingDir getManagerWorkingDIR();
     /**
      * Return managerIdsFilms.
      * @return managerIdsFilms

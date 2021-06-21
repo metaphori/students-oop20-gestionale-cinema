@@ -13,20 +13,20 @@ import controllerimpl.manageaccounts.AccountsControllerImpl;
 import controllerimpl.managefilms.FilmsControllerImpl;
 import controllerimpl.manageprogrammingfilms.ProgrammingFilmsControllerImpl;
 import controllerimpl.managestatistics.StatisticsControllerImpl;
-import utilities.ManagerWorkingDIR;
-import utilitiesimpl.ManagerWorkingDIRimpl;
+import utilities.ManagerWorkingDir;
+import utilitiesimpl.ManagerWorkingDirImpl;
 import view.managemenu.MenuView;
 import viewimpl.managemenu.MenuViewImpl;
 
 
 public class CinemaControllerImpl implements CinemaController, CinemaControllerObserver {
-    private final ManagerWorkingDIR manager;
+    private final ManagerWorkingDir manager;
     private final MenuView menu;
     private final AccountsController accountController;
 
     public CinemaControllerImpl() {
         super();
-        manager = new ManagerWorkingDIRimpl();
+        manager = new ManagerWorkingDirImpl();
         this.menu = new MenuViewImpl();
         this.menu.setObserver(this);
         this.initApplication(System.getProperty("user.home"));
