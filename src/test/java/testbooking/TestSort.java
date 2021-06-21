@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import controller.booking.BookingController;
-import controller.booking.BookingViewObserver;
-import controller.booking.TimeTableViewObserver;
-import controllerimpl.booking.BookingControllerImpl;
 import utilities.factory.ProgrammedFilm;
 import utilities.factory.ProgrammedFilmFactory;
 import utilitiesimpl.Hall;
@@ -21,7 +17,6 @@ import utilitiesimpl.factoryimpl.ProgrammedFilmFactoryImpl;
 import viewimpl.booking.SorterByLocalDate;
 
 public class TestSort {
-    
     @Test
     public void testControllerHandlerProgrammedFilm() {
         final LocalDate date1 = LocalDate.of(2000, 5, 1);
@@ -30,7 +25,6 @@ public class TestSort {
         final LocalDate date4 = LocalDate.of(2000, 9, 10);
         final LocalTime timeStart = LocalTime.of(9, 10);
         final LocalTime timeEnd = LocalTime.of(19, 25);
-      
         final ProgrammedFilmFactory factoryProgrammedFilm = new ProgrammedFilmFactoryImpl();
         final ProgrammedFilm filmProgrammed = factoryProgrammedFilm.createProgrammedFilm(1, Hall.HALL_1, 8.0, date1, timeStart, timeEnd);
         final ProgrammedFilm filmProgrammed1 = factoryProgrammedFilm.createProgrammedFilm(2, Hall.HALL_2, 10.0, date2, timeStart, timeEnd);
@@ -42,17 +36,12 @@ public class TestSort {
         listProgrammedFilm.add(filmProgrammed2);
         listProgrammedFilm.add(filmProgrammed1);
         listProgrammedFilm.add(filmProgrammed);
-        
         listOrdered.add(filmProgrammed);
         listOrdered.add(filmProgrammed1);
         listOrdered.add(filmProgrammed2);
         listOrdered.add(filmProgrammed3);
-        
-        System.out.println(listProgrammedFilm);
-        List<ProgrammedFilm> listProgrammedSorted = listProgrammedFilm.stream().sorted(new SorterByLocalDate().getComparator()).collect(Collectors.toList());
-        //System.out.println(listProgrammed);
+        final List<ProgrammedFilm> listProgrammedSorted = listProgrammedFilm.stream().sorted(new SorterByLocalDate().getComparator()).collect(Collectors.toList());
         assertEquals(listOrdered, listProgrammedSorted);
-       // controllerBooking.handlerProgrammedFilm(, new SorterByLocalDate());
-        
+
     }
 }
