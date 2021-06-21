@@ -1,6 +1,6 @@
 package utilities;
 
-import utilitiesImpl.Row;
+import utilitiesimpl.Row;
 
 public interface Seat {
     /**

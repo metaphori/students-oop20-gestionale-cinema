@@ -3,7 +3,7 @@ package utilities.factory;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import utilitiesImpl.Hall;
+import utilitiesimpl.Hall;
 /**
  * Describe a factory to create a programmed film.
  * */

@@ -12,17 +12,17 @@ import org.junit.jupiter.api.Test;
 import exceptions.ProgrammationNotAvailableException;
 import model.manageprogrammingfilms.ManagerProgrammingFilms;
 import model.manageprogrammingfilms.ProgrammedFilmsModel;
-import modelImpl.managefilms.IdsGeneratorImpl;
-import modelImpl.managefilms.ManagerIdsFilmImpl;
-import modelImpl.manageprogrammedfilms.ManagerProgrammingFilmsImpl;
-import modelImpl.manageprogrammedfilms.ProgrammedFilmsModelImpl;
+import modelimpl.managefilms.IdsGeneratorImpl;
+import modelimpl.managefilms.ManagerIdsFilmImpl;
+import modelimpl.manageprogrammedfilms.ManagerProgrammingFilmsImpl;
+import modelimpl.manageprogrammedfilms.ProgrammedFilmsModelImpl;
 import utilities.factory.Film;
 import utilities.factory.FilmFactory;
 import utilities.factory.ProgrammedFilm;
-import utilitiesImpl.Hall;
-import utilitiesImpl.factoryimpl.FilmFactoryImpl;
-import utilitiesImpl.factoryimpl.ProgrammedFilmFactoryImpl;
-import utilitiesImpl.factoryimpl.TimeSlotImpl;
+import utilitiesimpl.Hall;
+import utilitiesimpl.factoryimpl.FilmFactoryImpl;
+import utilitiesimpl.factoryimpl.ProgrammedFilmFactoryImpl;
+import utilitiesimpl.factoryimpl.TimeSlotImpl;
 
 
 class TestFilmProgrammation {

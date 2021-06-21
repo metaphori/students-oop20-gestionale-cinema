@@ -6,7 +6,7 @@ import exceptions.ProgrammationNotAvailableException;
 import utilities.TimeSlot;
 import utilities.factory.Film;
 import utilities.factory.ProgrammedFilm;
-import utilitiesImpl.Hall;
+import utilitiesimpl.Hall;
 /** 
  * Describe a model where data about programmed films are stored .
  * */

@@ -3,7 +3,8 @@ package utilities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
-import utilitiesImpl.Hall;
+
+import utilitiesimpl.Hall;
 
 public interface Ticket {
     /**

@@ -4,7 +4,7 @@ package controller.booking;
 import java.util.Set;
 import utilities.Seat;
 import utilities.factory.ProgrammedFilm;
-import utilitiesImpl.SeatImpl;
+import utilitiesimpl.SeatImpl;
 
 public interface BookingViewObserver {
     /**

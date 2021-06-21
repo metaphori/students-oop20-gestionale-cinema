@@ -3,7 +3,7 @@ package model.manageprogrammingfilms;
 import java.time.LocalDate;
 import utilities.TimeSlot;
 import utilities.factory.ProgrammedFilm;
-import utilitiesImpl.Hall;
+import utilitiesimpl.Hall;
 
 /** 
  * Describe a manager for programming films.

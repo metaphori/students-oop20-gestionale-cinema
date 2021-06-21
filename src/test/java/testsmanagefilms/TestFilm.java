@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import model.managefilms.ContainerFilmsModel;
 import model.managefilms.ManagerIdsFilms;
-import modelImpl.managefilms.ContainerFilmsModelImpl;
-import modelImpl.managefilms.IdsGeneratorImpl;
-import modelImpl.managefilms.ManagerIdsFilmImpl;
+import modelimpl.managefilms.ContainerFilmsModelImpl;
+import modelimpl.managefilms.IdsGeneratorImpl;
+import modelimpl.managefilms.ManagerIdsFilmImpl;
 import utilities.factory.Film;
 import utilities.factory.FilmFactory;
-import utilitiesImpl.factoryimpl.FilmFactoryImpl;
+import utilitiesimpl.factoryimpl.FilmFactoryImpl;
 
 
 

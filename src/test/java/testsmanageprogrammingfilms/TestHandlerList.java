@@ -9,14 +9,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import model.manageprogrammingfilms.HandlerList;
-import modelImpl.manageprogrammedfilms.FilterByDateHallImpl;
-import modelImpl.manageprogrammedfilms.FilterByDateImpl;
-import modelImpl.manageprogrammedfilms.HandlerListImpl;
-import modelImpl.manageprogrammedfilms.SorterByHallImpl;
-import modelImpl.manageprogrammedfilms.SorterByTimeImpl;
+import modelimpl.manageprogrammedfilms.FilterByDateHallImpl;
+import modelimpl.manageprogrammedfilms.FilterByDateImpl;
+import modelimpl.manageprogrammedfilms.HandlerListImpl;
+import modelimpl.manageprogrammedfilms.SorterByHallImpl;
+import modelimpl.manageprogrammedfilms.SorterByTimeImpl;
 import utilities.factory.ProgrammedFilm;
-import utilitiesImpl.Hall;
-import utilitiesImpl.factoryimpl.ProgrammedFilmFactoryImpl;
+import utilitiesimpl.Hall;
+import utilitiesimpl.factoryimpl.ProgrammedFilmFactoryImpl;
 
 
 class TestHandlerList {

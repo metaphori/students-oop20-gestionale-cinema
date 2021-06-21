@@ -4,9 +4,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import controller.managefilms.FilmsController;
-import viewImpl.manageprogrammingfilms.factory.DatePanel;
-import viewImpl.manageprogrammingfilms.factory.InfoProgrammationPanel;
-import viewImpl.manageprogrammingfilms.factory.TimePanel;
+import viewimpl.manageprogrammingfilms.factory.DatePanel;
+import viewimpl.manageprogrammingfilms.factory.InfoProgrammationPanel;
+import viewimpl.manageprogrammingfilms.factory.TimePanel;
 /** 
  * 
  * Factory to create components for schedule films view.*/

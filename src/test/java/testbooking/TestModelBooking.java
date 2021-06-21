@@ -8,13 +8,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import model.booking.BookingModel;
-import modelImpl.booking.BookingModelImpl;
+import modelimpl.booking.BookingModelImpl;
 import utilities.Seat;
 import utilities.Ticket;
-import utilitiesImpl.Hall;
-import utilitiesImpl.Row;
-import utilitiesImpl.SeatImpl;
-import utilitiesImpl.TicketImpl;
+import utilitiesimpl.Hall;
+import utilitiesimpl.Row;
+import utilitiesimpl.SeatImpl;
+import utilitiesimpl.TicketImpl;
 
 public class TestModelBooking {
   
