@@ -7,16 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.TextField;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,48 +19,48 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.manageaccounts.AccountsController;
 import utilities.Account;
 import utilities.TypeAccount;
-import utilities.factory.Film;
+import utilitiesimpl.ViewSettings;
 import view.manageaccounts.ManagementAccountView;
 
 /**
  * Implements login view.
  */
-public class ManagementAccountImplView implements ManagementAccountView{
+public class ManagementAccountViewImpl implements ManagementAccountView{
     //GRID BAG LAYOUT + FLOW LAYOUT 
 
     private static final String FRAME_NAME = "Management account";
+    private static final String TITLE_STRING = "List account";
     private static final double PROPORTION = 1.15;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame = new JFrame();
 
     //components
-    private final JLabel title = new JLabel("List account"); 
+    private final JLabel title = new JLabel("TITLE_STRING"); 
     private final JButton add = new JButton("Add");
     private final JButton home = new JButton("Home");
     private final JButton delete = new JButton("Delete");
     private JTable table = new JTable();
 
-    //real dimension of the screen
-    private final int screenWidth = (int) screen.getWidth();
-    private final int screenHeight = (int) screen.getHeight();
-    //real dimension of my frame
-    private final int frameWidth = (int) (screenWidth / PROPORTION);
-    private final int frameHeight = (int) (screenHeight / PROPORTION);
-
     private AccountsController observer;
     public static final int SPACE = 5;
+
+    //real dimension of the screen
+    private final int screenWidth = (int) ViewSettings.DIMENSION_WIDTH_SCREEN;
+    private final int screenHeight = (int) ViewSettings.DIMENSION_HEIGTH_SCREEN;
+    //real dimension of my frame
+    private final int frameWidth = (int) ViewSettings.DIMENSION_WIDTH_VIEW;
+    private final int frameHeight = (int) ViewSettings.DIMENSION_HEIGTH_VIEW;
 
 
     /**
      * Constructor for the view Manage Account.
      */
-    public ManagementAccountImplView() {
+    public ManagementAccountViewImpl() {
 
         frame.setTitle(FRAME_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,9 +120,8 @@ public class ManagementAccountImplView implements ManagementAccountView{
 
                 if (row1 <= 1) {
                     final TypeAccount type = (TypeAccount) table.getModel().getValueAt(row, 3);
-                    type.equals("AMMINISTRATOR");
                     Account account2 = observer.getAccounts().stream().filter(a -> a.type().equals(type)).findFirst().get();
-                    JOptionPane.showMessageDialog(frame, "It isn't possible to delete the last administrator account");
+                    JOptionPane.showMessageDialog(frame, "It isn't possible to delete the last administrator account", "", JOptionPane.ERROR_MESSAGE);
                     this.update();
 
                  } else {
@@ -142,7 +135,7 @@ public class ManagementAccountImplView implements ManagementAccountView{
                     final String selectAccount = account.getUsername();
 
                     if (personalAcc.equals(selectAccount)) {
-                        JOptionPane.showMessageDialog(frame, "You cannot delete your own account");
+                        JOptionPane.showMessageDialog(frame, "You cannot delete your own account", "", JOptionPane.ERROR_MESSAGE);
                     } else {
                         observer.deleteAccount(account);
                         this.update();

@@ -9,43 +9,28 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
-import java.util.Set;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-
-import org.apache.commons.io.FileUtils;
-
 import controller.managestatistics.StatisticsController;
-import utilities.Account;
 import utilities.factory.Film;
-import utilitiesimpl.ViewSettings;
 import view.managestatistics.StatisticsView;
+import utilitiesimpl.ViewSettings;
 
 /**
  * Implements statistics view.
  */
-public class StatisticsImplView implements StatisticsView{
+public class StatisticsViewImpl implements StatisticsView {
     //GRID BAG LAYOUT + FLOW LAYOUT
 
     private static final String FRAME_NAME = "Statistics";
@@ -86,18 +71,18 @@ public class StatisticsImplView implements StatisticsView{
     public static final int SC = 3;
 
     //real dimension of the screen
-    private final int screenWidth = (int) screen.getWidth();
-    private final int screenHeight = (int) screen.getHeight();
+    private final int screenWidth = (int) ViewSettings.DIMENSION_WIDTH_SCREEN;
+    private final int screenHeight = (int) ViewSettings.DIMENSION_HEIGTH_SCREEN;
     //real dimension of my frame
-    private final int frameWidth = (int) (screenWidth / PROPORTION);
-    private final int frameHeight = (int) (screenHeight / PROPORTION);
+    private final int frameWidth = (int) ViewSettings.DIMENSION_WIDTH_VIEW;
+    private final int frameHeight = (int) ViewSettings.DIMENSION_HEIGTH_VIEW;
 
     private StatisticsController observer;
 
     /**
      * Constructor for the view statistics.
      */
-    public StatisticsImplView() {
+    public StatisticsViewImpl() {
 
         //I create the frame and set the title and other properties
         this.frame = new JFrame();
@@ -163,7 +148,6 @@ public class StatisticsImplView implements StatisticsView{
         frame.add(pNorthInternal, BorderLayout.EAST);
         frame.add(pSouth, BorderLayout.SOUTH);
 
-        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
         frame.validate();
 
 
@@ -183,6 +167,7 @@ public class StatisticsImplView implements StatisticsView{
         frame.setLocationByPlatform(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
       }
 
     /**
@@ -211,36 +196,26 @@ public class StatisticsImplView implements StatisticsView{
         }
 
         final Optional<LocalDate> dateOptional = observer.getMostAffluentDays();
-        if (dateOptional.isPresent()) {
-            people.setText(PEOPLE_STRING + dateOptional.get().toString());
-        }
-
         final Double moneyTotal = observer.getRecessed();
-        money.setText(MONEY_STRING + moneyTotal.toString() + " euro");
-        picS.setIcon(iconS);
-
-
         final Optional<LocalTime> timeOptional = observer.getMostAffluenceHours();
-        if (timeOptional.isPresent()) {
-            time.setText(TIME_STRING + timeOptional.get().toString());
-        }
 
         final String[] columnNames = {"Title of Cinema statistics", "Type" };
         Object[][] data = new Object[4][columnNames.length];
         data[0][0] = PEOPLE_STRING;
-        if (dateOptional.isEmpty()) {
-            data[0][1] = "";
-        } else {
+        if (dateOptional.isPresent()) {
             data[0][1] = dateOptional.get().toString();
+        } else {
+            data[0][1] = "";
         }
+
         data[1][0] = MONEY_STRING;
         data[1][1] = moneyTotal.toString() + " euro";
-        data[2][0] = TIME_STRING;
 
-        if (timeOptional.isEmpty()) {
-            data[2][1] = "";
-        } else {
+        data[2][0] = TIME_STRING;
+        if (timeOptional.isPresent()) {
             data[2][1] = timeOptional.get().toString();
+        } else {
+            data[2][1] = "";
         }
 
         final DefaultTableModel model = (DefaultTableModel) table.getModel();

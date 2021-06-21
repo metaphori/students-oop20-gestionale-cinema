@@ -16,7 +16,7 @@ public interface RegistrationAccountView {
     void setObserver(AccountsController observer);
 
     /**
-     * Reset registartion view.
+     * Reset registration view.
      */
     void reset();
 }

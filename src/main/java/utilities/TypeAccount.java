@@ -1,8 +1,11 @@
 package utilities;
 
 /**
- * Type of Account
+ * Describers type of Accounts.
  */
 public enum TypeAccount {
+    /**
+     * Name of type.
+     */
     ADMINISTRATOR, OPERATOR
 }

@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.swing.border.TitledBorder;
 
 import controller.CinemaController;
 import controller.booking.BookingController;
@@ -15,13 +14,10 @@ import controller.managefilms.FilmsController;
 import controller.managestatistics.StatisticsController;
 import controllerimpl.booking.BookingControllerImpl;
 import controllerimpl.managefilms.FilmsControllerImpl;
-import model.booking.BookingModel;
-import modelimpl.booking.BookingModelImpl;
 import utilities.Ticket;
 import utilities.factory.Film;
-import utilitiesimpl.TicketImpl;
 import view.managestatistics.StatisticsView;
-import viewimpl.managestatistics.StatisticsImplView;
+import viewimpl.managestatistics.StatisticsViewImpl;
 
 /**
  * Implements Account Controller.
@@ -38,7 +34,7 @@ public class StatisticsControllerImpl implements StatisticsController {
      * Constructor for the Statistics Controller.
      */
     public StatisticsControllerImpl() {
-        this.statisticsView = new StatisticsImplView();
+        this.statisticsView = new StatisticsViewImpl();
         this.statisticsView.setObserver(this);
 
         this.controllerBooking = new BookingControllerImpl();

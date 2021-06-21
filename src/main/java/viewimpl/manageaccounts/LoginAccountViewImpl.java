@@ -1,7 +1,6 @@
 package viewimpl.manageaccounts;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 
@@ -10,58 +9,51 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
-import org.apache.commons.io.FileUtils;
-
 import controller.manageaccounts.AccountsController;
 import utilities.Account;
 import view.manageaccounts.LoginAccountView;
 
-import java.awt.event.*
-;
+import java.awt.event.*;
+
 
 /**
  * Implements login view.
  */
-public class LoginAccountImplView implements LoginAccountView{
+public class LoginAccountViewImpl implements LoginAccountView{
     //GRID BAG LAYOUT + FLOW LAYOUT
 
     private static final String FRAME_NAME = "Login";
+    private static final int HORIZONTAL = 350;
+    private static final int VERTICAL = 200;
+    public static final int SPACE = 5;
+    public static final String TITLE = "Login Account";
+    public static final String USERNAME_STRING = "Username:";
+    public static final String PASSWORD_STRING = "Password:";
+
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
 
     //components
-    private final JLabel title = new JLabel("Login Account");
-    private final JLabel username = new JLabel("Username:");
+    private final JLabel title = new JLabel(TITLE);
+    private final JLabel username = new JLabel(USERNAME_STRING);
     private final TextField textUsername = new TextField("Username", 12); //written that will be removed when clicked
-    private final JLabel password = new JLabel("Password:");
+    private final JLabel password = new JLabel(PASSWORD_STRING);
     private final JPasswordField textPassword = new JPasswordField("Password", 12); //password field + written that will be removed when clicked
     private final JButton login = new JButton("Login");
     private final JButton reset = new JButton("Reset");
@@ -71,12 +63,10 @@ public class LoginAccountImplView implements LoginAccountView{
     private Map<String, String> logininfo = new HashMap<String, String>();
     private Set<Account> setAccount = new HashSet<>();
 
-    public static final int SPACE = 5;
-
     /**
      * Constructor for the view Login.
      */
-    public LoginAccountImplView() {
+    public LoginAccountViewImpl() {
 
         //I create the frame and set the title and other properties
         this.frame = new JFrame();
@@ -188,8 +178,8 @@ public class LoginAccountImplView implements LoginAccountView{
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setSize(350, 200);
-        frame.setMinimumSize(new Dimension(350, 200));
+        frame.setSize(HORIZONTAL, VERTICAL);
+        frame.setMinimumSize(new Dimension(HORIZONTAL, VERTICAL));
      }
 
     /**
@@ -203,5 +193,5 @@ public class LoginAccountImplView implements LoginAccountView{
         }
         System.out.print("Account: " + logininfo);
     }
-    
+
 }

@@ -43,6 +43,7 @@ import org.apache.commons.io.FileUtils;
 import controller.manageaccounts.AccountsController;
 import utilities.Account;
 import utilities.TypeAccount;
+import utilitiesimpl.ViewSettings;
 import utilitiesimpl.AccountImpl;
 import view.manageaccounts.RegistrationAccountView;
 
@@ -51,27 +52,39 @@ import java.awt.event.*;
 /**
  * Implements registration view.
  */
-public class RegistrationAccountImplView implements RegistrationAccountView{
+public class RegistrationAccountViewImpl implements RegistrationAccountView{
     //GRID BAG LAYOUT + FLOW LAYOUT
 
     private static final String FRAME_NAME = "Registration";
     private static final double PROPORTION = 1.15;
+    public static final String TITLE = "Add account";
+    public static final String USERNAME_STRING = "Username:";
+    public static final String NAME_STRING = "Name:";
+    public static final String PASSWORD_STRING = "Password:";
+    public static final String SURNAME_STRING = "Surname:";
+    public static final String SECONDPWD_STRING = "Repeat Password:";
+    public static final String TYPE_STRING = "Type:";
+    
+    private static final int HORIZONTAL = 500;
+    private static final int VERTICAL = 400;
+    public static final int SPACE = 5;
+    
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final JFrame frame;
 
     //components
-    private final JLabel title = new JLabel("Add account"); 
-    private final JLabel username = new JLabel("Username:");
+    private final JLabel title = new JLabel(TITLE); 
+    private final JLabel username = new JLabel(USERNAME_STRING);
     private final TextField textUsername = new TextField("Username", 12);
-    private final JLabel name = new JLabel("Name:");
+    private final JLabel name = new JLabel(NAME_STRING);
     private final TextField textName = new TextField("Name", 12);
-    private final JLabel surname = new JLabel("Surname:");
+    private final JLabel surname = new JLabel(SURNAME_STRING);
     private final TextField textSurname = new TextField("Surname", 12);
-    private final JLabel password = new JLabel("Password:");
+    private final JLabel password = new JLabel(PASSWORD_STRING);
     private final JPasswordField textPassword = new JPasswordField("Password", 12);
-    private final JLabel secondPwd = new JLabel("Repeat Password:");
+    private final JLabel secondPwd = new JLabel(SECONDPWD_STRING);
     private final JPasswordField textSecondPwd = new JPasswordField("Repeat Password", 12);
-    private final JLabel isAdmin = new JLabel("Type:");
+    private final JLabel isAdmin = new JLabel(TYPE_STRING);
 
     private final String [] stringType = new String [] {"Administrator", "Operator"};
     private final JComboBox type = new JComboBox<String>(stringType);
@@ -84,12 +97,18 @@ public class RegistrationAccountImplView implements RegistrationAccountView{
     private AccountsController observer;
 
 
-    public static final int SPACE = 5;
+    // real dimension of the screen
+    private static final  double PROPORTION_HEIGHT = 2;
+    private static final  double PROPORTION_WIDTH = 4;
+    private final int screenWidth = (int) ViewSettings.DIMENSION_WIDTH_SCREEN;
+    private final int screenHeight = (int) ViewSettings.DIMENSION_HEIGTH_SCREEN;
+    private final int frameWidth = (int) (screenWidth / PROPORTION_WIDTH);
+    private final int frameHeight = (int) (screenHeight / PROPORTION_HEIGHT);
 
     /**
      * Constructor for the view registration Account.
      */
-    public RegistrationAccountImplView() {
+    public RegistrationAccountViewImpl() {
 
         //I create the frame and set the title and other properties
         this.frame = new JFrame();
@@ -244,7 +263,7 @@ public class RegistrationAccountImplView implements RegistrationAccountView{
                         frame.setVisible(false);
                         this.observer.showManagementAccountView();
                     } else {
-                        JOptionPane.showMessageDialog(frame, "Please insert a Surame without number");
+                        JOptionPane.showMessageDialog(frame, "Please insert a Surname without number");
                     }
                 } else {
                     JOptionPane.showMessageDialog(frame, "Please insert a Name without number");
@@ -267,7 +286,7 @@ public class RegistrationAccountImplView implements RegistrationAccountView{
         frame.setLocationByPlatform(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setSize(500, 400);
+        frame.setMinimumSize(new Dimension(HORIZONTAL, VERTICAL));
      }
 
     /**
@@ -293,11 +312,11 @@ public class RegistrationAccountImplView implements RegistrationAccountView{
     private boolean checkAccount() {
         Set<Account> setAccount = observer.getAccounts();
         if (!(textPassword.getText()).equals(textSecondPwd.getText())) {
-            JOptionPane.showMessageDialog(frame, "Password doesn't match");
+            JOptionPane.showMessageDialog(frame, "Password doesn't match", "", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (setAccount.stream().filter(a -> a.getUsername().equals(textUsername.getText())).findAny().isPresent()) {
-            JOptionPane.showMessageDialog(frame, "Username already present");
+            JOptionPane.showMessageDialog(frame, "Username already present", "", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 

@@ -7,8 +7,8 @@ import java.util.Set;
 import com.google.gson.reflect.TypeToken;
 
 import controller.CinemaController;
-import controller.inputoutput.RWobject;
 import controller.manageaccounts.AccountsController;
+import controller.inputoutput.RWobject;
 import controllerimpl.inputoutput.RWobjectImpl;
 import model.manageaccounts.AccountModel;
 import modelimpl.manageaccounts.AccountModelImpl;
@@ -17,9 +17,10 @@ import utilitiesimpl.GeneralSettings;
 import view.manageaccounts.LoginAccountView;
 import view.manageaccounts.ManagementAccountView;
 import view.manageaccounts.RegistrationAccountView;
-import viewimpl.manageaccounts.LoginAccountImplView;
-import viewimpl.manageaccounts.ManagementAccountImplView;
-import viewimpl.manageaccounts.RegistrationAccountImplView;
+import viewimpl.manageaccounts.LoginAccountViewImpl;
+import viewimpl.manageaccounts.ManagementAccountViewImpl;
+import viewimpl.manageaccounts.RegistrationAccountViewImpl;
+
 
 /**
  * Implements Account Controller.
@@ -46,9 +47,9 @@ public class AccountsControllerImpl implements AccountsController {
             model = new AccountModelImpl(new HashSet<>());
         }
 
-        loginView = new LoginAccountImplView();
-        managementView = new ManagementAccountImplView();
-        registrationView = new RegistrationAccountImplView();
+        loginView = new LoginAccountViewImpl();
+        managementView = new ManagementAccountViewImpl();
+        registrationView = new RegistrationAccountViewImpl();
 
         this.loginView.setObserver(this);
         this.managementView.setObserver(this);
@@ -138,7 +139,7 @@ public class AccountsControllerImpl implements AccountsController {
      * {@inheritDoc}
      */
     @Override
-    public void setCinemaController(CinemaController cinemaController) {
+    public void setCinemaController(final CinemaController cinemaController) {
         this.controllerCinema = cinemaController;
     }
 

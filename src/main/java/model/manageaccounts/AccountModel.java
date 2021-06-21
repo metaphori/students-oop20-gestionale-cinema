@@ -26,7 +26,7 @@ public interface AccountModel {
 
     /**
      * Get Account logged in that time.
-     * @return
+     * @return account
      */
     Account getAccountLogged();
 
