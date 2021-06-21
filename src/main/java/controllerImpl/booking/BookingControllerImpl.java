@@ -45,7 +45,8 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
     private final Set<ProgrammedFilm> setProgrammedFilm;
     private CinemaController observer;
     private BookingView viewBooking; 
-
+    private TimeTableView viewTimeTable;
+    private ListFilmView viewFilm;
     public BookingControllerImpl() {
         final Optional<Set<Ticket>> opSetTicket = this.readTicketOnFile();
         final FilmsController controllerFilms = new FilmsControllerImpl();
@@ -236,7 +237,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
      * Show ListFilmView and used checkEmpyFilm after show.
      */
     private void showListFilmView() {
-        final ListFilmView viewFilm = new ListFilmViewImpl(this);
+        this.viewFilm = new ListFilmViewImpl(this);
         viewFilm.show();
         viewFilm.checkEmptyFilm();
     }
@@ -246,7 +247,7 @@ public class BookingControllerImpl implements BookingController, ListFilmViewObs
      * @param film used to take general info
      */
     private void showTimeTableView(final Set<ProgrammedFilm> setProgrammedFilm, final Film film) {
-        final TimeTableView viewTimeTable = new TimeTableViewImpl(this, setProgrammedFilm, film);
+        this.viewTimeTable = new TimeTableViewImpl(this, setProgrammedFilm, film);
         viewTimeTable.show();
         viewTimeTable.checkEmptyProgrammation(setProgrammedFilm);
     }
