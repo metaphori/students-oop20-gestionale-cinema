@@ -1,4 +1,4 @@
-package TestsManageAccounts;
+package testsmanageaccounts;
 
 import org.junit.jupiter.api.Test;
 

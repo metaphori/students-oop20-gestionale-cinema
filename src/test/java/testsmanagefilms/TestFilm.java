@@ -1,4 +1,4 @@
-package TestsManageFilms;
+package testsmanagefilms;
 
 import static org.junit.jupiter.api.Assertions.*;
 
