@@ -4,7 +4,7 @@ import utilitiesimpl.Row;
 
 public interface Seat {
     /**
-     * Return row
+     * Return row.
      * @return row
      */
     Row getRow();
