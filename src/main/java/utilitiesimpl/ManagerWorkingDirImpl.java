@@ -93,17 +93,15 @@ public final class ManagerWorkingDirImpl implements ManagerWorkingDir {
         Creates directory with specific name.
         @throws Exception 
      */
-    private void createDIR(final String pathWithDIRname) throws SecurityException  {
+    private void createDIR(final String pathWithDIRname) {
         final File rootDIR = new File(pathWithDIRname);
         try {
             rootDIR.mkdir();
         } catch (final SecurityException se) {
-            ;
+            se.printStackTrace();
         }
     }
 
-    private void fillDIR(final File toCopy, final String pathDir) { // TODO
-    }
     /**
        {@inheritDoc}
      */

@@ -40,7 +40,7 @@ public class ManagementAccountViewImpl implements ManagementAccountView{
     private final JFrame frame = new JFrame();
 
     //components
-    private final JLabel title = new JLabel("TITLE_STRING"); 
+    private final JLabel title = new JLabel(TITLE_STRING); 
     private final JButton add = new JButton("Add");
     private final JButton home = new JButton("Home");
     private final JButton delete = new JButton("Delete");
