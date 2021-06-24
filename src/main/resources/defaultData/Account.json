@@ -6,5 +6,21 @@
     "username": "admin",
     "pass": "123",
     "type": "ADMINISTRATOR"
+  },
+  {
+    "Type": "utilitiesimpl.AccountImpl",
+    "name": "demo",
+    "surname": "demo",
+    "username": "demo",
+    "pass": "123",
+    "type": "ADMINISTRATOR"
+  },
+  {
+    "Type": "utilitiesimpl.AccountImpl",
+    "name": "Verdi",
+    "surname": "operator",
+    "username": "Mario",
+    "pass": "123",
+    "type": "OPERATOR"
   }
 ]

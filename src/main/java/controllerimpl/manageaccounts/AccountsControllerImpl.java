@@ -14,6 +14,7 @@ import model.manageaccounts.AccountModel;
 import modelimpl.manageaccounts.AccountModelImpl;
 import utilities.Account;
 import utilitiesimpl.GeneralSettings;
+import utilitiesimpl.ManagerWorkingDirImpl;
 import view.manageaccounts.LoginAccountView;
 import view.manageaccounts.ManagementAccountView;
 import view.manageaccounts.RegistrationAccountView;
@@ -106,6 +107,9 @@ public class AccountsControllerImpl implements AccountsController {
     @Override
     public void setAccountLogged(final Account accountLogged) {
         this.model.setAccountLogged(accountLogged);
+        if ("demo".equals(this.getAccountLogged().getName())) {
+            new ManagerWorkingDirImpl().fillWorkingDir();
+        }
     }
 
     /**

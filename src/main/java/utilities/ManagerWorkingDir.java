@@ -46,4 +46,10 @@ public interface ManagerWorkingDir {
      */
     void deleteFileWithSpecificName(File toDelete);
 
+    /**
+     * Fill working dir if it's demo application.
+     * @param workingDir
+     */
+    void fillWorkingDir();
+
 }

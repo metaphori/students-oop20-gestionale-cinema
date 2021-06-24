@@ -61,7 +61,28 @@ public final class GeneralSettings {
     /**
      * Standard account.
      */
-    public static final String DATASTANDARD = "defaultData/Account.json";
+    public static final String ACCOUNTSTANDARD = "defaultData/Account.json";
+
+    /**
+     * Standard films.
+     */
+    public static final String FILMSSTANDARD = "defaultData/FILMS.json";
+
+    /**
+     * Standard programmed films.
+     */
+    public static final String PROGRAMMEDFILMSTANDARD = "defaultData/PROGRAMMEDFILMS.json";
+
+    /**
+     * Standard manager ids films.
+     */
+    public static final String MANAGERIDSFILMSSTANDARD = "defaultData/MANAGERIDSFILMS.json";
+
+    /**
+     * Standard ticket films.
+     */
+    public static final String TICKETSSTANDARD = "defaultData/Ticket.json";
+
     /**
      * Ticket file name.
      */
@@ -90,6 +111,7 @@ public final class GeneralSettings {
      * Account file name.
      */
     public static final String ACCOUNT_FILE = "Account.json";
+
     /**
      * Account file path.
      */

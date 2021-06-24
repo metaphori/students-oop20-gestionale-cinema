@@ -116,12 +116,31 @@ public final class ManagerWorkingDirImpl implements ManagerWorkingDir {
     }
 
     private void initData() {
-        final URL url = ClassLoader.getSystemResource(GeneralSettings.DATASTANDARD);
+        final URL url = ClassLoader.getSystemResource(GeneralSettings.ACCOUNTSTANDARD);
         final File file = new File(GeneralSettings.ACCOUNT_FILE_PATH);
         try {
             if (!file.exists()) {
                 FileUtils.copyURLToFile(url, file);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void fillWorkingDir() {
+        try {
+             URL url = ClassLoader.getSystemResource(GeneralSettings.ACCOUNTSTANDARD);
+             FileUtils.copyURLToFile(url, new File(GeneralSettings.ACCOUNT_FILE_PATH));
+             url = ClassLoader.getSystemResource(GeneralSettings.FILMSSTANDARD);
+             FileUtils.copyURLToFile(url, new File(GeneralSettings.FILMSPATH));
+             url = ClassLoader.getSystemResource(GeneralSettings.PROGRAMMEDFILMSTANDARD);
+             FileUtils.copyURLToFile(url, new File(GeneralSettings.PROGRAMMEDFILMSPATH));
+             url = ClassLoader.getSystemResource(GeneralSettings.MANAGERIDSFILMSSTANDARD);
+             FileUtils.copyURLToFile(url, new File(GeneralSettings.MANAGERIDSFILMSPATH));
+             url = ClassLoader.getSystemResource(GeneralSettings.TICKETSSTANDARD);
+             FileUtils.copyURLToFile(url, new File(GeneralSettings.TICKET_FILE_PATH));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
