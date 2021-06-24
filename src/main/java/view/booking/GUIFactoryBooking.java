@@ -58,8 +58,8 @@ public interface GUIFactoryBooking {
     /**
      * Return a label with a specific icon with specific dimension.
      * @param icon used in label
-     * @param width 
-     * @param height
+     * @param width image
+     * @param height image
      * @return label 
      */
     JLabel getLabelImage(ImageIcon icon, int width, int height);
